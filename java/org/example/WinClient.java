@@ -5,9 +5,12 @@ import java.awt.event.*;
 import java.io.*;
 import java.net.*;
 
+import javax.swing.*;
+
 public class WinClient extends Frame implements ActionListener, Runnable {
     Label msg;
     Label output;
+    Label a;
     Button send;
 
     TextField input;
@@ -27,18 +30,62 @@ public class WinClient extends Frame implements ActionListener, Runnable {
     private static int showing = ACTIVE;
 
     WinClient() {
-        setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
+        JPanel mainPanel = new JPanel ();
+        mainPanel.setLayout ( new BorderLayout () );
+        setSize ( 800, 700 );
+        setBackground ( Color.pink );
+        mainPanel.add(new JButton("WelCome"), BorderLayout.NORTH);
+
+        // add a new JButton with name "come" and it is
+        // lie button of the container
+        mainPanel.add(new JButton("Geeks"), BorderLayout.SOUTH);
+
+        // add a new JButton with name "Layout" and it is
+        // lie left of the container
+        mainPanel.add(new JButton("Layout"), BorderLayout.EAST);
+        add ( mainPanel );
+
+        BorderLayout bors = new BorderLayout ();
+        //add (bors, BorderLayout.WEST);
+
         msg = new Label("Color");
-        input = new TextField(20);
+        msg.setBackground ( Color.BLUE );
+        Label msg2 = new Label ("Color2");
+        msg2.setBackground ( Color.GREEN );
+        mainPanel.add ( msg,   BorderLayout.NORTH );
+        mainPanel.add ( msg2, BorderLayout.SOUTH );
+
+
+
+
+        setLayout(new GridBagLayout());
+        setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 40));
+
+        input = new TextField(30);
         output = new Label();
         output.setBackground(Color.white);
         send = new Button("Send");
         send.addActionListener(this);
-        setLayout(new GridLayout(4, 1));
+//        GridBagConstraints gbc = new GridBagConstraints();
+//        gbc.fill = GridBagConstraints.HORIZONTAL;
+//        gbc.gridx = 0;
+//        gbc.gridy = 0;
+//        this.add(new Button("Button 1"), gbc);
+//        gbc.gridx = 1;
+//        gbc.gridy = 0;
+//        this.add(new Button("Button 2"), gbc);
+
+
         add(msg);
         add(input);
         add(send);
         add(output);
+//        for (int i = 0; i <8; i++) {
+//            a = new Label ( String.valueOf ( i ) );
+//            a.setBackground ( Color.blue );
+//            a.setBounds ( 1, 2, 3, 4 );
+//            add(a);
+//        }
     }
 
     public void actionPerformed(ActionEvent event) {
@@ -118,8 +165,9 @@ public class WinClient extends Frame implements ActionListener, Runnable {
                 System.exit(0);
             }
         });
-        frame.pack();
+        //frame.pack();
         frame.setVisible(true);
+        //methods from application
         frame.listenSocket();
         frame.receiveInitFromServer();
         frame.startThread();
