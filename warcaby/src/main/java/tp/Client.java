@@ -3,7 +3,7 @@ package tp;
 import java.net.*;
 import java.io.*;
 
-public class Client implements Runnable { 
+public class Client { 
   //TO DO: Add instance of GUI class
 
   private static final int WHITE=1;
@@ -23,7 +23,7 @@ public class Client implements Runnable {
   private static int oponnentId;
   private static int currPlayer;
   private static CoderDecoder CD;
-  private Command gameStatus;
+  private static gameStatusClass gameStatus;
 
   //TO DO: Move this to GUI Class
   private static PrintWriter out = null;
@@ -33,6 +33,13 @@ public class Client implements Runnable {
     CD = new CoderDecoder();
   }
 
+  public void boardInitFill() {
+    for(int i=1; i<=8; i++) { //
+      for(int j=1; j<=8; j++) { //
+        gameStatus.board[i][j] = "";
+      }
+    }
+  }
 
   public void listenSocket() {
     try {
@@ -69,27 +76,24 @@ public class Client implements Runnable {
   }
 
   private static void send(Command command) { // nonstatic
-    //System.out.println("SEND PLAYER_ID: " + playerId);
     //TO DO: Send temporary MOVE command
 
     // code command using CoderDecoder
     String commandString = CD.codeCommand(command);
     //Send string to Server
     out.println(commandString);
-
     
     //currPlayer = oponnentId;
     showing = ACTIVE;
     currPlayer = playerId;
   }
 
-  private void receive() { //nonstatic
-    //System.out.println("RECEIVE PLAYER_ID: " + playerId);
+  private static void receive() { //nonstatic
     //TO DO: Receive from Server temporary GAME STATUS command
      try {
       String commandString = in.readLine();
-      //System.out.println("IN COMMAND CODE: " + commandString);
-      Command command =  CD.decodeCommand(commandString, "gameStaus");
+      System.out.println("CommandString: "+commandString);
+      Command command =  CD.decodeCommand(commandString, "gameStatus");
       gameStatus = (gameStatusClass) command;
       gameStatus.showView();
       
@@ -98,121 +102,25 @@ public class Client implements Runnable {
      }
   }  
 
-  private void startThread() {
-    Thread playerThread = new Thread(this);
-    playerThread.start();
-  }
-
-  public void run() {
-    
-    if(playerId == WHITE) {
-      runWhite();
-    } else {
-      runBlack();
-    }
-    
-    //runPlayer();
-  }
-/*
-  void runPlayer(){
-    while(true) {
-        synchronized (this) {
-            if (currPlayer== playerId) {
-                
-                try {
-                    wait(10);
-                } catch (InterruptedException e) {
-                }
-            }
-            if (showing ==ACTIVE){
-                receive();
-                showing =NONACTIVE;
-            }
-            notifyAll();
-        }
-    }
-}
-*/
-
-  void runWhite() {
-    while(true) {
-      synchronized(this) {
-
-        if(showing == ACTIVE) {
-          //System.out.println("SHOW ACTIVE IN PLAYER WHITE TIME: " + java.time.LocalTime.now());
-          receive();
-          showing = NONACTIVE;
-          //System.out.println("SHOW FOR WHITE - NONACTIVE");
-        }
-
-        if(currPlayer == WHITE) {
-          //TO DO: Add temporary command to move piece
-          gameCommandClass moveCommand = new gameCommandClass();
-          moveCommand.setActorId(playerId);
-          moveCommand.setPieceId(PIECE);
-          moveCommand.fromX=6; 
-          moveCommand.fromY=3;
-          moveCommand.toX=5; 
-          moveCommand.toY=4; 
-          send(moveCommand);
-          //System.out.println("SHOW FOR BLACK - ACTIVE TIME: " + java.time.LocalTime.now());
-          showing = ACTIVE;
-          //System.out.println("WH CURR_PLAYER: " + currPlayer);
-          
-          try {
-            wait(10);
-          } catch (InterruptedException e) {}
-        }
-      }
-      //notifyAll();
-    }
-  }
-
-  void runBlack() {
-    while(true) {
-      synchronized(this) {
-        if(showing == ACTIVE) {
-          //System.out.println("SHOW ACTIVE IN PLAYER BLACK TIME: " + java.time.LocalTime.now());
-          receive();
-          showing = NONACTIVE;
-          //System.out.println("SHOW FOR BLACK - NONACTIVE");
-        }
-
-        if(currPlayer == BLACK) {
-          try {
-            wait(10);
-          } catch (InterruptedException e) {}
-
-          //System.out.println("CLIENT CURR_PLAYER BLACK TIME: " + java.time.LocalTime.now());
-          //TO DO: Add temporary command to move piece
-          
-          gameCommandClass moveCommand = new gameCommandClass();
-          moveCommand.setActorId(playerId);
-          moveCommand.setPieceId(KING);
-          moveCommand.fromX=2; 
-          moveCommand.fromY=5;
-          moveCommand.toX=5; 
-          moveCommand.toY=8;
-          send(moveCommand);
-          showing = ACTIVE;
-          //System.out.println("SHOW FOR WHITE - ACTIVE TIME: " + java.time.LocalTime.now());
-          //System.out.println("BL CURR_PLAYER: " + currPlayer); 
-        }
-      }
-      //notifyAll();
-    }
-  }
-
   public static void main(String[] main) {
     Client player = new Client();
 
     player.listenSocket();
     player.receiveInitInfo();
-    //player.startThread();
 
     System.out.println("PlayerId: " + playerId + " CurrPlayer: " + currPlayer);
 
-    player.receiveInitInfo();
-    System.out.println("PlayerId: " + playerId + " CurrPlayer: " + currPlayer);
+    receive();
+
+    gameCommandClass moveCommand = new gameCommandClass();
+    moveCommand.setActorId(playerId);
+    moveCommand.setPieceId(PIECE);
+    moveCommand.fromX=6; 
+    moveCommand.fromY=3;
+    moveCommand.toX=5; 
+    moveCommand.toY=2;
+
+    send(moveCommand);
+    receive();
   }
 }

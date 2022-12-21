@@ -21,20 +21,14 @@ public class CzechKind implements IGameKind {
 
   public boolean checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY) {
     if(currPlayer == WHITE) {
-      System.out.println("CHECK_MOVE_P WHITE");
       if(toX < fromX) {
-        System.out.println("CHECK_MOVE_P toX < fromX");
         if(Math.abs(fromY-toY) == 1) {
-          System.out.println("CHECK_MOVE_P abs(fromY-toY)=1");
           return true;
         }
       }
     } else if(currPlayer == BLACK) {
-      System.out.println("CHECK_MOVE_P BLACK");
       if(toX > fromX) {
-        System.out.println("CHECK_MOVE_P toX > fromX");
         if(Math.abs(fromY-toY) == 1) {
-          System.out.println("CHECK_MOVE_P abs(fromY-toY)=1");
           return true;
         }
       }

@@ -14,7 +14,7 @@ public class Server {
       System.out.println("Turning on the server");
       CzechKind CG = new CzechKind();
 
-      while(true) {
+      //while(true) {
         // Only 2 clients can play! (CHECKING POINT)
 
         if(clientCounter < 2) { 
@@ -26,17 +26,15 @@ public class Server {
           secondClientSocket = serverSocket.accept();
           System.out.println("Second player (client) connected");
           clientCounter++;
-       }
+        }
         
         // create GameKindFactory
-
-        
 
         // create and start game thread -> pass firstClientSocket and secondClientSocket to thread
         Game game = new Game(firstClientSocket, secondClientSocket, CG); //TEST
         Thread gameThread = new Thread(game);
         gameThread.start();
-    }
+      //}
 
     } catch(IOException e) {
       System.out.println(e.getMessage());

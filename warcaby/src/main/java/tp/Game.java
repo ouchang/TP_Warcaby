@@ -10,6 +10,7 @@ public class Game implements Runnable {
 
   private IGameKind gameKind;
   private String[][] board;
+  private int boardSize;
 
   private final static int WHITE=1;
   private final static int BLACK=2;
@@ -34,8 +35,8 @@ public class Game implements Runnable {
     this.secondPlayer = secondPlayer;
     this.gameKind = gameKind;
 
-    int boardSize = gameKind.getBoardSize();
-    this.board = new String[boardSize][boardSize];
+    this.boardSize = gameKind.getBoardSize();
+    this.board = new String[boardSize+1][boardSize+1];
     this.currPlayer = gameKind.whoStarts();
 
     this.moveCommand = new gameCommandClass();
@@ -50,8 +51,27 @@ public class Game implements Runnable {
     statusCommand.setTurn(String.valueOf(gameKind.whoStarts()));
     statusCommand.setStatus("ongoing");
     statusCommand.setError("");
-    String[][] board = new String[boardSize+1][boardSize+1];
-    statusCommand.setBoard(board);
+    statusCommand.setBoard(this.board);
+  }
+
+  public synchronized void move(int x, int y, String symbol, int nextTurn) {
+    statusCommand.turn = String.valueOf(nextTurn);
+    statusCommand.board[x][y] = symbol;
+  }
+
+  public synchronized void sendStatus(PrintWriter out) {
+    String line;
+    line = CD.codeCommand(statusCommand);
+    System.out.println("SEND LINE: " + line);
+    out.println(line);
+  }
+
+  public void boardInitFill() {
+    for(int i=0; i<=boardSize; i++) {
+      for(int j=0; j<=boardSize; j++) {
+        board[i][j] = "0";
+      }
+    }
   }
 
   @Override
@@ -71,6 +91,8 @@ public class Game implements Runnable {
       OutputStream outputSecond = secondPlayer.getOutputStream();
       PrintWriter outB = new PrintWriter(outputSecond, true);
 
+      boardInitFill();
+
       // Tell clients their assigned indexes
       outW.println("1"); //TO DO: Change to json
       outB.println("2");
@@ -80,15 +102,18 @@ public class Game implements Runnable {
       outB.println(String.valueOf(gameKind.whoStarts()));
 
       //Start game
-
       String line;
-      //System.out.println("currPlayer: " + currPlayer);
-
       
-      do { 
+      line = CD.codeCommand(statusCommand);
+      System.out.println("STATUS LINE: " + line);
+      outW.println(line);
+      outB.println(line);
+      
+      
+      //do { 
         if(currPlayer == WHITE) {
           line = inW.readLine();
-          System.out.println("WHITE LINE: " + line + " TIME: " + java.time.LocalTime.now());
+          System.out.println("MOVE LINE: " + line);
           //create MOVE COMMNAD instance
           
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); //
@@ -96,32 +121,22 @@ public class Game implements Runnable {
           if(moveCommand.pieceId == PIECE) {
             System.out.println("WHITE MOVE PIECE");
             if(gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              System.out.println("WHITE GOOD MOVE");
-              statusCommand.turn = String.valueOf(BLACK);
-              statusCommand.board[moveCommand.toX][moveCommand.toY] = WH_PIECE;
-
-              line = CD.codeCommand(statusCommand);
-              System.out.println("WHITE UPDATE STATUS: " + line);
-              outB.println(line);
-              outW.println(line);
+              move(moveCommand.toX, moveCommand.toY, WH_PIECE, BLACK);
+              sendStatus(outB);
+              sendStatus(outW);
             }
           } else if(moveCommand.pieceId == KING) {
             System.out.println("WHITE MOVE KING");
             if(gameKind.checkMoveKing(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              System.out.println("WHITE GOOD MOVE");
-              statusCommand.turn = String.valueOf(BLACK);
-              statusCommand.board[moveCommand.toX][moveCommand.toY] = WH_KING;
-              System.out.println("WHITE UPDATE STATUS: " + line);
-              line = CD.codeCommand(statusCommand);
-              outB.println(line);
-              outW.println(line);
+              move(moveCommand.toX, moveCommand.toY, WH_KING, BLACK);
+              sendStatus(outB);
+              sendStatus(outW);
             }
           }
-          System.out.println("GAME | CHANGE TO BLACK");
+
           currPlayer = BLACK;
         } else if(currPlayer == BLACK) {
           line = inB.readLine();
-          System.out.println("BLACK LINE: " + line);
           //create MOVE COMMNAD instance
           
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); //
@@ -129,33 +144,22 @@ public class Game implements Runnable {
           if(moveCommand.pieceId == PIECE) {
             System.out.println("BLACK MOVE PIECE");
             if(gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              System.out.println("BLACK GOOD MOVE");
-              statusCommand.turn = String.valueOf(WHITE);
-              statusCommand.board[moveCommand.toX][moveCommand.toY] = BL_PIECE;
-
-              line = CD.codeCommand(statusCommand);
-              System.out.println("BLACK UPDATE STATUS: " + line);
-              outW.println(line);
-              outB.println(line);
+              move(moveCommand.toX, moveCommand.toY, BL_PIECE, WHITE);
+              sendStatus(outW);
+              sendStatus(outB);
             }
           } else if(moveCommand.pieceId == KING) {
             System.out.println("BLACK MOVE KING");
             if(gameKind.checkMoveKing(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              System.out.println("BLACK GOOD MOVE");
-              statusCommand.turn = String.valueOf(WHITE);
-              statusCommand.board[moveCommand.toX][moveCommand.toY] = BL_KING;
-
-              line = CD.codeCommand(statusCommand);
-              System.out.println("BLACK UPDATE STATUS: " + line);
-              outW.println(line);
-              outB.println(line);
+              move(moveCommand.toX, moveCommand.toY, BL_KING, WHITE);
+              sendStatus(outW);
+              sendStatus(outB);
             }
           }
-          System.out.println("GAME | CHANGE TO WHITE");
           currPlayer = WHITE;
         }
-      } while(true);
-
+      //} while(true);
+      
     } catch(IOException e) {
       System.out.println(e.getMessage());
     }

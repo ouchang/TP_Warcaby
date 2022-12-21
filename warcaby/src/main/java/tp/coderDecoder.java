@@ -291,15 +291,12 @@ class CoderDecoder {
   
 
   String codeCommand(Command object) { // void
-    System.out.println("CODER DECODER");
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);
       String commandAsString;
       //mapper.writeValue(new File("/home/ola/WORKSPACE/pwr/warcaby_tp/warcaby/src/main/java/tp/output.json"), object);
-      System.out.println("BEFORE WRITING OBJECT AS STRING");
       commandAsString = mapper.writeValueAsString(object);
-      System.out.println("AFTER WRITING OBJECT AS STRING: " + commandAsString);
       return commandAsString;
     } catch(JsonProcessingException e) {
       System.out.println(e.getMessage());
