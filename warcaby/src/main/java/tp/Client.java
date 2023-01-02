@@ -78,7 +78,6 @@ public class Client {
     out.println(commandString);
     
     showing = ACTIVE;
-    currPlayer = oponnentId; // PREV: oponnentId
   }
 
   private static void receive() { // PREV: nonstatic
@@ -89,6 +88,9 @@ public class Client {
       gameStatus = (gameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
       
+      //Update currPlayer based on gameStatus
+      currPlayer = Integer.parseInt(gameStatus.turn);
+
      } catch(IOException e) {
       System.out.println(e.getMessage());
      }
@@ -105,12 +107,42 @@ public class Client {
     receive();
 
     gameCommandClass moveCommand = new gameCommandClass();
-    moveCommand.setActorId(playerId);
-    moveCommand.setPieceId(PIECE);
-    moveCommand.fromX=6; 
-    moveCommand.fromY=3;
-    moveCommand.toX=5; 
-    moveCommand.toY=2;
+
+    if(playerId == 1 && currPlayer == 1) { //WHITE
+      System.out.println("WHITE sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+      moveCommand.fromX=6; 
+      moveCommand.fromY=5;
+      moveCommand.toX=5; 
+      moveCommand.toY=4;
+    }
+
+    send(moveCommand);
+    receive();
+
+    if(playerId == 2 && currPlayer == 2) { // BLACK
+      System.out.println("BLACK sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+      moveCommand.fromX=3; 
+      moveCommand.fromY=2;
+      moveCommand.toX=4; 
+      moveCommand.toY=3;
+    }
+
+    send(moveCommand);
+    receive();
+
+    if(playerId == 1 && currPlayer == 1) { //WHITE
+      System.out.println("WHITE sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+      moveCommand.fromX=5; 
+      moveCommand.fromY=4;
+      moveCommand.toX=3; 
+      moveCommand.toY=2;
+    } 
 
     send(moveCommand);
     receive();

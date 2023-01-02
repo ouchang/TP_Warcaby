@@ -24,6 +24,9 @@ public class Game implements Runnable {
   private static final String BL_PIECE="3";
   private static final String BL_KING="4";
 
+  private static final String REGULAR = "REGULAR";
+  private static final String CAPTURE = "CAPTURE";
+
   private int currPlayer;
   private gameCommandClass moveCommand;
   private gameStatusClass statusCommand;
@@ -36,7 +39,7 @@ public class Game implements Runnable {
     this.gameKind = gameKind;
 
     this.boardSize = gameKind.getBoardSize();
-    this.board = new String[boardSize+1][boardSize+1];
+    this.board = gameKind.getGameBoard();
     this.currPlayer = gameKind.whoStarts();
 
     this.moveCommand = new gameCommandClass();
@@ -54,9 +57,22 @@ public class Game implements Runnable {
     statusCommand.setBoard(this.board);
   }
 
-  public synchronized void move(int x, int y, String symbol, int nextTurn) {
+  public synchronized void move(int fromX, int fromY, int toX, int toY, String symbol, int nextTurn, Movement movement) {
     statusCommand.turn = String.valueOf(nextTurn);
-    statusCommand.board[x][y] = symbol;
+    
+
+    if(movement.getKind() == CAPTURE) {
+      board[fromX][fromY] = EMPTY;
+      board[movement.getCapturedFigureX()][movement.getCapturedFigureY()] = EMPTY;
+      board[toX][toY] = symbol;
+      System.out.println("CAPTURE UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
+    } else if(movement.getKind() == REGULAR) {
+      board[fromX][fromY] = EMPTY;
+      board[toX][toY] = symbol;
+      System.out.println("REGULAR UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
+    }
+
+    statusCommand.setBoard(board);
   }
 
   public synchronized void sendStatus(PrintWriter out) {
@@ -66,16 +82,11 @@ public class Game implements Runnable {
     out.println(line);
   }
 
-  public void boardInitFill() {
-    for(int i=0; i<=boardSize; i++) {
-      for(int j=0; j<=boardSize; j++) {
-        board[i][j] = EMPTY;
-      }
-    }
-  }
-
   @Override
   public void run() {
+    boolean moveOccured = false;
+    Movement movement = new Movement();
+
     try {
       //Support for player1's socket (WHITE)
       InputStream inputFirst = firstPlayer.getInputStream();
@@ -90,8 +101,6 @@ public class Game implements Runnable {
 
       OutputStream outputSecond = secondPlayer.getOutputStream();
       PrintWriter outB = new PrintWriter(outputSecond, true);
-
-      boardInitFill(); // fill board with EMPTY symbol ("0")
 
       // Tell clients their assigned indexes
       outW.println("1"); //TO DO: Change to json
@@ -110,54 +119,85 @@ public class Game implements Runnable {
       outW.println(line);
       outB.println(line);
       
-      
-      //do { 
+      do { 
+        System.out.println("NEW ITERATION - WAITING FOR PLAYER: " + currPlayer + " TO MOVE");
         if(currPlayer == WHITE) {
           //receive MOVE command
           line = inW.readLine();
+
+          // Null line exception (?)
+          if(line == null) {
+            System.out.println("Empty stream");
+            return;
+          }
+
           System.out.println("MOVE LINE: " + line);
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand");
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("WHITE MOVE PIECE");
-            if(gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              move(moveCommand.toX, moveCommand.toY, WH_PIECE, BLACK);
+            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
+            if(movement.getCorrectMove()) {
+              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_PIECE, BLACK, movement);
               sendStatus(outB);
               sendStatus(outW);
+              moveOccured = true;
             }
           } else if(moveCommand.pieceId == KING) {
             System.out.println("WHITE MOVE KING");
-            if(gameKind.checkMoveKing(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              move(moveCommand.toX, moveCommand.toY, WH_KING, BLACK);
+            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
+            if(movement.getCorrectMove()) {
+              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_KING, BLACK, movement);
               sendStatus(outB);
               sendStatus(outW);
+              moveOccured = true;
             }
           }
 
-          currPlayer = BLACK;
+          if(moveOccured) {
+            currPlayer = BLACK;
+            moveOccured = false;
+          }
         } else if(currPlayer == BLACK) {
           //receive MOVE command
           line = inB.readLine();
+
+          // Null line exception (?)
+          if(line == null) {
+            System.out.println("Empty stream");
+            return;
+          }
+
+          System.out.println("MOVE LINE: " + line);
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); 
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("BLACK MOVE PIECE");
-            if(gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              move(moveCommand.toX, moveCommand.toY, BL_PIECE, WHITE);
+            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
+            if(movement.getCorrectMove()) {
+              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_PIECE, WHITE, movement);
               sendStatus(outW);
               sendStatus(outB);
+              moveOccured = true;
             }
           } else if(moveCommand.pieceId == KING) {
             System.out.println("BLACK MOVE KING");
-            if(gameKind.checkMoveKing(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY)) {
-              move(moveCommand.toX, moveCommand.toY, BL_KING, WHITE);
+            movement = gameKind.checkMoveKing(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
+            if(movement.getCorrectMove()) {
+              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_KING, WHITE, movement);
               sendStatus(outW);
               sendStatus(outB);
+              moveOccured = true;
             }
           }
-          currPlayer = WHITE;
+
+          if(moveOccured) {
+            currPlayer = WHITE;
+            moveOccured = false;
+          }
         }
-      //} while(true);
+
+      } while(true);
       
     } catch(IOException e) {
       System.out.println(e.getMessage());

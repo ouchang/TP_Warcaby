@@ -6,16 +6,20 @@ public class BrazilianKind implements IGameKind {
     return "";
   }
 
+  public String[][] getGameBoard() {
+    return null;
+  }
+
   public int getBoardSize() {
     return 0;
   }
 
-  public boolean checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY) {
-    return false;
+  public Movement checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+    return new Movement();
   }
 
-  public boolean checkMoveKing(int fromX, int fromY, int toX, int toY) {
-    return false;
+  public Movement checkMoveKing(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+    return new Movement();
   }
 
   public void isCapturePossible() {
