@@ -10,6 +10,8 @@ public class App
 {
     public static void main( String[] args )
     {
+        //Testing CoderDecoder class
+
         System.out.println( "Hello World!" );
         CoderDecoder CD = new CoderDecoder();
         //Command command = CD.decodeCommand(new File("/home/ola/WORKSPACE/pwr/warcaby_tp/warcaby/src/main/java/tp/protocol/gameStatus.json"), "gameStatus");

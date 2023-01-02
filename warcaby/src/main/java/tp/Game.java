@@ -69,25 +69,7 @@ public class Game implements Runnable {
     statusCommand.setBoard(this.board);
   }
 
-  public synchronized void move(int fromX, int fromY, int toX, int toY, String symbol, int nextTurn) {
-    statusCommand.turn = String.valueOf(nextTurn);
-    
-
-    if(movement.getKind() == CAPTURE) {
-      board[fromX][fromY] = EMPTY;
-      board[movement.getCapturedFigureX()][movement.getCapturedFigureY()] = EMPTY;
-      board[toX][toY] = symbol;
-      System.out.println("CAPTURE UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
-    } else if(movement.getKind() == REGULAR) {
-      board[fromX][fromY] = EMPTY;
-      board[toX][toY] = symbol;
-      System.out.println("REGULAR UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
-    }
-
-    statusCommand.setBoard(board);
-  }
-
-  public synchronized boolean move2(int fromX, int fromY, int toX, int toY, String symbol, int currPlayer, int nextTurn) {
+  public synchronized boolean move(int fromX, int fromY, int toX, int toY, String symbol, int currPlayer, int nextTurn) {
     if(symbol == WH_PIECE || symbol == BL_PIECE) {
       movement = gameKind.checkMovePiece(currPlayer, fromX, fromY, toX, toY, board);
     } else if(symbol == WH_KING || symbol == BL_KING) {
@@ -175,7 +157,7 @@ public class Game implements Runnable {
 
           // Null line exception (?)
           if(line == null) {
-            System.out.println("Empty stream");
+            System.out.println("Empty ClientStream");
             return;
           }
 
@@ -194,10 +176,10 @@ public class Game implements Runnable {
             System.out.println("WHITE MOVE PIECE");
 
 
-            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_PIECE, WHITE, BLACK);
+            moveOccured = move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_PIECE, WHITE, BLACK);
           } else if(moveCommand.pieceId == KING) {
             System.out.println("WHITE MOVE KING");
-            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_KING, WHITE, BLACK);
+            moveOccured = move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_KING, WHITE, BLACK);
           }
 
           if(moveOccured) {
@@ -211,7 +193,7 @@ public class Game implements Runnable {
 
           // Null line exception (?)
           if(line == null) {
-            System.out.println("Empty stream");
+            System.out.println("Empty ClientStream");
             return;
           }
 
@@ -228,11 +210,11 @@ public class Game implements Runnable {
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("BLACK MOVE PIECE");
-            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_PIECE, BLACK, WHITE);
+            moveOccured = move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_PIECE, BLACK, WHITE);
 
           } else if(moveCommand.pieceId == KING) {
             System.out.println("BLACK MOVE KING");
-            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_KING, BLACK, WHITE);    
+            moveOccured = move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_KING, BLACK, WHITE);    
           }
 
           if(moveOccured) {
@@ -242,10 +224,8 @@ public class Game implements Runnable {
           }
         }
 
-        
         sendStatus(outB);
         sendStatus(outW);
-        
 
         if(statusCommand.getError() != "") {
           statusCommand.setError("");
