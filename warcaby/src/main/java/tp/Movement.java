@@ -5,12 +5,14 @@ public class Movement {
   private boolean correctMove;
   private int capturedFigureX;
   private int capturedFigureY;  
+  private String errorMessage;
 
   Movement() {
     this.kind = "";
     this.correctMove = false;
     this.capturedFigureX = 0;
     this.capturedFigureY = 0;
+    this.errorMessage = "";
   }
 
   public String getKind() {
@@ -43,5 +45,13 @@ public class Movement {
 
   public void setCapturedFigureY(int capturedFigureY) {
     this.capturedFigureY = capturedFigureY;
+  }
+
+  public String getErrorMessage() {
+    return this.errorMessage;
+  }
+
+  public void setErrorMessage(String errorMessage) {
+    this.errorMessage = errorMessage;
   }
 }

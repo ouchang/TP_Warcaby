@@ -66,16 +66,19 @@ public class CzechKind implements IGameKind {
     // check if it is actually pieces's move
     if(currPlayer == WHITE) {
       if(board[fromX][fromY] != WH_PIECE) {
+        move.setErrorMessage("ERROR: White piece has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     } else if(currPlayer == BLACK) {
       if(board[fromX][fromY] != BL_PIECE) {
+        move.setErrorMessage("ERROR: Black piece has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     }
     
     // check if piece goes outside the board
     if(toX < 1 || toX > 8 || toY < 1 || toY > 8) {
+      move.setErrorMessage("ERROR: Move outside the board");
       return move; // return default Movement value (incorrect move)
     }
 
@@ -119,6 +122,7 @@ public class CzechKind implements IGameKind {
       }
     }
 
+    move.setErrorMessage("ERROR: Incorrect move");
     return move; // return default Movement value (incorrect move)
   }
 
@@ -128,16 +132,19 @@ public class CzechKind implements IGameKind {
     // check if it is actually king's move
     if(currPlayer == WHITE) {
       if(board[fromX][fromY] != WH_KING) {
+        move.setErrorMessage("ERROR: White king has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     } else if(currPlayer == BLACK) {
       if(board[fromX][fromY] != BL_KING) {
+        move.setErrorMessage("ERROR: Black king has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     }
 
     // check if piece goes outside the board
     if(toX < 1 || toX > 8 || toY < 1 || toY > 8) {
+      move.setErrorMessage("ERROR: Move outside the board");
       return move; // return default Movement value (incorrect move)
     }
     
@@ -180,6 +187,7 @@ public class CzechKind implements IGameKind {
           }
         }
       }
+
     } else if(fromX+fromY == toX+toY) { //"rising" diagonal
       if(toX > fromX) { // forward move 
         startX = fromX+1;
@@ -213,6 +221,7 @@ public class CzechKind implements IGameKind {
         }
       }
     }
+
     
     if(currPlayer == WHITE) {
       if(whiteFiguresCounter == 0) {
@@ -244,6 +253,7 @@ public class CzechKind implements IGameKind {
       }
     }
 
+    move.setErrorMessage("ERROR: Incorrect move");
     return move; // return default Movement value (incorrect move)
   }
 

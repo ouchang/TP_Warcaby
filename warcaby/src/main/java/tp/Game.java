@@ -31,6 +31,10 @@ public class Game implements Runnable {
   private gameCommandClass moveCommand;
   private gameStatusClass statusCommand;
 
+  private Movement movement;
+  private int whitePrevFromX, whitePrevFromY;
+  private int blackPrevFromX, blackPrevFromY;
+
   public Game(Socket firstPlayer, Socket secondPlayer, IGameKind gameKind) {
     this.CD = new CoderDecoder();
 
@@ -45,6 +49,14 @@ public class Game implements Runnable {
     this.moveCommand = new gameCommandClass();
     this.statusCommand = new gameStatusClass();
 
+    this.movement = new Movement();
+
+    this.blackPrevFromX = -1;
+    this.blackPrevFromY = -1;
+    
+    this.whitePrevFromX = -1;
+    this.whitePrevFromY = -1;
+
     //Temporary inicializing statusCommand
     statusCommand.setId("12");
     statusCommand.setFriendly_name("testGame1");
@@ -57,7 +69,7 @@ public class Game implements Runnable {
     statusCommand.setBoard(this.board);
   }
 
-  public synchronized void move(int fromX, int fromY, int toX, int toY, String symbol, int nextTurn, Movement movement) {
+  public synchronized void move(int fromX, int fromY, int toX, int toY, String symbol, int nextTurn) {
     statusCommand.turn = String.valueOf(nextTurn);
     
 
@@ -75,6 +87,43 @@ public class Game implements Runnable {
     statusCommand.setBoard(board);
   }
 
+  public synchronized boolean move2(int fromX, int fromY, int toX, int toY, String symbol, int currPlayer, int nextTurn) {
+    if(symbol == WH_PIECE || symbol == BL_PIECE) {
+      movement = gameKind.checkMovePiece(currPlayer, fromX, fromY, toX, toY, board);
+    } else if(symbol == WH_KING || symbol == BL_KING) {
+      movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
+    }
+
+    if(movement.getCorrectMove()) {
+      if(movement.getKind() == CAPTURE) {
+        board[fromX][fromY] = EMPTY;
+        board[movement.getCapturedFigureX()][movement.getCapturedFigureY()] = EMPTY;
+        board[toX][toY] = symbol;
+        System.out.println("CAPTURE UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
+      } else if(movement.getKind() == REGULAR) {
+        board[fromX][fromY] = EMPTY;
+        board[toX][toY] = symbol;
+        System.out.println("REGULAR UPDATE BOARD["+toX+"]["+toY+"]: "+board[toX][toY]);
+      }
+      //TO DO: Change turn when there is no possible captures
+      statusCommand.turn = String.valueOf(nextTurn);
+
+      if(currPlayer == WHITE) {
+        whitePrevFromX = fromX;
+        whitePrevFromY = fromY;
+      } else if(currPlayer == BLACK) {
+        blackPrevFromX = fromX;
+        blackPrevFromY = fromY;
+      }
+
+      return true;
+    }  else {
+      statusCommand.setError(movement.getErrorMessage());
+    }
+
+    return false;
+  }
+
   public synchronized void sendStatus(PrintWriter out) {
     String line;
     line = CD.codeCommand(statusCommand);
@@ -85,7 +134,6 @@ public class Game implements Runnable {
   @Override
   public void run() {
     boolean moveOccured = false;
-    Movement movement = new Movement();
 
     try {
       //Support for player1's socket (WHITE)
@@ -133,28 +181,27 @@ public class Game implements Runnable {
 
           System.out.println("MOVE LINE: " + line);
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand");
+
+          if(moveCommand.getActorId() != WHITE) { // hasn't receive info about WHITE's new move
+            continue;
+        }
           
-          if(moveCommand.pieceId == PIECE) {
+          if(moveCommand.fromX == whitePrevFromX && moveCommand.fromY == whitePrevFromY) { // still haven't received new move info
+            continue;
+          }
+
+          if(moveCommand.pieceId == PIECE) {  
             System.out.println("WHITE MOVE PIECE");
-            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
-            if(movement.getCorrectMove()) {
-              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_PIECE, BLACK, movement);
-              sendStatus(outB);
-              sendStatus(outW);
-              moveOccured = true;
-            }
+
+
+            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_PIECE, WHITE, BLACK);
           } else if(moveCommand.pieceId == KING) {
             System.out.println("WHITE MOVE KING");
-            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
-            if(movement.getCorrectMove()) {
-              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_KING, BLACK, movement);
-              sendStatus(outB);
-              sendStatus(outW);
-              moveOccured = true;
-            }
+            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, WH_KING, WHITE, BLACK);
           }
 
           if(moveOccured) {
+            System.out.println("MOVE OCCURED");
             currPlayer = BLACK;
             moveOccured = false;
           }
@@ -170,31 +217,38 @@ public class Game implements Runnable {
 
           System.out.println("MOVE LINE: " + line);
           moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); 
+
+          if(moveCommand.getActorId() != BLACK) { // hasn't receive info about BLACK's new move
+            continue;
+          }
+
+          if(moveCommand.fromX == blackPrevFromX && moveCommand.fromY == blackPrevFromY) { // still hasn't received move info
+            continue;
+          }
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("BLACK MOVE PIECE");
-            movement = gameKind.checkMovePiece(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
-            if(movement.getCorrectMove()) {
-              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_PIECE, WHITE, movement);
-              sendStatus(outW);
-              sendStatus(outB);
-              moveOccured = true;
-            }
+            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_PIECE, BLACK, WHITE);
+
           } else if(moveCommand.pieceId == KING) {
             System.out.println("BLACK MOVE KING");
-            movement = gameKind.checkMoveKing(currPlayer, moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, board);
-            if(movement.getCorrectMove()) {
-              move(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_KING, WHITE, movement);
-              sendStatus(outW);
-              sendStatus(outB);
-              moveOccured = true;
-            }
+            moveOccured = move2(moveCommand.fromX, moveCommand.fromY, moveCommand.toX, moveCommand.toY, BL_KING, BLACK, WHITE);    
           }
 
           if(moveOccured) {
+            System.out.println("MOVE OCCURED");
             currPlayer = WHITE;
             moveOccured = false;
           }
+        }
+
+        
+        sendStatus(outB);
+        sendStatus(outW);
+        
+
+        if(statusCommand.getError() != "") {
+          statusCommand.setError("");
         }
 
       } while(true);

@@ -88,6 +88,11 @@ public class Client {
       gameStatus = (gameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
       
+      // Display error message
+      if(gameStatus.getError() != "" && Integer.parseInt(gameStatus.getTurn()) == playerId) {
+        System.out.println("Error Message:" + gameStatus.getError());
+      }
+
       //Update currPlayer based on gameStatus
       currPlayer = Integer.parseInt(gameStatus.turn);
 
@@ -127,6 +132,10 @@ public class Client {
       moveCommand.setPieceId(PIECE);
       moveCommand.fromX=3; 
       moveCommand.fromY=2;
+
+      //moveCommand.fromX=3; // Testing wrong move
+      //moveCommand.fromY=3;
+
       moveCommand.toX=4; 
       moveCommand.toY=3;
     }
