@@ -1,0 +1,7 @@
+{
+  "id":"1111",
+  "actor":"player1",
+  "command":"move",
+  "from":"6;2",
+  "to":"5;3"
+}

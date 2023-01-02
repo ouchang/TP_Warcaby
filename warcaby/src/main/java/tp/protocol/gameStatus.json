@@ -1,0 +1,16 @@
+{
+  "id":"1111",
+  "friendly_name":"Gra dla jaj",
+  "gameKind":"brazilian",
+  "player1":"ola",
+  "player2":"maria",
+  "turn":"player1",
+  "status":"ongoing",
+  "error":null,
+  "board":[
+    ["0","P1P","0","P2K"],
+    [],
+    [],
+    []
+  ]
+}
