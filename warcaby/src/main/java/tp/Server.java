@@ -6,7 +6,7 @@ import java.net.*;
 public class Server {
   private static int clientCounter=0;
 
-  private static Socket firstClientSocket; // TEST
+  private static Socket firstClientSocket;
   private static Socket secondClientSocket;
 
   public static void main(String[] args) {
@@ -31,7 +31,7 @@ public class Server {
         // create GameKindFactory
 
         // create and start game thread -> pass firstClientSocket and secondClientSocket to thread
-        Game game = new Game(firstClientSocket, secondClientSocket, CG); //TEST
+        Game game = new Game(firstClientSocket, secondClientSocket, CG);
         Thread gameThread = new Thread(game);
         gameThread.start();
       //}

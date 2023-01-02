@@ -69,7 +69,7 @@ public class Game implements Runnable {
   public void boardInitFill() {
     for(int i=0; i<=boardSize; i++) {
       for(int j=0; j<=boardSize; j++) {
-        board[i][j] = "0";
+        board[i][j] = EMPTY;
       }
     }
   }
@@ -91,7 +91,7 @@ public class Game implements Runnable {
       OutputStream outputSecond = secondPlayer.getOutputStream();
       PrintWriter outB = new PrintWriter(outputSecond, true);
 
-      boardInitFill();
+      boardInitFill(); // fill board with EMPTY symbol ("0")
 
       // Tell clients their assigned indexes
       outW.println("1"); //TO DO: Change to json
@@ -104,19 +104,19 @@ public class Game implements Runnable {
       //Start game
       String line;
       
+      //TO DO: Replace temporary statusCommand's content from constructor with init info read from GUI
       line = CD.codeCommand(statusCommand);
-      System.out.println("STATUS LINE: " + line);
+      System.out.println("START STATUS: " + line);
       outW.println(line);
       outB.println(line);
       
       
       //do { 
         if(currPlayer == WHITE) {
+          //receive MOVE command
           line = inW.readLine();
           System.out.println("MOVE LINE: " + line);
-          //create MOVE COMMNAD instance
-          
-          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); //
+          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand");
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("WHITE MOVE PIECE");
@@ -136,10 +136,9 @@ public class Game implements Runnable {
 
           currPlayer = BLACK;
         } else if(currPlayer == BLACK) {
+          //receive MOVE command
           line = inB.readLine();
-          //create MOVE COMMNAD instance
-          
-          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); //
+          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); 
           
           if(moveCommand.pieceId == PIECE) {
             System.out.println("BLACK MOVE PIECE");

@@ -15,11 +15,9 @@ public class Client {
   private static final int ACTIVE=0;
   private static final int NONACTIVE=1;
 
-  //private static int showingWhite = NONACTIVE; //
-  //private static int showingBlack = NONACTIVE; //
   private static int showing = NONACTIVE; 
 
-  private static int playerId; // Id that Server sends to identification
+  private static int playerId; // ID that Server sends for identification
   private static int oponnentId;
   private static int currPlayer;
   private static CoderDecoder CD;
@@ -34,8 +32,8 @@ public class Client {
   }
 
   public void boardInitFill() {
-    for(int i=1; i<=8; i++) { //
-      for(int j=1; j<=8; j++) { //
+    for(int i=1; i<=8; i++) { 
+      for(int j=1; j<=8; j++) { 
         gameStatus.board[i][j] = "";
       }
     }
@@ -59,9 +57,7 @@ public class Client {
     try {
       //Receive from Server player's index
       playerId = Integer.parseInt(in.readLine());
-      //System.out.println("PLAYER_ID: " + playerId);
       currPlayer = Integer.parseInt(in.readLine()); //Receive from Server who starts the game
-      //System.out.println("CURR_PLAYER_ID: " + currPlayer);
 
       if(playerId == WHITE)
         oponnentId = BLACK;
@@ -75,27 +71,23 @@ public class Client {
     }
   }
 
-  private static void send(Command command) { // nonstatic
-    //TO DO: Send temporary MOVE command
-
+  private static void send(ICommand command) { // PREV: nonstatic
     // code command using CoderDecoder
     String commandString = CD.codeCommand(command);
     //Send string to Server
     out.println(commandString);
     
-    //currPlayer = oponnentId;
     showing = ACTIVE;
-    currPlayer = playerId;
+    currPlayer = oponnentId; // PREV: oponnentId
   }
 
-  private static void receive() { //nonstatic
-    //TO DO: Receive from Server temporary GAME STATUS command
+  private static void receive() { // PREV: nonstatic
      try {
       String commandString = in.readLine();
       System.out.println("CommandString: "+commandString);
-      Command command =  CD.decodeCommand(commandString, "gameStatus");
+      ICommand command =  CD.decodeCommand(commandString, "gameStatus");
       gameStatus = (gameStatusClass) command;
-      gameStatus.showView();
+      System.out.println("GameStatus View:" + gameStatus.showView());
       
      } catch(IOException e) {
       System.out.println(e.getMessage());
