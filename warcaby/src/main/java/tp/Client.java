@@ -74,6 +74,8 @@ public class Client {
   private static void send(ICommand command) { // PREV: nonstatic
     // code command using CoderDecoder
     String commandString = CD.codeCommand(command);
+    System.out.println("CLIENT sends: " + commandString);
+    
     //Send string to Server
     out.println(commandString);
     
@@ -83,14 +85,14 @@ public class Client {
   private static void receive() { // PREV: nonstatic
      try {
       String commandString = in.readLine();
-      System.out.println("CommandString: "+commandString);
+      System.out.println("CLIENT receives: "+commandString);
       ICommand command =  CD.decodeCommand(commandString, "gameStatus");
       gameStatus = (gameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
       
       // Display error message
       if(gameStatus.getError() != "" && Integer.parseInt(gameStatus.getTurn()) == playerId) {
-        System.out.println("Error Message:" + gameStatus.getError());
+        System.out.println(gameStatus.getError());
       }
 
       //Update currPlayer based on gameStatus
@@ -103,6 +105,7 @@ public class Client {
 
   public static void main(String[] main) {
     Client player = new Client();
+    Position tmp = new Position();
 
     player.listenSocket();
     player.receiveInitInfo();
@@ -113,47 +116,121 @@ public class Client {
 
     gameCommandClass moveCommand = new gameCommandClass();
 
+    // REGULAR MOVE / SINGLE CAPTURE - TEST
+    /*
     if(playerId == 1 && currPlayer == 1) { //WHITE
       System.out.println("WHITE sends move");
       moveCommand.setActorId(playerId);
       moveCommand.setPieceId(PIECE);
-      moveCommand.fromX=6; 
-      moveCommand.fromY=5;
-      moveCommand.toX=5; 
-      moveCommand.toY=4;
+
+      tmp = new Position();
+      tmp.setX(6);
+      tmp.setY(5);
+      moveCommand.addPosition(tmp);
+
+      tmp = new Position();
+      tmp.setX(5);
+      tmp.setY(4);
+      moveCommand.addPosition(tmp);
     }
 
     send(moveCommand);
+    //clear positions in moveCommand
+    moveCommand.clearPositions();
     receive();
 
     if(playerId == 2 && currPlayer == 2) { // BLACK
       System.out.println("BLACK sends move");
       moveCommand.setActorId(playerId);
       moveCommand.setPieceId(PIECE);
-      moveCommand.fromX=3; 
-      moveCommand.fromY=2;
+
+      tmp = new Position();
+      tmp.setX(3);
+      tmp.setY(2);
+      moveCommand.addPosition(tmp);
 
       //moveCommand.fromX=3; // Testing wrong move
       //moveCommand.fromY=3;
 
-      moveCommand.toX=4; 
-      moveCommand.toY=3;
+      tmp = new Position();
+      tmp.setX(4);
+      tmp.setY(3);
+      moveCommand.addPosition(tmp);
     }
 
     send(moveCommand);
+    moveCommand.clearPositions();
     receive();
 
     if(playerId == 1 && currPlayer == 1) { //WHITE
       System.out.println("WHITE sends move");
       moveCommand.setActorId(playerId);
       moveCommand.setPieceId(PIECE);
-      moveCommand.fromX=5; 
-      moveCommand.fromY=4;
-      moveCommand.toX=3; 
-      moveCommand.toY=2;
+
+      tmp = new Position();
+      tmp.setX(5);
+      tmp.setY(4);
+      moveCommand.addPosition(tmp);
+
+      tmp = new Position();
+      tmp.setX(3);
+      tmp.setY(2);
+      moveCommand.addPosition(tmp);
     } 
 
     send(moveCommand);
+    moveCommand.clearPositions();
     receive();
+    */
+
+    //MULTI CAPTURE TEST
+    if(playerId == 1 && currPlayer == 1) { //WHITE
+      System.out.println("WHITE sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+
+      tmp = new Position();
+      tmp.setX(6);
+      tmp.setY(5);
+      moveCommand.addPosition(tmp);
+
+      tmp = new Position();
+      tmp.setX(4);
+      tmp.setY(3);
+      moveCommand.addPosition(tmp);
+
+      tmp = new Position();
+      tmp.setX(2);
+      tmp.setY(5);
+      moveCommand.addPosition(tmp);
+    }
+
+    send(moveCommand);
+    //clear positions in moveCommand
+    moveCommand.clearPositions();
+    receive();
+
+    if(playerId == 2 && currPlayer == 2) { // BLACK
+      System.out.println("BLACK sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+
+      tmp = new Position();
+      tmp.setX(1);
+      tmp.setY(6);
+      moveCommand.addPosition(tmp);
+
+      //moveCommand.fromX=3; // Testing wrong move
+      //moveCommand.fromY=3;
+
+      tmp = new Position();
+      tmp.setX(3);
+      tmp.setY(4);
+      moveCommand.addPosition(tmp);
+    }
+
+    send(moveCommand);
+    moveCommand.clearPositions();
+    receive();    
   }
 }

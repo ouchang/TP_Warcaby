@@ -18,10 +18,10 @@ public class App
         //System.out.println( "DESERIALIZED: " + command.showView());
         gameCommandClass moveCommand = new gameCommandClass();
         moveCommand.setActorId(1);
-        moveCommand.fromX=6; // TEST
-        moveCommand.fromY=2; // TEST
-        moveCommand.toX=5; // TEST
-        moveCommand.toY=4; // TEST
+    //    moveCommand.fromX=6; // TEST
+    //    moveCommand.fromY=2; // TEST
+   //     moveCommand.toX=5; // TEST
+    //    moveCommand.toY=4; // TEST
 
         String output;
         output = CD.codeCommand(moveCommand);

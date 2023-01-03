@@ -1,5 +1,8 @@
 package tp;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class CzechKind implements IGameKind {
   private static final int WHITE=1;
   private static final int BLACK=2;
@@ -61,7 +64,9 @@ public class CzechKind implements IGameKind {
   }
 
   public Movement checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+    //TO DO: Replace fromX, fromy, toX, toY with Position object!
     Movement move = new Movement();
+    Position cf = new Position();
 
     // check if it is actually pieces's move
     if(currPlayer == WHITE) {
@@ -90,17 +95,25 @@ public class CzechKind implements IGameKind {
           return move;
         } else if(Math.abs(fromY-toY) == 2 && Math.abs(fromX-toX) == 2) { // capture move
           move.setKind(CAPTURE);
-          if(board[fromX-1][fromY-1] == BL_KING || board[fromX-1][fromY-1] == BL_PIECE) {
-            move.setCorrectMove(true);
-            move.setCapturedFigureX(fromX-1);
-            move.setCapturedFigureY(fromY-1);
-            return move;
-          } else if(board[fromX-1][fromY+1] == BL_KING || board[fromX-1][fromY+1] == BL_PIECE) {
-            move.setCorrectMove(true);
-            move.setCapturedFigureX(fromX-1);
-            move.setCapturedFigureY(fromY+1);
-            return move;
-          }
+          if(fromX-2 == toX && fromY-2 == toY) { //left capture
+            if(board[fromX-1][fromY-1] == BL_KING || board[fromX-1][fromY-1] == BL_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(fromX-1);
+              cf.setY(fromY-1);
+              move.addCapturedFigure(cf);
+              return move;
+            }
+          } else if(fromX-2 == toX && fromY+2 == toY) { //right capture
+            if(board[fromX-1][fromY+1] == BL_KING || board[fromX-1][fromY+1] == BL_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(fromX-1);
+              cf.setY(fromY+1);
+              move.addCapturedFigure(cf);
+              return move;
+            }
+          } 
         }
       }
     } else if(currPlayer == BLACK) {
@@ -109,17 +122,29 @@ public class CzechKind implements IGameKind {
           move.setKind(REGULAR);
           move.setCorrectMove(true);
           return move;
+        } else if(Math.abs(fromY-toY) == 2 && Math.abs(fromX-toX) == 2) { // capture move
+          move.setKind(CAPTURE);
+          if(fromX+2 == toX && fromY-2 == toY) { //left capture
+            if(board[fromX+1][fromY-1] == WH_KING || board[fromX+1][fromY-1] == WH_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(fromX+1);
+              cf.setY(fromY-1);
+              move.addCapturedFigure(cf);
+              return move;
+            } 
+          } else if(fromX+2 == toX && fromY+2 == toY) { //right capture
+            if(board[fromX+1][fromY+1] == WH_KING || board[fromX+1][fromY+1] == WH_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(fromX+1);
+              cf.setY(fromY+1);
+              move.addCapturedFigure(cf);
+              return move;
+            }
+          }
         }
-      } else if(Math.abs(fromY-toY) == 2 && Math.abs(fromX-toX) == 2) { // capture move
-        move.setKind(CAPTURE);
-        if(board[fromX+1][fromY-1] == WH_KING || board[fromX+1][fromY-1] == WH_PIECE) {
-          move.setCorrectMove(true);
-          return move;
-        } else if(board[fromX+1][fromY+1] == WH_KING || board[fromX+1][fromY+1] == WH_PIECE) {
-          move.setCorrectMove(true);
-          return move;
-        }
-      }
+      } 
     }
 
     move.setErrorMessage("ERROR: Incorrect move");
@@ -128,6 +153,9 @@ public class CzechKind implements IGameKind {
 
   public Movement checkMoveKing(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
     Movement move = new Movement();
+    Position cf = new Position();
+
+    //TO DO: Replace fromX, fromy, toX, toY with Position object!
 
     // check if it is actually king's move
     if(currPlayer == WHITE) {
@@ -151,8 +179,6 @@ public class CzechKind implements IGameKind {
     int blackFiguresCounter=0;
     int whiteFiguresCounter=0;
 
-    int captureFigureX=0, captureFigureY=0;
-
     int startX=0, endX=0, startY=0, endY=0;
 
     if(Math.abs(fromX-fromY) == Math.abs(toX-toY)) { //"falling" diagonal - move
@@ -174,15 +200,17 @@ public class CzechKind implements IGameKind {
             blackFiguresCounter++;
 
             if(currPlayer == WHITE) {
-              captureFigureX = i;
-              captureFigureY = j;
+              cf = new Position();
+              cf.setX(i);
+              cf.setY(j);
             }
           } else if(board[i][j] == WH_KING || board[i][j] == WH_PIECE) {
             whiteFiguresCounter++;
 
             if(currPlayer == BLACK) {
-              captureFigureX = i;
-              captureFigureY = j;
+              cf = new Position();
+              cf.setX(i);
+              cf.setY(j);
             }
           }
         }
@@ -207,15 +235,17 @@ public class CzechKind implements IGameKind {
             blackFiguresCounter++;
 
             if(currPlayer == WHITE) {
-              captureFigureX = i;
-              captureFigureY = j;
+              cf = new Position();
+              cf.setX(i);
+              cf.setY(j);
             }
           } else if(board[i][j] == WH_KING || board[i][j] == WH_PIECE) {
             whiteFiguresCounter++;
 
             if(currPlayer == BLACK) {
-              captureFigureX = i;
-              captureFigureY = j;
+              cf = new Position();
+              cf.setX(i);
+              cf.setY(j);
             }
           }
         }
@@ -228,8 +258,7 @@ public class CzechKind implements IGameKind {
         if(blackFiguresCounter == 1) {
           move.setKind(CAPTURE);
           move.setCorrectMove(true);
-          move.setCapturedFigureX(captureFigureX);
-          move.setCapturedFigureY(captureFigureY);
+          move.addCapturedFigure(cf);
           return move;
         }
 
@@ -242,8 +271,7 @@ public class CzechKind implements IGameKind {
         if(whiteFiguresCounter == 1) {
           move.setKind(CAPTURE);
           move.setCorrectMove(true);
-          move.setCapturedFigureX(captureFigureX);
-          move.setCapturedFigureY(captureFigureY);
+          move.addCapturedFigure(cf);
           return move;
         }
 
@@ -255,6 +283,88 @@ public class CzechKind implements IGameKind {
 
     move.setErrorMessage("ERROR: Incorrect move");
     return move; // return default Movement value (incorrect move)
+  }
+
+  public Movement checkMultiCapture(int currPlayer, List<Position> positions, String[][] board) {
+    Movement move = new Movement();
+    Position cf = new Position();
+    Position start;
+    start = positions.get(0);
+
+     // check if it is actually pieces's move
+     if(currPlayer == WHITE) {
+      if(board[start.getX()][start.getY()] != WH_PIECE) {
+        move.setErrorMessage("ERROR: White piece has not been chosen!");
+        return move; // return default Movement value (incorrect move)
+      }
+    } else if(currPlayer == BLACK) {
+      if(board[start.getX()][start.getY()] != BL_PIECE) {
+        move.setErrorMessage("ERROR: Black piece has not been chosen!");
+        return move; // return default Movement value (incorrect move)
+      }
+    }
+    
+    for(Position end : positions.subList(1, positions.size())) { //-1
+      System.out.println("START X: " + start.getX() + " Y: " + start.getY() + " END X: " + end.getX() + " Y: " + end.getY());
+      // check if piece goes outside the board
+      if(end.getX() < 1 || end.getX() > 8 || end.getY() < 1 || end.getY() > 8) {
+        move.setErrorMessage("ERROR: Move outside the board");
+        return move; // return default Movement value (incorrect move)
+      }
+
+      if(currPlayer == WHITE) {
+        if(Math.abs(start.getY()-end.getY()) == 2 && Math.abs(start.getX()-end.getX()) == 2) { // capture move
+          move.setKind(CAPTURE);
+          if(start.getX()-2 == end.getX() && start.getY()-2 == end.getY()) { //left capture
+            if(board[start.getX()-1][start.getY()-1] == BL_KING || board[start.getX()-1][start.getY()-1] == BL_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(start.getX()-1);
+              cf.setY(start.getY()-1);
+              move.addCapturedFigure(cf);
+            }
+          } else if(start.getX()-2 == end.getX() && start.getY()+2 == end.getY()) { //right capture
+            if(board[start.getX()-1][start.getY()+1] == BL_KING || board[start.getX()-1][start.getY()+1] == BL_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(start.getX()-1);
+              cf.setY(start.getY()+1);
+              move.addCapturedFigure(cf);
+            }
+          } 
+        }
+      } else if(currPlayer == BLACK) {
+        if(Math.abs(start.getY()-end.getY()) == 2 && Math.abs(start.getX()-end.getX()) == 2) { // capture move
+          move.setKind(CAPTURE);
+          if(start.getX()+2 == end.getX() && start.getY()-2 == end.getY()) { //left capture
+            if(board[start.getX()+1][start.getY()-1] == WH_KING || board[start.getX()+1][start.getY()-1] == WH_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(start.getX()+1);
+              cf.setY(start.getY()-1);
+              move.addCapturedFigure(cf);
+            } 
+          } else if(start.getX()+2 == end.getX() && start.getY()+2 == end.getY()) { //right capture
+            if(board[start.getX()+1][start.getY()+1] == WH_KING || board[start.getX()+1][start.getY()+1] == WH_PIECE) {
+              move.setCorrectMove(true);
+              cf = new Position();
+              cf.setX(start.getX()+1);
+              cf.setY(start.getY()+1);
+              move.addCapturedFigure(cf);
+            }
+          }
+        }
+      }
+
+      if(move.getCorrectMove() == false) {
+        move.setErrorMessage("ERROR: Wrong move!");
+        return move; // return default Movement value (incorrect move)
+      }
+
+      start = end;
+    }
+
+    return move;
   }
 
   public void isCapturePossible() {

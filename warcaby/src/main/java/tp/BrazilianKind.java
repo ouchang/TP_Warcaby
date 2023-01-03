@@ -1,5 +1,7 @@
 package tp;
 
+import java.util.List;
+
 public class BrazilianKind implements IGameKind {
   //TO DO: Implement methods
   public String getName() {
@@ -21,6 +23,11 @@ public class BrazilianKind implements IGameKind {
   public Movement checkMoveKing(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
     return new Movement();
   }
+
+  public Movement checkMultiCapture(int currPlayer, List<Position> positions, String[][] board) {
+    return new Movement();
+  }
+
 
   public void isCapturePossible() {
 
