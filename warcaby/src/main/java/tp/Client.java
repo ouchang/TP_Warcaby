@@ -117,7 +117,7 @@ public class Client {
     gameCommandClass moveCommand = new gameCommandClass();
 
     // REGULAR MOVE / SINGLE CAPTURE - TEST
-    /*
+    
     if(playerId == 1 && currPlayer == 1) { //WHITE
       System.out.println("WHITE sends move");
       moveCommand.setActorId(playerId);
@@ -132,11 +132,13 @@ public class Client {
       tmp.setX(5);
       tmp.setY(4);
       moveCommand.addPosition(tmp);
+
+      send(moveCommand);
+      //clear positions in moveCommand
+      moveCommand.clearPositions();
     }
 
-    send(moveCommand);
-    //clear positions in moveCommand
-    moveCommand.clearPositions();
+    
     receive();
 
     if(playerId == 2 && currPlayer == 2) { // BLACK
@@ -149,17 +151,21 @@ public class Client {
       tmp.setY(2);
       moveCommand.addPosition(tmp);
 
-      //moveCommand.fromX=3; // Testing wrong move
-      //moveCommand.fromY=3;
+      // Testing wrong move
+//     tmp = new Position();
+//      tmp.setX(3);
+//      tmp.setY(3);
+//      moveCommand.addPosition(tmp);
 
       tmp = new Position();
       tmp.setX(4);
       tmp.setY(3);
       moveCommand.addPosition(tmp);
-    }
 
-    send(moveCommand);
-    moveCommand.clearPositions();
+      send(moveCommand);
+      moveCommand.clearPositions();
+    }
+    
     receive();
 
     if(playerId == 1 && currPlayer == 1) { //WHITE
@@ -176,13 +182,37 @@ public class Client {
       tmp.setX(3);
       tmp.setY(2);
       moveCommand.addPosition(tmp);
+
+      send(moveCommand);
+      moveCommand.clearPositions();
     } 
 
-    send(moveCommand);
-    moveCommand.clearPositions();
+    
     receive();
-    */
 
+    if(playerId == 2 && currPlayer == 2) { // BLACK
+      System.out.println("BLACK sends move");
+      moveCommand.setActorId(playerId);
+      moveCommand.setPieceId(PIECE);
+
+      tmp = new Position();
+      tmp.setX(2);
+      tmp.setY(1);
+      moveCommand.addPosition(tmp);
+
+      tmp = new Position();
+      tmp.setX(4);
+      tmp.setY(3);
+      moveCommand.addPosition(tmp);
+      
+      send(moveCommand);
+      moveCommand.clearPositions();
+    }
+
+    receive();
+
+    
+/* 
     //MULTI CAPTURE TEST
     if(playerId == 1 && currPlayer == 1) { //WHITE
       System.out.println("WHITE sends move");
@@ -203,11 +233,12 @@ public class Client {
       tmp.setX(2);
       tmp.setY(5);
       moveCommand.addPosition(tmp);
+
+      send(moveCommand);
+      //clear positions in moveCommand
+      moveCommand.clearPositions();
     }
 
-    send(moveCommand);
-    //clear positions in moveCommand
-    moveCommand.clearPositions();
     receive();
 
     if(playerId == 2 && currPlayer == 2) { // BLACK
@@ -227,10 +258,12 @@ public class Client {
       tmp.setX(3);
       tmp.setY(4);
       moveCommand.addPosition(tmp);
-    }
 
-    send(moveCommand);
-    moveCommand.clearPositions();
+      send(moveCommand);
+      moveCommand.clearPositions();
+    }
+  
     receive();    
+    */
   }
 }

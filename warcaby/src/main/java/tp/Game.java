@@ -113,9 +113,9 @@ public class Game implements Runnable {
       to = positions.get(positions.size()-1);
 
       if(symbol == WH_PIECE || symbol == BL_PIECE) {
-        movement = gameKind.checkMovePiece(currPlayer, from.getX(), from.getY(), to.getX(), to.getY(), board);
+        movement = gameKind.checkMovePiece(currPlayer, positions, board);
       } else if(symbol == WH_KING || symbol == BL_KING) {
-        movement = gameKind.checkMovePiece(currPlayer, from.getX(), from.getY(), to.getX(), to.getY(), board);
+        movement = gameKind.checkMovePiece(currPlayer, positions, board);
       }
 
       if(movement.getCorrectMove()) {
@@ -198,8 +198,8 @@ public class Game implements Runnable {
       outB.println(line);
 
       //MULTI CAPTURE TEST -> BOARD CHANGE
-      board[2][5] = EMPTY;
-      board[5][4] = BL_PIECE;
+//      board[2][5] = EMPTY;
+//      board[5][4] = BL_PIECE;
       
       do { 
         System.out.println("NEW ITERATION - WAITING FOR PLAYER: " + currPlayer + " TO MOVE");

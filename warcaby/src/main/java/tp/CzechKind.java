@@ -63,53 +63,55 @@ public class CzechKind implements IGameKind {
     return this.name;
   }
 
-  public Movement checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+  public Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board) {
     //TO DO: Replace fromX, fromy, toX, toY with Position object!
     Movement move = new Movement();
     Position cf = new Position();
+    Position from = positions.get(0);
+    Position to = positions.get(1);
 
     // check if it is actually pieces's move
     if(currPlayer == WHITE) {
-      if(board[fromX][fromY] != WH_PIECE) {
+      if(board[from.getX()][from.getY()] != WH_PIECE) {
         move.setErrorMessage("ERROR: White piece has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     } else if(currPlayer == BLACK) {
-      if(board[fromX][fromY] != BL_PIECE) {
+      if(board[from.getX()][from.getY()] != BL_PIECE) {
         move.setErrorMessage("ERROR: Black piece has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     }
     
     // check if piece goes outside the board
-    if(toX < 1 || toX > 8 || toY < 1 || toY > 8) {
+    if(to.getX() < 1 || to.getX() > 8 || to.getY() < 1 || to.getY() > 8) {
       move.setErrorMessage("ERROR: Move outside the board");
       return move; // return default Movement value (incorrect move)
     }
 
     if(currPlayer == WHITE) {
-      if(toX < fromX) {
-        if(Math.abs(fromY-toY) == 1) { // regular move
+      if(to.getX() < from.getX()) {
+        if(Math.abs(from.getY()-to.getY()) == 1) { // regular move
           move.setKind(REGULAR);
           move.setCorrectMove(true);
           return move;
-        } else if(Math.abs(fromY-toY) == 2 && Math.abs(fromX-toX) == 2) { // capture move
+        } else if(Math.abs(from.getY()-to.getY()) == 2 && Math.abs(from.getX()-to.getX()) == 2) { // capture move
           move.setKind(CAPTURE);
-          if(fromX-2 == toX && fromY-2 == toY) { //left capture
-            if(board[fromX-1][fromY-1] == BL_KING || board[fromX-1][fromY-1] == BL_PIECE) {
+          if(from.getX()-2 == to.getX() && from.getY()-2 == to.getY()) { //left capture
+            if(board[from.getX()-1][from.getY()-1] == BL_KING || board[from.getX()-1][from.getY()-1] == BL_PIECE) {
               move.setCorrectMove(true);
               cf = new Position();
-              cf.setX(fromX-1);
-              cf.setY(fromY-1);
+              cf.setX(from.getX()-1);
+              cf.setY(from.getY()-1);
               move.addCapturedFigure(cf);
               return move;
             }
-          } else if(fromX-2 == toX && fromY+2 == toY) { //right capture
-            if(board[fromX-1][fromY+1] == BL_KING || board[fromX-1][fromY+1] == BL_PIECE) {
+          } else if(from.getX()-2 == to.getX() && from.getX()+2 == to.getY()) { //right capture
+            if(board[from.getX()-1][from.getY()+1] == BL_KING || board[from.getX()-1][from.getY()+1] == BL_PIECE) {
               move.setCorrectMove(true);
               cf = new Position();
-              cf.setX(fromX-1);
-              cf.setY(fromY+1);
+              cf.setX(from.getX()-1);
+              cf.setY(from.getY()+1);
               move.addCapturedFigure(cf);
               return move;
             }
@@ -117,28 +119,28 @@ public class CzechKind implements IGameKind {
         }
       }
     } else if(currPlayer == BLACK) {
-      if(toX > fromX) {
-        if(Math.abs(fromY-toY) == 1) {
+      if(to.getX() > from.getX()) {
+        if(Math.abs(from.getY()-to.getY()) == 1) {
           move.setKind(REGULAR);
           move.setCorrectMove(true);
           return move;
-        } else if(Math.abs(fromY-toY) == 2 && Math.abs(fromX-toX) == 2) { // capture move
+        } else if(Math.abs(from.getY()-to.getY()) == 2 && Math.abs(from.getX()-to.getX()) == 2) { // capture move
           move.setKind(CAPTURE);
-          if(fromX+2 == toX && fromY-2 == toY) { //left capture
-            if(board[fromX+1][fromY-1] == WH_KING || board[fromX+1][fromY-1] == WH_PIECE) {
+          if(from.getX()+2 == to.getX() && from.getY()-2 == to.getY()) { //left capture
+            if(board[from.getX()+1][from.getY()-1] == WH_KING || board[from.getX()+1][from.getY()-1] == WH_PIECE) {
               move.setCorrectMove(true);
               cf = new Position();
-              cf.setX(fromX+1);
-              cf.setY(fromY-1);
+              cf.setX(from.getX()+1);
+              cf.setY(from.getY()-1);
               move.addCapturedFigure(cf);
               return move;
             } 
-          } else if(fromX+2 == toX && fromY+2 == toY) { //right capture
-            if(board[fromX+1][fromY+1] == WH_KING || board[fromX+1][fromY+1] == WH_PIECE) {
+          } else if(from.getX()+2 == to.getX() && from.getY()+2 == to.getY()) { //right capture
+            if(board[from.getX()+1][from.getY()+1] == WH_KING || board[from.getX()+1][from.getY()+1] == WH_PIECE) {
               move.setCorrectMove(true);
               cf = new Position();
-              cf.setX(fromX+1);
-              cf.setY(fromY+1);
+              cf.setX(from.getX()+1);
+              cf.setY(from.getY()+1);
               move.addCapturedFigure(cf);
               return move;
             }
@@ -151,27 +153,29 @@ public class CzechKind implements IGameKind {
     return move; // return default Movement value (incorrect move)
   }
 
-  public Movement checkMoveKing(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+  public Movement checkMoveKing(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
+    Position from = positions.get(0);
+    Position to = positions.get(1);
 
     //TO DO: Replace fromX, fromy, toX, toY with Position object!
 
     // check if it is actually king's move
     if(currPlayer == WHITE) {
-      if(board[fromX][fromY] != WH_KING) {
+      if(board[from.getX()][from.getY()] != WH_KING) {
         move.setErrorMessage("ERROR: White king has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     } else if(currPlayer == BLACK) {
-      if(board[fromX][fromY] != BL_KING) {
+      if(board[from.getX()][from.getY()] != BL_KING) {
         move.setErrorMessage("ERROR: Black king has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
     }
 
     // check if piece goes outside the board
-    if(toX < 1 || toX > 8 || toY < 1 || toY > 8) {
+    if(to.getX() < 1 || to.getX() > 8 || to.getY() < 1 || to.getY() > 8) {
       move.setErrorMessage("ERROR: Move outside the board");
       return move; // return default Movement value (incorrect move)
     }
@@ -181,17 +185,17 @@ public class CzechKind implements IGameKind {
 
     int startX=0, endX=0, startY=0, endY=0;
 
-    if(Math.abs(fromX-fromY) == Math.abs(toX-toY)) { //"falling" diagonal - move
-      if(toX > fromX) { // forward move 
-        startX = fromX+1;
-        endX = toX;
-        startY = fromY+1;
-        endY = toY;
-      } else if(toX < fromX) { // backward move
-        startX = toX+1;
-        endX = fromX;
-        startY = toY+1;
-        endY = fromY;
+    if(Math.abs(from.getX()-from.getY()) == Math.abs(to.getX()-to.getY())) { //"falling" diagonal - move
+      if(to.getX() > from.getX()) { // forward move 
+        startX = from.getX()+1;
+        endX = to.getX();
+        startY = from.getY()+1;
+        endY = to.getY();
+      } else if(to.getX() < from.getX()) { // backward move
+        startX = to.getX()+1;
+        endX = from.getX();
+        startY = to.getY()+1;
+        endY = from.getY();
       }
 
       for(int i=startX; i<endX; i++) {
@@ -216,17 +220,17 @@ public class CzechKind implements IGameKind {
         }
       }
 
-    } else if(fromX+fromY == toX+toY) { //"rising" diagonal
-      if(toX > fromX) { // forward move 
-        startX = fromX+1;
-        endX = toX;
-        startY = fromY-1;
-        endY = toY;
-      } else if(toX < fromX) { // backward move
-        startX = toX+1;
-        endX = fromX;
-        startY = toY-1;
-        endY = fromY;
+    } else if(from.getX()+from.getY() == to.getX()+to.getY()) { //"rising" diagonal
+      if(to.getX() > from.getX()) { // forward move 
+        startX = from.getX()+1;
+        endX = to.getX();
+        startY = from.getY()-1;
+        endY = to.getY();
+      } else if(to.getX() < from.getX()) { // backward move
+        startX = to.getX()+1;
+        endX = from.getX();
+        startY = to.getY()-1;
+        endY = from.getY();
       }
 
       for(int i=startX; i<endX; i++) {

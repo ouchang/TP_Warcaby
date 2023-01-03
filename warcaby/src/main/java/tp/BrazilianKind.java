@@ -16,11 +16,11 @@ public class BrazilianKind implements IGameKind {
     return 0;
   }
 
-  public Movement checkMovePiece(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+  public Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board) {
     return new Movement();
   }
 
-  public Movement checkMoveKing(int currPlayer, int fromX, int fromY, int toX, int toY, String[][] board) {
+  public Movement checkMoveKing(int currPlayer, List<Position> positions, String[][] board) {
     return new Movement();
   }
 
