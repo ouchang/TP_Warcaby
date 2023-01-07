@@ -61,12 +61,14 @@ public class GUI_frame extends Application implements ActionListener {
 
     //}
 
+
     @Override
     public void start(Stage stage) throws Exception {
         FXMLLoader fxmlLoader = new FXMLLoader ( GUI_frame.class.getResource ( "gui_xml.fxml" ) );
-        Scene scene = new Scene ( fxmlLoader.load (), 320, 240 );
-        stage.setTitle ( "Hello!" );
+        Scene scene = new Scene ( fxmlLoader.load (), 800, 600 );
+        stage.setTitle ( "CHECKERS" );
         stage.setScene ( scene );
+        stage.setResizable ( false );
         stage.show ();
     }
 
