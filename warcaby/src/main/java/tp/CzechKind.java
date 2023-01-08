@@ -217,7 +217,7 @@ public class CzechKind implements IGameKind {
         }
       }
 
-    } else if(from.getX()+from.getY() == to.getX()+to.getY() && from.getX() != to.getY() ) { //"rising" diagonal - move
+    } else if(from.getX()+from.getY() == to.getX()+to.getY()) { //"rising" diagonal - move
       if(to.getX() > from.getX()) { // forward move 
         startX = from.getX()+1;
         endX = to.getX();
