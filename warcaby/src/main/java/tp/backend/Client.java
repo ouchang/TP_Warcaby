@@ -1,4 +1,4 @@
-package tp;
+package tp.backend;
 
 import java.net.*;
 import java.io.*;
@@ -71,24 +71,33 @@ public class Client {
     }
   }
 
-  private static void send(ICommand command) { // PREV: nonstatic
+  private static void send(ICommand command) { 
     // code command using CoderDecoder
     String commandString = CD.codeCommand(command);
+    System.out.println("CLIENT sends: " + commandString);
+    
     //Send string to Server
     out.println(commandString);
     
     showing = ACTIVE;
-    currPlayer = oponnentId; // PREV: oponnentId
   }
 
-  private static void receive() { // PREV: nonstatic
+  private static void receive() { 
      try {
       String commandString = in.readLine();
-      System.out.println("CommandString: "+commandString);
+      System.out.println("CLIENT receives: "+commandString);
       ICommand command =  CD.decodeCommand(commandString, "gameStatus");
       gameStatus = (gameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
       
+      // Display error message
+      if(gameStatus.getError() != "" && Integer.parseInt(gameStatus.getTurn()) == playerId) {
+        System.out.println(gameStatus.getError());
+      }
+
+      //Update currPlayer based on gameStatus
+      currPlayer = Integer.parseInt(gameStatus.turn);
+
      } catch(IOException e) {
       System.out.println(e.getMessage());
      }
@@ -96,6 +105,7 @@ public class Client {
 
   public static void main(String[] main) {
     Client player = new Client();
+    Position tmp = new Position();
 
     player.listenSocket();
     player.receiveInitInfo();
@@ -104,15 +114,15 @@ public class Client {
 
     receive();
 
-    gameCommandClass moveCommand = new gameCommandClass();
-    moveCommand.setActorId(playerId);
-    moveCommand.setPieceId(PIECE);
-    moveCommand.fromX=6; 
-    moveCommand.fromY=3;
-    moveCommand.toX=5; 
-    moveCommand.toY=2;
+    ClientManager CM = new ClientManager(playerId);
+    gameCommandClass command;
 
-    send(moveCommand);
-    receive();
+    while(true) {
+      if(currPlayer == playerId) {
+        command = (gameCommandClass) CM.start();
+        send(command);
+      }
+      receive();
+    }
   }
 }

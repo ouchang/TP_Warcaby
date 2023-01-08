@@ -1,4 +1,4 @@
-package tp;
+package tp.backend;
 
 class gameStatusClass implements ICommand {
   String id;

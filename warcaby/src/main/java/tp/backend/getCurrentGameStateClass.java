@@ -1,6 +1,6 @@
-package tp;
+package tp.backend;
 
-class joinGameClass implements ICommand {
+class getCurrentGameStateClass implements ICommand {
   String id;
   String actor;
 

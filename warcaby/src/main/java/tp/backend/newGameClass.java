@@ -1,4 +1,4 @@
-package tp;
+package tp.backend;
 
 class newGameClass implements ICommand {
   String actor;

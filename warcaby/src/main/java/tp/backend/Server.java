@@ -1,8 +1,12 @@
-package tp;
+package tp.backend;
 
 import java.io.*;
 import java.net.*;
 
+/**
+ * Server's class representation.
+ * Within this class, server socket listens on a given port.
+ */
 public class Server {
   private static int clientCounter=0;
 
