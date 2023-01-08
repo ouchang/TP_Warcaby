@@ -1,4 +1,4 @@
-package tp.frontend;
+package tp;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +14,8 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import javax.lang.model.type.NullType;
-import javax.swing.plaf.IconUIResource;
-import javax.swing.text.html.ImageView;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.Objects;
 
 public class GUI_controller {
 
@@ -36,10 +32,15 @@ public class GUI_controller {
     private Label detector;
 
     @FXML
-    private Pane pos65;
+    private Button exitButton;
 
     @FXML
-    private Pane pos74;
+    private GridPane game;
+
+
+    @FXML
+    private Button sendMessageButton;
+
 
     @FXML
     void tedectorAction(MouseEvent event) {
@@ -69,8 +70,10 @@ public class GUI_controller {
     @FXML
     void movePiece(MouseEvent event) throws FileNotFoundException {
         Pane actual = (Pane) event.getSource ();
-        final ObservableList<Node> children = actual.getChildren();
+        System.out.println (actual.getId ());
 
+
+        final ObservableList<Node> children = actual.getChildren();
         System.out.println (children.size ());
         if (children.size () == 0){
             System.out.println ("setting image");
@@ -84,26 +87,20 @@ public class GUI_controller {
             System.out.println ("deleting image");
             actual.getChildren ().removeAll (children );
         }
-    //if has image -> delete
-    //if has no image -> add
 
     }
 
-    @FXML
-    private Button exitButton;
+    void deletePiece(){
 
-    @FXML
-    private GridPane game;
+    }
 
+    void addPiece(){
 
-    @FXML
-    private Button sendMessageButton;
-
+    }
     @FXML
     void exitGame(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
     }
-
-
 }
+

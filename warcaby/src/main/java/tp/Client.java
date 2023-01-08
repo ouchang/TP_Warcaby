@@ -1,9 +1,11 @@
 package tp;
 
+import javafx.application.Application;
+
 import java.net.*;
 import java.io.*;
 
-public class Client { 
+public class Client  {
   //TO DO: Add instance of GUI class
 
   private static final int WHITE=1;
@@ -15,7 +17,7 @@ public class Client {
   private static final int ACTIVE=0;
   private static final int NONACTIVE=1;
 
-  private static int showing = NONACTIVE; 
+  private static int showing = NONACTIVE;
 
   private static int playerId; // ID that Server sends for identification
   private static int oponnentId;
@@ -32,8 +34,8 @@ public class Client {
   }
 
   public void boardInitFill() {
-    for(int i=1; i<=8; i++) { 
-      for(int j=1; j<=8; j++) { 
+    for(int i=1; i<=8; i++) {
+      for(int j=1; j<=8; j++) {
         gameStatus.board[i][j] = "";
       }
     }
@@ -76,7 +78,7 @@ public class Client {
     String commandString = CD.codeCommand(command);
     //Send string to Server
     out.println(commandString);
-    
+
     showing = ACTIVE;
     currPlayer = oponnentId; // PREV: oponnentId
   }
@@ -88,11 +90,12 @@ public class Client {
       ICommand command =  CD.decodeCommand(commandString, "gameStatus");
       gameStatus = (gameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
-      
+
      } catch(IOException e) {
       System.out.println(e.getMessage());
      }
-  }  
+  }
+
 
   public static void main(String[] main) {
     Client player = new Client();
@@ -107,12 +110,14 @@ public class Client {
     gameCommandClass moveCommand = new gameCommandClass();
     moveCommand.setActorId(playerId);
     moveCommand.setPieceId(PIECE);
-    moveCommand.fromX=6; 
+    moveCommand.fromX=6;
     moveCommand.fromY=3;
-    moveCommand.toX=5; 
+    moveCommand.toX=5;
     moveCommand.toY=2;
 
     send(moveCommand);
     receive();
+
+    Application.launch ( GUIstart.class);
   }
 }
