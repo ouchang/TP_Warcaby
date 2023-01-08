@@ -24,13 +24,16 @@ public class BrazilianKind implements IGameKind {
     return new Movement();
   }
 
-  public Movement checkMultiCapture(int currPlayer, List<Position> positions, String[][] board) {
+  public Movement checkMultiCapturePiece(int currPlayer, List<Position> positions, String[][] board) {
     return new Movement();
   }
 
+  public Movement checkMultiCaptureKing(int currPlayer, List<Position> positions, String[][] board) {
+    return new Movement();
+  }
 
-  public void isCapturePossible() {
-
+  public boolean isCapturePossible(int currPlayer, String[][] board) {
+    return false;
   }
 
   public int whoStarts() {

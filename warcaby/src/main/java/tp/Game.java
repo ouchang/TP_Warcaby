@@ -53,7 +53,6 @@ public class Game implements Runnable {
 
     this.movement = new Movement();
 
-    //TO DO: Check if we still need this (after update to Position class)!
     this.blackPrevFromX = -1;
     this.blackPrevFromY = -1;
     
@@ -74,7 +73,6 @@ public class Game implements Runnable {
 
   public synchronized boolean move(List<Position> positions, String symbol, int currPlayer, int nextTurn) {
 
-    //TO DO: Replace fromX, fromY, toX, toY with Position object!
     Position from = new Position();
     Position to = new Position();
 
@@ -82,7 +80,13 @@ public class Game implements Runnable {
       from = positions.get(0);
       to = positions.get(positions.size()-1);
 
-      movement = gameKind.checkMultiCapture(currPlayer, positions, board);
+      movement = gameKind.checkMultiCapturePiece(currPlayer, positions, board);
+
+      if(symbol == WH_PIECE || symbol == BL_PIECE) {
+        movement = gameKind.checkMultiCapturePiece(currPlayer, positions, board);
+      } else if(symbol == WH_KING || symbol == BL_KING) {
+        movement = gameKind.checkMultiCaptureKing(currPlayer, positions, board);
+      }
 
       if(movement.getCorrectMove()) {
         board[from.getX()][from.getY()] = EMPTY;
@@ -98,7 +102,7 @@ public class Game implements Runnable {
       } else {
         statusCommand.setError(movement.getErrorMessage());
 
-        if(currPlayer == WHITE) { //TO DO: Check if correct! 
+        if(currPlayer == WHITE) { 
           whitePrevFromX = from.getX();
           whitePrevFromY = from.getY();
         } else if(currPlayer == BLACK) {
@@ -115,7 +119,7 @@ public class Game implements Runnable {
       if(symbol == WH_PIECE || symbol == BL_PIECE) {
         movement = gameKind.checkMovePiece(currPlayer, positions, board);
       } else if(symbol == WH_KING || symbol == BL_KING) {
-        movement = gameKind.checkMovePiece(currPlayer, positions, board);
+        movement = gameKind.checkMoveKing(currPlayer, positions, board);
       }
 
       if(movement.getCorrectMove()) {
@@ -130,7 +134,7 @@ public class Game implements Runnable {
           board[to.getX()][to.getY()] = symbol;
           System.out.println("REGULAR UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
         }
-        //TO DO: Change turn when there is no possible captures
+
         statusCommand.turn = String.valueOf(nextTurn);
   
         if(currPlayer == WHITE) {
@@ -151,9 +155,6 @@ public class Game implements Runnable {
     return false;
   }
     
-
-    
-
   public synchronized void sendStatus(PrintWriter out) {
     String line;
     line = CD.codeCommand(statusCommand);
@@ -181,7 +182,7 @@ public class Game implements Runnable {
       PrintWriter outB = new PrintWriter(outputSecond, true);
 
       // Tell clients their assigned indexes
-      outW.println("1"); //TO DO: Change to json
+      outW.println("1"); //TO DO: Change to json (?)
       outB.println("2");
 
       //Tell clients who starts the game
@@ -196,10 +197,6 @@ public class Game implements Runnable {
       System.out.println("START STATUS: " + line);
       outW.println(line);
       outB.println(line);
-
-      //MULTI CAPTURE TEST -> BOARD CHANGE
-//      board[2][5] = EMPTY;
-//      board[5][4] = BL_PIECE;
       
       do { 
         System.out.println("NEW ITERATION - WAITING FOR PLAYER: " + currPlayer + " TO MOVE");

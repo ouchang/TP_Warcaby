@@ -3,14 +3,13 @@ package tp;
 import java.util.List;
 
 interface IGameKind {
-  // TO DO: Change methods' output type
-
   int getBoardSize();
   String[][] getGameBoard();
   Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board);
   Movement checkMoveKing(int currPlayer, List<Position> positions, String[][] board);
-  Movement checkMultiCapture(int currPlayer, List<Position> positions, String[][] board);
-  void isCapturePossible();
+  Movement checkMultiCapturePiece(int currPlayer, List<Position> positions, String[][] board);
+  Movement checkMultiCaptureKing(int currPlayer, List<Position> positions, String[][] board);
+  boolean isCapturePossible(int currPlayer, String[][] board);
   int whoStarts();
   String getName();
 }
