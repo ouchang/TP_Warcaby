@@ -1,5 +1,6 @@
 package tp.backend;
 
+import tp.backend.position.Position;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -64,7 +65,7 @@ public class Movement {
   }
 
   public void addCapturedFigure(Position cf) {
-    this.capturedFigures.add(cf);
+    capturedFigures.add(cf);
   }
 
   public String getErrorMessage() {

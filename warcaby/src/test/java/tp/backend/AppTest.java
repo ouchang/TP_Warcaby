@@ -1,10 +1,12 @@
 package tp.backend;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
-import java.util.List;
+import tp.backend.position.Position;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Unit test for simple App.

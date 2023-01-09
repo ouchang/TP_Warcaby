@@ -1,9 +1,11 @@
 package tp.backend;
 
-import java.util.List;
-import java.util.ArrayList;
+import tp.backend.position.Position;
 
-class gameCommandClass implements ICommand {
+import java.util.ArrayList;
+import java.util.List;
+
+public class GameCommandClass implements ICommand {
   //String id;
   int actorId;
   int pieceId; // 0 - piece, 1 - king
@@ -15,7 +17,7 @@ class gameCommandClass implements ICommand {
   //int toY;
   List<Position> positions;
 
-  gameCommandClass() {
+  GameCommandClass() {
     actorId = -1;
     pieceId = -1;
     positions = new ArrayList<Position>();

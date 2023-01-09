@@ -1,12 +1,8 @@
 package tp.frontend;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 //import javafx.scene.control.Button;
-import javafx.scene.Node;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.ColumnConstraints;
@@ -14,11 +10,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 
-public class GUI_controller {
+public class GUIController {
 
     @FXML
     private CheckBox showInstructionButton;
@@ -96,7 +91,7 @@ public class GUI_controller {
         stage.close();
     }
 
-    public GUI_controller(){
+    public GUIController(){
         System.out.println ("gui controller created");
     }
 }

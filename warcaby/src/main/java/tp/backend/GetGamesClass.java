@@ -1,8 +1,9 @@
 package tp.backend;
 
-class joinGameClass implements ICommand {
-  String id;
-  String actor;
+import java.util.List;
+
+class GetGamesClass implements ICommand {
+  List<String> games;
 
   public String showView() {
     return "TEMPORARY STRING";

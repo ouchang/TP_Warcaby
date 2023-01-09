@@ -1,10 +1,10 @@
-package tp.backend;
+package tp.backend.position;
 
 public class Position {
   private int x;
   private int y;
 
-  Position() {
+  public Position() {
     this.x = -1;
     this.y = -1;
   }

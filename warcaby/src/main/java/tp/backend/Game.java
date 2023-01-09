@@ -1,8 +1,9 @@
 package tp.backend;
 
-import java.io.*;
-import java.net.*;
+import tp.backend.position.Position;
 
+import java.io.*;
+import java.net.Socket;
 import java.util.List;
 
 public class Game implements Runnable {
@@ -30,8 +31,8 @@ public class Game implements Runnable {
   private static final String CAPTURE = "CAPTURE";
 
   private int currPlayer;
-  private gameCommandClass moveCommand;
-  private gameStatusClass statusCommand;
+  private GameCommandClass moveCommand;
+  private GameStatusClass statusCommand;
 
   private Movement movement;
   private int whitePrevFromX, whitePrevFromY;
@@ -48,8 +49,8 @@ public class Game implements Runnable {
     this.board = gameKind.getGameBoard();
     this.currPlayer = gameKind.whoStarts();
 
-    this.moveCommand = new gameCommandClass();
-    this.statusCommand = new gameStatusClass();
+    this.moveCommand = new GameCommandClass ();
+    this.statusCommand = new GameStatusClass ();
 
     this.movement = new Movement();
 
@@ -211,7 +212,7 @@ public class Game implements Runnable {
           }
 
           System.out.println("MOVE LINE: " + line);
-          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand");
+          moveCommand = (GameCommandClass)CD.decodeCommand(line, "gameCommand");
           Position from = new Position();
 
           if(moveCommand.getPositions().size() != 0) {
@@ -253,7 +254,7 @@ public class Game implements Runnable {
           }
 
           System.out.println("MOVE LINE: " + line);
-          moveCommand = (gameCommandClass)CD.decodeCommand(line, "gameCommand"); 
+          moveCommand = (GameCommandClass)CD.decodeCommand(line, "gameCommand");
           Position from = new Position();
 
           if(moveCommand.getPositions().size() != 0) {

@@ -1,16 +1,18 @@
 package tp.backend;
 
+import tp.backend.position.Position;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ClientManager {
-  InputStreamReader inRead;
-  BufferedReader reader;
-  int playerId;
-  CoderDecoder CD;
+  private InputStreamReader inRead;
+  private BufferedReader reader;
+  private int playerId;
+  private CoderDecoder CD;
 
   ClientManager(int playerId) {
     this.inRead = new InputStreamReader(System.in);
@@ -19,8 +21,8 @@ public class ClientManager {
     this.CD = new CoderDecoder();
   }
 
-  public gameCommandClass makeMove(int pieceId, List<Position> positions) {
-      gameCommandClass command = new gameCommandClass();
+  public GameCommandClass makeMove(int pieceId, List<Position> positions) {
+      GameCommandClass command = new GameCommandClass ();
       command.setActorId(playerId);
       command.setPieceId(pieceId);
       command.setPositions(positions);

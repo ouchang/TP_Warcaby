@@ -1,9 +1,8 @@
 package tp.backend;
 
-import java.util.List;
-
-class getGamesClass implements ICommand {
-  List<String> games;
+class GetCurrentGameStateClass implements ICommand {
+  String id;
+  String actor;
 
   public String showView() {
     return "TEMPORARY STRING";

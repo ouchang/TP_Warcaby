@@ -1,6 +1,6 @@
 package tp.backend;
 
-class newGameClass implements ICommand {
+public class NewGameClass implements ICommand {
   String actor;
   String gameKind;
 

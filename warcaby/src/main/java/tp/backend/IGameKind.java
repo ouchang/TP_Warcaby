@@ -1,8 +1,10 @@
 package tp.backend;
 
+import tp.backend.position.Position;
+
 import java.util.List;
 
-interface IGameKind {
+public interface IGameKind {
   int getBoardSize();
   String[][] getGameBoard();
   Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board);

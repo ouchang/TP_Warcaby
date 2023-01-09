@@ -6,7 +6,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
 
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -37,16 +36,14 @@ public class GUIbehaviour {
             boolean b = Objects.equals ( ( (ImageView) children.get ( 0 )).getImage().getUrl (), abc.toString () ); //todo po drugim poruszeniu nie umie znalezc url i wurzuca null: ustawiac url po dodaniu obrazka?
             if (b == true){
                 System.out.println ("same white");
-                FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleWhitePiece.png");
-                Image image = new Image (inputstream);
+                Image image = new Image( Objects.requireNonNull ( getClass ().getClassLoader ().getResourceAsStream ( "/simpleWhitePiece.png" ) ) );
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );
                 imageView.setFitWidth ( 50 );
                 position.getChildren ().add ( imageView );
             } else {
                 System.out.println ("different colors");
-                FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleBlackPiece.png");
-                Image image = new Image (inputstream);
+                Image image = new Image( Objects.requireNonNull ( getClass ().getClassLoader ().getResourceAsStream ( "/simpleBlackPiece.png" ) ) );
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );
                 imageView.setFitWidth ( 50 );

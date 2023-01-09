@@ -1,6 +1,6 @@
 package tp.backend;
 
-class gameStatusClass implements ICommand {
+public class GameStatusClass implements ICommand {
   String id;
   String friendly_name;
   String gameKind;

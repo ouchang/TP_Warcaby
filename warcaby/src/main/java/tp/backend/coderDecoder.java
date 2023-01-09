@@ -12,17 +12,17 @@ class CommandFactory {
   static ICommand getInstance(String type) {
     switch(type) {
       case "gameStatus":
-        return (new gameStatusClass());
+        return (new GameStatusClass ());
       case "getGames":
-        return (new getGamesClass());
+        return (new GetGamesClass ());
       case "joinGame":
-        return (new joinGameClass());
+        return (new JoinGameClass ());
       case "getCurrentGameState":
-        return (new getCurrentGameStateClass());
+        return (new GetCurrentGameStateClass ());
       case "newGame":
-        return (new newGameClass());
+        return (new NewGameClass ());
       case "gameCommand":
-        return (new gameCommandClass());
+        return (new GameCommandClass ());
       default:
         return null;
     }
@@ -31,17 +31,17 @@ class CommandFactory {
   static Class getClass(String type) { 
     switch(type) {
       case "gameStatus":
-        return (new gameStatusClass()).getClass();
+        return (new GameStatusClass ()).getClass();
       case "getGames":
-        return (new getGamesClass()).getClass();
+        return (new GetGamesClass ()).getClass();
       case "joinGame":
-        return (new joinGameClass()).getClass();
+        return (new JoinGameClass ()).getClass();
       case "getCurrentGameState":
-        return (new getCurrentGameStateClass()).getClass();
+        return (new GetCurrentGameStateClass ()).getClass();
       case "newGame":
-        return (new newGameClass()).getClass();
+        return (new NewGameClass ()).getClass();
       case "gameCommand":
-        return (new gameCommandClass()).getClass();
+        return (new GameCommandClass ()).getClass();
       default:
         return null;
     }
