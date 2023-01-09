@@ -54,7 +54,7 @@ class CoderDecoder {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       ICommand command = CommandFactory.getInstance(type);
-      command = mapper.readValue(json, CommandFactory.getClass(type));
+      command = (ICommand) mapper.readValue(json, CommandFactory.getClass(type));
       return command;
     } catch(JsonProcessingException e) {
       System.out.println(e.getMessage());
