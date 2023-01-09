@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.net.MalformedURLException;
 
 public class GUI_controller {
 
@@ -41,9 +42,16 @@ public class GUI_controller {
     @FXML
     private Button sendMessageButton;
 
+    @FXML
+    public Pane pos65;
 
     @FXML
-    void tedectorAction(MouseEvent event) {
+    public Pane pos74;
+
+//
+
+    @FXML
+    public void tedectorAction(MouseEvent event) {
         if (event.getButton () == MouseButton.PRIMARY){
             System.out.println ("lewy przycisk");
             detector.setText ( "lewy przycisk" );
@@ -55,7 +63,7 @@ public class GUI_controller {
     }
 
     @FXML
-    void showInstruction(ActionEvent event) {
+    public void showInstruction(ActionEvent event) {
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
         } else {
@@ -63,44 +71,33 @@ public class GUI_controller {
         }
     }
 
+    public static int movesCounter = 0;
+    public GUIbehaviour guiBehaviour;
     @FXML
-    private ImageView simplePieceIm;
-
-
-    @FXML
-    void movePiece(MouseEvent event) throws FileNotFoundException {
+    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource ();
-        System.out.println (actual.getId ());
-
-
-        final ObservableList<Node> children = actual.getChildren();
-        System.out.println (children.size ());
-        if (children.size () == 0){
-            System.out.println ("setting image");
-            FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\frontend\\simpleWhitePiece.png");
-            Image image = new Image (inputstream);
-            ImageView imageView = new ImageView(image);
-            imageView.setFitHeight ( 40 );
-            imageView.setFitWidth ( 50 );
-            actual.getChildren ().add ( imageView );
-        } else if (children.size () == 1){
-            System.out.println ("deleting image");
-            actual.getChildren ().removeAll (children );
+        if (movesCounter == 0){
+            GUIbehaviour guiReact = new GUIbehaviour ();
+            guiBehaviour = guiReact;
+            guiBehaviour.fromTo.add ( actual );
+            movesCounter ++;
+        } else {
+            movesCounter = 0;
+            guiBehaviour.fromTo.add ( actual );
+            guiBehaviour.react();
+            guiBehaviour = null;
         }
-
     }
 
-    void deletePiece(){
 
-    }
-
-    void addPiece(){
-
-    }
     @FXML
-    void exitGame(ActionEvent event) {
+    public void exitGame(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public GUI_controller(){
+        System.out.println ("gui controller created");
     }
 }
 

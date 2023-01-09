@@ -1,9 +1,11 @@
 package tp;
 
 import javafx.application.Application;
+import javafx.scene.layout.Pane;
 
 import java.net.*;
 import java.io.*;
+import java.util.ArrayList;
 
 public class Client  {
   //TO DO: Add instance of GUI class
@@ -97,7 +99,8 @@ public class Client  {
   }
 
 
-  public static void main(String[] main) {
+  public static void main(String[] main) throws FileNotFoundException {
+
     Client player = new Client();
 
     player.listenSocket();
@@ -110,14 +113,21 @@ public class Client  {
     gameCommandClass moveCommand = new gameCommandClass();
     moveCommand.setActorId(playerId);
     moveCommand.setPieceId(PIECE);
-    moveCommand.fromX=6;
-    moveCommand.fromY=3;
-    moveCommand.toX=5;
-    moveCommand.toY=2;
 
-    send(moveCommand);
-    receive();
+//    positionChanges.add ( "pos56" );
+//    positionChanges.add ( "pos74" );
+
 
     Application.launch ( GUIstart.class);
+//
+//
+//    moveCommand.fromX=6;
+//    moveCommand.fromY=3;
+//    moveCommand.toX=5;
+//    moveCommand.toY=2;
+//
+//    send(moveCommand);
+//    receive();
+
   }
 }
