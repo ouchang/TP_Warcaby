@@ -1,4 +1,4 @@
-package tp.frontend;
+package tp.frontend.gui.start;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 //import javafx.scene.control.Button;
@@ -72,8 +72,7 @@ public class GUIController {
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource ();
         if (movesCounter == 0){
-            GUIbehaviour guiReact = new GUIbehaviour ();
-            guiBehaviour = guiReact;
+            guiBehaviour = new GUIbehaviour ();
             guiBehaviour.fromTo.add ( actual );
             movesCounter ++;
         } else {

@@ -1,4 +1,4 @@
-package tp.frontend;
+package tp.frontend.gui.start;
 
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
@@ -36,14 +36,14 @@ public class GUIbehaviour {
             boolean b = Objects.equals ( ( (ImageView) children.get ( 0 )).getImage().getUrl (), abc.toString () ); //todo po drugim poruszeniu nie umie znalezc url i wurzuca null: ustawiac url po dodaniu obrazka?
             if (b == true){
                 System.out.println ("same white");
-                Image image = new Image( Objects.requireNonNull ( getClass ().getClassLoader ().getResourceAsStream ( "/simpleWhitePiece.png" ) ) );
+                Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );
                 imageView.setFitWidth ( 50 );
                 position.getChildren ().add ( imageView );
             } else {
                 System.out.println ("different colors");
-                Image image = new Image( Objects.requireNonNull ( getClass ().getClassLoader ().getResourceAsStream ( "/simpleBlackPiece.png" ) ) );
+                Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );
                 imageView.setFitWidth ( 50 );
