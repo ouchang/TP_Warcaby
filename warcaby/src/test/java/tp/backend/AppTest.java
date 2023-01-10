@@ -1,7 +1,6 @@
 package tp.backend;
 
 import org.junit.Test;
-import tp.backend.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,18 @@ public class AppTest
         }
 
         return board;
+    }
+
+    @Test
+    public void checkClassName() {
+        ICommand cmd;
+        GetGamesClass status = new GetGamesClass();
+
+        cmd = status;
+        String cmd_class = cmd.getClass().getSimpleName();
+        String status_class = status.getClass().getSimpleName();
+
+        assertEquals("GetGamesClass", cmd_class);
     }
 
     @Test
@@ -358,4 +369,147 @@ public class AppTest
     }
 
     //TO DO: Preapare tests for GermanKind
+    @Test
+    public void checkGermanCaptureTest1() { // white piece reversed right capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[4][3] = WH_PIECE;
+        board[5][4] = BL_PIECE;
+
+        tmp.setX(4);
+        tmp.setY(3);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(6);
+        tmp.setY(5);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(WHITE, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(4);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest2() { // white piece reversed left capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[3][6] = WH_PIECE;
+        board[4][5] = BL_PIECE;
+
+        tmp.setX(3);
+        tmp.setY(6);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(4);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(WHITE, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(5);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest3() { // black piece reversed left capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[6][7] = BL_PIECE;
+        board[5][6] = WH_PIECE;
+
+        tmp.setX(6);
+        tmp.setY(7);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(5);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(BLACK, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(6);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest4() { // black piece reversed right capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[5][2] = BL_PIECE;
+        board[4][3] = WH_PIECE;
+
+        tmp.setX(5);
+        tmp.setY(2);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(3);
+        tmp.setY(4);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(BLACK, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(3);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
 }

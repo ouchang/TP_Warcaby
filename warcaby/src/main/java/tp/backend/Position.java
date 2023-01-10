@@ -1,4 +1,4 @@
-package tp.backend.position;
+package tp.backend;
 
 public class Position {
   private int x;

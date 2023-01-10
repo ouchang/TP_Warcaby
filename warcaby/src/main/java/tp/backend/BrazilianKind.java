@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.util.List;
 
 public class BrazilianKind implements IGameKind {
@@ -35,6 +33,10 @@ public class BrazilianKind implements IGameKind {
   }
 
   public boolean isCapturePossible(int currPlayer, String[][] board) {
+    return false;
+  }
+
+  public boolean hasPieceUpgrade(int currPlayer, Position to) {
     return false;
   }
 

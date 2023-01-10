@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -97,7 +95,7 @@ public class Movement {
           if(this.capturedFigures.size() == 0) {
             return true;        
           }       
-        } 
+        }
       }
     }
 

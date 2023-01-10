@@ -11,75 +11,75 @@ public class GameStatusClass implements ICommand {
   String error;
   String[][] board;
 
-  void setId(String id) {
+  public void setId(String id) {
     this.id = id;
   }
 
-  String getId() {
+  public String getId() {
     return id;
   }
 
-  void setFriendly_name(String friendly_name) {
+  public void setFriendly_name(String friendly_name) {
     this.friendly_name = friendly_name;
   }
 
-  String getFriendly_name() {
+  public String getFriendly_name() {
     return this.friendly_name;
   }
 
-  void setPlayer1(String player1) {
+  public void setPlayer1(String player1) {
     this.player1 = player1;
   }
 
-  String getPlayer1() {
+  public String getPlayer1() {
     return this.player1;
   }
 
-  void setPlayer2(String player2) {
+  public void setPlayer2(String player2) {
     this.player2 = player2;
   }
 
-  String getPlayer2() {
+  public String getPlayer2() {
     return this.player2;
   }
 
-  void setGameKind(String gameKind) {
+  public void setGameKind(String gameKind) {
     this.gameKind = gameKind;
   }
 
-  String getGameKind() {
+  public String getGameKind() {
     return gameKind;
   }
 
-  void setTurn(String turn) {
+  public void setTurn(String turn) {
     this.turn = turn;
   }
 
-  String getTurn() {
+  public String getTurn() {
     return this.turn;
   }
 
-  void setStatus(String status) {
+  public void setStatus(String status) {
     this.status = status;
   }
 
-  String getStatus() {
+  public String getStatus() {
     return status;
   }
 
-  void setError(String error) {
+  public void setError(String error) {
     this.error = error;
   }
 
-  String getError() {
+  public String getError() {
     return this.error;
   }
 
-  void setBoard(String[][] board) {
+  public void setBoard(String[][] board) {
     this.board = board;
   }
 
-  String[][] getBoard() {
+  public String[][] getBoard() {
     return board;
   }
 

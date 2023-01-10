@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.util.List;
 
 /**
@@ -106,6 +104,12 @@ public class CzechKind implements IGameKind {
       }
     }
     
+    //Check if distination is empty
+    if(board[to.getX()][to.getY()] != EMPTY) {
+      move.setErrorMessage("ERROR: This field is occupied!");
+      return move; // return default Movement value (incorrect move)
+    }
+
     // check if piece goes outside the board
     if(to.getX() < 1 || to.getX() > boardSize || to.getY() < 1 || to.getY() > boardSize) {
       move.setErrorMessage("ERROR: Move outside the board");
@@ -129,7 +133,7 @@ public class CzechKind implements IGameKind {
               move.addCapturedFigure(cf);
               return move;
             }
-          } else if(from.getX()-2 == to.getX() && from.getX()+2 == to.getY()) { //right capture
+          } else if(from.getX()-2 == to.getX() && from.getY()+2 == to.getY()) { //right capture
             if(board[from.getX()-1][from.getY()+1] == BL_KING || board[from.getX()-1][from.getY()+1] == BL_PIECE) {
               move.setCorrectMove(true);
               cf = new Position();
@@ -193,6 +197,12 @@ public class CzechKind implements IGameKind {
         move.setErrorMessage("ERROR: Black king has not been chosen!");
         return move; // return default Movement value (incorrect move)
       }
+    }
+
+    //Check if distination is empty
+    if(board[to.getX()][to.getY()] != EMPTY) {
+      move.setErrorMessage("ERROR: This field is occupied!");
+      return move; // return default Movement value (incorrect move)
     }
 
     // check if piece goes outside the board
@@ -337,6 +347,12 @@ public class CzechKind implements IGameKind {
         return move; // return default Movement value (incorrect move)
       }
 
+      //Check if distination is empty
+      if(board[end.getX()][end.getY()] != EMPTY) {
+        move.setErrorMessage("ERROR: This field is occupied!");
+        return move; // return default Movement value (incorrect move)
+      }
+
       if(currPlayer == WHITE) {
         if(Math.abs(start.getY()-end.getY()) == 2 && Math.abs(start.getX()-end.getX()) == 2) { // capture move
           move.setKind(CAPTURE);
@@ -429,6 +445,12 @@ public class CzechKind implements IGameKind {
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
+        return move; // return default Movement value (incorrect move)
+      }
+
+      //Check if distination is empty
+      if(board[end.getX()][end.getY()] != EMPTY) {
+        move.setErrorMessage("ERROR: This field is occupied!");
         return move; // return default Movement value (incorrect move)
       }
 
@@ -689,6 +711,20 @@ public class CzechKind implements IGameKind {
     }
 
     return false;  //TO DO: Think about returning positions of possible capture
+  }
+
+  public boolean hasPieceUpgrade(int currPlayer, Position to) {
+    if(currPlayer == BLACK) {
+      if(to.getX() == boardSize) {
+        return true;
+      }
+    } else if(currPlayer == WHITE) {
+      if(to.getX() == 1) {
+        return true;
+      }
+    }
+    
+    return false;
   }
 
   public int whoStarts() {
