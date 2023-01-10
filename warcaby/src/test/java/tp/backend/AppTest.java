@@ -357,5 +357,5 @@ public class AppTest
         assertEquals(false, CK.isCapturePossible(BLACK, board));
     }
 
-
+    //TO DO: Preapare tests for GermanKind
 }
