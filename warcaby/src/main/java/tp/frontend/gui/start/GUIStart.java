@@ -10,7 +10,13 @@ public class GUIStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
-        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
+//      Maria
+//        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
+//        Test tees1 = new Test ();
+//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
+//      Ola
+        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("gui_xml.fxml"));
+//        Test tees2 = new Test ();
         Scene scene = new Scene ( fxmlLoader.load (), 800, 600 );
         GUIController controller = fxmlLoader.getController ();
         if (controller == null){
