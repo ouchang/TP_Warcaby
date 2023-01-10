@@ -15,7 +15,7 @@ public class GUIStart extends Application {
 //        Test tees1 = new Test ();
 //        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
 //      Ola
-        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("gui_xml.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
 //        Test tees2 = new Test ();
         Scene scene = new Scene ( fxmlLoader.load (), 800, 600 );
         GUIController controller = fxmlLoader.getController ();

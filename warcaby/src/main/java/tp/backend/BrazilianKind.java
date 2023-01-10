@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.util.List;
 
 public class BrazilianKind implements IGameKind {

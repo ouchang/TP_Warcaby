@@ -72,10 +72,12 @@ public class GUIController {
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource ();
         if (movesCounter == 0){
+            System.out.println("FIRST CLICK");
             guiBehaviour = new GUIbehaviour ();
             guiBehaviour.fromTo.add ( actual );
             movesCounter ++;
         } else {
+            System.out.println("SECOND CLICK");
             movesCounter = 0;
             guiBehaviour.fromTo.add ( actual );
             guiBehaviour.react();

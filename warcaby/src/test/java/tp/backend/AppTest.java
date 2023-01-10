@@ -1,7 +1,6 @@
 package tp.backend;
 
 import org.junit.Test;
-import tp.backend.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;

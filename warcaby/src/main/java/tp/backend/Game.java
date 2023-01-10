@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.List;

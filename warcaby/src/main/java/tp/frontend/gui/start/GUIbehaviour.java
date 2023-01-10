@@ -12,14 +12,23 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.imageio.ImageIO;
-
 public class GUIbehaviour {
     ArrayList<Pane> fromTo = new ArrayList<> (2);
     public static ArrayList<Pane> positionChanges = new ArrayList<> ();
+    
     GUIbehaviour(){
 
     }
+
+    public String getImageName(String url) {
+        int slashIdx = url.length()-1;
+        while(url.charAt(slashIdx) != '/') {
+            slashIdx--;
+        }
+
+        return url.substring(slashIdx+1);
+    }
+
     public void deletePiece(Pane position){
         System.out.println ("deleting piece");
         final ObservableList<Node> children = position.getChildren();
@@ -30,14 +39,19 @@ public class GUIbehaviour {
         System.out.println ("adding image");
         final ObservableList<Node> children = fromTo.get ( 0 ).getChildren();
 
-    
-
         //URL abc = new URL ( "file:/C:/Users/hnatiuk/Desktop/pwr/TP/WarcabyGit/warcaby/src/main/java/tp/simpleWhitePiece.png" );
-        URL abc = getClass().getClassLoader().getResource("simpleWhitePiece.png");
-        if (children.size () != 0){
-            System.out.println ("OBJECT: " + ( (ImageView) children.get ( 0 )).getImage().getUrl ());
-            System.out.println ("WHITE ULR: " + abc); // TO DO: Check -> currently it returns null
-            boolean b = Objects.equals ( ((ImageView) children.get(0)).getImage().getUrl(), abc.toString()); //todo po drugim poruszeniu nie umie znalezc url i wurzuca null: ustawiac url po dodaniu obrazka?
+        URL abc = this.getClass().getClassLoader().getResource("simpleWhitePiece.png");
+
+        if (children.size () != 0){    
+            System.out.println ("OBJECT: " + getImageName(((ImageView) children.get(0)).getImage().getUrl()));
+            System.out.println ("WHITE URL2: " + getImageName(abc.getPath())); 
+
+            String childName = getImageName(((ImageView) children.get(0)).getImage().getUrl());
+            String whiteName = getImageName(abc.getPath());
+            
+            //boolean b = Objects.equals ( ((ImageView) children.get(0)).getImage().getUrl(), abc.toString()); //todo po drugim poruszeniu nie umie znalezc url i wurzuca null: ustawiac url po dodaniu obrazka?
+            boolean b = childName.equals(whiteName);
+
             if (b == true){
                 System.out.println ("same white");
 	        // Maria 
@@ -60,16 +74,15 @@ public class GUIbehaviour {
                 imageView.setFitWidth ( 50 );
                 position.getChildren ().add ( imageView );
             }
-
-
         } else {
             System.out.println ("num of children = 0");
         }
 
     }
     public void react() throws FileNotFoundException, MalformedURLException {
-
+        System.out.println("START ADD_PIECE FUNC");
         addPiece ( fromTo.get ( 1 ) );
+        System.out.println("START DELETE_PIECE FUNC");
         deletePiece ( fromTo.get ( 0 ) );
     }
 }
