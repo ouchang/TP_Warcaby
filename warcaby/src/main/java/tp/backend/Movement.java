@@ -95,7 +95,7 @@ public class Movement {
           if(this.capturedFigures.size() == 0) {
             return true;        
           }       
-        } 
+        }
       }
     }
 
