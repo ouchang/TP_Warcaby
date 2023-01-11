@@ -70,6 +70,7 @@ public class GUIController {
     public GUIbehaviour guiBehaviour;
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
+        //todo difference between from and to
         Pane actual = (Pane) event.getSource ();
         if (movesCounter == 0){
             guiBehaviour = new GUIbehaviour ();

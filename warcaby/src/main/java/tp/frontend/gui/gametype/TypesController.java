@@ -56,5 +56,7 @@ public class TypesController {
         stage.show();
 
     }
-
 }
+//todo rotate plansza
+//todo zaznaczyc klikniete pole
+//todo info czyja tura + blokowanie planszy
