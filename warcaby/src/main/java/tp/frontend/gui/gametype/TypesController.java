@@ -50,13 +50,14 @@ public class TypesController {
         }
         System.out.println(Client.gametype);
         FXMLLoader board = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
-        Scene secondScene = new Scene( board.load(), 800, 600);     //todo add background image
+        Scene secondScene = new Scene( board.load(), 800, 600);
         stage.setTitle("WHITE");
         stage.setScene(secondScene);
         stage.show();
 
     }
 }
+//todo okno powitalne dla drugiego gracza
 //todo rotate plansza
 //todo zaznaczyc klikniete pole
 //todo info czyja tura + blokowanie planszy

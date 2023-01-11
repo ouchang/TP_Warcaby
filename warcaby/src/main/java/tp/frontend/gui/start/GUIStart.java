@@ -9,17 +9,19 @@ import javafx.stage.Stage;
 import tp.backend.Client;
 import tp.frontend.gui.gametype.TypesController;
 
+import java.io.IOException;
+import java.net.MalformedURLException;
 import java.nio.file.Paths;
 
 import static tp.backend.Client.gametype;
 
-public class GUIStart extends Application {
+public class GUIStart extends Application implements Runnable {
 
     @Override
     public void start(Stage stage) throws Exception {
 //     Maria
-       FXMLLoader board = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
-       FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
+        FXMLLoader wait = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\wait.fxml" ).toUri().toURL () );
+        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
 //      Ola
 //        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("file:/guixml.fxml"));
 
@@ -30,31 +32,52 @@ public class GUIStart extends Application {
                 System.out.println ("controller is null");
             } else {
                 System.out.println("pomiedzy");
-
-                stage.setTitle("Chose a type of a game");
+                stage.setTitle("Welcome to checkers!");
                 stage.setScene(scene);
                 stage.setResizable(false);
                 stage.show();
             }
         } else {
-            Scene scene = new Scene ( board.load (), 800, 600 );
-            GUIController controller = board.getController ();
-            if (controller == null){
-                System.out.println ("controller is null");
-            } else {
-                System.out.println("pomiedzy");
-                Reflection reflection = new Reflection();
-                Rotate rotate = new Rotate();
-                //Setting pivot points for the rotation
-                rotate.setPivotX(300);
-                rotate.setPivotY(100);
 
-                stage.setTitle("BLACK");
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
-            }
+            System.out.println("before while");
+            Scene scene = new Scene(wait.load(), 800, 600);
+            stage.setTitle("WAIT");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+            GUIStart ex = new GUIStart();
+            Thread a = new Thread(ex);
+            a.start();
+
+
+        }
+    }
+
+    @Override
+    public void run() {
+        FXMLLoader board = null;
+        try {
+            board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
         }
 
+        System.out.println("run");
+        while (gametype == 0) {
+            Thread.onSpinWait();
+        }
+        System.out.println("out while");
+        Scene scene2 = null;
+        try {
+            scene2 = new Scene(board.load(), 800, 600);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Stage stage = new Stage();
+        stage.setTitle("BLACK");
+        stage.setScene(scene2);
+        stage.setResizable(false);
+        System.out.println("before show");
+        stage.show();
     }
 }
