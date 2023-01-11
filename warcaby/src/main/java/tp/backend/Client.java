@@ -8,7 +8,7 @@ import java.net.Socket;
 
 public class Client  {
   //TO DO: Add instance of GUI class
-
+  public static int gametype = 0;
   private static final int WHITE=1;
   private static final int BLACK=2;
 
@@ -20,7 +20,7 @@ public class Client  {
 
   private static int showing = NONACTIVE;
 
-  private static int playerId; // ID that Server sends for identification
+  public static int playerId; // ID that Server sends for identification
   private static int oponnentId;
   private static int currPlayer;
   private static CoderDecoder CD;
@@ -104,7 +104,9 @@ public class Client  {
 
     player.listenSocket();
     player.receiveInitInfo();
-
+//    if (gametype == 0){
+//      Application.launch(tp.frontend.gui.gametype.ChooseGameType.class);
+//    }
     System.out.println("PlayerId: " + playerId + " CurrPlayer: " + currPlayer);
 
     receive();
@@ -113,21 +115,7 @@ public class Client  {
     moveCommand.setActorId(playerId);
     moveCommand.setPieceId(PIECE);
 
-//    positionChanges.add ( "pos56" );
-//    positionChanges.add ( "pos74" );
-
-
-    Application.launch ( GUIStart.class);
-//
-//
-//    moveCommand.fromX=6;
-//    moveCommand.fromY=3;
-//    moveCommand.toX=5;
-//    moveCommand.toY=2;
-//
-//    send(moveCommand);
-//    receive();
-
+    Application.launch ( tp.frontend.gui.start.GUIStart.class);
   }
 }
 
