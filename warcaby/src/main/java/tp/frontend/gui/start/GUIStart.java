@@ -1,7 +1,9 @@
 package tp.frontend.gui.start;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.*;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.Reflection;
 import javafx.scene.transform.Rotate;
@@ -20,6 +22,7 @@ public class GUIStart extends Application implements Runnable {
     @Override
     public void start(Stage stage) throws Exception {
 //     Maria
+        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
         FXMLLoader wait = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\wait.fxml" ).toUri().toURL () );
         FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
 //      Ola
@@ -40,14 +43,26 @@ public class GUIStart extends Application implements Runnable {
         } else {
 
             System.out.println("before while");
-            Scene scene = new Scene(wait.load(), 800, 600);
+//            Scene scene = new Scene(wait.load(), 800, 600);
+            System.out.println("before while");
+            Scene scene = new Scene(board.load(), 800, 600);
             stage.setTitle("WAIT");
+            GUIController controller = board.getController();
+            controller.board8x8.setRotate(180);
+            ObservableList<Node> childrenPane = controller.board8x8.getChildren();
+            for (Node node : childrenPane){
+                System.out.println(node.getId());
+                node.setRotate(180);
+            }
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-            GUIStart ex = new GUIStart();
-            Thread a = new Thread(ex);
-            a.start();
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+//            GUIStart ex = new GUIStart();
+//            Thread a = new Thread(ex);
+//            a.start();
 
 
         }

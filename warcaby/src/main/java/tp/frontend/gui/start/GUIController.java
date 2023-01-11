@@ -22,6 +22,10 @@ public class GUIController {
     private TextArea instruction;
 
     @FXML
+    public GridPane board8x8;
+
+
+    @FXML
     private ColumnConstraints board;
 
     @FXML
