@@ -6,6 +6,8 @@ import javafx.fxml.*;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.effect.Reflection;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import tp.backend.Client;
@@ -18,7 +20,64 @@ import java.nio.file.Paths;
 import static tp.backend.Client.gametype;
 
 public class GUIStart extends Application implements Runnable {
-
+//    public String board[][] = "[[\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"3\",\"0\",\"3\",\"0\",\"3\",\"0\",\"3\"],[\"0\",\"3\",\"0\",\"3\",\"0\",\"3\",\"0\",\"3\",\"0\"],[\"0\",\"0\",\"3\",\"0\",\"3\",\"0\",\"3\",\"0\",\"3\"],[\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\",\"0\"],[\"0\",\"1\",\"0\",\"1\",\"0\",\"1\",\"0\",\"1\",\"0\"],[\"0\",\"0\",\"1\",\"0\",\"1\",\"0\",\"1\",\"0\",\"1\"],[\"0\",\"1\",\"0\",\"1\",\"0\",\"1\",\"0\",\"1\",\"0\"]]";
+    public String[][] boardString =
+                {{"1", "1", "2", "3", "2", "1", "1", "1"},
+                {"1", "1", "1", "1", "1", "1", "1", "1"},
+                {"1", "1", "1", "1", "1", "1", "1", "1"},
+                {"1", "1", "1", "1", "1", "1", "1", "1"},
+                {"1", "1", "1", "1", "1", "1", "1", "1"},
+                {"2", "2", "2", "2", "2", "2", "2", "2"},
+                {"4", "4", "4", "4", "4", "4", "4", "4"},
+                {"3", "3", "3", "3", "3", "3", "3", "3"}};
+    public void updateBoard(String[][] boardString, GUIController controller){
+        ObservableList<Node> childrenPane = controller.board8x8.getChildren();
+        for (Node node : childrenPane){
+            System.out.println(node.getId());
+        }
+        //todo usunąć poprzednie pionki
+        for (int i = 0 ; i<8; i++){
+            for (int j = 0; j<8; j++){
+                switch (boardString[j][i]){
+                    case "0":{
+                        break;
+                    }
+                    case "1":{
+                        Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleWhitePiece.png"));
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight ( 40 );
+                        imageView.setFitWidth ( 50 );
+                        controller.board8x8.add(imageView, i, j);
+                        break;
+                    }
+                    case "2":{
+                        Image image = new Image(getClass().getClassLoader().getResourceAsStream("kingWhitePiece.png"));
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight ( 40 );
+                        imageView.setFitWidth ( 50 );
+                        controller.board8x8.add(imageView, i, j);
+                        break;
+                    }
+                    case "3":{
+                        Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight ( 40 );
+                        imageView.setFitWidth ( 50 );
+                        controller.board8x8.add(imageView, i, j);
+                        break;
+                    }
+                    case "4":{
+                        Image image = new Image(getClass().getClassLoader().getResourceAsStream("kingBlackPiece.png"));
+                        ImageView imageView = new ImageView(image);
+                        imageView.setFitHeight ( 40 );
+                        imageView.setFitWidth ( 50 );
+                        controller.board8x8.add(imageView, i, j);
+                        break;
+                    }
+                }
+            }
+        }
+    }
     @Override
     public void start(Stage stage) throws Exception {
 //     Maria
@@ -28,23 +87,23 @@ public class GUIStart extends Application implements Runnable {
 //      Ola
 //        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("file:/guixml.fxml"));
 
-        if (Client.playerId == 1){
-            Scene scene = new Scene ( types.load (), 800, 600 );
-            TypesController controller = types.getController ();
-            if (controller == null){
-                System.out.println ("controller is null");
-            } else {
-                System.out.println("pomiedzy");
-                stage.setTitle("Welcome to checkers!");
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
-            }
-        } else {
 
-            System.out.println("before while");
+//        if (Client.playerId == 1){
+//            Scene scene = new Scene ( types.load (), 800, 600 );
+//            TypesController controller = types.getController ();
+//            if (controller == null){
+//                System.out.println ("controller is null");
+//            } else {
+//                System.out.println("pomiedzy");
+//                stage.setTitle("Welcome to checkers!");
+//                updateBoard(boardString);
+//                stage.setScene(scene);
+//                stage.setResizable(false);
+//                stage.show();
+//            }
+//        } else {
+
 //            Scene scene = new Scene(wait.load(), 800, 600);
-            System.out.println("before while");
             Scene scene = new Scene(board.load(), 800, 600);
             stage.setTitle("WAIT");
             GUIController controller = board.getController();
@@ -55,9 +114,7 @@ public class GUIStart extends Application implements Runnable {
                 node.setRotate(180);
             }
             stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-            stage.setScene(scene);
+            updateBoard(boardString, controller);
             stage.setResizable(false);
             stage.show();
 //            GUIStart ex = new GUIStart();
@@ -65,7 +122,7 @@ public class GUIStart extends Application implements Runnable {
 //            a.start();
 
 
-        }
+//        }
     }
 
     @Override
