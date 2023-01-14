@@ -13,6 +13,7 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import tp.backend.ClientNew;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -35,20 +36,21 @@ public class TypesController {
 
     @FXML
     public void choseType(ActionEvent event) throws IOException {
-        //todo bo to jeszcze nie dziala bo nie ma klasy Client
         Stage stage = (Stage) czech.getScene().getWindow();
         System.out.println("chose type");
         System.out.println(event.getSource());
+        ClientNew clientTemp = new ClientNew();
         if (czech.equals(event.getSource())) {
-            Client.gametype = 1;
+            clientTemp.setGameKind("czech");
         } else if (swedish.equals(event.getSource())){
-            Client.gametype = 2;
+            clientTemp.setGameKind("swedish");
         } else if (german.equals(event.getSource())) {
-            Client.gametype = 3;
+            clientTemp.setGameKind("german");
         } else {
-            Client.gametype = 4;
+            clientTemp.setGameKind("nieokreslony");
+
         }
-        System.out.println(Client.gametype);
+//        System.out.println(clientTemp.getGameKind());
         FXMLLoader board = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
         Scene secondScene = new Scene( board.load(), 800, 600);
         stage.setTitle("WHITE");
