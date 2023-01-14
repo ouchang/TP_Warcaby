@@ -44,25 +44,38 @@ public class GameManager implements Runnable {
       if(gameKind.getPlayerId().equals(game.getPlayer1ID())) {
         IGameKind kind = gameKindFactory.getGameKind(gameKind.getKind());
         game.setGameKind(kind);
+        game.loadInitBoard();
       }
     }
 
     System.out.println("Client [" + gameKind.getPlayerId() + "] set gameKind = " + gameKind.getKind());
   }
 
-  private void gameStatusHandler(GameStatus gameStatus, PrintWriter clientOut) {
+  private void gameStatusHandler(GameStatus gameStatus, PrintWriter clientOut, String errorMessage) {
     synchronized(game) {
       gameStatus.setGameKind(game.getGameKindName());
       gameStatus.setPlayer1(game.getPlayer1ID());
       gameStatus.setPlayer2(game.getPlayer2ID());
       gameStatus.setActivePlayerID(game.getActivePlayerID());
-      gameStatus.setError(""); // TO DO: Check me
+      gameStatus.setError(errorMessage); // TO DO: Check me
       gameStatus.setBoard(game.getBoard());
     }
 
     String objectSerialized = CD.codeCommand(gameStatus);
     clientOut.println(objectSerialized);
     System.out.println("Client [" + gameStatus.getPlayerId() + "]  gets gameStatus: " + objectSerialized);
+  }
+
+  private void moveCommandHandler(MoveCommand moveCommand, PrintWriter clientOut) {
+    String errorMessage = "";
+    synchronized(game) {
+      if(moveCommand.getPlayerId().equals(game.getActivePlayerID())) {
+        errorMessage = game.move(moveCommand.getPositions(), moveCommand.getPlayerId());
+        System.out.println("Client [" + moveCommand.getPlayerId() + "]  makes move from: " + moveCommand.getPositions().get(0) + " to: " + moveCommand.getPositions().get(1));
+      }
+    }
+
+    gameStatusHandler(new GameStatus(), clientOut, errorMessage);
   }
 
   public void run() {
@@ -90,7 +103,11 @@ public class GameManager implements Runnable {
           break;
         case "GameStatus":
           GameStatus gameStatus = (GameStatus) CD.decodeCommand(clientCallSerialized);
-          gameStatusHandler(gameStatus, clientOut);
+          gameStatusHandler(gameStatus, clientOut, "");
+          break;
+        case "MoveCommand":
+          MoveCommand moveCommand = (MoveCommand) CD.decodeCommand(clientCallSerialized);
+          moveCommandHandler(moveCommand, clientOut);
           break;
       }
 

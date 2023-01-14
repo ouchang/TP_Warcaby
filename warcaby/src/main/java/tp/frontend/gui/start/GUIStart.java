@@ -22,6 +22,7 @@ public class GUIStart extends Application {
         ClientNew player = new ClientNew();
         player.clientInit(); // pierwsze polaczenie z serwerem
 
+        //FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
         FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
 
         GameStatus gameStatus;

@@ -1,7 +1,6 @@
 package tp.frontend.gui.start;
 
 import tp.backend.ClientNew;
-import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
 
@@ -101,12 +100,14 @@ public class GUIController {
     private Position from = new Position();
     private Position to = new Position();
     public ArrayList<Pane> fromTo = new ArrayList<Pane>();
+    public List<Position> positions = new ArrayList<Position>();
     //private GameStatusClass gameStatus;
 
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource();
-        boolean correctMove = false;
+        String errorMessage;
+        
         
         // Regular / Single capture move
         if(!firstClick) {
@@ -130,8 +131,9 @@ public class GUIController {
 
             from.setX(row);
             from.setY(col);
+            positions.add(from);
 
-            System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY() + " TO X: " + to.getX() + " TO Y: " + to.getY());
+            System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY());
 
             fromTo.add(actual);
 
@@ -159,22 +161,31 @@ public class GUIController {
 
             to.setX(row);
             to.setY(col);
+            System.out.println("TO X:" + to.getX() + " TO Y: " + to.getY());
+            positions.add(to);
+
             fromTo.add(actual);
 
-            //String[][] gameBoard = player.getGameStatusClass().getBoard();
-            //int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
+            GameStatus gameStatus = player.getGameStatus();
+            String[][] gameBoard = gameStatus.getBoard();
+            int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
 
             // send move info to server
-            //correctMove = player.move(from, to);
+            System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY() + " TO X: " + to.getX() + " TO Y: " + to.getY());
+            System.out.println("POSITIONS: " + positions);
+            gameStatus = player.sendMoveCommand(positions);
+            errorMessage = gameStatus.getError();
 
-            if(correctMove) {
+            System.out.println("Error Message: " + errorMessage);
+
+            if(errorMessage.equals("")) {
                 System.out.println("GUIController - Correct move");
                 GUIbehaviour bevhaviour = new GUIbehaviour();
                 bevhaviour.swapList(fromTo);
                 //System.out.println("GUIController - gameStatus: " + player.getGameStatus().getBoard());
                 //bevhaviour.react(player.getGameStatus().getBoard(), from);
                 
-                //bevhaviour.react(figureIdx);
+                bevhaviour.react(figureIdx);
 
                 //gameStatus = player.getGameStatus();
                 //System.out.println("1 STATUS: " + gameStatus.getStatus() + " WHOSE TURN NOW: " + gameStatus.getTurn());

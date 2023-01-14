@@ -2,6 +2,7 @@ package tp.backend;
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
 
 public class ClientNew {
   private CoderDecoder CD;
@@ -132,6 +133,14 @@ public class ClientNew {
     gameStatus.setPlayerId(this.playerId);
     gameStatus = (GameStatus) clientCallSync(gameStatus);
     System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
+    return gameStatus;
+  }
+
+  public GameStatus sendMoveCommand(List<Position> positions) {
+    MoveCommand moveCommand = (MoveCommand) commandFactory.getCommand("MoveCommand");
+    moveCommand.setPlayerId(this.playerId);
+    moveCommand.setPositions(positions);
+    GameStatus gameStatus = (GameStatus) clientCallSync(moveCommand);
     return gameStatus;
   }
 }

@@ -5,8 +5,8 @@ public class CommandFactory {
     switch(type) {
       case "GetGamesClass":
         return new GetGamesClass();
-      case "GameCommandClass":
-        return new GameCommandClass();
+      case "MoveCommand":
+        return new MoveCommand();
       case "GameStatus":
         return new GameStatus();
       case "GetCurrentGameStateClass":
@@ -37,8 +37,8 @@ public class CommandFactory {
         return (new GetCurrentGameStateClass()).getClass();
       case "NewGameClass":
         return (new NewGameClass()).getClass();
-      case "GameCommandClass":
-        return (new GameCommandClass()).getClass();
+      case "MoveCommand":
+        return (new MoveCommand()).getClass();
       case "ClientInit":
         return (new ClientInit()).getClass();
       case "WhoStartsClass":

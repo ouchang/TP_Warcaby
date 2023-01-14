@@ -1,6 +1,7 @@
 package tp.frontend.gui.start;
 
 import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -117,8 +118,6 @@ public class GUIbehaviour {
             System.out.println("Empty fileName!");
         }
     }
-
-
 
     public void react(int figureIdx) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
