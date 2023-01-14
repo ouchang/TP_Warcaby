@@ -41,7 +41,7 @@ public class TypesController {
         System.out.println(event.getSource());
 
         if (czech.equals(event.getSource())) {
-            Client.gametype = 1;
+            Client.gametype = 1; //player.setGameKind("czech");
         } else if (swedish.equals(event.getSource())){
             Client.gametype = 2;
         } else if (german.equals(event.getSource())) {

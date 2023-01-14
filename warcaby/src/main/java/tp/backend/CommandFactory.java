@@ -7,8 +7,8 @@ public class CommandFactory {
         return new GetGamesClass();
       case "GameCommandClass":
         return new GameCommandClass();
-      case "GameStatusClass":
-        return new GameStatusClass();
+      case "GameStatus":
+        return new GameStatus();
       case "GetCurrentGameStateClass":
         return new GetCurrentGameStateClass();
       case "JoinGameClass":
@@ -27,8 +27,8 @@ public class CommandFactory {
 
   public static Class getClass(String type) { 
     switch(type) {
-      case "GameStatusClass":
-        return (new GameStatusClass()).getClass();
+      case "GameStatus":
+        return (new GameStatus()).getClass();
       case "GetGamesClass":
         return (new GetGamesClass()).getClass();
       case "JoinGameClass":

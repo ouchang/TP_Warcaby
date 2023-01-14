@@ -1,7 +1,5 @@
 package tp.backend;
 
-import javax.swing.event.SwingPropertyChangeSupport;
-
 public class GameKindFactory {
   public IGameKind getGameKind(String type) {
     switch(type) {

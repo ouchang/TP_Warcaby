@@ -23,12 +23,14 @@ public class Server {
       //gameThread.start();
 
       //NEW VERSION
-
+      int i = 0;
       while(true) {
         Socket client = serverSocket.accept();
+        System.out.println("Connection nr " + String.valueOf(i));
 
         GameManager gameManager = new GameManager(game, client);
         new Thread(gameManager).start();
+        i++;
       }
     } catch(IOException e) {
       System.out.println(e.getMessage());

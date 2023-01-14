@@ -4,28 +4,31 @@ import java.io.*;
 import java.net.*;
 
 public class ClientNew {
-  
-  private static PrintWriter clientOut = null;
-  private static BufferedReader clientIn = null;
-
   private CoderDecoder CD;
   private CommandFactory commandFactory;
 
   private String playerId;
   private String color;
   private boolean firstPlayer;
+  private String gameKind;
 
   public ClientNew() {
     this.CD = new CoderDecoder();
+    this.gameKind = "czech";
   }
 
   public boolean getFirstPlayer() {
     return this.firstPlayer;
   }
 
+  public void setGameKind(String gameKind) {
+    this.gameKind = gameKind;
+  }
+
   public void clientCallAsync(ICommand object) {
     String objectSerialized = CD.codeCommand(object);
     Socket socket = null;
+    PrintWriter clientOut = null;
 
     try {
       socket = new Socket("localhost", 4444);
@@ -41,6 +44,11 @@ public class ClientNew {
 
     try {
       socket.close();
+
+      if(clientOut != null) {
+        clientOut.close();
+      }
+
     } catch(IOException e) {
       System.out.println(e.getMessage());
       System.exit(1);
@@ -50,6 +58,8 @@ public class ClientNew {
   public ICommand clientCallSync(ICommand object) {
     String objectSerialized = CD.codeCommand(object);
     Socket socket = null;
+    PrintWriter clientOut = null;
+    BufferedReader clientIn = null;
 
     try {
       socket = new Socket("localhost", 4444);
@@ -67,6 +77,14 @@ public class ClientNew {
     try {
       objectSerialized = clientIn.readLine();
       socket.close();
+
+      if(clientIn != null) {
+        clientIn.close();
+      }
+
+      if(clientOut != null) {
+        clientOut.close();
+      }
     } catch(IOException e) {
       System.out.println(e.getMessage());
       System.exit(1);
@@ -78,6 +96,9 @@ public class ClientNew {
       case "ClientInit":
         ClientInit clientInit = (ClientInit) CD.decodeCommand(objectSerialized);
         return clientInit;
+      case "GameStatus":
+        GameStatus gameStatus = (GameStatus) CD.decodeCommand(objectSerialized);
+        return gameStatus;
     }
 
     return null;
@@ -90,12 +111,27 @@ public class ClientNew {
     this.playerId = clientInit.getPlayerId();
     this.color = clientInit.getColor();
     this.firstPlayer = clientInit.getFirstPlayer();
+
+    System.out.println("[" + this.playerId + "] Client registered!");
+    if(this.firstPlayer) {
+      System.out.println("[" + this.playerId + "] First privileged client");
+    } else {
+      System.out.println("[" + this.playerId + "] Second client");
+    }
   }
 
-  public void setGameKind(String kind) {
-    GameKind gameKind = (GameKind) commandFactory.getCommand("GameKind");
-    gameKind.setPlayerId(this.playerId);
-    gameKind.setKind(kind);
-    clientCallAsync(gameKind);
+  public void sendGameKind() {
+    GameKind gameKindObject = (GameKind) commandFactory.getCommand("GameKind");
+    gameKindObject.setPlayerId(this.playerId);
+    gameKindObject.setKind(this.gameKind);
+    clientCallAsync(gameKindObject);
+  }
+
+  public GameStatus getGameStatus() {
+    GameStatus gameStatus = (GameStatus) commandFactory.getCommand("GameStatus");
+    gameStatus.setPlayerId(this.playerId);
+    gameStatus = (GameStatus) clientCallSync(gameStatus);
+    System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
+    return gameStatus;
   }
 }

@@ -77,6 +77,11 @@ public class GUIbehaviour {
             boolean b = true;
             if (b == true){
                 System.out.println ("same white");
+	        // Maria 
+                //Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
+                //FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleWhitePiece.png");
+                //FileInputStream inputstream = new FileInputStream();
+                //Image image = new Image (inputstream);
                 Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleWhitePiece.png"));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );
@@ -84,6 +89,9 @@ public class GUIbehaviour {
                 position.getChildren ().add ( imageView );
             } else {
                 System.out.println ("different colors");
+                
+                //FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleBlackPiece.png");
+                //Image image = new Image (inputstream);
                 Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
                 ImageView imageView = new ImageView(image);
                 imageView.setFitHeight ( 40 );

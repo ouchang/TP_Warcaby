@@ -37,7 +37,7 @@ public class AppTest
     public void checkCoderDecoder() {
         int boardSize = 8;
         String[][] board = makeBoard(boardSize);
-        GameStatusClass gameStatus = new GameStatusClass();
+        GameStatus gameStatus = new GameStatus();
         CzechKind CK = new CzechKind();
 
         CoderDecoder CD = new CoderDecoder();
@@ -48,20 +48,20 @@ public class AppTest
         gameStatus.setGameKind(CK.getName());
         gameStatus.setPlayer1("Ola");
         gameStatus.setPlayer2("Aga");
-        gameStatus.setTurn(String.valueOf(CK.whoStarts()));
+        gameStatus.setActivePlayerID(String.valueOf(CK.whoStarts()));
         gameStatus.setStatus("ongoing");
         gameStatus.setError("");
         gameStatus.setBoard(board);
 
         String json = CD.codeCommand(gameStatus);
-        GameStatusClass outputStatus = (GameStatusClass) CD.decodeCommand(json);
+        GameStatus outputStatus = (GameStatus) CD.decodeCommand(json);
 
         assertEquals(gameStatus.getId(), outputStatus.getId());
         assertEquals(gameStatus.getFriendly_name(), outputStatus.getFriendly_name());
         assertEquals(gameStatus.getGameKind(), outputStatus.getGameKind());
         assertEquals(gameStatus.getPlayer1(), outputStatus.getPlayer1());
         assertEquals(gameStatus.getPlayer2(), outputStatus.getPlayer2());
-        assertEquals(gameStatus.getTurn(), outputStatus.getTurn());
+        assertEquals(gameStatus.getActivePlayerID(), outputStatus.getActivePlayerID());
         assertEquals(gameStatus.getStatus(), outputStatus.getStatus());
         assertEquals(gameStatus.getError(), outputStatus.getError());
 

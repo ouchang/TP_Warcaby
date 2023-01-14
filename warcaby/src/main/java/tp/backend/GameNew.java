@@ -12,6 +12,8 @@ public class GameNew {
   private String player1ID;
   private String player2ID;
 
+  private String activePlayerID;
+
   // Player's ID
   private final static int WHITE=1;
   private final static int BLACK=2;
@@ -35,12 +37,28 @@ public class GameNew {
     this.numOfPlayers = 0;
   }
 
-  public String getPlayer1D() {
+  public void setGameKind(IGameKind gameKind) {
+    this.gameKind = gameKind;
+  }
+
+  public String getPlayer1ID() {
     return this.player1ID;
   }
 
-  public String getPlayer2D() {
+  public String getPlayer2ID() {
     return this.player2ID;
+  }
+
+  public String getGameKindName() {
+    return this.gameKind.getClass().getSimpleName();
+  }
+
+  public String getActivePlayerID() {
+    return this.activePlayerID;
+  }
+
+  public String[][] getBoard() {
+    return this.board;
   }
 
   public int getNumOfPlayers() {
@@ -52,6 +70,7 @@ public class GameNew {
     
     if(numOfPlayers == 0) {
       this.player1ID = uuid.toString();
+      this.activePlayerID = this.player1ID;
       this.numOfPlayers++;
       return this.player1ID;
     } else if(numOfPlayers == 1) {

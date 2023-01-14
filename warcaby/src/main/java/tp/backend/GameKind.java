@@ -16,7 +16,7 @@ public class GameKind implements ICommand {
     this.playerId = playerId;
   }
 
-  public String setPlayerId() {
+  public String getPlayerId() {
     return this.playerId;
   }
 

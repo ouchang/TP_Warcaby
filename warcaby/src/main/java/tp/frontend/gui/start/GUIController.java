@@ -1,7 +1,8 @@
 package tp.frontend.gui.start;
 
 import tp.backend.ClientNew;
-import tp.backend.GameStatusClass;
+import tp.backend.ClientNew;
+import tp.backend.GameStatus;
 import tp.backend.Position;
 
 import javafx.event.ActionEvent;
@@ -21,22 +22,13 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GUIController {
-    private ClientNew player;
-
-    private boolean firstClick = false;
-    private Position from = new Position();
-    private Position to = new Position();
-    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
+    ClientNew player;
 
     @FXML
     private CheckBox showInstructionButton;
 
     @FXML
     private TextArea instruction;
-
-    @FXML
-    public GridPane board8x8;
-
 
     @FXML
     private ColumnConstraints board;
@@ -65,6 +57,18 @@ public class GUIController {
     }
 
     @FXML
+    public void tedectorAction(MouseEvent event) {
+        if (event.getButton () == MouseButton.PRIMARY){
+            System.out.println ("lewy przycisk");
+            detector.setText ( "lewy przycisk" );
+        }
+        if (event.getButton () == MouseButton.SECONDARY){
+            System.out.println ("prawy przycisk");
+            detector.setText ( "prawy przycisk" );
+        }
+    }
+
+    @FXML
     public void showInstruction(ActionEvent event) {
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
@@ -72,7 +76,33 @@ public class GUIController {
             instruction.setVisible ( true );
         }
     }
-  
+/*
+    public static int movesCounter = 0;
+    public GUIbehaviour guiBehaviour;
+    @FXML
+    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
+        Pane actual = (Pane) event.getSource ();
+        System.out.println("ROW: " + GridPane.getRowIndex(actual) + " COL: " + GridPane.getColumnIndex(actual));
+        if (movesCounter == 0){
+            System.out.println("FIRST CLICK");
+            guiBehaviour = new GUIbehaviour ();
+            guiBehaviour.fromTo.add ( actual );
+            movesCounter ++;
+        } else {
+            System.out.println("SECOND CLICK");
+            movesCounter = 0;
+            guiBehaviour.fromTo.add ( actual );
+            guiBehaviour.react();
+            guiBehaviour = null;
+        }
+    }
+*/  
+    private boolean firstClick = false;
+    private Position from = new Position();
+    private Position to = new Position();
+    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
+    //private GameStatusClass gameStatus;
+
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource();
@@ -131,11 +161,11 @@ public class GUIController {
             to.setY(col);
             fromTo.add(actual);
 
-            String[][] gameBoard = player.getGameStatusClass().getBoard();
-            int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
+            //String[][] gameBoard = player.getGameStatusClass().getBoard();
+            //int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
 
             // send move info to server
-            correctMove = player.move(from, to);
+            //correctMove = player.move(from, to);
 
             if(correctMove) {
                 System.out.println("GUIController - Correct move");
@@ -144,7 +174,7 @@ public class GUIController {
                 //System.out.println("GUIController - gameStatus: " + player.getGameStatus().getBoard());
                 //bevhaviour.react(player.getGameStatus().getBoard(), from);
                 
-                bevhaviour.react(figureIdx);
+                //bevhaviour.react(figureIdx);
 
                 //gameStatus = player.getGameStatus();
                 //System.out.println("1 STATUS: " + gameStatus.getStatus() + " WHOSE TURN NOW: " + gameStatus.getTurn());

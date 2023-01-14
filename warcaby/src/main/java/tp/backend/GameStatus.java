@@ -1,12 +1,13 @@
 package tp.backend;
 
-public class GameStatusClass implements ICommand {
+public class GameStatus implements ICommand {
+  String playerId;
   String id;
   String friendly_name;
   String gameKind;
   String player1;
   String player2;
-  String turn;
+  String activePlayerID;
   String status;
   String error;
   String[][] board;
@@ -17,6 +18,14 @@ public class GameStatusClass implements ICommand {
 
   public String getId() {
     return id;
+  }
+
+  public void setPlayerId(String playerId) {
+    this.playerId = playerId;
+  }
+
+  public String getPlayerId() {
+    return this.playerId;
   }
 
   public void setFriendly_name(String friendly_name) {
@@ -51,12 +60,12 @@ public class GameStatusClass implements ICommand {
     return gameKind;
   }
 
-  public void setTurn(String turn) {
-    this.turn = turn;
+  public void setActivePlayerID(String activePlayerID) {
+    this.activePlayerID = activePlayerID;
   }
 
-  public String getTurn() {
-    return this.turn;
+  public String getActivePlayerID() {
+    return this.activePlayerID;
   }
 
   public void setStatus(String status) {
@@ -84,6 +93,6 @@ public class GameStatusClass implements ICommand {
   }
 
   public String showView() {
-    return id + "|" + friendly_name + "|" + player1 + "|" + player2 + "|" +  gameKind + "|" + turn  + "|" + status + "|" + error + "|" + board;
+    return id + "|" + friendly_name + "|" + player1 + "|" + player2 + "|" +  gameKind + "|" + activePlayerID  + "|" + status + "|" + error + "|" + board;
   }
 }
