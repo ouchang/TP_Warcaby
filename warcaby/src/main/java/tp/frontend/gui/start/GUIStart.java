@@ -8,10 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.effect.Reflection;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
 import tp.backend.Client;
 import tp.frontend.gui.gametype.TypesController;
+import tp.frontend.gui.start.GUIbehaviour;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -35,10 +38,21 @@ public class GUIStart extends Application implements Runnable {
         for (Node node : childrenPane){
             System.out.println(node.getId());
         }
-        //todo usunąć poprzednie pionki
+
+        for (Node node : controller.board8x8.getChildren()) {
+
+            if (node instanceof Pane) {
+                Pane pane = (Pane) node;
+                final ObservableList<Node> children = pane.getChildren();
+                pane.getChildren().removeAll(children);
+            }
+        }
+
+
         for (int i = 0 ; i<8; i++){
             for (int j = 0; j<8; j++){
                 switch (boardString[j][i]){
+
                     case "0":{
                         break;
                     }
@@ -47,6 +61,7 @@ public class GUIStart extends Application implements Runnable {
                         ImageView imageView = new ImageView(image);
                         imageView.setFitHeight ( 40 );
                         imageView.setFitWidth ( 50 );
+
                         controller.board8x8.add(imageView, i, j);
                         break;
                     }

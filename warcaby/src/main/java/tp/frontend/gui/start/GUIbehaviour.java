@@ -63,6 +63,7 @@ public class GUIbehaviour {
                 imageView.setFitWidth ( 50 );
                 position.getChildren ().add ( imageView );
             }
+
         } else {
             System.out.println ("num of children = 0");
         }
