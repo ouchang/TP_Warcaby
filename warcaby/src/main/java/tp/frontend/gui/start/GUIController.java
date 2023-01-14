@@ -25,6 +25,10 @@ public class GUIController {
     ClientNew player;
     @FXML
     public GridPane board8x8;
+
+    @FXML
+    private Button updateButton;
+
     @FXML
     private CheckBox showInstructionButton;
 
@@ -55,6 +59,12 @@ public class GUIController {
 
     public void setPlayer(ClientNew player) {
         this.player = player;
+    }
+
+    private  GUIStart a = new GUIStart();
+    @FXML
+    void updateBoard(ActionEvent event) {
+        a.updateBoard(jakisString, this);
     }
 
     @FXML
