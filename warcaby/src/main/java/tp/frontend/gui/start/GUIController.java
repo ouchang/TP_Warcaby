@@ -23,7 +23,8 @@ import java.util.ArrayList;
 
 public class GUIController {
     ClientNew player;
-
+    @FXML
+    public GridPane board8x8;
     @FXML
     private CheckBox showInstructionButton;
 
