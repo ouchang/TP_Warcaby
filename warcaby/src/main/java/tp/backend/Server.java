@@ -18,11 +18,6 @@ public class Server {
 
       System.out.println("Turning on the server");
 
-      //Game game = new Game(firstClientSocket, secondClientSocket, CG);
-      //Thread gameThread = new Thread(game);
-      //gameThread.start();
-
-      //NEW VERSION
       int i = 0;
       while(true) {
         Socket client = serverSocket.accept();
