@@ -8,40 +8,39 @@ import java.net.*;
  * Within this class, server socket listens on a given port.
  */
 public class Server {
-  private static int clientCounter=0;
-
-  private static Socket firstClientSocket;
-  private static Socket secondClientSocket;
-
   public static void main(String[] args) {
-    try(ServerSocket serverSocket = new ServerSocket(4444)) {
+    ServerSocket serverSocket = null;
+    GameNew game = new GameNew();
+
+    try {
+      serverSocket = new ServerSocket(4444);
+      serverSocket.setReuseAddress(true);
+
       System.out.println("Turning on the server");
-      CzechKind CG = new CzechKind();
 
-      //while(true) {
-        // Only 2 clients can play! (CHECKING POINT)
+      //Game game = new Game(firstClientSocket, secondClientSocket, CG);
+      //Thread gameThread = new Thread(game);
+      //gameThread.start();
 
-        if(clientCounter < 2) { 
-          firstClientSocket = serverSocket.accept();
-          System.out.println("First player (client) connected");
-          System.out.println("Waiting for the second player");
-          clientCounter++;
+      //NEW VERSION
 
-          secondClientSocket = serverSocket.accept();
-          System.out.println("Second player (client) connected");
-          clientCounter++;
-        }
-        
-        // create GameKindFactory
+      while(true) {
+        Socket client = serverSocket.accept();
 
-        // create and start game thread -> pass firstClientSocket and secondClientSocket to thread
-        Game game = new Game(firstClientSocket, secondClientSocket, CG);
-        Thread gameThread = new Thread(game);
-        gameThread.start();
-      //}
-
+        GameManager gameManager = new GameManager(game, client);
+        new Thread(gameManager).start();
+      }
     } catch(IOException e) {
       System.out.println(e.getMessage());
+    } finally {
+      if(serverSocket != null) {
+        try {
+          serverSocket.close();
+        } catch(IOException e) {
+          System.out.println(e.getMessage());
+          System.exit(1);
+        }
+      }
     }
   }
 }

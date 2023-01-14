@@ -34,15 +34,44 @@ public class AppTest
     }
 
     @Test
-    public void checkClassName() {
-        ICommand cmd;
-        GetGamesClass status = new GetGamesClass();
+    public void checkCoderDecoder() {
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        GameStatusClass gameStatus = new GameStatusClass();
+        CzechKind CK = new CzechKind();
 
-        cmd = status;
-        String cmd_class = cmd.getClass().getSimpleName();
-        String status_class = status.getClass().getSimpleName();
+        CoderDecoder CD = new CoderDecoder();
+        
+        //Temporary inicializing statusCommand
+        gameStatus.setId("12");
+        gameStatus.setFriendly_name("testGame1");
+        gameStatus.setGameKind(CK.getName());
+        gameStatus.setPlayer1("Ola");
+        gameStatus.setPlayer2("Aga");
+        gameStatus.setTurn(String.valueOf(CK.whoStarts()));
+        gameStatus.setStatus("ongoing");
+        gameStatus.setError("");
+        gameStatus.setBoard(board);
 
-        assertEquals("GetGamesClass", cmd_class);
+        String json = CD.codeCommand(gameStatus);
+        GameStatusClass outputStatus = (GameStatusClass) CD.decodeCommand(json);
+
+        assertEquals(gameStatus.getId(), outputStatus.getId());
+        assertEquals(gameStatus.getFriendly_name(), outputStatus.getFriendly_name());
+        assertEquals(gameStatus.getGameKind(), outputStatus.getGameKind());
+        assertEquals(gameStatus.getPlayer1(), outputStatus.getPlayer1());
+        assertEquals(gameStatus.getPlayer2(), outputStatus.getPlayer2());
+        assertEquals(gameStatus.getTurn(), outputStatus.getTurn());
+        assertEquals(gameStatus.getStatus(), outputStatus.getStatus());
+        assertEquals(gameStatus.getError(), outputStatus.getError());
+
+        String gameStatusBoard[][] = gameStatus.getBoard();
+        String outputStatusBoard[][] = outputStatus.getBoard();
+        for(int i=0; i<=boardSize; i++) {
+            for(int j=0; j<=boardSize; j++) {
+                assertEquals(gameStatusBoard[i][j], outputStatusBoard[i][j]);
+            }
+        }
     }
 
     @Test

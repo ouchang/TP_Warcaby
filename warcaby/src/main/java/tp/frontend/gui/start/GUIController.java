@@ -1,6 +1,6 @@
 package tp.frontend.gui.start;
 
-import tp.backend.Client;
+import tp.backend.ClientNew;
 import tp.backend.GameStatusClass;
 import tp.backend.Position;
 
@@ -21,7 +21,12 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class GUIController {
-    Client player = new Client();
+    private ClientNew player;
+
+    private boolean firstClick = false;
+    private Position from = new Position();
+    private Position to = new Position();
+    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
 
     @FXML
     private CheckBox showInstructionButton;
@@ -55,23 +60,8 @@ public class GUIController {
     @FXML
     public Pane pos74;
 
-    @FXML
-    public void tedectorAction(MouseEvent event) {
-        //TO DO: DELETE
-        if(player.getPlayerId() == 1) { //WHITE
-            System.out.println("WHITE");
-        } else if(player.getPlayerId() == 2) {
-            System.out.println("BLACK");
-        }
-
-        if (event.getButton () == MouseButton.PRIMARY){
-            System.out.println ("lewy przycisk");
-            detector.setText ( "lewy przycisk" );
-        }
-        if (event.getButton () == MouseButton.SECONDARY){
-            System.out.println ("prawy przycisk");
-            detector.setText ( "prawy przycisk" );
-        }
+    public void setPlayer(ClientNew player) {
+        this.player = player;
     }
 
     @FXML
@@ -82,34 +72,7 @@ public class GUIController {
             instruction.setVisible ( true );
         }
     }
-/*
-    public static int movesCounter = 0;
-    public GUIbehaviour guiBehaviour;
-    @FXML
-    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-        //todo difference between from and to
-        Pane actual = (Pane) event.getSource ();
-        System.out.println("ROW: " + GridPane.getRowIndex(actual) + " COL: " + GridPane.getColumnIndex(actual));
-        if (movesCounter == 0){
-            System.out.println("FIRST CLICK");
-            guiBehaviour = new GUIbehaviour ();
-            guiBehaviour.fromTo.add ( actual );
-            movesCounter ++;
-        } else {
-            System.out.println("SECOND CLICK");
-            movesCounter = 0;
-            guiBehaviour.fromTo.add ( actual );
-            guiBehaviour.react();
-            guiBehaviour = null;
-        }
-    }
-*/  
-    private boolean firstClick = false;
-    private Position from = new Position();
-    private Position to = new Position();
-    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
-    //private GameStatusClass gameStatus;
-
+  
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         Pane actual = (Pane) event.getSource();

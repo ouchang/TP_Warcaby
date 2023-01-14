@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Client  {
   //TO DO: Add instance of GUI class
-  public static volatile int gametype = 0;
+  //public static volatile int gametype = 0;
   private static final int WHITE=1;
   private static final int BLACK=2;
 

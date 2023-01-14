@@ -9,7 +9,7 @@ import java.io.IOException;
 
 class CoderDecoder {
 
-  ICommand decode(String json, String type) {
+  private ICommand decode(String json, String type) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       ICommand command = CommandFactory.getCommand(type);
@@ -33,6 +33,19 @@ class CoderDecoder {
     }
 
     return null;
+  }
+
+  String decodeCall(String json) {
+    try {
+      ObjectMapper mapper = new ObjectMapper(); 
+      CommandClass cmd = new CommandClass();
+      cmd = mapper.readValue(json, cmd.getClass());
+      return cmd.getType();
+    } catch(JsonProcessingException e) {
+      System.out.println(e.getMessage());
+    }
+    
+    return "";
   }
   
   String codeCommand(ICommand object) { // void
