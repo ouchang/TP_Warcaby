@@ -2,9 +2,7 @@ package tp.frontend.gui.start;
 
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
-import tp.backend.Movement;
 import tp.backend.Position;
-import tp.backend.Movement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,6 +19,9 @@ import java.net.MalformedURLException;
 import java.util.List;
 import java.util.ArrayList;
 
+/**
+ * MVC - Controller
+ */
 public class GUIController {
     ClientNew player;
 
@@ -41,6 +42,9 @@ public class GUIController {
 
     @FXML
     private Label detector;
+
+    @FXML
+    private Label printer;
 
     @FXML
     private Button exitButton;
@@ -111,7 +115,7 @@ public class GUIController {
         Position pos = new Position();
 
         int row, col;
-        // handling when rowIndex / colIndex = 0
+        // handling when rowIndex/colIndex = 0
         if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
             row = 1;
         } else {
@@ -147,10 +151,7 @@ public class GUIController {
 
                 this.fromTo.add(actual);
                 
-                //int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
                 List<Position> capturedFigures = new ArrayList<Position>();
-
-                //if(figureIdx == 0) {}
 
                 // send move info to server
                 System.out.println("POSITIONS: " + this.positions);
@@ -165,7 +166,7 @@ public class GUIController {
                 if(errorMessage.equals("")) {
                     System.out.println("GUIController - Correct move");
                     GUIbehaviour bevhaviour = new GUIbehaviour();
-                    //bevhaviour.updateBoard(gameStatus.getBoard(), this);
+
                     bevhaviour.swapList(this.fromTo);
                     if(capturedFigures.size() != 0) {
                         bevhaviour.react(figureIdx, capturedFigures, this.board8x8);
@@ -174,7 +175,7 @@ public class GUIController {
                     }
                 } else {
                     System.out.println("GUIController - Wrong move");
-                    
+                    System.out.println(gameStatus.getError());
                     // print error message
                 }
 

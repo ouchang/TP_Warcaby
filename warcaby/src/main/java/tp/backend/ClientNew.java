@@ -4,6 +4,11 @@ import java.io.*;
 import java.net.*;
 import java.util.List;
 
+/**
+ * MVC - Controller
+ * 
+ * Connection and sending commands client's manager class
+ */
 public class ClientNew {
   private CoderDecoder CD;
   private CommandFactory commandFactory;
@@ -14,10 +19,15 @@ public class ClientNew {
   private String gameKind;
   public PollingAgent pollingAgent;
 
+  /**
+   * Constructor
+   */
   public ClientNew() {
     this.CD = new CoderDecoder();
     this.gameKind = "czech";
   }
+
+  // Getters & Setter for class's attributes
 
   public String getPlayerId() {
     return this.playerId;
@@ -35,6 +45,10 @@ public class ClientNew {
     return this.pollingAgent;
   }
 
+  /**
+   * Clients sends asynchronously commands to Server
+   * @param object command object that is sent
+   */
   public void clientCallAsync(ICommand object) {
     String objectSerialized = CD.codeCommand(object);
     Socket socket = null;
@@ -49,6 +63,7 @@ public class ClientNew {
       System.exit(1);
     }
 
+    // send serialized command to Server
     clientOut.println(objectSerialized);
 
     try {
@@ -64,6 +79,12 @@ public class ClientNew {
     }
   }
 
+  /**
+   * Fully synchronized connection Client to Server
+   * (send & receive command)
+   * @param object command object that is sent
+   * @return server's output
+   */
   public ICommand clientCallSync(ICommand object) {
     String objectSerialized = CD.codeCommand(object);
     Socket socket = null;
@@ -80,6 +101,7 @@ public class ClientNew {
       System.exit(1);
     }
 
+    // send client's command
     clientOut.println(objectSerialized);
 
     try {
@@ -98,6 +120,7 @@ public class ClientNew {
       System.exit(1);
     }
 
+    // receive server's output
     String clientCallType = CD.decodeCall(objectSerialized);
 
     switch(clientCallType) {
@@ -112,6 +135,9 @@ public class ClientNew {
     return null;
   }
 
+  /**
+   * Registering client to the game
+   */
   public void clientInit() {
     ClientInit clientInit = (ClientInit) commandFactory.getCommand("ClientInit");
     clientInit = (ClientInit) clientCallSync(clientInit);
@@ -132,6 +158,9 @@ public class ClientNew {
     new Thread(pollingAgent).start();
   }
 
+  /**
+   * Setting the game's kind
+   */
   public void sendGameKind() {
     GameKind gameKindObject = (GameKind) commandFactory.getCommand("GameKind");
     gameKindObject.setPlayerId(this.playerId);
@@ -139,6 +168,10 @@ public class ClientNew {
     clientCallAsync(gameKindObject);
   }
 
+  /**
+   * Request for current game's status
+   * @return current game's status
+   */
   public GameStatus getGameStatus() {
     GameStatus gameStatus = (GameStatus) commandFactory.getCommand("GameStatus");
     gameStatus.setPlayerId(this.playerId);
@@ -146,12 +179,18 @@ public class ClientNew {
     //System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
     return gameStatus;
   }
-
+  /**
+   * Sending movement's command to be validated by Server
+   * @param positions clicked positions on game's board by client
+   * @return game's status after movement's validation
+   */
   public GameStatus sendMoveCommand(List<Position> positions) {
     MoveCommand moveCommand = (MoveCommand) commandFactory.getCommand("MoveCommand");
     moveCommand.setPlayerId(this.playerId);
     moveCommand.setPositions(positions);
 
+
+    //Helper to check clicked positions
     System.out.println("Client [" + this.playerId + "] sends move with positions: ");
     for(Position p : positions) {
       System.out.println("  X: " + p.getX() + " Y: " + p.getY());
@@ -161,13 +200,19 @@ public class ClientNew {
     return gameStatus;
   }
 
-
-
+  /**
+   * Agent class to handle polling requests of game's status
+   * Implemented as Threads
+   */
   public class PollingAgent implements Runnable {
     GameStatus gameStatus;
     ClientNew client;
     boolean stop;
 
+    /**
+     * Construtor
+     * @param client client/player object to be updated (thread-safe)
+     */
     PollingAgent(ClientNew client) {
       this.client = client;
       this.stop = false;
@@ -177,10 +222,12 @@ public class ClientNew {
       return this.gameStatus;
     }
 
+    /**
+     * Thread runner
+     */
     public void run() {
       try {
         while(!stop) {
-          //System.out.println("PollingAgents asks for status");
           synchronized(this) {
             this.gameStatus = client.getGameStatus();
           }
@@ -196,6 +243,5 @@ public class ClientNew {
     public void stop() {
       this.stop = true;
     }
-
   }
 }

@@ -3,6 +3,11 @@ package tp.backend;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+ * Class for informaction about client's movement
+ * 
+ * A part of communication protocol.
+ */
 public class MoveCommand implements ICommand {
   String playerId;
   List<Position> positions;

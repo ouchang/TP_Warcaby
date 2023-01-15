@@ -3,7 +3,9 @@ package tp.backend;
 import java.util.List;
 
 /**
- * Class CzechKind determine rules in Czech version of checkers
+ * MVC - Controller
+ * 
+ * Class CzechKind determines rules in Czech version of checkers
  */
 public class CzechKind implements IGameKind {
   private static final int WHITE=1; // WHITE Player ID
@@ -62,6 +64,8 @@ public class CzechKind implements IGameKind {
     }
   }
 
+  // Setter & Getters
+
   public String[][] getGameBoard() {
     return this.gameBoard;
   }
@@ -74,16 +78,17 @@ public class CzechKind implements IGameKind {
     return this.name;
   }
 
+  public boolean getCapturedRequired() {
+    return this.capturedRequired;
+  }
+
   /**
    * Method checkMovePiece checks the correctness of the move, made by piece. 
-   * @param currPlayer 
-   * @param positions
-   * @param board
-   * @return
-   * 
-   * 
-   * {@link Movement Movement}
-   * {@link Position Position}
+   * This methods checks regular move as well as single capture
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
    */
   public Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
@@ -180,6 +185,14 @@ public class CzechKind implements IGameKind {
     return move; // return default Movement value (incorrect move)
   }
 
+  /**
+   * Method checkMoveKing checks the correctness of the move, made by king.
+   * This methods checks regular move as well as single capture 
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMoveKing(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position(); // captured figure
@@ -290,7 +303,6 @@ public class CzechKind implements IGameKind {
       }
     }
 
-    System.out.println("WHITE_FIG: " + whiteFiguresCounter + " BLACK_FIG: " + blackFiguresCounter);
     if(currPlayer == WHITE) {
       if(whiteFiguresCounter == 0) {
         if(blackFiguresCounter == 1) {
@@ -323,6 +335,13 @@ public class CzechKind implements IGameKind {
     return move; // return default Movement value (incorrect move)
   }
 
+  /**
+   * Method checkMultiCapturePiece checks the correctness of the multi-capture move made by piece.
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMultiCapturePiece(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
@@ -343,7 +362,6 @@ public class CzechKind implements IGameKind {
     }
     
     for(Position end : positions.subList(1, positions.size())) { 
-      System.out.println("MULTIPIECE START X: " + start.getX() + " Y: " + start.getY() + " END X: " + end.getX() + " Y: " + end.getY());
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
@@ -411,6 +429,13 @@ public class CzechKind implements IGameKind {
     return move;
   }
 
+  /**
+   * Method checkMultiCaptureKing checks the correctness of the multi-capture move made by king.
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMultiCaptureKing(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
@@ -444,7 +469,6 @@ public class CzechKind implements IGameKind {
       startY=0;
       endY=0;
 
-      System.out.println("MULTIKING START X: " + start.getX() + " Y: " + start.getY() + " END X: " + end.getX() + " Y: " + end.getY());
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
@@ -568,6 +592,12 @@ public class CzechKind implements IGameKind {
     return move;
   }
 
+  /**
+   * Method checks if in a given turn there are any possible captures
+   * @param currPlayer ID of the player who made move
+   * @param board game's board
+   * @return true - capture is possible | false - no possible captures
+   */
   public boolean isCapturePossible(int currPlayer, String[][] board) {
     String[] playerFigures = new String[2];
     String[] opponentFigures = new String[2];
@@ -604,6 +634,17 @@ public class CzechKind implements IGameKind {
             for(int j=0; j<2; j++) {
               mx = moveX[i];
               my = moveY[j];
+
+              if(x == 1 && moveX[i] == -1) {
+                continue;
+              } else if(x == boardSize && moveX[i] == 1) {
+                continue;
+              } else if(y == 1 && moveY[j] == -1) {
+                continue;
+              } else if(y == boardSize && moveY[j] == 1) {
+                continue;
+              }
+
               if(board[x+mx][y+my] == opponentFigures[0] || board[x+mx][y+my] == opponentFigures[1]) { // oponnent's figure next to me
                 if(board[x+2*mx][y+2*my] == EMPTY) { // check if I have space to jump
                   return true; 
@@ -714,6 +755,12 @@ public class CzechKind implements IGameKind {
     return false; 
   }
 
+  /**
+   * Method checks if a piece can be upgraded into a king
+   * @param currPlayer ID of the player who made move
+   * @param to ending position in player's moe
+   * @return true - upgrade possible | false - no possible upgrades
+   */
   public boolean hasPieceUpgrade(int currPlayer, Position to) {
     System.out.println("Checking if piece has upgrade");
     if(currPlayer == BLACK) {
@@ -729,6 +776,10 @@ public class CzechKind implements IGameKind {
     return false;
   }
 
+  /**
+   * Method determing who starts the game
+   * @return color's ID
+   */
   public int whoStarts() {
     return WHITE;
   }

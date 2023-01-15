@@ -7,8 +7,17 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 
 import java.io.IOException;
 
+/**
+ * Implementation of communication protocol between Client and Server
+ */
 class CoderDecoder {
-
+  
+  /**
+   * Command's deserializer
+   * @param json serialized command as JSON
+   * @param type command's type
+   * @return command as object
+   */
   private ICommand decode(String json, String type) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
@@ -22,6 +31,11 @@ class CoderDecoder {
     return null;
   }
 
+  /**
+   * Gerneric task deserializer
+   * @param json serialized command as JSON
+   * @return command as object
+   */
   ICommand decodeCommand(String json) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
@@ -35,6 +49,11 @@ class CoderDecoder {
     return null;
   }
 
+  /**
+   * Generic task type deserializer
+   * @param json
+   * @return command's type
+   */
   String decodeCall(String json) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
@@ -48,7 +67,12 @@ class CoderDecoder {
     return "";
   }
   
-  String codeCommand(ICommand object) { // void
+  /**
+   * Command's serializer
+   * @param object command object
+   * @return serialized command as JSON
+   */
+  String codeCommand(ICommand object) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);

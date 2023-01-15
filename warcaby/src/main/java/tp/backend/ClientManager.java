@@ -6,12 +6,19 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class ClientManager {
   private InputStreamReader inRead;
   private BufferedReader reader;
+
   private String playerId;
+
   private CoderDecoder CD;
 
+  /**
+   * Constructor
+   * @param playerId unique player's ID
+   */
   ClientManager(String playerId) {
     this.inRead = new InputStreamReader(System.in);
     this.reader = new BufferedReader(inRead);

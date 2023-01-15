@@ -4,6 +4,10 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+/**
+ * Class representing movement's output information
+ * It is used during the process of movement's check
+ */
 public class Movement {
   private String kind; // possible values: "REGULAR", "CAPTURE"
   private boolean correctMove;
@@ -16,6 +20,8 @@ public class Movement {
     this.capturedFigures = new ArrayList<Position>();
     this.errorMessage = "";
   }
+
+  // Setter & Getters
 
   public String getKind() {
     return this.kind;
@@ -53,6 +59,14 @@ public class Movement {
     this.errorMessage = errorMessage;
   }
 
+  /**
+   * Method used to check if 2 Movement's objects are equal
+   * @param kind object's kind attribute
+   * @param correctMove object's info about the movement's correctness attribute
+   * @param capturedFigures object's list of captured figures attribute
+   * @param errorMessage object's error's message attribute
+   * @return are those 2 objects equal?
+   */
   public boolean isEqual(String kind, boolean correctMove, List<Position> capturedFigures, String errorMessage) {
     if(kind.equals(this.kind)) {
       if(correctMove == this.correctMove) {

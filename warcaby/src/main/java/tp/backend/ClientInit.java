@@ -1,5 +1,10 @@
 package tp.backend;
 
+/*
+ * Class for client's initial information.
+ * 
+ * A part of communication protocol.
+ */
 public class ClientInit implements ICommand {
   private String playerId;
   private boolean firstPlayer;

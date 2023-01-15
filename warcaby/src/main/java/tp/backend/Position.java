@@ -1,5 +1,8 @@
 package tp.backend;
 
+/**
+ * Class used to represent piece/king's position on board
+ */
 public class Position {
   private int x;
   private int y;

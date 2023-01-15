@@ -1,0 +1,227 @@
+\hypertarget{classtp_1_1backend_1_1_czech_kind}{}\doxysection{tp.\+backend.\+Czech\+Kind Class Reference}
+\label{classtp_1_1backend_1_1_czech_kind}\index{tp.backend.CzechKind@{tp.backend.CzechKind}}
+Inheritance diagram for tp.\+backend.\+Czech\+Kind\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{classtp_1_1backend_1_1_czech_kind}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_ac06ef23022ea48c7ef9337360cfa6c6e}{get\+Game\+Board}} ()
+\item 
+int \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_aa48c10e6976f8fc256897804ac26812c}{get\+Board\+Size}} ()
+\item 
+String \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a343433256ce6f91c00f302cf6b8c0017}{get\+Name}} ()
+\item 
+boolean \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a066537c3ca53bf3c25b720ac3ae54e10}{get\+Captured\+Required}} ()
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a0574a41dbc824f7f76bb158d893ede61}{check\+Move\+Piece}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_aae6b0eea58740ee0faedc3468cb0ef62}{check\+Move\+King}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a0f780319e34028c076b7354f82c10dfd}{check\+Multi\+Capture\+Piece}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a580b608efa980bbb860bbb346ba44b7e}{check\+Multi\+Capture\+King}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+boolean \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_a707d3f93fee672edadd7aad935c3c208}{is\+Capture\+Possible}} (int curr\+Player, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+boolean \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_ad419add60023c86960c5ee19b7d2f55e}{has\+Piece\+Upgrade}} (int curr\+Player, \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} to)
+\item 
+int \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind_acb99605e254b754f7be71dafe3f1c4f5}{who\+Starts}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MVC -\/ Controller
+
+Class \mbox{\hyperlink{classtp_1_1backend_1_1_czech_kind}{Czech\+Kind}} determines rules in Czech version of checkers 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_aae6b0eea58740ee0faedc3468cb0ef62}\label{classtp_1_1backend_1_1_czech_kind_aae6b0eea58740ee0faedc3468cb0ef62}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!checkMoveKing@{checkMoveKing}}
+\index{checkMoveKing@{checkMoveKing}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{checkMoveKing()}{checkMoveKing()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Czech\+Kind.\+check\+Move\+King (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Move\+King checks the correctness of the move, made by king. This methods checks regular move as well as single capture 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a0574a41dbc824f7f76bb158d893ede61}\label{classtp_1_1backend_1_1_czech_kind_a0574a41dbc824f7f76bb158d893ede61}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!checkMovePiece@{checkMovePiece}}
+\index{checkMovePiece@{checkMovePiece}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{checkMovePiece()}{checkMovePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Czech\+Kind.\+check\+Move\+Piece (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Move\+Piece checks the correctness of the move, made by piece. This methods checks regular move as well as single capture 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a580b608efa980bbb860bbb346ba44b7e}\label{classtp_1_1backend_1_1_czech_kind_a580b608efa980bbb860bbb346ba44b7e}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!checkMultiCaptureKing@{checkMultiCaptureKing}}
+\index{checkMultiCaptureKing@{checkMultiCaptureKing}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{checkMultiCaptureKing()}{checkMultiCaptureKing()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Czech\+Kind.\+check\+Multi\+Capture\+King (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Multi\+Capture\+King checks the correctness of the multi-\/capture move made by king. 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a0f780319e34028c076b7354f82c10dfd}\label{classtp_1_1backend_1_1_czech_kind_a0f780319e34028c076b7354f82c10dfd}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!checkMultiCapturePiece@{checkMultiCapturePiece}}
+\index{checkMultiCapturePiece@{checkMultiCapturePiece}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{checkMultiCapturePiece()}{checkMultiCapturePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Czech\+Kind.\+check\+Multi\+Capture\+Piece (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Multi\+Capture\+Piece checks the correctness of the multi-\/capture move made by piece. 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_aa48c10e6976f8fc256897804ac26812c}\label{classtp_1_1backend_1_1_czech_kind_aa48c10e6976f8fc256897804ac26812c}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!getBoardSize@{getBoardSize}}
+\index{getBoardSize@{getBoardSize}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{getBoardSize()}{getBoardSize()}}
+{\footnotesize\ttfamily int tp.\+backend.\+Czech\+Kind.\+get\+Board\+Size (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a066537c3ca53bf3c25b720ac3ae54e10}\label{classtp_1_1backend_1_1_czech_kind_a066537c3ca53bf3c25b720ac3ae54e10}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!getCapturedRequired@{getCapturedRequired}}
+\index{getCapturedRequired@{getCapturedRequired}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{getCapturedRequired()}{getCapturedRequired()}}
+{\footnotesize\ttfamily boolean tp.\+backend.\+Czech\+Kind.\+get\+Captured\+Required (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_ac06ef23022ea48c7ef9337360cfa6c6e}\label{classtp_1_1backend_1_1_czech_kind_ac06ef23022ea48c7ef9337360cfa6c6e}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!getGameBoard@{getGameBoard}}
+\index{getGameBoard@{getGameBoard}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{getGameBoard()}{getGameBoard()}}
+{\footnotesize\ttfamily String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} tp.\+backend.\+Czech\+Kind.\+get\+Game\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a343433256ce6f91c00f302cf6b8c0017}\label{classtp_1_1backend_1_1_czech_kind_a343433256ce6f91c00f302cf6b8c0017}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!getName@{getName}}
+\index{getName@{getName}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{getName()}{getName()}}
+{\footnotesize\ttfamily String tp.\+backend.\+Czech\+Kind.\+get\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_ad419add60023c86960c5ee19b7d2f55e}\label{classtp_1_1backend_1_1_czech_kind_ad419add60023c86960c5ee19b7d2f55e}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!hasPieceUpgrade@{hasPieceUpgrade}}
+\index{hasPieceUpgrade@{hasPieceUpgrade}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{hasPieceUpgrade()}{hasPieceUpgrade()}}
+{\footnotesize\ttfamily boolean tp.\+backend.\+Czech\+Kind.\+has\+Piece\+Upgrade (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{\mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}}}]{to }\end{DoxyParamCaption})}
+
+Method checks if a piece can be upgraded into a king 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em to} & ending position in player\textquotesingle{}s moe \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true -\/ upgrade possible $\vert$ false -\/ no possible upgrades 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_a707d3f93fee672edadd7aad935c3c208}\label{classtp_1_1backend_1_1_czech_kind_a707d3f93fee672edadd7aad935c3c208}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!isCapturePossible@{isCapturePossible}}
+\index{isCapturePossible@{isCapturePossible}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{isCapturePossible()}{isCapturePossible()}}
+{\footnotesize\ttfamily boolean tp.\+backend.\+Czech\+Kind.\+is\+Capture\+Possible (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method checks if in a given turn there are any possible captures 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true -\/ capture is possible $\vert$ false -\/ no possible captures 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+\mbox{\Hypertarget{classtp_1_1backend_1_1_czech_kind_acb99605e254b754f7be71dafe3f1c4f5}\label{classtp_1_1backend_1_1_czech_kind_acb99605e254b754f7be71dafe3f1c4f5}} 
+\index{tp.backend.CzechKind@{tp.backend.CzechKind}!whoStarts@{whoStarts}}
+\index{whoStarts@{whoStarts}!tp.backend.CzechKind@{tp.backend.CzechKind}}
+\doxysubsubsection{\texorpdfstring{whoStarts()}{whoStarts()}}
+{\footnotesize\ttfamily int tp.\+backend.\+Czech\+Kind.\+who\+Starts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method determing who starts the game \begin{DoxyReturn}{Returns}
+color\textquotesingle{}s ID 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{tp.\+backend.\+IGame\+Kind}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/Czech\+Kind.\+java\end{DoxyCompactItemize}

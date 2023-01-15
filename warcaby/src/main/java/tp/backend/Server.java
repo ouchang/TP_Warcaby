@@ -4,7 +4,10 @@ import java.io.*;
 import java.net.*;
 
 /**
+ * MVC - Model
+ * 
  * Server's class representation.
+ * Entry point kind class for Server.
  * Within this class, server socket listens on a given port.
  */
 public class Server {
