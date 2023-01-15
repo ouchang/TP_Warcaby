@@ -40,6 +40,11 @@ public class GameNew {
 
   GameNew() {
     this.numOfPlayers = 0;
+    this.activePlayerID = "";
+    this.board = null;
+    this.gameKind = null;
+    this.player1ID = "";
+    this.player2ID = "";
   }
 
   public void setGameKind(IGameKind gameKind) {
@@ -48,6 +53,7 @@ public class GameNew {
 
   public void loadInitBoard() {
     this.board = gameKind.getGameBoard();
+    this.boardSize = gameKind.getBoardSize();
   }
 
   public String getPlayer1ID() {
@@ -59,7 +65,11 @@ public class GameNew {
   }
 
   public String getGameKindName() {
-    return this.gameKind.getClass().getSimpleName();
+    if(this.gameKind != null) {
+      return this.gameKind.getClass().getSimpleName();
+    }
+
+    return "";
   }
 
   public String getActivePlayerID() {

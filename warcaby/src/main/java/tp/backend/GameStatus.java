@@ -12,6 +12,19 @@ public class GameStatus implements ICommand {
   String error;
   String[][] board;
 
+  public GameStatus() {
+    this.playerId = "";
+    this.id = "";
+    this.friendly_name = "";
+    this.gameKind = "";
+    this.player1 = "";
+    this.player2 = "";
+    this.activePlayerID = "";
+    this.status = "";
+    this.error = "";
+    this.board = null;
+  }
+
   public void setId(String id) {
     this.id = id;
   }
@@ -93,6 +106,6 @@ public class GameStatus implements ICommand {
   }
 
   public String showView() {
-    return id + "|" + friendly_name + "|" + player1 + "|" + player2 + "|" +  gameKind + "|" + activePlayerID  + "|" + status + "|" + error + "|" + board;
+    return id + "|" + friendly_name + "|" + player1 + "|" + player2 + "| GK: " +  gameKind + "|" + activePlayerID  + "|" + status + "|" + error + "|" + board;
   }
 }

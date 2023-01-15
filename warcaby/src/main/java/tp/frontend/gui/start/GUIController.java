@@ -6,7 +6,6 @@ import tp.backend.Position;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
@@ -27,7 +26,13 @@ public class GUIController {
     private CheckBox showInstructionButton;
 
     @FXML
+    private Button updateButton;
+
+    @FXML
     private TextArea instruction;
+
+    @FXML
+    public GridPane board8x8;
 
     @FXML
     private ColumnConstraints board;
@@ -56,6 +61,13 @@ public class GUIController {
     }
 
     @FXML
+    void updateBoard(ActionEvent event) {
+        GUIbehaviour bevhaviour = new GUIbehaviour();
+        GameStatus gameStatus = player.getPollingAgent().getGameStatus();
+        bevhaviour.updateBoard(gameStatus.getBoard(), this);
+    }
+
+    @FXML
     public void tedectorAction(MouseEvent event) {
         if (event.getButton () == MouseButton.PRIMARY){
             System.out.println ("lewy przycisk");
@@ -75,141 +87,106 @@ public class GUIController {
             instruction.setVisible ( true );
         }
     }
-/*
-    public static int movesCounter = 0;
-    public GUIbehaviour guiBehaviour;
-    @FXML
-    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-        Pane actual = (Pane) event.getSource ();
-        System.out.println("ROW: " + GridPane.getRowIndex(actual) + " COL: " + GridPane.getColumnIndex(actual));
-        if (movesCounter == 0){
-            System.out.println("FIRST CLICK");
-            guiBehaviour = new GUIbehaviour ();
-            guiBehaviour.fromTo.add ( actual );
-            movesCounter ++;
-        } else {
-            System.out.println("SECOND CLICK");
-            movesCounter = 0;
-            guiBehaviour.fromTo.add ( actual );
-            guiBehaviour.react();
-            guiBehaviour = null;
-        }
-    }
-*/  
+ 
     private boolean firstClick = false;
-    private Position from = new Position();
-    private Position to = new Position();
     public ArrayList<Pane> fromTo = new ArrayList<Pane>();
     public List<Position> positions = new ArrayList<Position>();
-    //private GameStatusClass gameStatus;
 
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-        Pane actual = (Pane) event.getSource();
-        String errorMessage;
-        
-        
-        // Regular / Single capture move
-        if(!firstClick) {
-            System.out.println("FIRST CLICK");
-            System.out.println("ROW: " + GridPane.getRowIndex(actual) + " COL: " + GridPane.getColumnIndex(actual));
-
-            int row, col;
-
-            // position's indexes start from 1!
-            if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
-                row = 1;
-            } else {
-                row = GridPane.getRowIndex(actual) + 1;
-            }
-
-            if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
-                col = 1;
-            } else {
-                col = GridPane.getColumnIndex(actual) + 1;
-            }
-
-            from.setX(row);
-            from.setY(col);
-            positions.add(from);
-
-            System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY());
-
-            fromTo.add(actual);
-
-            // mark clicked field on board!
-
-            firstClick = true;
-        } else {
-            System.out.println("SECOND CLICK");
-            System.out.println("ROW: " + GridPane.getRowIndex(actual) + " COL: " + GridPane.getColumnIndex(actual));
-
-            int row, col;
-
-            // position's indexes start from 1!
-            if(GridPane.getRowIndex(actual) == null) { // rowIndex = 1
-                row = 1;
-            } else {
-                row = GridPane.getRowIndex(actual) + 1;
-            }
-
-            if(GridPane.getColumnIndex(actual) == null) { // colIndex = 1
-                col = 1;
-            } else {
-                col = GridPane.getColumnIndex(actual) + 1;
-            }
-
-            to.setX(row);
-            to.setY(col);
-            System.out.println("TO X:" + to.getX() + " TO Y: " + to.getY());
-            positions.add(to);
-
-            fromTo.add(actual);
-
-            GameStatus gameStatus = player.getGameStatus();
-            String[][] gameBoard = gameStatus.getBoard();
-            int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
-
-            // send move info to server
-            System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY() + " TO X: " + to.getX() + " TO Y: " + to.getY());
-            System.out.println("POSITIONS: " + positions);
-            gameStatus = player.sendMoveCommand(positions);
-            errorMessage = gameStatus.getError();
-
-            System.out.println("Error Message: " + errorMessage);
-
-            if(errorMessage.equals("")) {
-                System.out.println("GUIController - Correct move");
-                GUIbehaviour bevhaviour = new GUIbehaviour();
-                bevhaviour.swapList(fromTo);
-                //System.out.println("GUIController - gameStatus: " + player.getGameStatus().getBoard());
-                //bevhaviour.react(player.getGameStatus().getBoard(), from);
-                
-                bevhaviour.react(figureIdx);
-
-                //gameStatus = player.getGameStatus();
-                //System.out.println("1 STATUS: " + gameStatus.getStatus() + " WHOSE TURN NOW: " + gameStatus.getTurn());
-                
-                // lock board
-                //lockBoard();
-
-            } else {
-                System.out.println("GUIController - Wrong move");
-                
-                // print error message
-
-                // start the whole move process again
-            }
-
-            // clear
-            fromTo.clear();
-            firstClick = false;
-
-            //player.getGameStatus();
-            //System.out.println("Player " + player.getPlayerId() + " received gameStatus!");
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Not your turn!");
+            return;
         }
 
-       
+        Pane actual = (Pane) event.getSource();
+        String errorMessage;
+        Position pos = new Position();
+
+        int row, col;
+        // handling when rowIndex / colIndex = 0
+        if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
+            row = 1;
+        } else {
+            row = GridPane.getRowIndex(actual) + 1;
+        }
+
+        if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
+            col = 1;
+        } else {
+            col = GridPane.getColumnIndex(actual) + 1;
+        }
+
+        
+        if(event.getButton() == MouseButton.PRIMARY) {
+            if(!this.firstClick) {
+                System.out.println("FIRST CLICK");
+                
+                pos.setX(row);
+                pos.setY(col);
+                this.positions.add(pos);
+
+                this.fromTo.add(actual);
+
+                // TO DO: mark clicked field on board!
+
+                this.firstClick = true;
+            } else {
+                System.out.println("LAST CLICK");
+
+                pos.setX(row);
+                pos.setY(col);
+                this.positions.add(pos);
+
+                this.fromTo.add(actual);
+
+                GameStatus gameStatus = player.getGameStatus();
+                String[][] gameBoard = gameStatus.getBoard();
+                Position from = this.positions.get(0);
+                int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
+
+                //if(figureIdx == 0) {}
+
+                // send move info to server
+                System.out.println("POSITIONS: " + this.positions);
+                gameStatus = player.sendMoveCommand(this.positions);
+                errorMessage = gameStatus.getError();
+
+                System.out.println("Error Message: " + errorMessage);
+
+                if(errorMessage.equals("")) {
+                    System.out.println("GUIController - Correct move");
+                    GUIbehaviour bevhaviour = new GUIbehaviour();
+                    bevhaviour.swapList(this.fromTo);                 
+                    bevhaviour.react(figureIdx);
+                    
+                    // lock board
+                    //lockBoard();
+
+                } else {
+                    System.out.println("GUIController - Wrong move");
+                    
+                    // print error message
+
+                    // start the whole move process again
+                }
+
+                // clear
+                this.fromTo.clear();
+                this.positions.clear();
+
+                this.firstClick = false;
+            }
+        } else if(event.getButton() == MouseButton.SECONDARY) {
+            if(this.firstClick) {
+                System.out.println("MIDDLE CLICK");
+                pos.setX(row);
+                pos.setY(col);
+                this.positions.add(pos);
+
+                this.fromTo.add(actual);
+            }
+        }
     }
 
     public void lockBoard() {

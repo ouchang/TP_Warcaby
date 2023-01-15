@@ -1,19 +1,15 @@
 package tp.frontend.gui.start;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-
-import tp.backend.Position;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class GUIbehaviour {
     //ArrayList<Pane> fromTo = new ArrayList<> (2);
@@ -39,7 +35,6 @@ public class GUIbehaviour {
         for(Pane p : list) {
             addElement(p);
         }
-        System.out.println("End of List copy process");
     }
 
     public String getImageName(String url) {
@@ -52,61 +47,13 @@ public class GUIbehaviour {
     }
 
     public void deletePiece(Pane position){
-        System.out.println ("deleting piece");
+        System.out.println ("Deleting piece");
         final ObservableList<Node> children = position.getChildren();
         position.getChildren ().removeAll (children );
     }
 
-    public void addPiece(Pane position) throws FileNotFoundException, MalformedURLException {
-        System.out.println ("adding image");
-        //final ObservableList<Node> children = fromTo.get ( 0 ).getChildren();
-        ObservableList<Node> children = fromTo.get ( 0 ).getChildren();
-
-        //URL abc = new URL ( "file:/C:/Users/hnatiuk/Desktop/pwr/TP/WarcabyGit/warcaby/src/main/java/tp/simpleWhitePiece.png" );
-        URL abc = this.getClass().getClassLoader().getResource("simpleWhitePiece.png");
-
-        if (children.size () != 0){
-
-            System.out.println ("OBJECT: " + ((ImageView) children.get(0)).getImage().getUrl());
-            System.out.println ("WHITE URL2: " + abc.getPath()); 
-
-            //String childName = getImageName(((ImageView) children.get(0)).getImage().getUrl());
-            //String whiteName = getImageName(abc.getPath());
-            
-            //boolean b = Objects.equals ( ((ImageView) children.get(0)).getImage().getUrl(), abc.toString()); //todo po drugim poruszeniu nie umie znalezc url i wurzuca null: ustawiac url po dodaniu obrazka?
-            //boolean b = childName.equals(whiteName);
-            boolean b = true;
-            if (b == true){
-                System.out.println ("same white");
-	        // Maria 
-                //Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
-                //FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleWhitePiece.png");
-                //FileInputStream inputstream = new FileInputStream();
-                //Image image = new Image (inputstream);
-                Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleWhitePiece.png"));
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight ( 40 );
-                imageView.setFitWidth ( 50 );
-                position.getChildren ().add ( imageView );
-            } else {
-                System.out.println ("different colors");
-                
-                //FileInputStream inputstream = new FileInputStream("C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\WarcabyGit\\warcaby\\src\\main\\java\\tp\\simpleBlackPiece.png");
-                //Image image = new Image (inputstream);
-                Image image = new Image(getClass().getClassLoader().getResourceAsStream("simpleBlackPiece.png"));
-                ImageView imageView = new ImageView(image);
-                imageView.setFitHeight ( 40 );
-                imageView.setFitWidth ( 50 );
-                position.getChildren ().add ( imageView );
-            }
-        } else {
-            System.out.println ("num of children = 0");
-        }
-
-    }
-
     public void add(Pane position, String fileName) throws FileNotFoundException, MalformedURLException {
-        System.out.println ("Add figure's image");
+        //System.out.println ("Add figure's image");
 
         if(fileName != "") {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
@@ -119,13 +66,86 @@ public class GUIbehaviour {
         }
     }
 
+    public void updateBoard(String[][] boardString, GUIController controller){
+        int row, col;
+        String fileName = "";
+        Image image = null;
+        boolean emptyField = false;
+        for (Node node : controller.board8x8.getChildren()) {
+
+            if (node instanceof Pane) {
+                if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
+                    row = 1;
+                } else {
+                    row = GridPane.getRowIndex(node) + 1;
+                }
+        
+                if(GridPane.getColumnIndex(node) == null) { // colIndex = 0
+                    col = 1;
+                } else {
+                    col = GridPane.getColumnIndex(node) + 1;
+                }
+
+
+                switch (boardString[row][col]) {
+                    case "0":{
+                        emptyField = true;
+                        break;
+                    }
+                    case "1":{
+                        fileName = "simpleWhitePiece.png";
+                        emptyField = false;
+                        break;
+                    }
+                    case "2":{
+                        fileName = "kingWhitePiece.png";
+                        emptyField = false;
+                        break;
+                    }
+                    case "3":{
+                        fileName = "simpleBlackPiece.png";
+                        emptyField = false;
+                        break;
+                    }
+                    case "4":{
+                        fileName = "kingBlackPiece.png";
+                        emptyField = false;
+                        break;
+                    }
+                }
+
+                Pane pane = (Pane) node;
+                ObservableList<Node> children = pane.getChildren();
+                pane.getChildren().removeAll(children);                
+
+                if(!emptyField) {
+                    image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
+                    ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight( 40 );
+                    imageView.setFitWidth( 50 );
+
+                    try {
+                        add(pane, fileName);
+                    } catch(FileNotFoundException e) {
+                        System.out.println(e.getMessage());
+                        System.exit(1);
+                    } catch(MalformedURLException e) {
+                        System.out.println(e.getMessage());
+                        System.exit(1);
+                    }
+                }
+            }
+        }
+    }
+
     public void react(int figureIdx) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
         String fileName = imageType[figureIdx];
         System.out.println("FileName: " + fileName);
+
         System.out.println("START ADD_PIECE FUNC");
-        //addPiece ( fromTo.get ( 1 ) );
         add(fromTo.get(1), fileName);
+        
         System.out.println("START DELETE_PIECE FUNC");
         deletePiece ( fromTo.get ( 0 ) );
     }

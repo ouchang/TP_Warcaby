@@ -12,10 +12,15 @@ public class ClientNew {
   private String color;
   private boolean firstPlayer;
   private String gameKind;
+  public PollingAgent pollingAgent;
 
   public ClientNew() {
     this.CD = new CoderDecoder();
     this.gameKind = "czech";
+  }
+
+  public String getPlayerId() {
+    return this.playerId;
   }
 
   public boolean getFirstPlayer() {
@@ -24,6 +29,10 @@ public class ClientNew {
 
   public void setGameKind(String gameKind) {
     this.gameKind = gameKind;
+  }
+
+  public PollingAgent getPollingAgent() {
+    return this.pollingAgent;
   }
 
   public void clientCallAsync(ICommand object) {
@@ -119,6 +128,10 @@ public class ClientNew {
     } else {
       System.out.println("[" + this.playerId + "] Second client");
     }
+
+    // start PollingAgent
+    pollingAgent = new PollingAgent(this);
+    new Thread(pollingAgent).start();
   }
 
   public void sendGameKind() {
@@ -140,7 +153,51 @@ public class ClientNew {
     MoveCommand moveCommand = (MoveCommand) commandFactory.getCommand("MoveCommand");
     moveCommand.setPlayerId(this.playerId);
     moveCommand.setPositions(positions);
+
+    System.out.println("Client [" + this.playerId + "] sends move with positions: ");
+    for(Position p : positions) {
+      System.out.println("  X: " + p.getX() + " Y: " + p.getY());
+    }
+
     GameStatus gameStatus = (GameStatus) clientCallSync(moveCommand);
     return gameStatus;
+  }
+
+
+
+  public class PollingAgent implements Runnable {
+    GameStatus gameStatus;
+    ClientNew client;
+    boolean stop;
+
+    PollingAgent(ClientNew client) {
+      this.client = client;
+      this.stop = false;
+    }
+
+    public synchronized GameStatus getGameStatus() {
+      return this.gameStatus;
+    }
+
+    public void run() {
+      try {
+        while(!stop) {
+          System.out.println("PollingAgents asks for status");
+          synchronized(this) {
+            this.gameStatus = client.getGameStatus();
+          }
+          Thread.sleep(5000);
+        }
+
+      } catch(InterruptedException e) {
+        System.out.println(e.getMessage());
+        System.exit(1);
+      }
+    }
+
+    public void stop() {
+      this.stop = true;
+    }
+
   }
 }
