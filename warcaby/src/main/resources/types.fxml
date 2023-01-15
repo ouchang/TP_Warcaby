@@ -28,7 +28,7 @@
          <children>
             <ImageView disable="true" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" smooth="false">
                <image>
-                  <Image url="@BoardWallpaper.png" />
+                  <Image url="@../../../../../resources/BoardWallpaper.png" />
                </image>
             </ImageView>
          </children>

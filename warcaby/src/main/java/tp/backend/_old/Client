@@ -1,19 +1,26 @@
 package tp.backend;
 
-import javafx.application.Application;
-import tp.frontend.gui.start.GUIStart;
-
 import java.io.*;
 import java.net.Socket;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class Client  {
   //TO DO: Add instance of GUI class
-  public static volatile int gametype = 0;
+  //public static volatile int gametype = 0;
   private static final int WHITE=1;
   private static final int BLACK=2;
 
   private static final int PIECE=0;
   private static final int KING=1;
+
+  // Figure's ID
+  private static final String EMPTY="0";
+  private static final String WH_PIECE="1";
+  private static final String WH_KING="2";
+  private static final String BL_PIECE="3";
+  private static final String BL_KING="4";
 
   private static final int ACTIVE=0;
   private static final int NONACTIVE=1;
@@ -26,14 +33,28 @@ public class Client  {
   private static CoderDecoder CD;
   private static GameStatusClass gameStatus;
 
-  //TO DO: Move this to GUI Class
   private static PrintWriter out = null;
   private static BufferedReader in = null;
 
-  Client() {
+  public Client() { //
     CD = new CoderDecoder();
+
+    listenSocket();
+    // consider to re-try for initial info
+    receiveInitInfo();
+
+    System.out.println("PlayerId: " + playerId + " CurrPlayer: " + currPlayer);
   }
 
+  public int getPlayerId() {
+    return this.playerId;
+  }
+
+  public int getCurrPlayer() {
+    return this.currPlayer;
+  }
+
+  // TO DO: Delete this part | only used for quick tests
   public void boardInitFill() {
     for(int i=1; i<=8; i++) {
       for(int j=1; j<=8; j++) {
@@ -42,7 +63,7 @@ public class Client  {
     }
   }
 
-  public void listenSocket() {
+  private static void listenSocket() {
     try {
       Socket socket = new Socket("localhost", 4444);
 
@@ -56,7 +77,7 @@ public class Client  {
     }
   }
 
-  private void receiveInitInfo() {
+  private static void receiveInitInfo() {
     try {
       //Receive from Server player's index
       playerId = Integer.parseInt(in.readLine());
@@ -67,6 +88,9 @@ public class Client  {
       else
         oponnentId = WHITE;
 
+      // receive initial gameStatus
+      receive();
+
       //TO DO: Change Label in GUI to show whose turn is now
     } catch(IOException e) {
       System.out.println(e.getMessage());
@@ -75,12 +99,13 @@ public class Client  {
   }
 
   private static void send(ICommand command) { // PREV: nonstatic
+    System.out.println("Client sends move info to Server");
+
     // code command using CoderDecoder
     String commandString = CD.codeCommand(command);
     //Send string to Server
     out.println(commandString);
 
-    showing = ACTIVE;
     currPlayer = oponnentId; // PREV: oponnentId
   }
 
@@ -88,7 +113,8 @@ public class Client  {
     try {
       String commandString = in.readLine();
       System.out.println("CommandString: "+commandString);
-      ICommand command =  CD.decodeCommand(commandString, "gameStatus");
+      //ICommand command =  CD.decodeCommand(commandString, "gameStatus");
+      ICommand command =  CD.decodeCommand(commandString);
       gameStatus = (GameStatusClass) command;
       System.out.println("GameStatus View:" + gameStatus.showView());
 
@@ -97,25 +123,49 @@ public class Client  {
     }
   }
 
+  public boolean move(Position from, Position to) {
+    System.out.println("FROM X:" + from.getX() + " FROM Y: " + from.getY() + " TO X: " + to.getX() + " TO Y: " + to.getY());
 
-  public static void main(String[] main) throws FileNotFoundException {
+    GameCommandClass moveCommand = new GameCommandClass();
 
-    Client player = new Client();
+    moveCommand.setActorId(playerId);
 
-    player.listenSocket();
-    player.receiveInitInfo();
-//    if (gametype == 0){
-//      Application.launch(tp.frontend.gui.gametype.ChooseGameType.class);
-//    }
-    System.out.println("PlayerId: " + playerId + " CurrPlayer: " + currPlayer);
+    // read figure's type from gameStatus's boar based on FROM position
+    moveCommand.setPieceId(PIECE);
+    /*
+    if(gameStatus.board[from.getX()][from.getY()] == WH_PIECE || gameStatus.board[from.getX()][from.getY()] == BL_PIECE) {
+      System.out.println("Client move() - FIGURE KIND: PIECE");
+      moveCommand.setPieceId(PIECE);
+    } else if(gameStatus.board[from.getX()][from.getY()] == WH_KING || gameStatus.board[from.getX()][from.getY()] == BL_KING) {
+      System.out.println("Client move() - FIGURE KIND: KING");
+      moveCommand.setPieceId(KING);
+    }
+    */
+    List<Position> positions = new ArrayList<Position>();
+    positions.add(from);
+    positions.add(to);
+    moveCommand.setPositions(positions);
 
+    // send move info to Server
+    send(moveCommand);
+
+    // receive move output info from Server
     receive();
 
-    GameCommandClass moveCommand = new GameCommandClass ();
-    moveCommand.setActorId(playerId);
-    moveCommand.setPieceId(PIECE);
+    if(gameStatus.getError() == "") {
+      return true; // correct move
+    } else {
+      return false; // incorrect move
+    }
+  }
 
-    Application.launch ( tp.frontend.gui.start.GUIStart.class);
+  public GameStatusClass getGameStatus() {
+    receive();
+    return this.gameStatus;
+  }
+
+  public GameStatusClass getGameStatusClass() {
+    return this.gameStatus;
   }
 }
 

@@ -2,9 +2,21 @@ package tp.backend;
 
 class GetCurrentGameStateClass implements ICommand {
   String id;
-  String actor;
+  String playerId;
 
-  public String showView() {
-    return "TEMPORARY STRING";
+  public String getId() {
+    return this.id;
+  }
+
+  public void setId(String id) {
+    this.id = id;
+  }
+
+  public String getPlayerId() {
+    return this.playerId;
+  }
+
+  public void setPlayerId(String playerId) {
+    this.playerId = playerId;
   }
 }

@@ -39,8 +39,9 @@ public class TypesController {
         Stage stage = (Stage) czech.getScene().getWindow();
         System.out.println("chose type");
         System.out.println(event.getSource());
+
         if (czech.equals(event.getSource())) {
-            Client.gametype = 1;
+            Client.gametype = 1; //player.setGameKind("czech");
         } else if (swedish.equals(event.getSource())){
             Client.gametype = 2;
         } else if (german.equals(event.getSource())) {
@@ -48,6 +49,7 @@ public class TypesController {
         } else {
             Client.gametype = 4;
         }
+        
         System.out.println(Client.gametype);
         FXMLLoader board = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
         Scene secondScene = new Scene( board.load(), 800, 600);

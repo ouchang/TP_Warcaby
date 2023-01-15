@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.util.List;
 
 public interface IGameKind {
@@ -12,6 +10,7 @@ public interface IGameKind {
   Movement checkMultiCapturePiece(int currPlayer, List<Position> positions, String[][] board);
   Movement checkMultiCaptureKing(int currPlayer, List<Position> positions, String[][] board);
   boolean isCapturePossible(int currPlayer, String[][] board);
+  boolean hasPieceUpgrade(int currPlayer, Position to);
   int whoStarts();
   String getName();
 }

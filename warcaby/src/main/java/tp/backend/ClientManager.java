@@ -1,7 +1,5 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -11,20 +9,20 @@ import java.util.List;
 public class ClientManager {
   private InputStreamReader inRead;
   private BufferedReader reader;
-  private int playerId;
+  private String playerId;
   private CoderDecoder CD;
 
-  ClientManager(int playerId) {
+  ClientManager(String playerId) {
     this.inRead = new InputStreamReader(System.in);
     this.reader = new BufferedReader(inRead);
     this.playerId = playerId;
     this.CD = new CoderDecoder();
   }
 
-  public GameCommandClass makeMove(int pieceId, List<Position> positions) {
-      GameCommandClass command = new GameCommandClass ();
-      command.setActorId(playerId);
-      command.setPieceId(pieceId);
+  public MoveCommand makeMove(int pieceId, List<Position> positions) {
+      MoveCommand command = new MoveCommand ();
+      command.setPlayerId(playerId);
+      //command.setPieceId(pieceId);
       command.setPositions(positions);
       return command;
   }

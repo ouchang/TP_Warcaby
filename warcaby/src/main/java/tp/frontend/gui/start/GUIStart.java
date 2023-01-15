@@ -1,98 +1,73 @@
 package tp.frontend.gui.start;
 
 import javafx.application.Application;
-import javafx.collections.ObservableList;
-import javafx.fxml.*;
-import javafx.scene.Node;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.effect.Reflection;
-import javafx.scene.transform.Rotate;
 import javafx.stage.Stage;
-import tp.backend.Client;
-import tp.frontend.gui.gametype.TypesController;
+import javafx.scene.Node;
+import javafx.collections.ObservableList;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.file.Paths;
+import java.lang.Thread;
 
-import static tp.backend.Client.gametype;
+import tp.backend.ClientNew;
+import tp.backend.GameStatus;
 
-public class GUIStart extends Application implements Runnable {
+public class GUIStart extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//     Maria
-        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
-        FXMLLoader wait = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\wait.fxml" ).toUri().toURL () );
-        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
+//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
+//      Maria
+//        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
+//        Test tees1 = new Test ();
+//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
 //      Ola
-//        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("file:/guixml.fxml"));
 
-        if (Client.playerId == 1){
-            Scene scene = new Scene ( types.load (), 800, 600 );
-            TypesController controller = types.getController ();
-            if (controller == null){
-                System.out.println ("controller is null");
-            } else {
-                System.out.println("pomiedzy");
-                stage.setTitle("Welcome to checkers!");
-                stage.setScene(scene);
-                stage.setResizable(false);
-                stage.show();
-            }
+        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
+        FXMLLoader wait = new FXMLLoader ( getClass().getResource("wait.fxml"));
+        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+
+        ClientNew player = new ClientNew();
+        player.clientInit(); // pierwsze polaczenie z serwerem
+
+        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
+
+        GameStatus gameStatus = new GameStatus();
+
+        if (player.getFirstPlayer() == true) {
+            System.out.println("GUI sends gameKind");
+
+            Scene scene = new Scene ( types.load(), 800, 600 );
+            TypesController typesController = types.getController();
+            typesController.setPlayer(player);
+
+            stage.setTitle("Welcome to checkers!");
+            stage.setScene(scene);
+            stage.setResizable(false);
+            stage.show();
+
         } else {
+            String tmp = player.getPollingAgent().getGameStatus().getGameKind();
+            while(tmp.equals("")) {
+                gameStatus = player.getPollingAgent().getGameStatus();
+                tmp = gameStatus.getGameKind();
+                Thread.sleep(500);
+            }
 
-            System.out.println("before while");
-//            Scene scene = new Scene(wait.load(), 800, 600);
-            System.out.println("before while");
-            Scene scene = new Scene(board.load(), 800, 600);
-            stage.setTitle("WAIT");
+            // todo: rozważyć opcje dolączenia więcej jak dwóch graczy
+            Scene scene = new Scene(board.load(), 800, 600 );
+            stage.setTitle("BLACK");
             GUIController controller = board.getController();
+            controller.setPlayer(player); //NEW
+            // kolejne 6 linijek to obracanie planszy, zauważ że one nie zmieniają logiki gry (zachowują indeksy pól)
             controller.board8x8.setRotate(180);
             ObservableList<Node> childrenPane = controller.board8x8.getChildren();
             for (Node node : childrenPane){
-                System.out.println(node.getId());
                 node.setRotate(180);
             }
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
-            stage.setScene(scene);
-            stage.setResizable(false);
-            stage.show();
-//            GUIStart ex = new GUIStart();
-//            Thread a = new Thread(ex);
-//            a.start();
-
-
         }
-    }
-
-    @Override
-    public void run() {
-        FXMLLoader board = null;
-        try {
-            board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("run");
-        while (gametype == 0) {
-            Thread.onSpinWait();
-        }
-        System.out.println("out while");
-        Scene scene2 = null;
-        try {
-            scene2 = new Scene(board.load(), 800, 600);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        Stage stage = new Stage();
-        stage.setTitle("BLACK");
-        stage.setScene(scene2);
-        stage.setResizable(false);
-        System.out.println("before show");
-        stage.show();
     }
 }

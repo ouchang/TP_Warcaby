@@ -1,11 +1,12 @@
 package tp.backend;
 
-import tp.backend.position.Position;
-
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
+/**
+ * Class responsible for game process
+ */
 public class Game implements Runnable {
   private Socket firstPlayer;
   private Socket secondPlayer;
@@ -15,35 +16,53 @@ public class Game implements Runnable {
   private String[][] board;
   private int boardSize;
 
+  // Player's ID
   private final static int WHITE=1;
   private final static int BLACK=2;
 
+  // Figure's type
   private static final int PIECE=0;
   private static final int KING=1;
 
+  // Figure's ID
   private static final String EMPTY="0";
   private static final String WH_PIECE="1";
   private static final String WH_KING="2";
   private static final String BL_PIECE="3";
   private static final String BL_KING="4";
 
+  // Move's type
   private static final String REGULAR = "REGULAR";
   private static final String CAPTURE = "CAPTURE";
 
-  private int currPlayer;
-  private GameCommandClass moveCommand;
-  private GameStatusClass statusCommand;
+  private int currPlayer; // whose turn is now? 
+  private GameCommandClass moveCommand; // template used to inform about the move
+  private GameStatusClass statusCommand; // template used to inform about the game's status
 
-  private Movement movement;
-  private int whitePrevFromX, whitePrevFromY;
-  private int blackPrevFromX, blackPrevFromY;
+  private Movement movement; // output info received after making a move
+  private int whitePrevFromX, whitePrevFromY; // last analyzed field (for player WHITE)
+  private int blackPrevFromX, blackPrevFromY; // last analyzed field (for player BLACK)
 
-  public Game(Socket firstPlayer, Socket secondPlayer, IGameKind gameKind) {
+  /**
+   * Sets game's kind
+   * @param gameKind
+   */
+  public void setGameKind(IGameKind gameKind) {
+    this.gameKind = gameKind;
+  }
+
+  /**
+   * Constructor
+   * @param firstPlayer player1's socket
+   * @param secondPlayer player2's socket
+   * @param gameKind type of game
+   */
+  public Game(Socket firstPlayer, Socket secondPlayer, IGameKind gameKind) { //TO DO: Make factory for IGameKind
     this.CD = new CoderDecoder();
-
+    //setGameKind(gameKind); //
+    this.gameKind = gameKind;
     this.firstPlayer = firstPlayer;
     this.secondPlayer = secondPlayer;
-    this.gameKind = gameKind;
 
     this.boardSize = gameKind.getBoardSize();
     this.board = gameKind.getGameBoard();
@@ -72,37 +91,62 @@ public class Game implements Runnable {
     statusCommand.setBoard(this.board);
   }
 
+  /**
+   * Method responsible for initialize the process of checking the correctness of occured move
+   * @param positions fields specialized in a given move (for example: jump from where? jump to where?)
+   * @param symbol ID of piece used in a given move
+   * @param currPlayer who made the move?
+   * @param nextTurn whose turn is next?
+   * @return
+   */
   public synchronized boolean move(List<Position> positions, String symbol, int currPlayer, int nextTurn) {
-
     Position from = new Position();
     Position to = new Position();
 
-    if(positions.size() > 2) { // multi-capture move
+    if(positions.size() > 2) { // Multi-Capture move
+      // Read starting and ending position
       from = positions.get(0);
       to = positions.get(positions.size()-1);
 
-      movement = gameKind.checkMultiCapturePiece(currPlayer, positions, board);
-
+      
       if(symbol == WH_PIECE || symbol == BL_PIECE) {
+        // Start method responsible for checking piece's multi-capture move
         movement = gameKind.checkMultiCapturePiece(currPlayer, positions, board);
       } else if(symbol == WH_KING || symbol == BL_KING) {
+        // Start method responsible for checking king's multi-capture move
         movement = gameKind.checkMultiCaptureKing(currPlayer, positions, board);
       }
 
+      // Update board if the move was correct
       if(movement.getCorrectMove()) {
+        // delete figure at starting position in board
         board[from.getX()][from.getY()] = EMPTY;
+
+        // delete captured figures in board
         for(Position cf : movement.getCapturedFigures()) {
-          System.out.println("MULTI CAPTURE UPDATE BOARD["+cf.getX()+"]["+cf.getY()+"]: "+board[to.getX()][to.getY()] + " GO EMPTY");
+          //System.out.println("MULTI CAPTURE UPDATE BOARD["+cf.getX()+"]["+cf.getY()+"]: "+board[to.getX()][to.getY()] + " GO EMPTY");
           board[cf.getX()][cf.getY()] = EMPTY;
         }
-        board[to.getX()][to.getY()] = symbol;
-        System.out.println("MULTI CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
 
+        // put figure at ending position in board + check if piece becomes king
+        if(gameKind.hasPieceUpgrade(currPlayer, to)) {
+          System.out.println("UPGRADE TO KING!");
+          if(symbol == WH_PIECE) {
+            board[to.getX()][to.getY()] = WH_KING;
+          } else if(symbol == BL_PIECE) {
+            board[to.getX()][to.getY()] = BL_KING;
+          }
+        } else {
+          System.out.println("MOVE WITHOUT UPGRADE");
+          board[to.getX()][to.getY()] = symbol;
+        }
+
+        //System.out.println("MULTI CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
+
+        // change turn
         statusCommand.turn = String.valueOf(nextTurn);
-        return true;
-      } else {
-        statusCommand.setError(movement.getErrorMessage());
 
+        // save last analyzed position
         if(currPlayer == WHITE) { 
           whitePrevFromX = from.getX();
           whitePrevFromY = from.getY();
@@ -111,33 +155,66 @@ public class Game implements Runnable {
           blackPrevFromY = from.getY();
         }
 
+        return true;
+      } else {
+        // update error info
+        statusCommand.setError(movement.getErrorMessage());
         return false;
       }
-    } else if(positions.size() == 2) { // single move
+    } else if(positions.size() == 2) { // Regular/Single capture move
+      // Read starting and ending position
       from = positions.get(0);
       to = positions.get(positions.size()-1);
 
       if(symbol == WH_PIECE || symbol == BL_PIECE) {
+        // Start method responsible for checking piece's move
         movement = gameKind.checkMovePiece(currPlayer, positions, board);
       } else if(symbol == WH_KING || symbol == BL_KING) {
+        // Start method responsible for checking king's move
         movement = gameKind.checkMoveKing(currPlayer, positions, board);
       }
 
+      // Update board if the move was correct
       if(movement.getCorrectMove()) {
         if(movement.getKind() == CAPTURE) {
+          // get info about captured figure
           Position cf = movement.getCapturedFigures().get(0);
+          
+          // delete figure at starting position in board
           board[from.getX()][from.getY()] = EMPTY;
-          board[cf.getX()][cf.getY()] = EMPTY;
-          board[to.getX()][to.getY()] = symbol;
-          System.out.println("CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
-        } else if(movement.getKind() == REGULAR) {
-          board[from.getX()][from.getY()] = EMPTY;
-          board[to.getX()][to.getY()] = symbol;
-          System.out.println("REGULAR UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
-        }
 
+          // delete captured figures in board
+          board[cf.getX()][cf.getY()] = EMPTY;
+
+          
+          // put figure at ending position in board + check if piece becomes king
+          if(gameKind.hasPieceUpgrade(currPlayer, to)) {
+            System.out.println("UPGRADE TO KING!");
+            if(symbol == WH_PIECE) {
+              board[to.getX()][to.getY()] = WH_KING;
+            } else if(symbol == BL_PIECE) {
+              board[to.getX()][to.getY()] = BL_KING;
+            }
+          } else {
+            System.out.println("MOVE WITHOUT UPGRADE");
+            board[to.getX()][to.getY()] = symbol;
+          }
+
+          //System.out.println("CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
+        } else if(movement.getKind() == REGULAR) {
+          // delete figure at starting position in board
+          board[from.getX()][from.getY()] = EMPTY;
+          
+          // put figure at ending position in board
+          board[to.getX()][to.getY()] = symbol;
+
+          //System.out.println("REGULAR UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
+        }
+        
+        // change turn
         statusCommand.turn = String.valueOf(nextTurn);
-  
+        
+        // save last analyzed position
         if(currPlayer == WHITE) {
           whitePrevFromX = from.getX();
           whitePrevFromY = from.getY();
@@ -182,6 +259,9 @@ public class Game implements Runnable {
       OutputStream outputSecond = secondPlayer.getOutputStream();
       PrintWriter outB = new PrintWriter(outputSecond, true);
 
+      //TO DO: Receive info about gameKind from player1 (WHITE) -> first connected Client plays WHITE by default
+      
+
       // Tell clients their assigned indexes
       outW.println("1"); //TO DO: Change to json (?)
       outB.println("2");
@@ -212,7 +292,9 @@ public class Game implements Runnable {
           }
 
           System.out.println("MOVE LINE: " + line);
-          moveCommand = (GameCommandClass)CD.decodeCommand(line, "gameCommand");
+          //moveCommand = (GameCommandClass)CD.decodeCommand(line, "gameCommand");
+          GameCommandClass moveCommand = (GameCommandClass) CD.decodeCommand(line);
+
           Position from = new Position();
 
           if(moveCommand.getPositions().size() != 0) {
@@ -254,7 +336,7 @@ public class Game implements Runnable {
           }
 
           System.out.println("MOVE LINE: " + line);
-          moveCommand = (GameCommandClass)CD.decodeCommand(line, "gameCommand");
+          moveCommand = (GameCommandClass)CD.decodeCommand(line);
           Position from = new Position();
 
           if(moveCommand.getPositions().size() != 0) {

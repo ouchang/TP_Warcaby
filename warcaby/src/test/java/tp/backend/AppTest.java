@@ -1,7 +1,6 @@
 package tp.backend;
 
 import org.junit.Test;
-import tp.backend.position.Position;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +31,47 @@ public class AppTest
         }
 
         return board;
+    }
+
+    @Test
+    public void checkCoderDecoder() {
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        GameStatus gameStatus = new GameStatus();
+        CzechKind CK = new CzechKind();
+
+        CoderDecoder CD = new CoderDecoder();
+        
+        //Temporary inicializing statusCommand
+        gameStatus.setId("12");
+        gameStatus.setFriendly_name("testGame1");
+        gameStatus.setGameKind(CK.getName());
+        gameStatus.setPlayer1("Ola");
+        gameStatus.setPlayer2("Aga");
+        gameStatus.setActivePlayerID(String.valueOf(CK.whoStarts()));
+        gameStatus.setStatus("ongoing");
+        gameStatus.setError("");
+        gameStatus.setBoard(board);
+
+        String json = CD.codeCommand(gameStatus);
+        GameStatus outputStatus = (GameStatus) CD.decodeCommand(json);
+
+        assertEquals(gameStatus.getId(), outputStatus.getId());
+        assertEquals(gameStatus.getFriendly_name(), outputStatus.getFriendly_name());
+        assertEquals(gameStatus.getGameKind(), outputStatus.getGameKind());
+        assertEquals(gameStatus.getPlayer1(), outputStatus.getPlayer1());
+        assertEquals(gameStatus.getPlayer2(), outputStatus.getPlayer2());
+        assertEquals(gameStatus.getActivePlayerID(), outputStatus.getActivePlayerID());
+        assertEquals(gameStatus.getStatus(), outputStatus.getStatus());
+        assertEquals(gameStatus.getError(), outputStatus.getError());
+
+        String gameStatusBoard[][] = gameStatus.getBoard();
+        String outputStatusBoard[][] = outputStatus.getBoard();
+        for(int i=0; i<=boardSize; i++) {
+            for(int j=0; j<=boardSize; j++) {
+                assertEquals(gameStatusBoard[i][j], outputStatusBoard[i][j]);
+            }
+        }
     }
 
     @Test
@@ -358,4 +398,147 @@ public class AppTest
     }
 
     //TO DO: Preapare tests for GermanKind
+    @Test
+    public void checkGermanCaptureTest1() { // white piece reversed right capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[4][3] = WH_PIECE;
+        board[5][4] = BL_PIECE;
+
+        tmp.setX(4);
+        tmp.setY(3);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(6);
+        tmp.setY(5);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(WHITE, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(4);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest2() { // white piece reversed left capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[3][6] = WH_PIECE;
+        board[4][5] = BL_PIECE;
+
+        tmp.setX(3);
+        tmp.setY(6);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(4);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(WHITE, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(5);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest3() { // black piece reversed left capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[6][7] = BL_PIECE;
+        board[5][6] = WH_PIECE;
+
+        tmp.setX(6);
+        tmp.setY(7);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(5);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(BLACK, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(5);
+        tmp.setY(6);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
+
+    @Test
+    public void checkGermanCaptureTest4() { // black piece reversed right capture
+        int boardSize = 8;
+        String[][] board = makeBoard(boardSize);
+        Position tmp = new Position();
+        List<Position> positions = new ArrayList<Position>();
+
+        // preparing arguments
+        GermanKind GK = new GermanKind();
+
+        board[5][2] = BL_PIECE;
+        board[4][3] = WH_PIECE;
+
+        tmp.setX(5);
+        tmp.setY(2);
+        positions.add(tmp);
+
+        tmp = new Position();
+        tmp.setX(3);
+        tmp.setY(4);
+        positions.add(tmp);
+
+        Movement output = GK.checkMovePiece(BLACK, positions, board);
+
+        // preparing expected output
+        List<Position> capturedFigures = new ArrayList<Position>();
+
+        tmp = new Position();
+        tmp.setX(4);
+        tmp.setY(3);
+        capturedFigures.add(tmp);
+
+        // Test
+        assertEquals(true, output.isEqual("CAPTURE", true, capturedFigures , ""));
+    }
 }
