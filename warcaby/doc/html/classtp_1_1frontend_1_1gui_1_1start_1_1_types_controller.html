@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>frontend</b></li><li class="navelem"><b>gui</b></li><li class="navelem"><b>start</b></li><li class="navelem"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html">TypesController</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -73,31 +89,123 @@ $(function() {
   <div class="headertitle"><div class="title">tp.frontend.gui.start.TypesController Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Collaboration diagram for tp.frontend.gui.start.TypesController:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller__coll__graph.png" border="0" usemap="#atp_8frontend_8gui_8start_8_types_controller_coll__map" alt="Collaboration graph"/></div>
+<map name="atp_8frontend_8gui_8start_8_types_controller_coll__map" id="atp_8frontend_8gui_8start_8_types_controller_coll__map">
+<area shape="rect" title=" " alt="" coords="11,184,185,225"/>
+<area shape="rect" title=" " alt="" coords="5,95,81,121"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html" title=" " alt="" coords="136,95,284,121"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html" title=" " alt="" coords="223,184,413,225"/>
+<area shape="rect" title=" " alt="" coords="335,95,411,121"/>
+<area shape="rect" href="classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="435,95,598,121"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="345,5,497,32"/>
+<area shape="rect" title=" " alt="" coords="521,5,704,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aaf1ca8444aed162f67bf6370000b80bc"><td class="memItemLeft" align="right" valign="top"><a id="aaf1ca8444aed162f67bf6370000b80bc" name="aaf1ca8444aed162f67bf6370000b80bc"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayer</b> (<a class="el" href="classtp_1_1backend_1_1_client_new.html">ClientNew</a> player)</td></tr>
+<tr class="memitem:aaf1ca8444aed162f67bf6370000b80bc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html#aaf1ca8444aed162f67bf6370000b80bc">setPlayer</a> (<a class="el" href="classtp_1_1backend_1_1_client_new.html">ClientNew</a> player)</td></tr>
 <tr class="separator:aaf1ca8444aed162f67bf6370000b80bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a29a898de2f004e21c8340aa5b39e6482"><td class="memItemLeft" align="right" valign="top"><a id="a29a898de2f004e21c8340aa5b39e6482" name="a29a898de2f004e21c8340aa5b39e6482"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>choseType</b> (ActionEvent event)  throws IOException </td></tr>
+<tr class="memitem:a29a898de2f004e21c8340aa5b39e6482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html#a29a898de2f004e21c8340aa5b39e6482">choseType</a> (ActionEvent event)  throws IOException </td></tr>
 <tr class="separator:a29a898de2f004e21c8340aa5b39e6482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:a51a71ca8335713e5ae33f5e9e733f81c"><td class="memItemLeft" align="right" valign="top"><a id="a51a71ca8335713e5ae33f5e9e733f81c" name="a51a71ca8335713e5ae33f5e9e733f81c"></a>
-GridPane&#160;</td><td class="memItemRight" valign="bottom"><b>wallpapper</b></td></tr>
+<tr class="memitem:a51a71ca8335713e5ae33f5e9e733f81c"><td class="memItemLeft" align="right" valign="top">GridPane&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html#a51a71ca8335713e5ae33f5e9e733f81c">wallpapper</a></td></tr>
 <tr class="separator:a51a71ca8335713e5ae33f5e9e733f81c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >MVC - Controller </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>frontend/gui/start/TypesController.java</li>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a29a898de2f004e21c8340aa5b39e6482" name="a29a898de2f004e21c8340aa5b39e6482"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a29a898de2f004e21c8340aa5b39e6482">&#9670;&nbsp;</a></span>choseType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.TypesController.choseType </td>
+          <td>(</td>
+          <td class="paramtype">ActionEvent&#160;</td>
+          <td class="paramname"><em>event</em></td><td>)</td>
+          <td> throws IOException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller_a29a898de2f004e21c8340aa5b39e6482_cgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_a29a898de2f004e21c8340aa5b39e6482_cgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_a29a898de2f004e21c8340aa5b39e6482_cgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_a29a898de2f004e21c8340aa5b39e6482_cgraph">
+<area shape="rect" title=" " alt="" coords="5,165,179,207"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a6eb1d86c6001335c74e2ec4c400af321" title=" " alt="" coords="255,100,435,141"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a13aa4cd5be045f4a6f123a105e9ee76e" title=" " alt="" coords="260,165,431,207"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a10553cc6342af45f83c81625d4d6b785" title=" " alt="" coords="227,231,464,272"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a7ef3b0a57a3637ee1c292cc5d77c80af" title=" " alt="" coords="531,5,713,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_command_factory.html#aa9f1f4f9593280bd33399a99b8045c34" title=" " alt="" coords="515,71,729,112"/>
+<area shape="rect" href="classtp_1_1backend_1_1_game_kind.html#a1231f742be4138c2e40988d3229953e9" title=" " alt="" coords="523,137,721,163"/>
+<area shape="rect" href="classtp_1_1backend_1_1_game_kind.html#a83fb74cef6d58eeb75cb3288bca86c65" title=" " alt="" coords="512,187,732,214"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aaf1ca8444aed162f67bf6370000b80bc" name="aaf1ca8444aed162f67bf6370000b80bc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf1ca8444aed162f67bf6370000b80bc">&#9670;&nbsp;</a></span>setPlayer()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.TypesController.setPlayer </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtp_1_1backend_1_1_client_new.html">ClientNew</a>&#160;</td>
+          <td class="paramname"><em>player</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller_aaf1ca8444aed162f67bf6370000b80bc_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_aaf1ca8444aed162f67bf6370000b80bc_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_aaf1ca8444aed162f67bf6370000b80bc_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_types_controller_aaf1ca8444aed162f67bf6370000b80bc_icgraph">
+<area shape="rect" title=" " alt="" coords="272,5,445,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html#ad70cc1f8c9b74b0c3a7a24e5da6bd3a3" title=" " alt="" coords="5,13,224,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="a51a71ca8335713e5ae33f5e9e733f81c" name="a51a71ca8335713e5ae33f5e9e733f81c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a51a71ca8335713e5ae33f5e9e733f81c">&#9670;&nbsp;</a></span>wallpapper</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GridPane tp.frontend.gui.start.TypesController.wallpapper</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>frontend/gui/start/<a class="el" href="_types_controller_8java.html">TypesController.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>tp</b></li><li class="navelem"><b>frontend</b></li><li class="navelem"><b>gui</b></li><li class="navelem"><a class="el" href="namespacetp_1_1frontend_1_1gui_1_1start.html">start</a></li><li class="navelem"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html">TypesController</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

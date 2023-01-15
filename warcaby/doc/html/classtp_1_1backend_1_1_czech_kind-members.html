@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1backend_1_1_czech_kind.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>backend</b></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">CzechKind</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">tp.backend.CzechKind Member List</div></div>
 </div><!--header-->
@@ -76,17 +92,20 @@ $(function() {
   <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0574a41dbc824f7f76bb158d893ede61">checkMovePiece</a>(int currPlayer, List&lt; Position &gt; positions, String[][] board)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a580b608efa980bbb860bbb346ba44b7e">checkMultiCaptureKing</a>(int currPlayer, List&lt; Position &gt; positions, String[][] board)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0f780319e34028c076b7354f82c10dfd">checkMultiCapturePiece</a>(int currPlayer, List&lt; Position &gt; positions, String[][] board)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getBoardSize</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getCapturedRequired</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getGameBoard</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getName</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#aa48c10e6976f8fc256897804ac26812c">getBoardSize</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a066537c3ca53bf3c25b720ac3ae54e10">getCapturedRequired</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#ac06ef23022ea48c7ef9337360cfa6c6e">getGameBoard</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a343433256ce6f91c00f302cf6b8c0017">getName</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#ad419add60023c86960c5ee19b7d2f55e">hasPieceUpgrade</a>(int currPlayer, Position to)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a707d3f93fee672edadd7aad935c3c208">isCapturePossible</a>(int currPlayer, String[][] board)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
   <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html#acb99605e254b754f7be71dafe3f1c4f5">whoStarts</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_czech_kind.html">tp.backend.CzechKind</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

@@ -1,0 +1,72 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class ClientNew {
+  + ClientNew(): 
+  - playerId: String
+  + pollingAgent: PollingAgent
+  - firstPlayer: boolean
+  - gameKind: String
+  + sendMoveCommand(List<Position>): GameStatus
+  + clientCallSync(ICommand): ICommand
+  + clientCallAsync(ICommand): void
+  + sendGameKind(): void
+  + clientInit(): void
+   firstPlayer: boolean
+   playerId: String
+   gameStatus: GameStatus
+   pollingAgent: PollingAgent
+   gameKind: String
+}
+class GUIController {
+  + GUIController(): 
+  ~ player: ClientNew
+  + movePiece(MouseEvent): void
+  ~ updateBoard(ActionEvent): void
+  + tedectorAction(MouseEvent): void
+  + showInstruction(ActionEvent): void
+  + unlockBoard(): void
+  + exitGame(ActionEvent): void
+  + lockBoard(): void
+   player: ClientNew
+}
+class GUIStart {
+  + GUIStart(): 
+  + start(Stage): void
+}
+class GUIbehaviour {
+  ~ GUIbehaviour(): 
+  + deletePiece(Pane): void
+  + addElement(Pane): void
+  + swapList(ArrayList<Pane>): void
+  + react(int, List<Position>, GridPane): void
+  + add(Pane, String): void
+  + updateBoard(String[][], GUIController): void
+  + getImageName(String): String
+}
+class PollingAgent {
+  ~ PollingAgent(ClientNew): 
+  ~ gameStatus: GameStatus
+  + stop(): void
+  + run(): void
+   gameStatus: GameStatus
+}
+class TypesController {
+  + TypesController(): 
+  ~ player: ClientNew
+  + choseType(ActionEvent): void
+   player: ClientNew
+}
+
+ClientNew       "1" *-[#595959,plain]-> "pollingAgent\n1" PollingAgent    
+ClientNew        -[#595959,dashed]->  PollingAgent    : "«create»"
+GUIController   "1" *-[#595959,plain]-> "player\n1" ClientNew       
+GUIController    -[#595959,dashed]->  GUIbehaviour    : "«create»"
+GUIStart         -[#595959,dashed]->  ClientNew       : "«create»"
+PollingAgent    "1" *-[#595959,plain]-> "client\n1" ClientNew       
+PollingAgent     +-[#820000,plain]-  ClientNew       
+TypesController "1" *-[#595959,plain]-> "player\n1" ClientNew       
+@enduml

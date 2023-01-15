@@ -1,0 +1,9 @@
+<map id="tp.backend.ClientNew.PollingAgent" name="tp.backend.ClientNew.PollingAgent">
+<area shape="rect" id="node1" title=" " alt="" coords="51,377,241,419"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,81,121"/>
+<area shape="rect" id="node7" href="$classtp_1_1backend_1_1_client_new_1_1_polling_agent.html" title=" " alt="" coords="51,184,241,225"/>
+<area shape="rect" id="node3" href="$classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="167,95,330,121"/>
+<area shape="rect" id="node4" href="$interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="77,5,229,32"/>
+<area shape="rect" id="node5" title=" " alt="" coords="253,5,436,32"/>
+<area shape="rect" id="node6" href="$classtp_1_1backend_1_1_client_new.html" title=" " alt="" coords="72,288,220,315"/>
+</map>
