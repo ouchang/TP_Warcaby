@@ -157,8 +157,10 @@ public class GUIController {
                 if(errorMessage.equals("")) {
                     System.out.println("GUIController - Correct move");
                     GUIbehaviour bevhaviour = new GUIbehaviour();
-                    bevhaviour.swapList(this.fromTo);                 
-                    bevhaviour.react(figureIdx);
+                    bevhaviour.updateBoard(gameStatus.getBoard(), this);
+
+                    //bevhaviour.swapList(this.fromTo);
+                    //bevhaviour.react(figureIdx);
                     
                     // lock board
                     //lockBoard();
