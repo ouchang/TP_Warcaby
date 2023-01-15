@@ -28,8 +28,4 @@ public class ClientInit implements ICommand {
   public String getColor() {
     return this.color;
   }
-
-  public String showView() {
-    return "";
-  }
 }

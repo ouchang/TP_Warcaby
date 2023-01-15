@@ -33,27 +33,7 @@ public class GUIStart extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
 
         GameStatus gameStatus = new GameStatus();
-/*
-        if(player.getFirstPlayer()) {
-            System.out.println("GUI sends gameKind");
 
-            // TO DO: Remove me!
-            //Thread.sleep(10000);
-
-            player.setGameKind("czech");
-
-            player.sendGameKind();
-            gameStatus = player.getGameStatus();
-        } else {
-            String tmp = player.getPollingAgent().getGameStatus().getGameKind();
-            while(tmp.equals("")) {
-                gameStatus = player.getPollingAgent().getGameStatus();
-                tmp = gameStatus.getGameKind();
-                Thread.sleep(500);
-            }
-        }
-*/
-        //MARIA VER
         if (player.getFirstPlayer() == true) {
             System.out.println("GUI sends gameKind");
 
@@ -62,7 +42,6 @@ public class GUIStart extends Application {
             typesController.setPlayer(player);
 
             stage.setTitle("Welcome to checkers!");
-//            updateBoard(boardString);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
@@ -84,26 +63,11 @@ public class GUIStart extends Application {
             controller.board8x8.setRotate(180);
             ObservableList<Node> childrenPane = controller.board8x8.getChildren();
             for (Node node : childrenPane){
-                //System.out.println(node.getId());
                 node.setRotate(180);
             }
-//                updateBoard(boardString);
             stage.setScene(scene);
             stage.setResizable(false);
             stage.show();
         }
-        //END OF MARIA VER
-
-
-/*
-        Scene scene = new Scene ( fxmlLoader.load (), 800, 600 );
-        GUIController controller = fxmlLoader.getController();
-        controller.setPlayer(player); //NEW
-
-        stage.setTitle ( "CHECKERS" );
-        stage.setScene ( scene );
-        stage.setResizable ( false );
-        stage.show ();
-*/
     }
 }

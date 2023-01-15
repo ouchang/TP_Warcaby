@@ -43,7 +43,6 @@ public class ClientNew {
     try {
       socket = new Socket("localhost", 4444);
 
-      // TO DO: Move this section to individual method in GUI class
       clientOut = new PrintWriter(socket.getOutputStream(), true);
     } catch(IOException e) {
       System.out.println(e.getMessage());
@@ -73,8 +72,7 @@ public class ClientNew {
 
     try {
       socket = new Socket("localhost", 4444);
-
-      // TO DO: Move this section to individual method in GUI class
+      
       clientOut = new PrintWriter(socket.getOutputStream(), true);
       clientIn = new BufferedReader(new InputStreamReader(socket.getInputStream()));
     } catch(IOException e) {
@@ -145,7 +143,7 @@ public class ClientNew {
     GameStatus gameStatus = (GameStatus) commandFactory.getCommand("GameStatus");
     gameStatus.setPlayerId(this.playerId);
     gameStatus = (GameStatus) clientCallSync(gameStatus);
-    System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
+    //System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
     return gameStatus;
   }
 
@@ -182,11 +180,11 @@ public class ClientNew {
     public void run() {
       try {
         while(!stop) {
-          System.out.println("PollingAgents asks for status");
+          //System.out.println("PollingAgents asks for status");
           synchronized(this) {
             this.gameStatus = client.getGameStatus();
           }
-          Thread.sleep(5000);
+          Thread.sleep(1000);
         }
 
       } catch(InterruptedException e) {
