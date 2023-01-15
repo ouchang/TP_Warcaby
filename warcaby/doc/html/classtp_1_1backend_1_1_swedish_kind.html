@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1backend_1_1_swedish_kind.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>backend</b></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html">SwedishKind</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -72,20 +88,34 @@ $(function() {
   <div class="headertitle"><div class="title">tp.backend.SwedishKind Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Inheritance diagram for tp.backend.SwedishKind:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind__inherit__graph.png" border="0" usemap="#atp_8backend_8_swedish_kind_inherit__map" alt="Inheritance graph"/></div>
+<map name="atp_8backend_8_swedish_kind_inherit__map" id="atp_8backend_8_swedish_kind_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,80,171,107"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_game_kind.html" title=" " alt="" coords="11,5,165,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for tp.backend.SwedishKind:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind__coll__graph.png" border="0" usemap="#atp_8backend_8_swedish_kind_coll__map" alt="Collaboration graph"/></div>
+<map name="atp_8backend_8_swedish_kind_coll__map" id="atp_8backend_8_swedish_kind_coll__map">
+<area shape="rect" title=" " alt="" coords="5,80,171,107"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_game_kind.html" title=" " alt="" coords="11,5,165,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa2ad164a17567ab65581efd0a07af5fc"><td class="memItemLeft" align="right" valign="top"><a id="aa2ad164a17567ab65581efd0a07af5fc" name="aa2ad164a17567ab65581efd0a07af5fc"></a>
-String[][]&#160;</td><td class="memItemRight" valign="bottom"><b>getGameBoard</b> ()</td></tr>
+<tr class="memitem:aa2ad164a17567ab65581efd0a07af5fc"><td class="memItemLeft" align="right" valign="top">String[][]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#aa2ad164a17567ab65581efd0a07af5fc">getGameBoard</a> ()</td></tr>
 <tr class="separator:aa2ad164a17567ab65581efd0a07af5fc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab8c05fecb5cbe1a1986c5c56f1cc7a93"><td class="memItemLeft" align="right" valign="top"><a id="ab8c05fecb5cbe1a1986c5c56f1cc7a93" name="ab8c05fecb5cbe1a1986c5c56f1cc7a93"></a>
-int&#160;</td><td class="memItemRight" valign="bottom"><b>getBoardSize</b> ()</td></tr>
+<tr class="memitem:ab8c05fecb5cbe1a1986c5c56f1cc7a93"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#ab8c05fecb5cbe1a1986c5c56f1cc7a93">getBoardSize</a> ()</td></tr>
 <tr class="separator:ab8c05fecb5cbe1a1986c5c56f1cc7a93"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5a0aa8ea8a40718f9b2c2f8bd86a51e"><td class="memItemLeft" align="right" valign="top"><a id="aa5a0aa8ea8a40718f9b2c2f8bd86a51e" name="aa5a0aa8ea8a40718f9b2c2f8bd86a51e"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getName</b> ()</td></tr>
+<tr class="memitem:aa5a0aa8ea8a40718f9b2c2f8bd86a51e"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#aa5a0aa8ea8a40718f9b2c2f8bd86a51e">getName</a> ()</td></tr>
 <tr class="separator:aa5a0aa8ea8a40718f9b2c2f8bd86a51e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a52c21e2e84bc0e8ccba5dc06cb7a4765"><td class="memItemLeft" align="right" valign="top"><a id="a52c21e2e84bc0e8ccba5dc06cb7a4765" name="a52c21e2e84bc0e8ccba5dc06cb7a4765"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>getCapturedRequired</b> ()</td></tr>
+<tr class="memitem:a52c21e2e84bc0e8ccba5dc06cb7a4765"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a52c21e2e84bc0e8ccba5dc06cb7a4765">getCapturedRequired</a> ()</td></tr>
 <tr class="separator:a52c21e2e84bc0e8ccba5dc06cb7a4765"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4df4e3fff40abd6d914cc8dc890d7e65"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a4df4e3fff40abd6d914cc8dc890d7e65">checkMovePiece</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
 <tr class="separator:a4df4e3fff40abd6d914cc8dc890d7e65"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -95,13 +125,34 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>getCapturedRequire
 <tr class="separator:a1f27ebb87d26b4476f2f83a8e970f522"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a82392b68490a6f32327f042b7743166a"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a82392b68490a6f32327f042b7743166a">checkMultiCaptureKing</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
 <tr class="separator:a82392b68490a6f32327f042b7743166a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8012928c0f6bea71d93fcb535b32aabf"><td class="memItemLeft" align="right" valign="top"><a id="a8012928c0f6bea71d93fcb535b32aabf" name="a8012928c0f6bea71d93fcb535b32aabf"></a>
-boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible</b> (int currPlayer, String[][] board)</td></tr>
+<tr class="memitem:a8012928c0f6bea71d93fcb535b32aabf"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a8012928c0f6bea71d93fcb535b32aabf">isCapturePossible</a> (int currPlayer, String[][] board)</td></tr>
 <tr class="separator:a8012928c0f6bea71d93fcb535b32aabf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3a4d47200d0b679f49b49bb30aee4b75"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a3a4d47200d0b679f49b49bb30aee4b75">hasPieceUpgrade</a> (int currPlayer, <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> to)</td></tr>
 <tr class="separator:a3a4d47200d0b679f49b49bb30aee4b75"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a696c6ae2e1e07d965677d4a8467ea5a0"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a696c6ae2e1e07d965677d4a8467ea5a0">whoStarts</a> ()</td></tr>
 <tr class="separator:a696c6ae2e1e07d965677d4a8467ea5a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9d945534f7edc5888ee6eac2b1023245"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9d945534f7edc5888ee6eac2b1023245">getBoardSize</a> ()</td></tr>
+<tr class="separator:a9d945534f7edc5888ee6eac2b1023245"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a321445772114fec2ccdb8f17dce7f238"><td class="memItemLeft" align="right" valign="top">String[][]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a321445772114fec2ccdb8f17dce7f238">getGameBoard</a> ()</td></tr>
+<tr class="separator:a321445772114fec2ccdb8f17dce7f238"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a79f2a988d8d447db8d031412e8132639"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a79f2a988d8d447db8d031412e8132639">getCapturedRequired</a> ()</td></tr>
+<tr class="separator:a79f2a988d8d447db8d031412e8132639"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac218218c928c9d34536458aae6ce6335"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#ac218218c928c9d34536458aae6ce6335">checkMovePiece</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
+<tr class="separator:ac218218c928c9d34536458aae6ce6335"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2d30b2fd76f27988edc18000d3874744"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a2d30b2fd76f27988edc18000d3874744">checkMoveKing</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
+<tr class="separator:a2d30b2fd76f27988edc18000d3874744"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a55cb1172dd328dfff05786a01a995091"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a55cb1172dd328dfff05786a01a995091">checkMultiCapturePiece</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
+<tr class="separator:a55cb1172dd328dfff05786a01a995091"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a9289d73964d1acfab142c1a0b0655f3c"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtp_1_1backend_1_1_movement.html">Movement</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9289d73964d1acfab142c1a0b0655f3c">checkMultiCaptureKing</a> (int currPlayer, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; positions, String[][] board)</td></tr>
+<tr class="separator:a9289d73964d1acfab142c1a0b0655f3c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a90518856f311da06d8ba3b88391c6856"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a90518856f311da06d8ba3b88391c6856">isCapturePossible</a> (int currPlayer, String[][] board)</td></tr>
+<tr class="separator:a90518856f311da06d8ba3b88391c6856"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a07599f2914797ab087441be8af94375c"><td class="memItemLeft" align="right" valign="top">boolean&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a07599f2914797ab087441be8af94375c">hasPieceUpgrade</a> (int currPlayer, <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> to)</td></tr>
+<tr class="separator:a07599f2914797ab087441be8af94375c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3dc9f08033c57419f18654a2534424ff"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a3dc9f08033c57419f18654a2534424ff">whoStarts</a> ()</td></tr>
+<tr class="separator:a3dc9f08033c57419f18654a2534424ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5226ac80723a67b217a38c66af2b9f71"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a5226ac80723a67b217a38c66af2b9f71">getName</a> ()</td></tr>
+<tr class="separator:a5226ac80723a67b217a38c66af2b9f71"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >MVC - Controller</p>
@@ -148,6 +199,24 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>movement's output information </dd></dl>
 
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a2d30b2fd76f27988edc18000d3874744">tp.backend.IGameKind</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f_cgraph" id="aclasstp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,195,209,236"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868" title=" " alt="" coords="265,5,492,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="295,71,462,98"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0" title=" " alt="" coords="295,122,463,149"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d" title=" " alt="" coords="257,173,500,199"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2" title=" " alt="" coords="279,224,478,265"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae" title=" " alt="" coords="280,290,477,317"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62" title=" " alt="" coords="295,341,462,367"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba" title=" " alt="" coords="295,391,463,418"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a4df4e3fff40abd6d914cc8dc890d7e65" name="a4df4e3fff40abd6d914cc8dc890d7e65"></a>
@@ -190,6 +259,24 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>movement's output information </dd></dl>
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#ac218218c928c9d34536458aae6ce6335">tp.backend.IGameKind</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65_cgraph" id="aclasstp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65_cgraph">
+<area shape="rect" title=" " alt="" coords="5,195,209,236"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868" title=" " alt="" coords="265,5,492,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="295,71,462,98"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0" title=" " alt="" coords="295,122,463,149"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d" title=" " alt="" coords="257,173,500,199"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2" title=" " alt="" coords="279,224,478,265"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae" title=" " alt="" coords="280,290,477,317"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62" title=" " alt="" coords="295,341,462,367"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba" title=" " alt="" coords="295,391,463,418"/>
+</map>
+</div>
 
 </div>
 </div>
@@ -234,6 +321,25 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>movement's output information </dd></dl>
 
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9289d73964d1acfab142c1a0b0655f3c">tp.backend.IGameKind</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a_cgraph" id="aclasstp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,216,209,257"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868" title=" " alt="" coords="265,5,492,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#ae6c343bc5ff706d94471f9400570561a" title=" " alt="" coords="257,71,500,98"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="295,122,462,149"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0" title=" " alt="" coords="295,173,463,199"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d" title=" " alt="" coords="257,223,500,250"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2" title=" " alt="" coords="279,275,478,316"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae" title=" " alt="" coords="280,341,477,367"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62" title=" " alt="" coords="295,391,462,418"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba" title=" " alt="" coords="295,442,463,469"/>
+</map>
+</div>
+
 </div>
 </div>
 <a id="a1f27ebb87d26b4476f2f83a8e970f522" name="a1f27ebb87d26b4476f2f83a8e970f522"></a>
@@ -277,6 +383,101 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>movement's output information </dd></dl>
 
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a55cb1172dd328dfff05786a01a995091">tp.backend.IGameKind</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522_cgraph" id="aclasstp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522_cgraph">
+<area shape="rect" title=" " alt="" coords="5,216,209,257"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868" title=" " alt="" coords="265,5,492,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#ae6c343bc5ff706d94471f9400570561a" title=" " alt="" coords="257,71,500,98"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="295,122,462,149"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0" title=" " alt="" coords="295,173,463,199"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d" title=" " alt="" coords="257,223,500,250"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2" title=" " alt="" coords="279,275,478,316"/>
+<area shape="rect" href="classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae" title=" " alt="" coords="280,341,477,367"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62" title=" " alt="" coords="295,391,462,418"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba" title=" " alt="" coords="295,442,463,469"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ab8c05fecb5cbe1a1986c5c56f1cc7a93" name="ab8c05fecb5cbe1a1986c5c56f1cc7a93"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab8c05fecb5cbe1a1986c5c56f1cc7a93">&#9670;&nbsp;</a></span>getBoardSize()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int tp.backend.SwedishKind.getBoardSize </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9d945534f7edc5888ee6eac2b1023245">tp.backend.IGameKind</a>.</p>
+
+</div>
+</div>
+<a id="a52c21e2e84bc0e8ccba5dc06cb7a4765" name="a52c21e2e84bc0e8ccba5dc06cb7a4765"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a52c21e2e84bc0e8ccba5dc06cb7a4765">&#9670;&nbsp;</a></span>getCapturedRequired()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean tp.backend.SwedishKind.getCapturedRequired </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a79f2a988d8d447db8d031412e8132639">tp.backend.IGameKind</a>.</p>
+
+</div>
+</div>
+<a id="aa2ad164a17567ab65581efd0a07af5fc" name="aa2ad164a17567ab65581efd0a07af5fc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa2ad164a17567ab65581efd0a07af5fc">&#9670;&nbsp;</a></span>getGameBoard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String[][] tp.backend.SwedishKind.getGameBoard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a321445772114fec2ccdb8f17dce7f238">tp.backend.IGameKind</a>.</p>
+
+</div>
+</div>
+<a id="aa5a0aa8ea8a40718f9b2c2f8bd86a51e" name="aa5a0aa8ea8a40718f9b2c2f8bd86a51e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa5a0aa8ea8a40718f9b2c2f8bd86a51e">&#9670;&nbsp;</a></span>getName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.SwedishKind.getName </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a5226ac80723a67b217a38c66af2b9f71">tp.backend.IGameKind</a>.</p>
+
 </div>
 </div>
 <a id="a3a4d47200d0b679f49b49bb30aee4b75" name="a3a4d47200d0b679f49b49bb30aee4b75"></a>
@@ -313,6 +514,47 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>true - upgrade possible | false - no possible upgrades </dd></dl>
 
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a07599f2914797ab087441be8af94375c">tp.backend.IGameKind</a>.</p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75_cgraph" id="aclasstp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,196,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="244,13,411,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8012928c0f6bea71d93fcb535b32aabf" name="a8012928c0f6bea71d93fcb535b32aabf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8012928c0f6bea71d93fcb535b32aabf">&#9670;&nbsp;</a></span>isCapturePossible()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">boolean tp.backend.SwedishKind.isCapturePossible </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>currPlayer</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>board</em>[][]&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a90518856f311da06d8ba3b88391c6856">tp.backend.IGameKind</a>.</p>
+
 </div>
 </div>
 <a id="a696c6ae2e1e07d965677d4a8467ea5a0" name="a696c6ae2e1e07d965677d4a8467ea5a0"></a>
@@ -331,15 +573,21 @@ boolean&#160;</td><td class="memItemRight" valign="bottom"><b>isCapturePossible<
 </div><div class="memdoc">
 <p >Method determing who starts the game </p><dl class="section return"><dt>Returns</dt><dd>color's ID </dd></dl>
 
+<p>Implements <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a3dc9f08033c57419f18654a2534424ff">tp.backend.IGameKind</a>.</p>
+
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>backend/SwedishKind.java</li>
+<li>backend/<a class="el" href="_swedish_kind_8java.html">SwedishKind.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>tp</b></li><li class="navelem"><a class="el" href="namespacetp_1_1backend.html">backend</a></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_swedish_kind.html">SwedishKind</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

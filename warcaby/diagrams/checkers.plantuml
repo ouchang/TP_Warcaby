@@ -1,0 +1,289 @@
+@startuml
+
+!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+class App {
+  + App(): 
+  + main(String[]): void
+}
+class ClientInit {
+  + ClientInit(): 
+  - color: String
+  - playerId: String
+  - firstPlayer: boolean
+   firstPlayer: boolean
+   playerId: String
+   colour: String
+   color: String
+}
+class ClientManager {
+  ~ ClientManager(String): 
+  + start(): ICommand
+  + makeMove(int, List<Position>): MoveCommand
+}
+class ClientNew {
+  + ClientNew(): 
+  - playerId: String
+  + pollingAgent: PollingAgent
+  - firstPlayer: boolean
+  - gameKind: String
+  + sendMoveCommand(List<Position>): GameStatus
+  + clientCallSync(ICommand): ICommand
+  + clientCallAsync(ICommand): void
+  + sendGameKind(): void
+  + clientInit(): void
+   firstPlayer: boolean
+   playerId: String
+   gameStatus: GameStatus
+   pollingAgent: PollingAgent
+   gameKind: String
+}
+class CoderDecoder {
+  + CoderDecoder(): 
+  - decode(String, String): ICommand?
+  ~ decodeCommand(String): ICommand
+  ~ decodeCall(String): String
+  ~ codeCommand(ICommand): String
+}
+class CommandClass {
+  + CommandClass(): 
+  - type: String
+  - value: String
+   type: String
+   value: String
+}
+class CommandFactory {
+  + CommandFactory(): 
+  + getCommand(String): ICommand?
+  + getClass(String): Class?
+}
+class CzechKind {
+  ~ CzechKind(): 
+  - name: String
+  - gameBoard: String[][]
+  - boardSize: int
+  - capturedRequired: boolean
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + isCapturePossible(int, String[][]): boolean
+  + hasPieceUpgrade(int, Position): boolean
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + whoStarts(): int
+   name: String
+   gameBoard: String[][]
+   boardSize: int
+   capturedRequired: boolean
+}
+class GameKind {
+  + GameKind(): 
+  - kind: String
+  - playerId: String
+   playerId: String
+   kind: String
+}
+class GameKindFactory {
+  + GameKindFactory(): 
+  + getGameKind(String): IGameKind
+}
+class GameManager {
+  ~ GameManager(GameNew, Socket): 
+  - gameStatusHandler(GameStatus, PrintWriter, Movement): void
+  - moveCommandHandler(MoveCommand, PrintWriter): void
+  - gameKindHandler(GameKind): void
+  - clientInitHandler(ClientInit, PrintWriter): void
+  + run(): void
+}
+class GameNew {
+  ~ GameNew(): 
+  - gameKind: IGameKind
+  - player1ID: String
+  - player2ID: String
+  - board: String[][]
+  - numOfPlayers: int
+  - activePlayerID: String
+  + loadInitBoard(): void
+  + addPlayer(): String
+  + move(List<Position>, String): Movement
+   activePlayerID: String
+   board: String[][]
+   player1ID: String
+   player2ID: String
+   numOfPlayers: int
+   gameKind: IGameKind
+   gameKindName: String
+}
+class GameStatus {
+  + GameStatus(): 
+  ~ player2: String
+  ~ status: String
+  ~ board: String[][]
+  ~ capturedFigures: List<Position>
+  ~ gameKind: String
+  ~ player1: String
+  ~ error: String
+  ~ friendly_name: String
+  ~ playerId: String
+  ~ id: String
+  ~ activePlayerID: String
+  + addCapturedFigure(Position): void
+   activePlayerID: String
+   playerId: String
+   board: String[][]
+   capturedFigures: List<Position>
+   error: String
+   status: String
+   player1: String
+   gameKind: String
+   player2: String
+   id: String
+   friendly_name: String
+}
+class GermanKind {
+  ~ GermanKind(): 
+  - capturedRequired: boolean
+  - name: String
+  - boardSize: int
+  - gameBoard: String[][]
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + whoStarts(): int
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + hasPieceUpgrade(int, Position): boolean
+  + isCapturePossible(int, String[][]): boolean
+   name: String
+   gameBoard: String[][]
+   boardSize: int
+   capturedRequired: boolean
+}
+class GetCurrentGameStateClass {
+  + GetCurrentGameStateClass(): 
+  ~ playerId: String
+  ~ id: String
+   id: String
+   playerId: String
+}
+interface ICommand << interface >>
+interface IGameKind << interface >> {
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + isCapturePossible(int, String[][]): boolean
+  + hasPieceUpgrade(int, Position): boolean
+  + whoStarts(): int
+   name: String
+   gameBoard: String[][]
+   boardSize: int
+   capturedRequired: boolean
+}
+class MoveCommand {
+  ~ MoveCommand(): 
+  ~ positions: List<Position>
+  ~ playerId: String
+  + addPosition(Position): void
+  + clearPositions(): void
+   positions: List<Position>
+   playerId: String
+}
+class Movement {
+  + Movement(): 
+  - capturedFigures: List<Position>
+  - errorMessage: String
+  - kind: String
+  - correctMove: boolean
+  + isEqual(String, boolean, List<Position>, String): boolean
+  + addCapturedFigure(Position): void
+   kind: String
+   capturedFigures: List<Position>
+   correctMove: boolean
+   errorMessage: String
+}
+class PollingAgent {
+  ~ PollingAgent(ClientNew): 
+  ~ gameStatus: GameStatus
+  + stop(): void
+  + run(): void
+   gameStatus: GameStatus
+}
+class Position {
+  + Position(): 
+  - y: int
+  - x: int
+   y: int
+   x: int
+}
+class Server {
+  + Server(): 
+  + main(String[]): void
+}
+class SwedishKind {
+  ~ SwedishKind(): 
+  - gameBoard: String[][]
+  - boardSize: int
+  - name: String
+  - capturedRequired: boolean
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + whoStarts(): int
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + hasPieceUpgrade(int, Position): boolean
+  + isCapturePossible(int, String[][]): boolean
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+   name: String
+   gameBoard: String[][]
+   boardSize: int
+   capturedRequired: boolean
+}
+
+ClientInit                -[#008200,dashed]-^  ICommand                 
+ClientManager             -[#595959,dashed]->  CoderDecoder             : "«create»"
+ClientManager            "1" *-[#595959,plain]-> "CD\n1" CoderDecoder             
+ClientManager             -[#595959,dashed]->  MoveCommand              : "«create»"
+ClientManager             -[#595959,dashed]->  Position                 : "«create»"
+ClientNew                "1" *-[#595959,plain]-> "CD\n1" CoderDecoder             
+ClientNew                 -[#595959,dashed]->  CoderDecoder             : "«create»"
+ClientNew                "1" *-[#595959,plain]-> "commandFactory\n1" CommandFactory           
+ClientNew                 -[#595959,dashed]->  PollingAgent             : "«create»"
+ClientNew                "1" *-[#595959,plain]-> "pollingAgent\n1" PollingAgent             
+CoderDecoder              -[#595959,dashed]->  CommandClass             : "«create»"
+CommandFactory            -[#595959,dashed]->  ClientInit               : "«create»"
+CommandFactory            -[#595959,dashed]->  GameKind                 : "«create»"
+CommandFactory            -[#595959,dashed]->  GameStatus               : "«create»"
+CommandFactory            -[#595959,dashed]->  GetCurrentGameStateClass : "«create»"
+CommandFactory            -[#595959,dashed]->  MoveCommand              : "«create»"
+CzechKind                 -[#008200,dashed]-^  IGameKind                
+CzechKind                 -[#595959,dashed]->  Movement                 : "«create»"
+CzechKind                 -[#595959,dashed]->  Position                 : "«create»"
+GameKind                  -[#008200,dashed]-^  ICommand                 
+GameKindFactory           -[#595959,dashed]->  CzechKind                : "«create»"
+GameKindFactory           -[#595959,dashed]->  GermanKind               : "«create»"
+GameKindFactory           -[#595959,dashed]->  SwedishKind              : "«create»"
+GameManager              "1" *-[#595959,plain]-> "CD\n1" CoderDecoder             
+GameManager               -[#595959,dashed]->  CoderDecoder             : "«create»"
+GameManager              "1" *-[#595959,plain]-> "gameKindFactory\n1" GameKindFactory          
+GameManager               -[#595959,dashed]->  GameKindFactory          : "«create»"
+GameManager              "1" *-[#595959,plain]-> "game\n1" GameNew                  
+GameManager               -[#595959,dashed]->  GameStatus               : "«create»"
+GameManager               -[#595959,dashed]->  Movement                 : "«create»"
+GameNew                  "1" *-[#595959,plain]-> "gameKind\n1" IGameKind                
+GameNew                   -[#595959,dashed]->  Movement                 : "«create»"
+GameNew                   -[#595959,dashed]->  Position                 : "«create»"
+GameStatus                -[#008200,dashed]-^  ICommand                 
+GermanKind                -[#008200,dashed]-^  IGameKind                
+GermanKind                -[#595959,dashed]->  Movement                 : "«create»"
+GermanKind                -[#595959,dashed]->  Position                 : "«create»"
+GetCurrentGameStateClass  -[#008200,dashed]-^  ICommand                 
+MoveCommand               -[#008200,dashed]-^  ICommand                 
+PollingAgent              +-[#820000,plain]-  ClientNew                
+PollingAgent             "1" *-[#595959,plain]-> "client\n1" ClientNew                
+PollingAgent             "1" *-[#595959,plain]-> "gameStatus\n1" GameStatus               
+Server                    -[#595959,dashed]->  GameManager              : "«create»"
+Server                    -[#595959,dashed]->  GameNew                  : "«create»"
+SwedishKind               -[#008200,dashed]-^  IGameKind                
+SwedishKind               -[#595959,dashed]->  Movement                 : "«create»"
+SwedishKind               -[#595959,dashed]->  Position                 : "«create»"
+@enduml

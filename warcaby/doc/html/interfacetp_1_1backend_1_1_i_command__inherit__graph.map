@@ -1,0 +1,8 @@
+<map id="tp.backend.ICommand" name="tp.backend.ICommand">
+<area shape="rect" id="node1" title=" " alt="" coords="5,107,157,133"/>
+<area shape="rect" id="node2" href="$classtp_1_1backend_1_1_client_init.html" title=" " alt="" coords="229,5,369,32"/>
+<area shape="rect" id="node3" href="$classtp_1_1backend_1_1_game_kind.html" title=" " alt="" coords="224,56,375,83"/>
+<area shape="rect" id="node4" href="$classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="218,107,381,133"/>
+<area shape="rect" id="node5" title=" " alt="" coords="205,158,393,199"/>
+<area shape="rect" id="node6" href="$classtp_1_1backend_1_1_move_command.html" title=" " alt="" coords="210,224,389,251"/>
+</map>

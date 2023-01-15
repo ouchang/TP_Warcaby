@@ -1,0 +1,10 @@
+<map id="tp.frontend.gui.start.TypesController" name="tp.frontend.gui.start.TypesController">
+<area shape="rect" id="node1" title=" " alt="" coords="11,184,185,225"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,95,81,121"/>
+<area shape="rect" id="node3" href="$classtp_1_1backend_1_1_client_new.html" title=" " alt="" coords="136,95,284,121"/>
+<area shape="rect" id="node4" href="$classtp_1_1backend_1_1_client_new_1_1_polling_agent.html" title=" " alt="" coords="223,184,413,225"/>
+<area shape="rect" id="node5" title=" " alt="" coords="335,95,411,121"/>
+<area shape="rect" id="node6" href="$classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="435,95,598,121"/>
+<area shape="rect" id="node7" href="$interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="345,5,497,32"/>
+<area shape="rect" id="node8" title=" " alt="" coords="521,5,704,32"/>
+</map>
