@@ -1,5 +1,8 @@
 package tp.backend;
 
+/**
+ * Command's factory
+ */
 public class CommandFactory {
   public static ICommand getCommand(String type) {
     switch(type) {

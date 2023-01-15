@@ -3,6 +3,12 @@ package tp.backend;
 import java.util.List;
 import java.util.ArrayList;
 
+
+/*
+ * Class for game's status
+ * 
+ * A part of communication protocol.
+ */
 public class GameStatus implements ICommand {
   String playerId;
   String id;

@@ -1,5 +1,10 @@
 package tp.backend;
 
+/*
+ * Class shows current game's state
+ * 
+ * A part of communication protocol.
+ */
 class GetCurrentGameStateClass implements ICommand {
   String id;
   String playerId;

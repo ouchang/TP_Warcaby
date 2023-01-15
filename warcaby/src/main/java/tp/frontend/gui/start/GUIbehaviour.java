@@ -14,8 +14,10 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * MVC - View
+ */
 public class GUIbehaviour {
-    //ArrayList<Pane> fromTo = new ArrayList<> (2);
     ArrayList<Pane> fromTo;
     public static ArrayList<Pane> positionChanges = new ArrayList<> ();
     String[] imageType;
@@ -50,14 +52,11 @@ public class GUIbehaviour {
     }
 
     public void deletePiece(Pane position){
-        System.out.println ("Deleting piece");
         final ObservableList<Node> children = position.getChildren();
         position.getChildren ().removeAll (children );
     }
 
     public void add(Pane position, String fileName) throws FileNotFoundException, MalformedURLException {
-        //System.out.println ("Add figure's image");
-
         if(fileName != "") {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
             ImageView imageView = new ImageView(image);
@@ -144,15 +143,14 @@ public class GUIbehaviour {
     public void react(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
         String fileName = imageType[figureIdx];
-        System.out.println("FileName: " + fileName);
 
-        System.out.println("START ADD_PIECE FUNC");
+
+        // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
 
-        System.out.println("START DELETE_PIECE FUNC");
+        // Delete captured figures' images
         if(capturedFigures != null) {
-            System.out.println("Delete - capture move");
-            //Capture  move
+            // Capture  move
             int row, col;
             ObservableList<Node> children = gridPane.getChildren();
             for(Position p : capturedFigures) {
@@ -177,11 +175,9 @@ public class GUIbehaviour {
                     }
                 }
             }
-        } else {
-            System.out.println("Delete - regular move");
         }
             
-        //Regular move
+        // Delete figure's image from starting position
         deletePiece(fromTo.get(0));
     }
 }

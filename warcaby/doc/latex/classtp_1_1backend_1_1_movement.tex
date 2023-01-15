@@ -1,0 +1,65 @@
+\hypertarget{classtp_1_1backend_1_1_movement}{}\doxysection{tp.\+backend.\+Movement Class Reference}
+\label{classtp_1_1backend_1_1_movement}\index{tp.backend.Movement@{tp.backend.Movement}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_adf50dac4dbee163c137baf64ab4aa43c}\label{classtp_1_1backend_1_1_movement_adf50dac4dbee163c137baf64ab4aa43c}} 
+String {\bfseries get\+Kind} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_a94a49986c4a29e48f5286357225213ae}\label{classtp_1_1backend_1_1_movement_a94a49986c4a29e48f5286357225213ae}} 
+void {\bfseries set\+Kind} (String kind)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_ae6c343bc5ff706d94471f9400570561a}\label{classtp_1_1backend_1_1_movement_ae6c343bc5ff706d94471f9400570561a}} 
+boolean {\bfseries get\+Correct\+Move} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_a2e09d543b72ed62945fb9c0af1a6127d}\label{classtp_1_1backend_1_1_movement_a2e09d543b72ed62945fb9c0af1a6127d}} 
+void {\bfseries set\+Correct\+Move} (boolean correct\+Move)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_a43a05fe02585e74f88524bb7bb4001b1}\label{classtp_1_1backend_1_1_movement_a43a05fe02585e74f88524bb7bb4001b1}} 
+List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ {\bfseries get\+Captured\+Figures} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_a3f65be0e85708324b93c3ef1dfec9de7}\label{classtp_1_1backend_1_1_movement_a3f65be0e85708324b93c3ef1dfec9de7}} 
+void {\bfseries set\+Captured\+Figures} (List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ captured\+Figures)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_a1fc31ee7e1c337f9d1fdc31629abd868}\label{classtp_1_1backend_1_1_movement_a1fc31ee7e1c337f9d1fdc31629abd868}} 
+void {\bfseries add\+Captured\+Figure} (\mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} cf)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_aa1937f6d3c329de0b0f64b77385941c4}\label{classtp_1_1backend_1_1_movement_aa1937f6d3c329de0b0f64b77385941c4}} 
+String {\bfseries get\+Error\+Message} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_aaab51f161ec75e431eedf3455fd5e5c2}\label{classtp_1_1backend_1_1_movement_aaab51f161ec75e431eedf3455fd5e5c2}} 
+void {\bfseries set\+Error\+Message} (String error\+Message)
+\item 
+boolean \mbox{\hyperlink{classtp_1_1backend_1_1_movement_ac44ea3052a8b8e9c96604c3a9df6e9ca}{is\+Equal}} (String kind, boolean correct\+Move, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ captured\+Figures, String error\+Message)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Class representing movement\textquotesingle{}s output information It is used during the process of movement\textquotesingle{}s check 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_movement_ac44ea3052a8b8e9c96604c3a9df6e9ca}\label{classtp_1_1backend_1_1_movement_ac44ea3052a8b8e9c96604c3a9df6e9ca}} 
+\index{tp.backend.Movement@{tp.backend.Movement}!isEqual@{isEqual}}
+\index{isEqual@{isEqual}!tp.backend.Movement@{tp.backend.Movement}}
+\doxysubsubsection{\texorpdfstring{isEqual()}{isEqual()}}
+{\footnotesize\ttfamily boolean tp.\+backend.\+Movement.\+is\+Equal (\begin{DoxyParamCaption}\item[{String}]{kind,  }\item[{boolean}]{correct\+Move,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{captured\+Figures,  }\item[{String}]{error\+Message }\end{DoxyParamCaption})}
+
+Method used to check if 2 \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}}\textquotesingle{}s objects are equal 
+\begin{DoxyParams}{Parameters}
+{\em kind} & object\textquotesingle{}s kind attribute \\
+\hline
+{\em correct\+Move} & object\textquotesingle{}s info about the movement\textquotesingle{}s correctness attribute \\
+\hline
+{\em captured\+Figures} & object\textquotesingle{}s list of captured figures attribute \\
+\hline
+{\em error\+Message} & object\textquotesingle{}s error\textquotesingle{}s message attribute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+are those 2 objects equal? 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/Movement.\+java\end{DoxyCompactItemize}

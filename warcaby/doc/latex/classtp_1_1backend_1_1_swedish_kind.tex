@@ -1,0 +1,142 @@
+\hypertarget{classtp_1_1backend_1_1_swedish_kind}{}\doxysection{tp.\+backend.\+Swedish\+Kind Class Reference}
+\label{classtp_1_1backend_1_1_swedish_kind}\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_aa2ad164a17567ab65581efd0a07af5fc}\label{classtp_1_1backend_1_1_swedish_kind_aa2ad164a17567ab65581efd0a07af5fc}} 
+String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} {\bfseries get\+Game\+Board} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_ab8c05fecb5cbe1a1986c5c56f1cc7a93}\label{classtp_1_1backend_1_1_swedish_kind_ab8c05fecb5cbe1a1986c5c56f1cc7a93}} 
+int {\bfseries get\+Board\+Size} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_aa5a0aa8ea8a40718f9b2c2f8bd86a51e}\label{classtp_1_1backend_1_1_swedish_kind_aa5a0aa8ea8a40718f9b2c2f8bd86a51e}} 
+String {\bfseries get\+Name} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a52c21e2e84bc0e8ccba5dc06cb7a4765}\label{classtp_1_1backend_1_1_swedish_kind_a52c21e2e84bc0e8ccba5dc06cb7a4765}} 
+boolean {\bfseries get\+Captured\+Required} ()
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65}{check\+Move\+Piece}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f}{check\+Move\+King}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522}{check\+Multi\+Capture\+Piece}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a}{check\+Multi\+Capture\+King}} (int curr\+Player, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a8012928c0f6bea71d93fcb535b32aabf}\label{classtp_1_1backend_1_1_swedish_kind_a8012928c0f6bea71d93fcb535b32aabf}} 
+boolean {\bfseries is\+Capture\+Possible} (int curr\+Player, String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board)
+\item 
+boolean \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75}{has\+Piece\+Upgrade}} (int curr\+Player, \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} to)
+\item 
+int \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind_a696c6ae2e1e07d965677d4a8467ea5a0}{who\+Starts}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MVC -\/ Controller
+
+Class \mbox{\hyperlink{classtp_1_1backend_1_1_swedish_kind}{Swedish\+Kind}} determines rules in Swedish version of checkers 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f}\label{classtp_1_1backend_1_1_swedish_kind_ad94efd5e1daeddd77c786fd52a18313f}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!checkMoveKing@{checkMoveKing}}
+\index{checkMoveKing@{checkMoveKing}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{checkMoveKing()}{checkMoveKing()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Swedish\+Kind.\+check\+Move\+King (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Move\+King checks the correctness of the move, made by king. This methods checks regular move as well as single capture 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65}\label{classtp_1_1backend_1_1_swedish_kind_a4df4e3fff40abd6d914cc8dc890d7e65}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!checkMovePiece@{checkMovePiece}}
+\index{checkMovePiece@{checkMovePiece}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{checkMovePiece()}{checkMovePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Swedish\+Kind.\+check\+Move\+Piece (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Move\+Piece checks the correctness of the move, made by piece. This methods checks regular move as well as single capture 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a}\label{classtp_1_1backend_1_1_swedish_kind_a82392b68490a6f32327f042b7743166a}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!checkMultiCaptureKing@{checkMultiCaptureKing}}
+\index{checkMultiCaptureKing@{checkMultiCaptureKing}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{checkMultiCaptureKing()}{checkMultiCaptureKing()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Swedish\+Kind.\+check\+Multi\+Capture\+King (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Multi\+Capture\+King checks the correctness of the multi-\/capture move made by king. 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522}\label{classtp_1_1backend_1_1_swedish_kind_a1f27ebb87d26b4476f2f83a8e970f522}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!checkMultiCapturePiece@{checkMultiCapturePiece}}
+\index{checkMultiCapturePiece@{checkMultiCapturePiece}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{checkMultiCapturePiece()}{checkMultiCapturePiece()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Swedish\+Kind.\+check\+Multi\+Capture\+Piece (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{board\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} }\end{DoxyParamCaption})}
+
+Method check\+Multi\+Capture\+Piece checks the correctness of the multi-\/capture move made by piece. 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em board} & game\textquotesingle{}s board \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+movement\textquotesingle{}s output information 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75}\label{classtp_1_1backend_1_1_swedish_kind_a3a4d47200d0b679f49b49bb30aee4b75}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!hasPieceUpgrade@{hasPieceUpgrade}}
+\index{hasPieceUpgrade@{hasPieceUpgrade}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{hasPieceUpgrade()}{hasPieceUpgrade()}}
+{\footnotesize\ttfamily boolean tp.\+backend.\+Swedish\+Kind.\+has\+Piece\+Upgrade (\begin{DoxyParamCaption}\item[{int}]{curr\+Player,  }\item[{\mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}}}]{to }\end{DoxyParamCaption})}
+
+Method checks if a piece can be upgraded into a king 
+\begin{DoxyParams}{Parameters}
+{\em curr\+Player} & ID of the player who made move \\
+\hline
+{\em to} & ending position in player\textquotesingle{}s moe \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true -\/ upgrade possible $\vert$ false -\/ no possible upgrades 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_swedish_kind_a696c6ae2e1e07d965677d4a8467ea5a0}\label{classtp_1_1backend_1_1_swedish_kind_a696c6ae2e1e07d965677d4a8467ea5a0}} 
+\index{tp.backend.SwedishKind@{tp.backend.SwedishKind}!whoStarts@{whoStarts}}
+\index{whoStarts@{whoStarts}!tp.backend.SwedishKind@{tp.backend.SwedishKind}}
+\doxysubsubsection{\texorpdfstring{whoStarts()}{whoStarts()}}
+{\footnotesize\ttfamily int tp.\+backend.\+Swedish\+Kind.\+who\+Starts (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method determing who starts the game \begin{DoxyReturn}{Returns}
+color\textquotesingle{}s ID 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/Swedish\+Kind.\+java\end{DoxyCompactItemize}

@@ -1,5 +1,10 @@
 package tp.backend;
 
+/*
+ * Class for game's kind.
+ * 
+ * A part of communication protocol.
+ */
 public class GameKind implements ICommand {
   private String playerId;
   private String kind;

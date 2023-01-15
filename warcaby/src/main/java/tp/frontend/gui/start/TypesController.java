@@ -2,22 +2,20 @@ package tp.frontend.gui.start;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-//import javafx.scene.control.Button;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseButton;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+
 import tp.backend.ClientNew;
 
 import java.io.IOException;
-import java.nio.file.Paths;
 
+/**
+ * MVC - Controller
+ */
 public class TypesController {
     @FXML
     private Button czech;
@@ -54,16 +52,15 @@ public class TypesController {
         } else if (german.equals(event.getSource())) {
             this.player.setGameKind("german");
         } else {
-            //player.setGameKind("nieokreslony");
             return;
         }
-//        System.out.println(this.player.getGameKind());
+
         this.player.sendGameKind();
 
         FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
         Scene secondScene = new Scene( board.load(), 800, 600);
         GUIController controller = board.getController();
-        controller.setPlayer(this.player); //NEW
+        controller.setPlayer(this.player);
 
         stage.setTitle("WHITE");
         stage.setScene(secondScene);

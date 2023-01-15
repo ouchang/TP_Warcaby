@@ -3,6 +3,11 @@ package tp.backend;
 import java.util.UUID;
 import java.util.List;
 
+/**
+ * MVC - Model
+ * 
+ * Class representing the game's process
+ */
 public class GameNew {
   private int numOfPlayers;
 
@@ -34,10 +39,9 @@ public class GameNew {
   private static final String REGULAR = "REGULAR";
   private static final String CAPTURE = "CAPTURE";
 
-  // Last analyzed move
-  private int whitePrevFromX, whitePrevFromY;
-  private int blackPrevFromX, blackPrevFromY;
-
+  /**
+   * Constructor
+   */
   GameNew() {
     this.numOfPlayers = 0;
     this.activePlayerID = "";
@@ -47,21 +51,25 @@ public class GameNew {
     this.player2ID = "";
   }
 
-  public void setGameKind(IGameKind gameKind) {
-    this.gameKind = gameKind;
-  }
-
-  public void loadInitBoard() {
-    this.board = gameKind.getGameBoard();
-    this.boardSize = gameKind.getBoardSize();
-  }
-
+  // Setters & Getters
   public String getPlayer1ID() {
     return this.player1ID;
   }
 
   public String getPlayer2ID() {
     return this.player2ID;
+  }
+
+  public void setGameKind(IGameKind gameKind) {
+    this.gameKind = gameKind;
+  }
+
+  /**
+   * Init board view loader based on game's kind
+   */
+  public void loadInitBoard() {
+    this.board = gameKind.getGameBoard();
+    this.boardSize = gameKind.getBoardSize();
   }
 
   public String getGameKindName() {
@@ -84,6 +92,9 @@ public class GameNew {
     return this.numOfPlayers;
   }
 
+  /**
+   * Method used for registering new players/clients
+   */
   public String addPlayer() {
     UUID uuid = UUID.randomUUID();
     
@@ -98,13 +109,13 @@ public class GameNew {
       return this.player2ID;
     }
 
-    return ""; //FIXME
+    return "";
   }
 
   /**
-   * 
-   * @param positions
-   * @param currPlayer
+   * Method used to register player's move
+   * @param positions player's clicked positions
+   * @param currPlayer player's ID
    * @return Error Message (if move was correct error message is empty (""))
    */
   public synchronized Movement move(List<Position> positions, String currPlayerID) { //String
@@ -116,10 +127,16 @@ public class GameNew {
     String symbol;
     int currPlayer = -1;
 
+    boolean captureNeeded = false;
+
     if(currPlayerID.equals(this.player1ID)) {
       currPlayer = WHITE;
     } else if(currPlayerID.equals(this.player2ID)) {
       currPlayer = BLACK;
+    }
+
+    if(this.gameKind.getCapturedRequired()) {
+      captureNeeded = this.gameKind.isCapturePossible(currPlayer, board);
     }
 
     if(positions.size() > 2) { // Multi-Capture move
@@ -144,39 +161,25 @@ public class GameNew {
 
         // delete captured figures in board
         for(Position cf : movement.getCapturedFigures()) {
-          //System.out.println("MULTI CAPTURE UPDATE BOARD["+cf.getX()+"]["+cf.getY()+"]: "+board[to.getX()][to.getY()] + " GO EMPTY");
           board[cf.getX()][cf.getY()] = EMPTY;
         }
 
         // put figure at ending position in board + check if piece becomes king
         if(gameKind.hasPieceUpgrade(currPlayer, to)) {
-          System.out.println("UPGRADE TO KING!");
           if(symbol == WH_PIECE) {
             board[to.getX()][to.getY()] = WH_KING;
           } else if(symbol == BL_PIECE) {
             board[to.getX()][to.getY()] = BL_KING;
           }
         } else {
-          System.out.println("MOVE WITHOUT UPGRADE");
           board[to.getX()][to.getY()] = symbol;
         }
-
-        //System.out.println("MULTI CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
 
         // change turn
         if(this.player1ID.equals(currPlayerID)) {
           this.activePlayerID = this.player2ID;
         } else if(this.player2ID.equals(currPlayerID)) {
           this.activePlayerID = this.player1ID;
-        }
-
-        // save last analyzed position
-        if(currPlayer == WHITE) { 
-          whitePrevFromX = from.getX();
-          whitePrevFromY = from.getY();
-        } else if(currPlayer == BLACK) {
-          blackPrevFromX = from.getX();
-          blackPrevFromY = from.getY();
         }
 
         return movement;
@@ -201,6 +204,15 @@ public class GameNew {
 
       // Update board if the move was correct
       if(movement.getCorrectMove()) {
+        //check if capture was made when it is required
+        if(captureNeeded) {
+          if(!movement.getKind().equals(CAPTURE)) {
+            movement.setCorrectMove(false);
+            movement.setErrorMessage("ERROR: You need to capture!");
+            return movement;
+          }
+        }
+
         if(movement.getKind() == CAPTURE) {
           // get info about captured figure
           Position cf = movement.getCapturedFigures().get(0);
@@ -214,26 +226,21 @@ public class GameNew {
           
           // put figure at ending position in board + check if piece becomes king
           if(gameKind.hasPieceUpgrade(currPlayer, to)) {
-            System.out.println("UPGRADE TO KING!");
             if(symbol == WH_PIECE) {
               board[to.getX()][to.getY()] = WH_KING;
             } else if(symbol == BL_PIECE) {
               board[to.getX()][to.getY()] = BL_KING;
             }
           } else {
-            System.out.println("MOVE WITHOUT UPGRADE");
             board[to.getX()][to.getY()] = symbol;
           }
 
-          //System.out.println("CAPTURE UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
         } else if(movement.getKind() == REGULAR) {
           // delete figure at starting position in board
           board[from.getX()][from.getY()] = EMPTY;
           
           // put figure at ending position in board
           board[to.getX()][to.getY()] = symbol;
-
-          //System.out.println("REGULAR UPDATE BOARD["+to.getX()+"]["+to.getY()+"]: "+board[to.getX()][to.getY()]);
         }
         
         // change turn
@@ -241,15 +248,6 @@ public class GameNew {
           this.activePlayerID = this.player2ID;
         } else if(this.player2ID.equals(currPlayerID)) {
           this.activePlayerID = this.player1ID;
-        }
-        
-        // save last analyzed position
-        if(currPlayer == WHITE) {
-          whitePrevFromX = from.getX();
-          whitePrevFromY = from.getY();
-        } else if(currPlayer == BLACK) {
-          blackPrevFromX = from.getX();
-          blackPrevFromY = from.getY();
         }
         
         return movement;
@@ -260,5 +258,4 @@ public class GameNew {
 
     return null;
   }
-
 }

@@ -3,12 +3,22 @@ package tp.backend;
 import java.net.*;
 import java.io.*;
 
+/**
+ * MVC - Controller
+ * 
+ * Class responsible for handling player's requests to model layer (Server Class, Game Class)
+ */
 public class GameManager implements Runnable {
   GameNew game;
   private Socket client;
   private CoderDecoder CD;
   private GameKindFactory gameKindFactory;
 
+  /**
+   * Constructor
+   * @param game object of Game model
+   * @param client connected client's socket
+   */
   GameManager(GameNew game, Socket client) {
     this.game = game;
     this.client = client;
@@ -16,6 +26,11 @@ public class GameManager implements Runnable {
     this.gameKindFactory = new GameKindFactory();
   }
 
+  /**
+   * Method handling initial client/player's connection 
+   * @param clientInit command send by client
+   * @param clientOut outbound stream to client
+   */
   private void clientInitHandler(ClientInit clientInit, PrintWriter clientOut) {
     String playerId;
 
@@ -39,6 +54,10 @@ public class GameManager implements Runnable {
     System.out.println("Sever sends ClientInit [" + playerId + "]");
   }
 
+  /**
+   * Method handling game's kind settings
+   * @param gameKind game's kind set by client
+   */
   private void gameKindHandler(GameKind gameKind) {
     synchronized(game) {
       if(gameKind.getPlayerId().equals(game.getPlayer1ID())) {
@@ -51,6 +70,12 @@ public class GameManager implements Runnable {
     System.out.println("Client [" + gameKind.getPlayerId() + "] set gameKind = " + gameKind.getKind());
   }
 
+  /**
+   * Method handling game's status propagation
+   * @param gameStatus game's status
+   * @param clientOut outbound stream to client
+   * @param moveOutput (in case client ask for game's status after making a move) output info about client's move
+   */
   private void gameStatusHandler(GameStatus gameStatus, PrintWriter clientOut, Movement moveOutput) {
     synchronized(game) {
       gameStatus.setGameKind(game.getGameKindName());
@@ -58,10 +83,10 @@ public class GameManager implements Runnable {
       gameStatus.setPlayer2(game.getPlayer2ID());
       gameStatus.setActivePlayerID(game.getActivePlayerID());
       gameStatus.setBoard(game.getBoard());
-      gameStatus.setError(""); // TO DO: Check me
+      gameStatus.setError("");
 
       if(moveOutput != null) {
-        gameStatus.setError(moveOutput.getErrorMessage()); // TO DO: Check me
+        gameStatus.setError(moveOutput.getErrorMessage());
         gameStatus.setCapturedFigures(moveOutput.getCapturedFigures());
       }
 
@@ -69,11 +94,14 @@ public class GameManager implements Runnable {
 
     String objectSerialized = CD.codeCommand(gameStatus);
     clientOut.println(objectSerialized);
-    System.out.println("Client [" + gameStatus.getPlayerId() + "]  gets gameStatus: " + objectSerialized);
   }
 
+  /**
+   * Method handling board piece's movement
+   * @param moveCommand client's move command
+   * @param clientOut outbound stream to client
+   */
   private void moveCommandHandler(MoveCommand moveCommand, PrintWriter clientOut) {
-    String errorMessage = "";
     Movement moveOutput = new Movement();
     synchronized(game) {
       if(moveCommand.getPlayerId().equals(game.getActivePlayerID())) {
@@ -85,6 +113,9 @@ public class GameManager implements Runnable {
     gameStatusHandler(new GameStatus(), clientOut, moveOutput);
   }
 
+  /**
+   * Starting method for threads
+   */
   public void run() {
     try {
 
@@ -96,6 +127,7 @@ public class GameManager implements Runnable {
 
       String clientCallSerialized;
 
+      // read client's request
       clientCallSerialized = clientIn.readLine();
       String clientCallType = CD.decodeCall(clientCallSerialized);
 

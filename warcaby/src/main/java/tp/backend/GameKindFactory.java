@@ -1,5 +1,8 @@
 package tp.backend;
 
+/**
+ * Factory of game's kinds
+ */
 public class GameKindFactory {
   public IGameKind getGameKind(String type) {
     switch(type) {
@@ -7,8 +10,8 @@ public class GameKindFactory {
         return new CzechKind();
       case "german":
         return new GermanKind();
-      //case "swidish":
-        //return new SwedishKind();
+      case "swedish":
+        return new SwedishKind();
     }
 
     return null;

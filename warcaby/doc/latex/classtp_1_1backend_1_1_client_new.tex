@@ -1,0 +1,124 @@
+\hypertarget{classtp_1_1backend_1_1_client_new}{}\doxysection{tp.\+backend.\+Client\+New Class Reference}
+\label{classtp_1_1backend_1_1_client_new}\index{tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_1_1_polling_agent}{Polling\+Agent}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a6aaa83afb992e130698f63749a1ed67e}{Client\+New}} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a2c2ccb81e11ca0fddafd4a21d316bb2e}\label{classtp_1_1backend_1_1_client_new_a2c2ccb81e11ca0fddafd4a21d316bb2e}} 
+String {\bfseries get\+Player\+Id} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a53e962662a502cdc92689ea9feb7c26d}\label{classtp_1_1backend_1_1_client_new_a53e962662a502cdc92689ea9feb7c26d}} 
+boolean {\bfseries get\+First\+Player} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a13aa4cd5be045f4a6f123a105e9ee76e}\label{classtp_1_1backend_1_1_client_new_a13aa4cd5be045f4a6f123a105e9ee76e}} 
+void {\bfseries set\+Game\+Kind} (String game\+Kind)
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_afbec6ac6c056fed39502ef50ed870f9a}\label{classtp_1_1backend_1_1_client_new_afbec6ac6c056fed39502ef50ed870f9a}} 
+\mbox{\hyperlink{classtp_1_1backend_1_1_client_new_1_1_polling_agent}{Polling\+Agent}} {\bfseries get\+Polling\+Agent} ()
+\item 
+void \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a7ef3b0a57a3637ee1c292cc5d77c80af}{client\+Call\+Async}} (\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}} object)
+\item 
+\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}} \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a5c0738a68d36b5b5881232114d85437d}{client\+Call\+Sync}} (\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}} object)
+\item 
+void \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_abc336e8ee2c7f831eaf2df63fdea1911}{client\+Init}} ()
+\item 
+void \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a6eb1d86c6001335c74e2ec4c400af321}{send\+Game\+Kind}} ()
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a8e77fb8ccf0387b5ce173d66f5a86e2d}{get\+Game\+Status}} ()
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} \mbox{\hyperlink{classtp_1_1backend_1_1_client_new_a149ccb6627caddd090a62cf742c64a02}{send\+Move\+Command}} (List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a2bfc996de97a69e203d8151d9ec2b65e}\label{classtp_1_1backend_1_1_client_new_a2bfc996de97a69e203d8151d9ec2b65e}} 
+\mbox{\hyperlink{classtp_1_1backend_1_1_client_new_1_1_polling_agent}{Polling\+Agent}} {\bfseries polling\+Agent}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MVC -\/ Controller
+
+Connection and sending commands client\textquotesingle{}s manager class 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a6aaa83afb992e130698f63749a1ed67e}\label{classtp_1_1backend_1_1_client_new_a6aaa83afb992e130698f63749a1ed67e}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!ClientNew@{ClientNew}}
+\index{ClientNew@{ClientNew}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{ClientNew()}{ClientNew()}}
+{\footnotesize\ttfamily tp.\+backend.\+Client\+New.\+Client\+New (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Constructor 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a7ef3b0a57a3637ee1c292cc5d77c80af}\label{classtp_1_1backend_1_1_client_new_a7ef3b0a57a3637ee1c292cc5d77c80af}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!clientCallAsync@{clientCallAsync}}
+\index{clientCallAsync@{clientCallAsync}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{clientCallAsync()}{clientCallAsync()}}
+{\footnotesize\ttfamily void tp.\+backend.\+Client\+New.\+client\+Call\+Async (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}}}]{object }\end{DoxyParamCaption})}
+
+Clients sends asynchronously commands to \mbox{\hyperlink{classtp_1_1backend_1_1_server}{Server}} 
+\begin{DoxyParams}{Parameters}
+{\em object} & command object that is sent \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a5c0738a68d36b5b5881232114d85437d}\label{classtp_1_1backend_1_1_client_new_a5c0738a68d36b5b5881232114d85437d}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!clientCallSync@{clientCallSync}}
+\index{clientCallSync@{clientCallSync}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{clientCallSync()}{clientCallSync()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}} tp.\+backend.\+Client\+New.\+client\+Call\+Sync (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_command}{ICommand}}}]{object }\end{DoxyParamCaption})}
+
+Fully synchronized connection Client to \mbox{\hyperlink{classtp_1_1backend_1_1_server}{Server}} (send \& receive command) 
+\begin{DoxyParams}{Parameters}
+{\em object} & command object that is sent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+server\textquotesingle{}s output 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_abc336e8ee2c7f831eaf2df63fdea1911}\label{classtp_1_1backend_1_1_client_new_abc336e8ee2c7f831eaf2df63fdea1911}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!clientInit@{clientInit}}
+\index{clientInit@{clientInit}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{clientInit()}{clientInit()}}
+{\footnotesize\ttfamily void tp.\+backend.\+Client\+New.\+client\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Registering client to the game \mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a8e77fb8ccf0387b5ce173d66f5a86e2d}\label{classtp_1_1backend_1_1_client_new_a8e77fb8ccf0387b5ce173d66f5a86e2d}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!getGameStatus@{getGameStatus}}
+\index{getGameStatus@{getGameStatus}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{getGameStatus()}{getGameStatus()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} tp.\+backend.\+Client\+New.\+get\+Game\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Request for current game\textquotesingle{}s status \begin{DoxyReturn}{Returns}
+current game\textquotesingle{}s status 
+\end{DoxyReturn}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a6eb1d86c6001335c74e2ec4c400af321}\label{classtp_1_1backend_1_1_client_new_a6eb1d86c6001335c74e2ec4c400af321}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!sendGameKind@{sendGameKind}}
+\index{sendGameKind@{sendGameKind}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{sendGameKind()}{sendGameKind()}}
+{\footnotesize\ttfamily void tp.\+backend.\+Client\+New.\+send\+Game\+Kind (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Setting the game\textquotesingle{}s kind \mbox{\Hypertarget{classtp_1_1backend_1_1_client_new_a149ccb6627caddd090a62cf742c64a02}\label{classtp_1_1backend_1_1_client_new_a149ccb6627caddd090a62cf742c64a02}} 
+\index{tp.backend.ClientNew@{tp.backend.ClientNew}!sendMoveCommand@{sendMoveCommand}}
+\index{sendMoveCommand@{sendMoveCommand}!tp.backend.ClientNew@{tp.backend.ClientNew}}
+\doxysubsubsection{\texorpdfstring{sendMoveCommand()}{sendMoveCommand()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} tp.\+backend.\+Client\+New.\+send\+Move\+Command (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions }\end{DoxyParamCaption})}
+
+Sending movement\textquotesingle{}s command to be validated by \mbox{\hyperlink{classtp_1_1backend_1_1_server}{Server}} 
+\begin{DoxyParams}{Parameters}
+{\em positions} & clicked positions on game\textquotesingle{}s board by client \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+game\textquotesingle{}s status after movement\textquotesingle{}s validation 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/Client\+New.\+java\end{DoxyCompactItemize}

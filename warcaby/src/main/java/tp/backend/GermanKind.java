@@ -1,9 +1,11 @@
 package tp.backend;
 
-//import tp.backend.position.Position;
-
 import java.util.List;
 
+/**
+ * MVC - Controller
+ * Class GermanKind determines rules in German version of checkers
+ */
 public class GermanKind implements IGameKind {
   // No need to check isCapturePossible()
   // ATTENTION: Piece can capture forewards and backwards!
@@ -29,6 +31,10 @@ public class GermanKind implements IGameKind {
   private static final String REGULAR = "REGULAR";
   private static final String CAPTURE = "CAPTURE";
 
+  /**
+   * Constructor. 
+   * Within this method, the gameBoard is initialized.
+   */
   GermanKind() {
     this.name = "German";
     this.gameBoard = new String[boardSize+1][boardSize+1];
@@ -60,6 +66,8 @@ public class GermanKind implements IGameKind {
     }
   }
 
+  // Setter & Getters
+
   public String[][] getGameBoard() {
     return this.gameBoard;
   }
@@ -72,10 +80,26 @@ public class GermanKind implements IGameKind {
     return this.name;
   }
 
+  public boolean getCapturedRequired() {
+    return this.capturedRequired;
+  }
+
+  /**
+   * Method determing who starts the game
+   * @return color's ID
+   */
   public int whoStarts() {
     return WHITE;
   }
 
+  /**
+   * Method checkMovePiece checks the correctness of the move, made by piece. 
+   * This methods checks regular move as well as single capture
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMovePiece(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
@@ -208,6 +232,14 @@ public class GermanKind implements IGameKind {
     return move; // return default Movement value (incorrect move)
   }
 
+  /**
+   * Method checkMoveKing checks the correctness of the move, made by king.
+   * This methods checks regular move as well as single capture 
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMoveKing(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position(); // captured figure
@@ -348,6 +380,13 @@ public class GermanKind implements IGameKind {
     return move; // return default Movement value (incorrect move)
   }
 
+  /**
+   * Method checkMultiCapturePiece checks the correctness of the multi-capture move made by piece.
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMultiCapturePiece(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
@@ -368,7 +407,6 @@ public class GermanKind implements IGameKind {
     }
     
     for(Position end : positions.subList(1, positions.size())) { 
-      System.out.println("MULTIPIECE START X: " + start.getX() + " Y: " + start.getY() + " END X: " + end.getX() + " Y: " + end.getY());
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
@@ -436,6 +474,13 @@ public class GermanKind implements IGameKind {
     return move;
   }
 
+  /**
+   * Method checkMultiCaptureKing checks the correctness of the multi-capture move made by king.
+   * @param currPlayer ID of the player who made move
+   * @param positions player's clicked positions
+   * @param board game's board
+   * @return movement's output information
+   */
   public Movement checkMultiCaptureKing(int currPlayer, List<Position> positions, String[][] board) {
     Movement move = new Movement();
     Position cf = new Position();
@@ -469,7 +514,6 @@ public class GermanKind implements IGameKind {
       startY=0;
       endY=0;
 
-      System.out.println("MULTIKING START X: " + start.getX() + " Y: " + start.getY() + " END X: " + end.getX() + " Y: " + end.getY());
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
@@ -593,6 +637,12 @@ public class GermanKind implements IGameKind {
     return move;
   }
 
+  /**
+   * Method checks if a piece can be upgraded into a king
+   * @param currPlayer ID of the player who made move
+   * @param to ending position in player's moe
+   * @return true - upgrade possible | false - no possible upgrades
+   */
   public boolean hasPieceUpgrade(int currPlayer, Position to) {
     if(currPlayer == BLACK) {
       if(to.getX() == boardSize) {

@@ -1,0 +1,73 @@
+\hypertarget{classtp_1_1backend_1_1_game_new}{}\doxysection{tp.\+backend.\+Game\+New Class Reference}
+\label{classtp_1_1backend_1_1_game_new}\index{tp.backend.GameNew@{tp.backend.GameNew}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_aec9385613a508509a54b186cc22ae2b8}\label{classtp_1_1backend_1_1_game_new_aec9385613a508509a54b186cc22ae2b8}} 
+String {\bfseries get\+Player1\+ID} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a4d8e5028b6925c1a04f6511400db42ed}\label{classtp_1_1backend_1_1_game_new_a4d8e5028b6925c1a04f6511400db42ed}} 
+String {\bfseries get\+Player2\+ID} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_ab5faff07dd8c414e402e28f008a98264}\label{classtp_1_1backend_1_1_game_new_ab5faff07dd8c414e402e28f008a98264}} 
+void {\bfseries set\+Game\+Kind} (\mbox{\hyperlink{interfacetp_1_1backend_1_1_i_game_kind}{IGame\+Kind}} game\+Kind)
+\item 
+void \mbox{\hyperlink{classtp_1_1backend_1_1_game_new_a7b48b0d47e0d68d63275232b5af90419}{load\+Init\+Board}} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_adc4c608404d41f5a41533cf726b6a780}\label{classtp_1_1backend_1_1_game_new_adc4c608404d41f5a41533cf726b6a780}} 
+String {\bfseries get\+Game\+Kind\+Name} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a5d37d1ce651b4f175e6b2d19af9fe428}\label{classtp_1_1backend_1_1_game_new_a5d37d1ce651b4f175e6b2d19af9fe428}} 
+String {\bfseries get\+Active\+Player\+ID} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a1046f029fdc62d2cd6bf76996252403b}\label{classtp_1_1backend_1_1_game_new_a1046f029fdc62d2cd6bf76996252403b}} 
+String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} {\bfseries get\+Board} ()
+\item 
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a00091987798b974c48d65d004b9353e4}\label{classtp_1_1backend_1_1_game_new_a00091987798b974c48d65d004b9353e4}} 
+int {\bfseries get\+Num\+Of\+Players} ()
+\item 
+String \mbox{\hyperlink{classtp_1_1backend_1_1_game_new_a02e61684c0d89ae59fde25c91785cd56}{add\+Player}} ()
+\item 
+synchronized \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} \mbox{\hyperlink{classtp_1_1backend_1_1_game_new_a3e123ea17434cdd8cde0eb9f0a3221f9}{move}} (List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ positions, String curr\+Player\+ID)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+MVC -\/ Model
+
+Class representing the game\textquotesingle{}s process 
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a02e61684c0d89ae59fde25c91785cd56}\label{classtp_1_1backend_1_1_game_new_a02e61684c0d89ae59fde25c91785cd56}} 
+\index{tp.backend.GameNew@{tp.backend.GameNew}!addPlayer@{addPlayer}}
+\index{addPlayer@{addPlayer}!tp.backend.GameNew@{tp.backend.GameNew}}
+\doxysubsubsection{\texorpdfstring{addPlayer()}{addPlayer()}}
+{\footnotesize\ttfamily String tp.\+backend.\+Game\+New.\+add\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Method used for registering new players/clients \mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a7b48b0d47e0d68d63275232b5af90419}\label{classtp_1_1backend_1_1_game_new_a7b48b0d47e0d68d63275232b5af90419}} 
+\index{tp.backend.GameNew@{tp.backend.GameNew}!loadInitBoard@{loadInitBoard}}
+\index{loadInitBoard@{loadInitBoard}!tp.backend.GameNew@{tp.backend.GameNew}}
+\doxysubsubsection{\texorpdfstring{loadInitBoard()}{loadInitBoard()}}
+{\footnotesize\ttfamily void tp.\+backend.\+Game\+New.\+load\+Init\+Board (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Init board view loader based on game\textquotesingle{}s kind \mbox{\Hypertarget{classtp_1_1backend_1_1_game_new_a3e123ea17434cdd8cde0eb9f0a3221f9}\label{classtp_1_1backend_1_1_game_new_a3e123ea17434cdd8cde0eb9f0a3221f9}} 
+\index{tp.backend.GameNew@{tp.backend.GameNew}!move@{move}}
+\index{move@{move}!tp.backend.GameNew@{tp.backend.GameNew}}
+\doxysubsubsection{\texorpdfstring{move()}{move()}}
+{\footnotesize\ttfamily synchronized \mbox{\hyperlink{classtp_1_1backend_1_1_movement}{Movement}} tp.\+backend.\+Game\+New.\+move (\begin{DoxyParamCaption}\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{positions,  }\item[{String}]{curr\+Player\+ID }\end{DoxyParamCaption})}
+
+Method used to register player\textquotesingle{}s move 
+\begin{DoxyParams}{Parameters}
+{\em positions} & player\textquotesingle{}s clicked positions \\
+\hline
+{\em curr\+Player} & player\textquotesingle{}s ID \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Error Message (if move was correct error message is empty (\char`\"{}\char`\"{})) 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+backend/Game\+New.\+java\end{DoxyCompactItemize}

@@ -1,5 +1,7 @@
 package tp.backend;
-
+/**
+ * Generic command used in communication protocol
+ */
 public class CommandClass {
   private String type;
   private String value;

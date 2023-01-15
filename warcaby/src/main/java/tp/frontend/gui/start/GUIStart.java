@@ -12,23 +12,26 @@ import java.lang.Thread;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 
+/**
+ * MVC - View
+ */
 public class GUIStart extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
 //      Maria
+//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
 //        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
 //        Test tees1 = new Test ();
 //        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
-//      Ola
 
+//      Ola
         FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
         FXMLLoader wait = new FXMLLoader ( getClass().getResource("wait.fxml"));
         FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
 
         ClientNew player = new ClientNew();
-        player.clientInit(); // pierwsze polaczenie z serwerem
+        player.clientInit(); // register client
 
         FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
 
@@ -58,8 +61,8 @@ public class GUIStart extends Application {
             Scene scene = new Scene(board.load(), 800, 600 );
             stage.setTitle("BLACK");
             GUIController controller = board.getController();
-            controller.setPlayer(player); //NEW
-            // kolejne 6 linijek to obracanie planszy, zauważ że one nie zmieniają logiki gry (zachowują indeksy pól)
+            controller.setPlayer(player); 
+            
             controller.board8x8.setRotate(180);
             ObservableList<Node> childrenPane = controller.board8x8.getChildren();
             for (Node node : childrenPane){
