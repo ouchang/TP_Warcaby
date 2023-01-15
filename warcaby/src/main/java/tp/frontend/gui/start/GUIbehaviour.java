@@ -1,5 +1,7 @@
 package tp.frontend.gui.start;
 
+import tp.backend.Position;
+
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
@@ -10,6 +12,7 @@ import javafx.scene.layout.Pane;
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class GUIbehaviour {
     //ArrayList<Pane> fromTo = new ArrayList<> (2);
@@ -22,9 +25,9 @@ public class GUIbehaviour {
         imageType = new String[5];
         imageType[0] = "";
         imageType[1] = "simpleWhitePiece.png";
-        imageType[2] = "simpleWhiteKing.png"; // TO DO: Add image to project!
+        imageType[2] = "kingWhitePiece.png"; 
         imageType[3] = "simpleBlackPiece.png";
-        imageType[4] = "simpleBlackKing.png"; // TO DO: Add image to project!
+        imageType[4] = "kingBlackPiece.png"; 
     }
 
     public void addElement(Pane element) {
@@ -138,15 +141,47 @@ public class GUIbehaviour {
         }
     }
 
-    public void react(int figureIdx) throws FileNotFoundException, MalformedURLException {
+    public void react(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
         String fileName = imageType[figureIdx];
         System.out.println("FileName: " + fileName);
 
         System.out.println("START ADD_PIECE FUNC");
         add(fromTo.get(1), fileName);
-        
+
         System.out.println("START DELETE_PIECE FUNC");
-        deletePiece ( fromTo.get ( 0 ) );
+        if(capturedFigures != null) {
+            System.out.println("Delete - capture move");
+            //Capture  move
+            int row, col;
+            ObservableList<Node> children = gridPane.getChildren();
+            for(Position p : capturedFigures) {
+                for(Node node : children) {
+                    if(node instanceof Pane) {
+                        if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
+                            row = 1;
+                        } else {
+                            row = GridPane.getRowIndex(node) + 1;
+                        }
+                
+                        if(GridPane.getColumnIndex(node) == null) { // colIndex = 0
+                            col = 1;
+                        } else {
+                            col = GridPane.getColumnIndex(node) + 1;
+                        }
+
+                        if(p.getX() == row && p.getY() == col) {
+                            Pane pane = (Pane) node;
+                            deletePiece(pane);
+                        }
+                    }
+                }
+            }
+        } else {
+            System.out.println("Delete - regular move");
+        }
+            
+        //Regular move
+        deletePiece(fromTo.get(0));
     }
 }

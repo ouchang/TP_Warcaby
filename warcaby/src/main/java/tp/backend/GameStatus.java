@@ -1,5 +1,8 @@
 package tp.backend;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class GameStatus implements ICommand {
   String playerId;
   String id;
@@ -11,6 +14,7 @@ public class GameStatus implements ICommand {
   String status;
   String error;
   String[][] board;
+  List<Position> capturedFigures;
 
   public GameStatus() {
     this.playerId = "";
@@ -23,6 +27,7 @@ public class GameStatus implements ICommand {
     this.status = "";
     this.error = "";
     this.board = null;
+    this.capturedFigures = new ArrayList<Position>();
   }
 
   public void setId(String id) {
@@ -105,7 +110,15 @@ public class GameStatus implements ICommand {
     return board;
   }
 
-  public String showView() {
-    return id + "|" + friendly_name + "|" + player1 + "|" + player2 + "| GK: " +  gameKind + "|" + activePlayerID  + "|" + status + "|" + error + "|" + board;
+  public List<Position> getCapturedFigures() {
+    return this.capturedFigures;
+  }
+
+  public void setCapturedFigures(List<Position> capturedFigures) {
+    this.capturedFigures = capturedFigures;
+  }
+
+  public void addCapturedFigure(Position cf) {
+    capturedFigures.add(cf);
   }
 }

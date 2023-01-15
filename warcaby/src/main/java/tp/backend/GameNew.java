@@ -107,7 +107,7 @@ public class GameNew {
    * @param currPlayer
    * @return Error Message (if move was correct error message is empty (""))
    */
-  public synchronized String move(List<Position> positions, String currPlayerID) {
+  public synchronized Movement move(List<Position> positions, String currPlayerID) { //String
     Movement movement = new Movement();
 
     Position from = new Position();
@@ -179,10 +179,10 @@ public class GameNew {
           blackPrevFromY = from.getY();
         }
 
-        return "";
+        return movement;
       } else {
         // update error info
-        return movement.getErrorMessage();
+        return movement;
       }
     } else if(positions.size() == 2) { // Regular/Single capture move
       // Read starting and ending position
@@ -252,13 +252,13 @@ public class GameNew {
           blackPrevFromY = from.getY();
         }
         
-        return "";
+        return movement;
       }  else {
-        return movement.getErrorMessage();
+        return movement;
       }
     }
 
-    return "ERROR: Wrong move!";
+    return null;
   }
 
 }

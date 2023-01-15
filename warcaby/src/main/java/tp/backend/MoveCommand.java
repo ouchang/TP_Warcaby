@@ -5,7 +5,6 @@ import java.util.List;
 
 public class MoveCommand implements ICommand {
   String playerId;
-  //int pieceId; // 0 - piece, 1 - king
   List<Position> positions;
 
   MoveCommand() {
@@ -19,15 +18,7 @@ public class MoveCommand implements ICommand {
   String getPlayerId() {
     return this.playerId;
   }
-/*
-  void setPieceId(int pieceId) {
-    this.pieceId = pieceId;
-  }
 
-  int getPieceId() {
-    return this.pieceId;
-  }
-*/
   public List<Position> getPositions() {
     return positions;
   }
@@ -42,15 +33,5 @@ public class MoveCommand implements ICommand {
 
   public void clearPositions() {
     this.positions.clear();
-  }
-
-  public String showView() { // TO DO: Delete this
-    String w = playerId + "| ";
-    for(Position p : positions) {
-      w += String.valueOf(p.getX()) + " ";
-      w += String.valueOf(p.getY()) + "| ";
-    }
-
-    return w;
   }
 }

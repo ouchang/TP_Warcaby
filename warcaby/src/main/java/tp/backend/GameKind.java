@@ -19,8 +19,4 @@ public class GameKind implements ICommand {
   public String getPlayerId() {
     return this.playerId;
   }
-
-  public String showView() {
-    return "";
-  }
 }

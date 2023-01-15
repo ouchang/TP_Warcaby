@@ -7,16 +7,12 @@ import java.util.Iterator;
 public class Movement {
   private String kind; // possible values: "REGULAR", "CAPTURE"
   private boolean correctMove;
-  //private int capturedFigureX;
-  //private int capturedFigureY;  
   private List<Position> capturedFigures;
   private String errorMessage;
 
-  Movement() {
+  public Movement() {
     this.kind = "";
     this.correctMove = false;
-    //this.capturedFigureX = 0;
-    //this.capturedFigureY = 0;
     this.capturedFigures = new ArrayList<Position>();
     this.errorMessage = "";
   }
@@ -36,23 +32,6 @@ public class Movement {
   public void setCorrectMove(boolean correctMove) {
     this.correctMove = correctMove;
   }
-/*
-  public int getCapturedFigureX() {
-    return this.capturedFigureX;
-  }
-
-  public void setCapturedFigureX(int capturedFigureX) {
-    this.capturedFigureX = capturedFigureX;
-  }
-  
-  public int getCapturedFigureY() {
-    return this.capturedFigureY;
-  }
-
-  public void setCapturedFigureY(int capturedFigureY) {
-    this.capturedFigureY = capturedFigureY;
-  }
-*/
 
   public List<Position> getCapturedFigures() {
     return this.capturedFigures;

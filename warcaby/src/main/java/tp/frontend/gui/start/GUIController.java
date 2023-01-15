@@ -2,7 +2,9 @@ package tp.frontend.gui.start;
 
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
+import tp.backend.Movement;
 import tp.backend.Position;
+import tp.backend.Movement;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -62,6 +64,11 @@ public class GUIController {
 
     @FXML
     void updateBoard(ActionEvent event) {
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Wait until opponent makes move!");
+            return;
+        }
+
         GUIbehaviour bevhaviour = new GUIbehaviour();
         GameStatus gameStatus = player.getPollingAgent().getGameStatus();
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
@@ -139,38 +146,36 @@ public class GUIController {
                 this.positions.add(pos);
 
                 this.fromTo.add(actual);
-
-                GameStatus gameStatus = player.getGameStatus();
-                String[][] gameBoard = gameStatus.getBoard();
-                Position from = this.positions.get(0);
-                int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
+                
+                //int figureIdx = Integer.parseInt(gameBoard[from.getX()][from.getY()]);
+                List<Position> capturedFigures = new ArrayList<Position>();
 
                 //if(figureIdx == 0) {}
 
                 // send move info to server
                 System.out.println("POSITIONS: " + this.positions);
-                gameStatus = player.sendMoveCommand(this.positions);
+                GameStatus gameStatus = player.sendMoveCommand(this.positions);
                 errorMessage = gameStatus.getError();
+                capturedFigures = gameStatus.getCapturedFigures();  
+                String[][] gameBoard = gameStatus.getBoard();
+                int figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
 
                 System.out.println("Error Message: " + errorMessage);
 
                 if(errorMessage.equals("")) {
                     System.out.println("GUIController - Correct move");
                     GUIbehaviour bevhaviour = new GUIbehaviour();
-                    bevhaviour.updateBoard(gameStatus.getBoard(), this);
-
-                    //bevhaviour.swapList(this.fromTo);
-                    //bevhaviour.react(figureIdx);
-                    
-                    // lock board
-                    //lockBoard();
-
+                    //bevhaviour.updateBoard(gameStatus.getBoard(), this);
+                    bevhaviour.swapList(this.fromTo);
+                    if(capturedFigures.size() != 0) {
+                        bevhaviour.react(figureIdx, capturedFigures, this.board8x8);
+                    } else {
+                        bevhaviour.react(figureIdx, null, this.board8x8);
+                    }
                 } else {
                     System.out.println("GUIController - Wrong move");
                     
                     // print error message
-
-                    // start the whole move process again
                 }
 
                 // clear
@@ -185,8 +190,6 @@ public class GUIController {
                 pos.setX(row);
                 pos.setY(col);
                 this.positions.add(pos);
-
-                this.fromTo.add(actual);
             }
         }
     }
