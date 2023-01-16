@@ -57,7 +57,8 @@ public class TypesController {
 
         this.player.sendGameKind();
 
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
+//        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
+        FXMLLoader board = new FXMLLoader ( getClass().getResource("gui2.fxml"));
         Scene secondScene = new Scene( board.load(), 800, 600);
         GUIController controller = board.getController();
         controller.setPlayer(this.player);

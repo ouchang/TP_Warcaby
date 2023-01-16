@@ -32,7 +32,7 @@ public class GUIController {
     private Button updateButton;
 
     @FXML
-    private TextArea instruction;
+    private TextField instruction;
 
     @FXML
     public GridPane board8x8;
@@ -52,16 +52,6 @@ public class GUIController {
     @FXML
     private GridPane game;
 
-
-    @FXML
-    private Button sendMessageButton;
-
-    @FXML
-    public Pane pos65;
-
-    @FXML
-    public Pane pos74;
-
     public void setPlayer(ClientNew player) {
         this.player = player;
     }
@@ -77,21 +67,26 @@ public class GUIController {
         GameStatus gameStatus = player.getPollingAgent().getGameStatus();
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
     }
-
-    @FXML
-    public void tedectorAction(MouseEvent event) {
-        if (event.getButton () == MouseButton.PRIMARY){
-            System.out.println ("lewy przycisk");
-            detector.setText ( "lewy przycisk" );
-        }
-        if (event.getButton () == MouseButton.SECONDARY){
-            System.out.println ("prawy przycisk");
-            detector.setText ( "prawy przycisk" );
-        }
-    }
-
+    
     @FXML
     public void showInstruction(ActionEvent event) {
+        String gameType =  player.getGameKind();
+
+        switch (gameType){
+            case "czech":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n2) Jeżeli istnieje możliwość bicia, to gracz musi wykonać dowolne bicie\n");
+                break;
+            }
+            case "swedish":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu szwedzkiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n");
+                break;
+            }
+            case "german":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się wyłącznie do przodu\n2) Pionek może wykonać bicie do tyłu\n");
+                break;
+            }
+
+        }
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
         } else {

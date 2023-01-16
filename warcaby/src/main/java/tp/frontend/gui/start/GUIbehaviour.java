@@ -144,7 +144,6 @@ public class GUIbehaviour {
         // get figure's image file name
         String fileName = imageType[figureIdx];
 
-
         // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
 
