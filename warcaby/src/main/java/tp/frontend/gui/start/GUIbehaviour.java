@@ -60,6 +60,8 @@ public class GUIbehaviour {
         if(fileName != "") {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
             ImageView imageView = new ImageView(image);
+            imageView.setLayoutX(4);
+            imageView.setLayoutY(12);
             imageView.setFitHeight ( 40 );
             imageView.setFitWidth ( 50 );
             position.getChildren ().add ( imageView );
@@ -123,18 +125,12 @@ public class GUIbehaviour {
                 if(!emptyField) {
                     image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
                     ImageView imageView = new ImageView(image);
+                    imageView.setLayoutX(4);
+                    imageView.setLayoutY(12);
                     imageView.setFitHeight( 40 );
                     imageView.setFitWidth( 50 );
 
-                    try {
-                        add(pane, fileName);
-                    } catch(FileNotFoundException e) {
-                        System.out.println(e.getMessage());
-                        System.exit(1);
-                    } catch(MalformedURLException e) {
-                        System.out.println(e.getMessage());
-                        System.exit(1);
-                    }
+                    pane.getChildren().add(imageView);
                 }
             }
         }

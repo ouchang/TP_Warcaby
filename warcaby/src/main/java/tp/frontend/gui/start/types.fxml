@@ -25,13 +25,13 @@
   </rowConstraints>
    <children>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnSpan="3" GridPane.rowSpan="5">
-         <children>
-            <ImageView disable="true" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" smooth="false">
-               <image>
-                  <Image url="@BoardWallpaper.png" />
-               </image>
-            </ImageView>
-         </children>
+<!--         <children>-->
+<!--            <ImageView disable="true" fitHeight="600.0" fitWidth="800.0" pickOnBounds="true" smooth="false">-->
+<!--               <image>-->
+<!--                  <Image url="@BoardWallpaper.png" />-->
+<!--               </image>-->
+<!--            </ImageView>-->
+<!--         </children>-->
       </Pane>
       <Pane fx:id="textPane" prefHeight="221.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
          <children>

@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Implementation of communication protocol between Client and Server
  */
-class CoderDecoder {
+public class CoderDecoder {
   
   /**
    * Command's deserializer
@@ -83,8 +83,6 @@ class CoderDecoder {
       String commandAsString = mapper.writeValueAsString(cmd);
       return commandAsString;
     } catch(JsonProcessingException e) {
-      System.out.println(e.getMessage());
-    } catch(IOException e) {
       System.out.println(e.getMessage());
     }
 

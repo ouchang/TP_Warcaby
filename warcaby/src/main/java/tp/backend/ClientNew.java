@@ -41,6 +41,10 @@ public class ClientNew {
     this.gameKind = gameKind;
   }
 
+  public String getGameKind() {
+    return this.gameKind;
+  }
+
   public PollingAgent getPollingAgent() {
     return this.pollingAgent;
   }

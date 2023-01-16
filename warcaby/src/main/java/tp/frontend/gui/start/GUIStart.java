@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.collections.ObservableList;
 
 import java.lang.Thread;
+import java.nio.file.Paths;
 
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
@@ -20,20 +21,14 @@ public class GUIStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //      Maria
-//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
-//        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
-//        Test tees1 = new Test ();
-//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
-
+        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guixml.fxml" ).toUri().toURL () );
+        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
 //      Ola
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
-        FXMLLoader wait = new FXMLLoader ( getClass().getResource("wait.fxml"));
-        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+//        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
+//        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
 
         ClientNew player = new ClientNew();
         player.clientInit(); // register client
-
-        FXMLLoader fxmlLoader = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
 
         GameStatus gameStatus = new GameStatus();
 
@@ -41,8 +36,8 @@ public class GUIStart extends Application {
             System.out.println("GUI sends gameKind");
 
             Scene scene = new Scene ( types.load(), 800, 600 );
-            TypesController typesController = types.getController();
-            typesController.setPlayer(player);
+            TypesController setBoard = types.getController();
+            setBoard.setPlayer(player);
 
             stage.setTitle("Welcome to checkers!");
             stage.setScene(scene);

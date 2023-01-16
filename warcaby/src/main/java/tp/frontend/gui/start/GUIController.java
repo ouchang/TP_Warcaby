@@ -1,5 +1,6 @@
 package tp.frontend.gui.start;
 
+import javafx.scene.Node;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
@@ -32,7 +33,7 @@ public class GUIController {
     private Button updateButton;
 
     @FXML
-    private TextArea instruction;
+    private TextField instruction;
 
     @FXML
     public GridPane board8x8;
@@ -52,22 +53,13 @@ public class GUIController {
     @FXML
     private GridPane game;
 
-
-    @FXML
-    private Button sendMessageButton;
-
-    @FXML
-    public Pane pos65;
-
-    @FXML
-    public Pane pos74;
-
     public void setPlayer(ClientNew player) {
         this.player = player;
     }
 
     @FXML
     void updateBoard(ActionEvent event) {
+        detector.setText("");
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
             return;
@@ -79,19 +71,24 @@ public class GUIController {
     }
 
     @FXML
-    public void tedectorAction(MouseEvent event) {
-        if (event.getButton () == MouseButton.PRIMARY){
-            System.out.println ("lewy przycisk");
-            detector.setText ( "lewy przycisk" );
-        }
-        if (event.getButton () == MouseButton.SECONDARY){
-            System.out.println ("prawy przycisk");
-            detector.setText ( "prawy przycisk" );
-        }
-    }
-
-    @FXML
     public void showInstruction(ActionEvent event) {
+        String gameType =  player.getGameKind();
+
+        switch (gameType){
+            case "czech":{
+                instruction.setText("CzechType");
+                break;
+            }
+            case "swedish":{
+                instruction.setText("SwedishType");
+                break;
+            }
+            case "german":{
+                instruction.setText("GermanType");
+                break;
+            }
+
+        }
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
         } else {
@@ -100,14 +97,18 @@ public class GUIController {
     }
  
     private boolean firstClick = false;
-    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
-    public List<Position> positions = new ArrayList<Position>();
+    public ArrayList<Pane> fromTo = new ArrayList<>();
+    public List<Position> positions = new ArrayList<>();
 
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
+
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
+            detector.setText("Not your turn!");
             return;
+        } else {
+            detector.setText("Your turn");
         }
 
         Pane actual = (Pane) event.getSource();
@@ -127,7 +128,6 @@ public class GUIController {
         } else {
             col = GridPane.getColumnIndex(actual) + 1;
         }
-
         
         if(event.getButton() == MouseButton.PRIMARY) {
             if(!this.firstClick) {
@@ -143,6 +143,7 @@ public class GUIController {
 
                 this.firstClick = true;
             } else {
+
                 System.out.println("LAST CLICK");
 
                 pos.setX(row);
@@ -182,7 +183,6 @@ public class GUIController {
                 // clear
                 this.fromTo.clear();
                 this.positions.clear();
-
                 this.firstClick = false;
             }
         } else if(event.getButton() == MouseButton.SECONDARY) {
@@ -191,6 +191,7 @@ public class GUIController {
                 pos.setX(row);
                 pos.setY(col);
                 this.positions.add(pos);
+                //((Pane) event.getSource()).setStyle("-fx-background-color: #E48A65;");
             }
         }
     }
