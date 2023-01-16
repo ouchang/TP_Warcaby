@@ -13,11 +13,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 /**
  * MVC - Controller
@@ -32,7 +38,7 @@ public class GUIController {
     private Button updateButton;
 
     @FXML
-    private TextArea instruction;
+    private TextField instruction;
 
     @FXML
     public GridPane board8x8;
@@ -52,18 +58,25 @@ public class GUIController {
     @FXML
     private GridPane game;
 
-
-    @FXML
-    private Button sendMessageButton;
-
-    @FXML
-    public Pane pos65;
-
-    @FXML
-    public Pane pos74;
+    boolean isBoardLocked = false;
 
     public void setPlayer(ClientNew player) {
         this.player = player;
+
+        GameStatus gameStatus = player.getGameStatus();
+
+        //start thread -> thread unlocks board
+        GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+        gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle (WorkerStateEvent e) {
+                unlockBoard();
+                updateOnDemand();
+            }
+        });
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(gameBoardManager);
     }
 
     @FXML
@@ -78,20 +91,37 @@ public class GUIController {
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
     }
 
-    @FXML
-    public void tedectorAction(MouseEvent event) {
-        if (event.getButton () == MouseButton.PRIMARY){
-            System.out.println ("lewy przycisk");
-            detector.setText ( "lewy przycisk" );
+    void updateOnDemand() {
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Wait until opponent makes move!");
+            return;
         }
-        if (event.getButton () == MouseButton.SECONDARY){
-            System.out.println ("prawy przycisk");
-            detector.setText ( "prawy przycisk" );
-        }
-    }
 
+        GUIbehaviour bevhaviour = new GUIbehaviour();
+        GameStatus gameStatus = player.getPollingAgent().getGameStatus();
+        System.out.println("Updating board!");
+        bevhaviour.updateBoard(gameStatus.getBoard(), this);
+    }
+    
     @FXML
     public void showInstruction(ActionEvent event) {
+        String gameType =  player.getGameKind();
+
+        switch (gameType){
+            case "czech":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n2) Jeżeli istnieje możliwość bicia, to gracz musi wykonać dowolne bicie\n");
+                break;
+            }
+            case "swedish":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu szwedzkiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n");
+                break;
+            }
+            case "german":{
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się wyłącznie do przodu\n2) Pionek może wykonać bicie do tyłu\n");
+                break;
+            }
+
+        }
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
         } else {
@@ -154,14 +184,11 @@ public class GUIController {
                 List<Position> capturedFigures = new ArrayList<Position>();
 
                 // send move info to server
-                System.out.println("POSITIONS: " + this.positions);
                 GameStatus gameStatus = player.sendMoveCommand(this.positions);
                 errorMessage = gameStatus.getError();
                 capturedFigures = gameStatus.getCapturedFigures();  
                 String[][] gameBoard = gameStatus.getBoard();
                 int figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
-
-                System.out.println("Error Message: " + errorMessage);
 
                 if(errorMessage.equals("")) {
                     System.out.println("GUIController - Correct move");
@@ -173,6 +200,23 @@ public class GUIController {
                     } else {
                         bevhaviour.react(figureIdx, null, this.board8x8);
                     }
+
+                    //lock board
+                    lockBoard();
+
+                    //start thread -> thread unlocks board
+                    GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+                    gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle (WorkerStateEvent e) {
+                            unlockBoard();
+                            updateOnDemand();
+                        }
+                    });
+
+                    ExecutorService executor = Executors.newSingleThreadExecutor();
+                    executor.submit(gameBoardManager);
+
                 } else {
                     System.out.println("GUIController - Wrong move");
                     System.out.println(gameStatus.getError());
@@ -196,11 +240,11 @@ public class GUIController {
     }
 
     public void lockBoard() {
-        this.game.setDisable(true);
+        this.board8x8.setDisable(true);
     }
 
     public void unlockBoard() {
-        this.game.setDisable(false);
+        this.board8x8.setDisable(false);
     }
 
     @FXML
@@ -210,7 +254,35 @@ public class GUIController {
     }
 
     public GUIController(){
-        System.out.println ("gui controller created");
+        System.out.println ("GUIController created");
+    }
+
+    public class GameBoardManager extends Task<Boolean> {
+        GUIController guiController;
+        GameStatus initGameStatus;
+        
+        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
+            this.guiController = guiController;
+            this.initGameStatus = initGameStatus;
+        }
+
+        public Boolean call() {
+            String currentPlayer;
+            String myPlayerID = guiController.player.getPlayerId();
+
+            currentPlayer = initGameStatus.getActivePlayerID();
+            try {
+                while(!myPlayerID.equals(currentPlayer)) {
+                    Thread.sleep(2000);
+                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
+                }
+            } catch(InterruptedException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+            
+            return true;
+        }
     }
 }
 

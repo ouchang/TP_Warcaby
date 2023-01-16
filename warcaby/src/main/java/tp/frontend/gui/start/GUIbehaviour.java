@@ -14,6 +14,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.management.relation.Role;
+
 /**
  * MVC - View
  */
@@ -68,13 +70,12 @@ public class GUIbehaviour {
         }
     }
 
-    public void updateBoard(String[][] boardString, GUIController controller){
+    public synchronized void updateBoard(String[][] boardString, GUIController controller){
         int row, col;
         String fileName = "";
         Image image = null;
         boolean emptyField = false;
         for (Node node : controller.board8x8.getChildren()) {
-
             if (node instanceof Pane) {
                 if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
                     row = 1;
@@ -87,7 +88,6 @@ public class GUIbehaviour {
                 } else {
                     col = GridPane.getColumnIndex(node) + 1;
                 }
-
 
                 switch (boardString[row][col]) {
                     case "0":{
@@ -143,7 +143,6 @@ public class GUIbehaviour {
     public void react(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
         String fileName = imageType[figureIdx];
-
 
         // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
