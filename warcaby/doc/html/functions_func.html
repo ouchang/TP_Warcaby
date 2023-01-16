@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -47,6 +51,22 @@ $(function() {
 </script>
 <div id="main-nav"></div>
 </div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('functions_func.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -65,15 +85,21 @@ $(function() {
 &#160;
 
 <h3><a id="index_a" name="index_a"></a>- a -</h3><ul>
+<li>add()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a559c864f775e9a6312f8a6e679e535c8">tp.frontend.gui.start.GUIbehaviour</a></li>
+<li>addCapturedFigure()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#ac6bbae65cb36004e89c0cbb0b2d0c318">tp.backend.GameStatus</a>, <a class="el" href="classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868">tp.backend.Movement</a></li>
+<li>addElement()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa8009e4ea086fac84ffd06455c6b24e6">tp.frontend.gui.start.GUIbehaviour</a></li>
 <li>addPlayer()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a02e61684c0d89ae59fde25c91785cd56">tp.backend.GameNew</a></li>
+<li>addPosition()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_move_command.html#a95615e1a0e7e1ff203264c4e885f524b">tp.backend.MoveCommand</a></li>
 </ul>
 
 
 <h3><a id="index_c" name="index_c"></a>- c -</h3><ul>
-<li>checkMoveKing()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#aae6b0eea58740ee0faedc3468cb0ef62">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#abaf90c6719cd87572b0db06a1d1f0c92">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#ad94efd5e1daeddd77c786fd52a18313f">tp.backend.SwedishKind</a></li>
-<li>checkMovePiece()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0574a41dbc824f7f76bb158d893ede61">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a11e9a5e6a1c64ad95b66b9d2346c61a5">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a4df4e3fff40abd6d914cc8dc890d7e65">tp.backend.SwedishKind</a></li>
-<li>checkMultiCaptureKing()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a580b608efa980bbb860bbb346ba44b7e">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a7c166b5cd2b5cc6fdb23137829c916b8">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a82392b68490a6f32327f042b7743166a">tp.backend.SwedishKind</a></li>
-<li>checkMultiCapturePiece()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0f780319e34028c076b7354f82c10dfd">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a1f929b03cbccff26063f9e2a745dacd2">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a1f27ebb87d26b4476f2f83a8e970f522">tp.backend.SwedishKind</a></li>
+<li>checkMoveKing()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#aae6b0eea58740ee0faedc3468cb0ef62">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#abaf90c6719cd87572b0db06a1d1f0c92">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a2d30b2fd76f27988edc18000d3874744">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#ad94efd5e1daeddd77c786fd52a18313f">tp.backend.SwedishKind</a></li>
+<li>checkMovePiece()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0574a41dbc824f7f76bb158d893ede61">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a11e9a5e6a1c64ad95b66b9d2346c61a5">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#ac218218c928c9d34536458aae6ce6335">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a4df4e3fff40abd6d914cc8dc890d7e65">tp.backend.SwedishKind</a></li>
+<li>checkMultiCaptureKing()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a580b608efa980bbb860bbb346ba44b7e">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a7c166b5cd2b5cc6fdb23137829c916b8">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9289d73964d1acfab142c1a0b0655f3c">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a82392b68490a6f32327f042b7743166a">tp.backend.SwedishKind</a></li>
+<li>checkMultiCapturePiece()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a0f780319e34028c076b7354f82c10dfd">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a1f929b03cbccff26063f9e2a745dacd2">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a55cb1172dd328dfff05786a01a995091">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a1f27ebb87d26b4476f2f83a8e970f522">tp.backend.SwedishKind</a></li>
+<li>choseType()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html#a29a898de2f004e21c8340aa5b39e6482">tp.frontend.gui.start.TypesController</a></li>
+<li>clearPositions()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_move_command.html#a60f082d845d9528e1171bb4e268a9f6b">tp.backend.MoveCommand</a></li>
 <li>clientCallAsync()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a7ef3b0a57a3637ee1c292cc5d77c80af">tp.backend.ClientNew</a></li>
 <li>clientCallSync()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a5c0738a68d36b5b5881232114d85437d">tp.backend.ClientNew</a></li>
 <li>clientInit()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#abc336e8ee2c7f831eaf2df63fdea1911">tp.backend.ClientNew</a></li>
@@ -81,33 +107,89 @@ $(function() {
 </ul>
 
 
+<h3><a id="index_d" name="index_d"></a>- d -</h3><ul>
+<li>deletePiece()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a2ff3c88da201003c08611ab7ddb10bd2">tp.frontend.gui.start.GUIbehaviour</a></li>
+</ul>
+
+
+<h3><a id="index_e" name="index_e"></a>- e -</h3><ul>
+<li>exitGame()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a4f555f2ee7461c53bdc35f1efba96b20">tp.frontend.gui.start.GUIController</a></li>
+</ul>
+
+
 <h3><a id="index_g" name="index_g"></a>- g -</h3><ul>
-<li>getGameStatus()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a8e77fb8ccf0387b5ce173d66f5a86e2d">tp.backend.ClientNew</a></li>
+<li>GameStatus()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a7332b6543c0272cd32418c045c029f25">tp.backend.GameStatus</a></li>
+<li>getActivePlayerID()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a5d37d1ce651b4f175e6b2d19af9fe428">tp.backend.GameNew</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#ad6bb078348001ecab80e4c2f2e90ce24">tp.backend.GameStatus</a></li>
+<li>getBoard()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a1046f029fdc62d2cd6bf76996252403b">tp.backend.GameNew</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#a436c98c32ae18e519d4dd40f57c060f0">tp.backend.GameStatus</a></li>
+<li>getBoardSize()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#aa48c10e6976f8fc256897804ac26812c">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a97a07e2cc54b8f730b3b9b484cffda5a">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a9d945534f7edc5888ee6eac2b1023245">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#ab8c05fecb5cbe1a1986c5c56f1cc7a93">tp.backend.SwedishKind</a></li>
+<li>getCapturedFigures()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a8dbb8539cd6dd482c2f9a5b560a5f8cf">tp.backend.GameStatus</a>, <a class="el" href="classtp_1_1backend_1_1_movement.html#a43a05fe02585e74f88524bb7bb4001b1">tp.backend.Movement</a></li>
+<li>getCapturedRequired()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a066537c3ca53bf3c25b720ac3ae54e10">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a9f42bf7d6770b68bf61ba6982b68352b">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a79f2a988d8d447db8d031412e8132639">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a52c21e2e84bc0e8ccba5dc06cb7a4765">tp.backend.SwedishKind</a></li>
+<li>getClass()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_factory.html#a560766a7c21bc298fcef608a1bffcdd4">tp.backend.CommandFactory</a></li>
+<li>getColor()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#a0519f4743adaa80c3d09e22f81533ac7">tp.backend.ClientInit</a></li>
+<li>getCommand()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_factory.html#aa9f1f4f9593280bd33399a99b8045c34">tp.backend.CommandFactory</a></li>
+<li>getCorrectMove()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#ae6c343bc5ff706d94471f9400570561a">tp.backend.Movement</a></li>
+<li>getError()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#ac8c5d6600d517f9046b09b05f2bdab92">tp.backend.GameStatus</a></li>
+<li>getErrorMessage()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#aa1937f6d3c329de0b0f64b77385941c4">tp.backend.Movement</a></li>
+<li>getFirstPlayer()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#a592a8c88df6154d8873fb7cdb3b17cb4">tp.backend.ClientInit</a>, <a class="el" href="classtp_1_1backend_1_1_client_new.html#a53e962662a502cdc92689ea9feb7c26d">tp.backend.ClientNew</a></li>
+<li>getFriendly_name()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a7593ec60fc3c2b3725751074f66cc8b1">tp.backend.GameStatus</a></li>
+<li>getGameBoard()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#ac06ef23022ea48c7ef9337360cfa6c6e">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a28d9360db89dcce10c5b4483fe6f1b24">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a321445772114fec2ccdb8f17dce7f238">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#aa2ad164a17567ab65581efd0a07af5fc">tp.backend.SwedishKind</a></li>
+<li>getGameKind()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_kind_factory.html#ab038d742cd44c20dc61c95f695c170cc">tp.backend.GameKindFactory</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#ae3997b86aa0e80852369a9d239b0e614">tp.backend.GameStatus</a></li>
+<li>getGameKindName()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#adc4c608404d41f5a41533cf726b6a780">tp.backend.GameNew</a></li>
+<li>getGameStatus()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a8e77fb8ccf0387b5ce173d66f5a86e2d">tp.backend.ClientNew</a>, <a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#a9dabbb611148ed8e035c9ef9e686a476">tp.backend.ClientNew.PollingAgent</a></li>
+<li>getId()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a20979458a638104a010613d17ae26c36">tp.backend.GameStatus</a></li>
+<li>getImageName()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#af38d9c67a7d7fb3065f256d39cde35ff">tp.frontend.gui.start.GUIbehaviour</a></li>
+<li>getKind()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_kind.html#a64a9ca6c7f0fc712b04fc943b4459c1f">tp.backend.GameKind</a>, <a class="el" href="classtp_1_1backend_1_1_movement.html#adf50dac4dbee163c137baf64ab4aa43c">tp.backend.Movement</a></li>
+<li>getName()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a343433256ce6f91c00f302cf6b8c0017">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a795591f55bff5e6f83a6fbdf26270d75">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a5226ac80723a67b217a38c66af2b9f71">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#aa5a0aa8ea8a40718f9b2c2f8bd86a51e">tp.backend.SwedishKind</a></li>
+<li>getNumOfPlayers()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a00091987798b974c48d65d004b9353e4">tp.backend.GameNew</a></li>
+<li>getPlayer1()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a8a7f8ac8e347704bfafa2eaa82a0d86a">tp.backend.GameStatus</a></li>
+<li>getPlayer1ID()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#aec9385613a508509a54b186cc22ae2b8">tp.backend.GameNew</a></li>
+<li>getPlayer2()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a8134726b12656a9104b3d21124887e5f">tp.backend.GameStatus</a></li>
+<li>getPlayer2ID()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a4d8e5028b6925c1a04f6511400db42ed">tp.backend.GameNew</a></li>
+<li>getPlayerId()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#ab0e8969e1f7fda56b9a00a0f67573bc6">tp.backend.ClientInit</a>, <a class="el" href="classtp_1_1backend_1_1_client_new.html#a2c2ccb81e11ca0fddafd4a21d316bb2e">tp.backend.ClientNew</a>, <a class="el" href="classtp_1_1backend_1_1_game_kind.html#a401937f98ff5abc2a62393c0fa31e27f">tp.backend.GameKind</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#aaf99060687d1e6bc9791172908581fb7">tp.backend.GameStatus</a></li>
+<li>getPollingAgent()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#afbec6ac6c056fed39502ef50ed870f9a">tp.backend.ClientNew</a></li>
+<li>getPositions()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_move_command.html#a314e129cc2daa8604e90c4e31b762132">tp.backend.MoveCommand</a></li>
+<li>getStatus()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#ae303b39c806c8f5f8fa850814b737ecf">tp.backend.GameStatus</a></li>
+<li>getType()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_class.html#aa5e539cce01871eec3066c12ca9b391b">tp.backend.CommandClass</a></li>
+<li>getValue()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_class.html#afe032951437d33fbcf7ce4a50b9d54c3">tp.backend.CommandClass</a></li>
+<li>getX()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc">tp.backend.Position</a></li>
+<li>getY()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0">tp.backend.Position</a></li>
+<li>GUIController()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a98a7dd420c7b467f6963996bc0009ffe">tp.frontend.gui.start.GUIController</a></li>
 </ul>
 
 
 <h3><a id="index_h" name="index_h"></a>- h -</h3><ul>
-<li>hasPieceUpgrade()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#ad419add60023c86960c5ee19b7d2f55e">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a45f6ac508922c2493be206ea4b4d3b71">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a3a4d47200d0b679f49b49bb30aee4b75">tp.backend.SwedishKind</a></li>
+<li>hasPieceUpgrade()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#ad419add60023c86960c5ee19b7d2f55e">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a45f6ac508922c2493be206ea4b4d3b71">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a07599f2914797ab087441be8af94375c">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a3a4d47200d0b679f49b49bb30aee4b75">tp.backend.SwedishKind</a></li>
 </ul>
 
 
 <h3><a id="index_i" name="index_i"></a>- i -</h3><ul>
-<li>isCapturePossible()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a707d3f93fee672edadd7aad935c3c208">tp.backend.CzechKind</a></li>
+<li>isCapturePossible()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#a707d3f93fee672edadd7aad935c3c208">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a867ec0f05581308c95ea8350eff0363c">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a90518856f311da06d8ba3b88391c6856">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a8012928c0f6bea71d93fcb535b32aabf">tp.backend.SwedishKind</a></li>
 <li>isEqual()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#ac44ea3052a8b8e9c96604c3a9df6e9ca">tp.backend.Movement</a></li>
 </ul>
 
 
 <h3><a id="index_l" name="index_l"></a>- l -</h3><ul>
 <li>loadInitBoard()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a7b48b0d47e0d68d63275232b5af90419">tp.backend.GameNew</a></li>
+<li>lockBoard()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a87d93ee2e18d85595c618a183f14b67e">tp.frontend.gui.start.GUIController</a></li>
 </ul>
 
 
 <h3><a id="index_m" name="index_m"></a>- m -</h3><ul>
+<li>main()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_app.html#a8f52750c1b29a2929832bc5fc3c3ee76">tp.backend.App</a>, <a class="el" href="classtp_1_1backend_1_1_server.html#aedea983dfd62d2be84637b78f99828d5">tp.backend.Server</a></li>
+<li>makeMove()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_manager.html#a5731dbb51a5016d54d6a254a31ad1bf2">tp.backend.ClientManager</a></li>
 <li>move()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_new.html#a3e123ea17434cdd8cde0eb9f0a3221f9">tp.backend.GameNew</a></li>
+<li>Movement()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#a66673ad1e3717672984627fb3ff121c8">tp.backend.Movement</a></li>
+<li>movePiece()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8">tp.frontend.gui.start.GUIController</a></li>
+</ul>
+
+
+<h3><a id="index_p" name="index_p"></a>- p -</h3><ul>
+<li>Position()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_position.html#a92f0413dacaff409fa98d6922c3f385f">tp.backend.Position</a></li>
 </ul>
 
 
 <h3><a id="index_r" name="index_r"></a>- r -</h3><ul>
+<li>react()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa0c490005212b0b7aa218cb1edc5089f">tp.frontend.gui.start.GUIbehaviour</a></li>
 <li>run()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#aeec502f9d997e5eb7557e9dbc9b8be5d">tp.backend.ClientNew.PollingAgent</a>, <a class="el" href="classtp_1_1backend_1_1_game_manager.html#a35e3aed4d3b04da2cc0ed6e3bc4dc40b">tp.backend.GameManager</a></li>
 </ul>
 
@@ -115,16 +197,56 @@ $(function() {
 <h3><a id="index_s" name="index_s"></a>- s -</h3><ul>
 <li>sendGameKind()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a6eb1d86c6001335c74e2ec4c400af321">tp.backend.ClientNew</a></li>
 <li>sendMoveCommand()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a149ccb6627caddd090a62cf742c64a02">tp.backend.ClientNew</a></li>
+<li>setActivePlayerID()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#ab25981c331325406e631e7a6fe207a33">tp.backend.GameStatus</a></li>
+<li>setBoard()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a71428efe9cd6703bd6adae1847bfbb6a">tp.backend.GameStatus</a></li>
+<li>setCapturedFigures()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a2426f2e8adfdb1ad91f51fa00f595149">tp.backend.GameStatus</a>, <a class="el" href="classtp_1_1backend_1_1_movement.html#a3f65be0e85708324b93c3ef1dfec9de7">tp.backend.Movement</a></li>
+<li>setColour()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#a46edf559e2d3bb5063619028f71b2b20">tp.backend.ClientInit</a></li>
+<li>setCorrectMove()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d">tp.backend.Movement</a></li>
+<li>setError()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#abc947d8f4e5ed1effd4c01bfda08cd68">tp.backend.GameStatus</a></li>
+<li>setErrorMessage()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2">tp.backend.Movement</a></li>
+<li>setFirstPlayer()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#a7b8de2dd18be6138989ac3408622123d">tp.backend.ClientInit</a></li>
+<li>setFriendly_name()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#afe0a913d9a737772a3faefa941ea5b94">tp.backend.GameStatus</a></li>
+<li>setGameKind()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new.html#a13aa4cd5be045f4a6f123a105e9ee76e">tp.backend.ClientNew</a>, <a class="el" href="classtp_1_1backend_1_1_game_new.html#ab5faff07dd8c414e402e28f008a98264">tp.backend.GameNew</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#a517beaebae96d4cc467cc5b2d103a3ee">tp.backend.GameStatus</a></li>
+<li>setId()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a8397c8d53d21b028667762e0687f10e9">tp.backend.GameStatus</a></li>
+<li>setKind()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_kind.html#a1231f742be4138c2e40988d3229953e9">tp.backend.GameKind</a>, <a class="el" href="classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae">tp.backend.Movement</a></li>
+<li>setPlayer()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a10553cc6342af45f83c81625d4d6b785">tp.frontend.gui.start.GUIController</a>, <a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html#aaf1ca8444aed162f67bf6370000b80bc">tp.frontend.gui.start.TypesController</a></li>
+<li>setPlayer1()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a6439ba48c941a393e2d524357b5923bb">tp.backend.GameStatus</a></li>
+<li>setPlayer2()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a73de09b6a49c56b995dc4976fd52a3f6">tp.backend.GameStatus</a></li>
+<li>setPlayerId()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_init.html#a0ff1366d0d0edfae746d03b7cb01ac88">tp.backend.ClientInit</a>, <a class="el" href="classtp_1_1backend_1_1_game_kind.html#a83fb74cef6d58eeb75cb3288bca86c65">tp.backend.GameKind</a>, <a class="el" href="classtp_1_1backend_1_1_game_status.html#a387242857080e3612b15d9e3904a9ad7">tp.backend.GameStatus</a></li>
+<li>setPositions()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_move_command.html#a58f5b76ed22348764eb74247099f9615">tp.backend.MoveCommand</a></li>
+<li>setStatus()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_game_status.html#a34b5697b3e1bfefd2692690c67a13376">tp.backend.GameStatus</a></li>
+<li>setType()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_class.html#a75fb764441d177364c0927dc87cdb81d">tp.backend.CommandClass</a></li>
+<li>setValue()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_command_class.html#a32079827f5a6f5784e7384138fb0950f">tp.backend.CommandClass</a></li>
+<li>setX()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62">tp.backend.Position</a></li>
+<li>setY()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba">tp.backend.Position</a></li>
+<li>showInstruction()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a3a382b064d03532d3028720bf8d87f49">tp.frontend.gui.start.GUIController</a></li>
+<li>start()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_manager.html#a140300ae3f462f597d53dabd0a320d58">tp.backend.ClientManager</a>, <a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html#ad70cc1f8c9b74b0c3a7a24e5da6bd3a3">tp.frontend.gui.start.GUIStart</a></li>
+<li>stop()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#a621c1b543ec4e71db6487afec7f495e3">tp.backend.ClientNew.PollingAgent</a></li>
+<li>swapList()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#abbc40e511816ef45d99187f942be6cc2">tp.frontend.gui.start.GUIbehaviour</a></li>
+</ul>
+
+
+<h3><a id="index_t" name="index_t"></a>- t -</h3><ul>
+<li>tedectorAction()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a974b88d9f3b93354f5faf15d825a33b0">tp.frontend.gui.start.GUIController</a></li>
+</ul>
+
+
+<h3><a id="index_u" name="index_u"></a>- u -</h3><ul>
+<li>unlockBoard()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#aaa8dc47603cabf598f015be3164261f7">tp.frontend.gui.start.GUIController</a></li>
+<li>updateBoard()&#160;:&#160;<a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a144c5dac05065d57d9f96ab0a577300a">tp.frontend.gui.start.GUIbehaviour</a></li>
 </ul>
 
 
 <h3><a id="index_w" name="index_w"></a>- w -</h3><ul>
-<li>whoStarts()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#acb99605e254b754f7be71dafe3f1c4f5">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a33861f5c3826b0677696c049872ae800">tp.backend.GermanKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a696c6ae2e1e07d965677d4a8467ea5a0">tp.backend.SwedishKind</a></li>
+<li>whoStarts()&#160;:&#160;<a class="el" href="classtp_1_1backend_1_1_czech_kind.html#acb99605e254b754f7be71dafe3f1c4f5">tp.backend.CzechKind</a>, <a class="el" href="classtp_1_1backend_1_1_german_kind.html#a33861f5c3826b0677696c049872ae800">tp.backend.GermanKind</a>, <a class="el" href="interfacetp_1_1backend_1_1_i_game_kind.html#a3dc9f08033c57419f18654a2534424ff">tp.backend.IGameKind</a>, <a class="el" href="classtp_1_1backend_1_1_swedish_kind.html#a696c6ae2e1e07d965677d4a8467ea5a0">tp.backend.SwedishKind</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>
