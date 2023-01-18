@@ -222,9 +222,13 @@ public class GameNew {
 
           // delete captured figures in board
           board[cf.getX()][cf.getY()] = EMPTY;
+        } else if(movement.getKind() == REGULAR) {
+          // delete figure at starting position in board
+          board[from.getX()][from.getY()] = EMPTY;
+        }
 
-          
-          // put figure at ending position in board + check if piece becomes king
+        // put figure at ending position in board + check if piece becomes king
+        if(symbol == WH_PIECE || symbol == BL_PIECE) {
           if(gameKind.hasPieceUpgrade(currPlayer, to)) {
             if(symbol == WH_PIECE) {
               board[to.getX()][to.getY()] = WH_KING;
@@ -234,12 +238,7 @@ public class GameNew {
           } else {
             board[to.getX()][to.getY()] = symbol;
           }
-
-        } else if(movement.getKind() == REGULAR) {
-          // delete figure at starting position in board
-          board[from.getX()][from.getY()] = EMPTY;
-          
-          // put figure at ending position in board
+        } else {
           board[to.getX()][to.getY()] = symbol;
         }
         

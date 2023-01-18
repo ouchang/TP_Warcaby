@@ -224,8 +224,8 @@ public class CzechKind implements IGameKind {
       return move; // return default Movement value (incorrect move)
     }
     
-    int blackFiguresCounter=0;
-    int whiteFiguresCounter=0;
+    int blackFiguresCounter=-1;
+    int whiteFiguresCounter=-1;
 
     int startX=0, endX=0, startY=0, endY=0;
 
@@ -242,26 +242,32 @@ public class CzechKind implements IGameKind {
         endY = from.getY();
       }
 
-      for(int i=startX; i<endX; i++) {
-        for(int j=startY; j<endY; j++) {
-          if(board[i][j] == BL_KING || board[i][j] == BL_PIECE) {
-            blackFiguresCounter++;
+      int i = startX;
+      int j = startY;
 
-            if(currPlayer == WHITE) {
-              cf = new Position();
-              cf.setX(i);
-              cf.setY(j);
-            }
-          } else if(board[i][j] == WH_KING || board[i][j] == WH_PIECE) {
-            whiteFiguresCounter++;
+      blackFiguresCounter=0;
+      whiteFiguresCounter=0;
+      while(i < endX && j < endY) {
+        if(board[i][j] == BL_KING || board[i][j] == BL_PIECE) {
+          blackFiguresCounter++;
 
-            if(currPlayer == BLACK) {
-              cf = new Position();
-              cf.setX(i);
-              cf.setY(j);
-            }
+          if(currPlayer == WHITE) {
+            cf = new Position();
+            cf.setX(i);
+            cf.setY(j);
+          }
+        } else if(board[i][j] == WH_KING || board[i][j] == WH_PIECE) {
+          whiteFiguresCounter++;
+
+          if(currPlayer == BLACK) {
+            cf = new Position();
+            cf.setX(i);
+            cf.setY(j);
           }
         }
+
+        i++;
+        j++;
       }
 
     } else if(from.getX()+from.getY() == to.getX()+to.getY()) { //"rising" diagonal - move
@@ -279,6 +285,9 @@ public class CzechKind implements IGameKind {
 
       int i = startX;
       int j = startY;
+
+      blackFiguresCounter=0;
+      whiteFiguresCounter=0;
       while(i < endX && j > endY) {
         if(board[i][j] == BL_KING || board[i][j] == BL_PIECE) {
           blackFiguresCounter++;
@@ -362,6 +371,8 @@ public class CzechKind implements IGameKind {
     }
     
     for(Position end : positions.subList(1, positions.size())) { 
+      move.setCorrectMove(false);
+
       // check if piece goes outside the board
       if(end.getX() < 1 || end.getX() > boardSize || end.getY() < 1 || end.getY() > boardSize) {
         move.setErrorMessage("ERROR: Move outside the board");
@@ -375,6 +386,7 @@ public class CzechKind implements IGameKind {
       }
 
       if(currPlayer == WHITE) {
+        
         if(Math.abs(start.getY()-end.getY()) == 2 && Math.abs(start.getX()-end.getX()) == 2) { // capture move
           move.setKind(CAPTURE);
           if(start.getX()-2 == end.getX() && start.getY()-2 == end.getY()) { //left capture
@@ -442,8 +454,8 @@ public class CzechKind implements IGameKind {
     Position start;
     start = positions.get(0);
 
-    int blackFiguresCounter=0;
-    int whiteFiguresCounter=0;
+    int blackFiguresCounter=-1;
+    int whiteFiguresCounter=-1;
 
     int startX=0, endX=0, startY=0, endY=0;
 
@@ -461,6 +473,8 @@ public class CzechKind implements IGameKind {
     }
 
     for(Position end : positions.subList(1, positions.size())) {
+      move.setCorrectMove(false);
+      
       blackFiguresCounter=0;
       whiteFiguresCounter=0;
 
