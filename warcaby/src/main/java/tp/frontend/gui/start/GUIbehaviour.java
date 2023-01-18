@@ -153,7 +153,6 @@ public class GUIbehaviour {
                 }
 
                 Pane pane = (Pane) node;
-//                ObservableList<Node> children = pane.getChildren();
                 pane.getChildren().removeAll(pane.getChildren());
 
                 if(!ImageType.EMPTY.equalsName(fileName)) {
@@ -164,6 +163,10 @@ public class GUIbehaviour {
                     imageView.setFitHeight( 40 );
                     imageView.setFitWidth( 50 );
                     pane.getChildren().add(imageView);
+                }
+
+                if (pane.getStyle().equals("-fx-background-color: #666990")) {
+                    pane.setStyle("-fx-background-color: #d67342");
                 }
             }
         }
@@ -193,9 +196,6 @@ public class GUIbehaviour {
         String fileName = ImageType.values()[figureIdx].toString();
         // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
-
-        System.out.println("FIGURE ID: " + figureIdx);
-        System.out.println("FILENAME: " + fileName);
 
         // Delete captured figures' images
         if(capturedFigures != null) {

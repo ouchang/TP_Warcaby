@@ -34,10 +34,6 @@ public class GUIController {
     private boolean firstClick = false;
     public ArrayList<Pane> pieceFromTo = new ArrayList<>();
     public List<Pane> pieceAllWay = new ArrayList<>();
-
-    @FXML
-    private CheckBox showInstructionButton;
-
     @FXML
     private TextArea instruction;
 
@@ -45,19 +41,10 @@ public class GUIController {
     public GridPane board8x8;
 
     @FXML
-    private ColumnConstraints board;
-
-    @FXML
     private Label detector;
 
     @FXML
-    private Label printer;
-
-    @FXML
     private Button exitButton;
-
-    @FXML
-    private GridPane game;
 
     public GUIController(){
         System.out.println ("GUI controller created");
@@ -121,7 +108,6 @@ public class GUIController {
                 System.out.println(e.getMessage());
                 System.exit(1);
             }
-
             return true;
         }
     }
@@ -135,18 +121,6 @@ public class GUIController {
         GameStatus gameStatus = player.getPollingAgent().getGameStatus();
         System.out.println("Updating board!");
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
-    }
-
-    @FXML
-    public void tedectorAction(MouseEvent event) {
-        if (event.getButton () == MouseButton.PRIMARY){
-            System.out.println ("lewy przycisk");
-            detector.setText ( "lewy przycisk" );
-        }
-        if (event.getButton () == MouseButton.SECONDARY){
-            System.out.println ("prawy przycisk");
-            detector.setText ( "prawy przycisk" );
-        }
     }
 
     @FXML
@@ -195,8 +169,6 @@ public class GUIController {
 
     public void lockBoard() {
         board8x8.setDisable(true);
-        //todo block panes if not your move
-//        board8x8.
     }
 
     public void unlockBoard() {
@@ -221,28 +193,18 @@ public class GUIController {
                 System.out.println("LAST CLICK");
                 pieceFromTo.add(actual);
                 pieceAllWay.add(actual);
-
+                actual.setStyle("-fx-background-color: #666990");
                 GUIbehaviour behaviour = new GUIbehaviour();
                 behaviour.copyFromTo(pieceFromTo);
                 List<Position> capturedFigures =  behaviour.serverCheck(player, pieceAllWay);
 
-//                System.out.println("___________________________________________");
-//                for (Position poss : capturedFigures){
-//                    System.out.println("X: " + poss.getX() + " Y: " + poss.getY());
-//                }
-//                System.out.println("ID OF PICTURE : " + behaviour.figureIdx);
-//                System.out.println("___________________________________________");
-
                 if (behaviour.getCorrectMove()) {
                     if (capturedFigures.size() != 0) {
-                        //todo get from server if the move is valid - if not do not delete pieces
-                        //todo podświetlać pane jak nad nim przejeżdża się myszką
                         behaviour.removePiecesAfterMove(behaviour.figureIdx, capturedFigures, board8x8);
                         lockBoard();
                     } else {
                         behaviour.removePiecesAfterMove(behaviour.figureIdx, null, board8x8);
                     }
-
                     //lock board
                     lockBoard();
 
@@ -262,14 +224,15 @@ public class GUIController {
                 } else {
                     System.out.println("GUIController - Wrong move");
                     System.out.println( behaviour.gameStatus.getError());
+                    detector.setText("Wrong move");
                     // print error message
                 }
 
-                for (Pane place : pieceAllWay) {
-                    if (place.getStyle().equals("-fx-background-color: #666990")) {
-                        place.setStyle("-fx-background-color: #d67342");
-                    }
-                }
+//                for (Pane place : pieceAllWay) {
+//                    if (place.getStyle().equals("-fx-background-color: #666990")) {
+//                        place.setStyle("-fx-background-color: #d67342");
+//                    }
+//                }
 
                 // clear
                 pieceFromTo.clear();
@@ -278,7 +241,7 @@ public class GUIController {
             }
         } else if(event.getButton() == MouseButton.SECONDARY && firstClick) {
             System.out.println("MIDDLE CLICK");
-            actual.setStyle("-fx-background-color: #666990");       //todo change color
+            actual.setStyle("-fx-background-color: #666990");
             pieceAllWay.add(actual);
         }
     }
