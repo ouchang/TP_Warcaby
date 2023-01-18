@@ -136,25 +136,30 @@ public class GUIController {
                 behaviour.copyFromTo(pieceFromTo);
                 List<Position> capturedFigures =  behaviour.serverCheck(player, pieceAllWay);
 
-                System.out.println("___________________________________________");
-                for (Position poss : capturedFigures){
-                    System.out.println("X: " + poss.getX() + " Y: " + poss.getY());
-                }
-                System.out.println("ID OF PICTURE : " + behaviour.figureIdx);
-                System.out.println("___________________________________________");
+//                System.out.println("___________________________________________");
+//                for (Position poss : capturedFigures){
+//                    System.out.println("X: " + poss.getX() + " Y: " + poss.getY());
+//                }
+//                System.out.println("ID OF PICTURE : " + behaviour.figureIdx);
+//                System.out.println("___________________________________________");
 
-                if(capturedFigures.size() != 0) {
-                    //todo get from server if the move is valid - if not do not delete pieces
-                    //todo podświetlać pane jak nad nim przejeżdża się myszką
-                    behaviour.react(behaviour.figureIdx, capturedFigures, board8x8);
-                    lockBoard();
-                } else {
-                    behaviour.react(behaviour.figureIdx, null, board8x8);
+                if (behaviour.getCorrectMove()) {
+                    if (capturedFigures.size() != 0) {
+                        //todo get from server if the move is valid - if not do not delete pieces
+                        //todo podświetlać pane jak nad nim przejeżdża się myszką
+                        behaviour.removePiecesAfterMove(behaviour.figureIdx, capturedFigures, board8x8);
+                        lockBoard();
+                    } else {
+                        behaviour.removePiecesAfterMove(behaviour.figureIdx, null, board8x8);
+                    }
                 }
 
-                for (Pane place : pieceAllWay){
-                    place.setStyle("-fx-background-color: #d67342");
+                for (Pane place : pieceAllWay) {
+                    if (place.getStyle().equals("-fx-background-color: #666990")) {
+                        place.setStyle("-fx-background-color: #d67342");
+                    }
                 }
+
                 // clear
                 pieceFromTo.clear();
                 pieceAllWay.clear();
@@ -162,13 +167,15 @@ public class GUIController {
             }
         } else if(event.getButton() == MouseButton.SECONDARY && firstClick) {
             System.out.println("MIDDLE CLICK");
-            actual.setStyle("-fx-background-color: #eb7990");       //todo change color
+            actual.setStyle("-fx-background-color: #666990");       //todo change color
             pieceAllWay.add(actual);
         }
     }
 
     public void lockBoard() {
         board8x8.setDisable(true);
+        //todo block panes if not your move
+//        board8x8.
     }
 
     public void unlockBoard() {
