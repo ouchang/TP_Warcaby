@@ -12,6 +12,7 @@ import javafx.stage.Stage;
 import tp.backend.ClientNew;
 
 import java.io.IOException;
+import java.nio.file.Paths;
 
 /**
  * MVC - Controller
@@ -56,9 +57,11 @@ public class TypesController {
         }
 
         this.player.sendGameKind();
+//      Maria
+        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guifxml.fxml" ).toUri().toURL () );
+//      Ola
+//        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
 
-//        FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("gui2.fxml"));
         Scene secondScene = new Scene( board.load(), 800, 600);
         GUIController controller = board.getController();
         controller.setPlayer(this.player);
@@ -68,7 +71,3 @@ public class TypesController {
         stage.show();
     }
 }
-//todo okno powitalne dla drugiego gracza
-//todo rotate plansza
-//todo zaznaczyc klikniete pole
-//todo info czyja tura + blokowanie planszy

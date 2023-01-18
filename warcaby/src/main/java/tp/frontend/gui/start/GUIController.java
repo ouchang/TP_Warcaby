@@ -1,5 +1,6 @@
 package tp.frontend.gui.start;
 
+import javafx.scene.text.TextFlow;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
@@ -30,34 +31,24 @@ import java.util.concurrent.Executors;
  */
 public class GUIController {
     ClientNew player;
-
+    private boolean firstClick = false;
+    public ArrayList<Pane> pieceFromTo = new ArrayList<>();
+    public List<Pane> pieceAllWay = new ArrayList<>();
     @FXML
-    private CheckBox showInstructionButton;
-
-    @FXML
-    private Button updateButton;
-
-    @FXML
-    private TextField instruction;
+    private TextArea instruction;
 
     @FXML
     public GridPane board8x8;
 
     @FXML
-    private ColumnConstraints board;
-
-    @FXML
     private Label detector;
-
-    @FXML
-    private Label printer;
 
     @FXML
     private Button exitButton;
 
-    @FXML
-    private GridPane game;
-
+    public GUIController(){
+        System.out.println ("GUI controller created");
+    }
     boolean isBoardLocked = false;
 
     public void setPlayer(ClientNew player) {
@@ -81,16 +72,45 @@ public class GUIController {
 
     @FXML
     void updateBoard(ActionEvent event) {
+        unlockBoard();
+        detector.setText("");
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
-            return;
+            detector.setText("Opponents move");
+        } else {
+            GUIbehaviour bevhaviour = new GUIbehaviour();
+            GameStatus gameStatus = player.getPollingAgent().getGameStatus();
+            bevhaviour.updateBoard(gameStatus.getBoard(), this);
+            detector.setText("Your move");
         }
-
-        GUIbehaviour bevhaviour = new GUIbehaviour();
-        GameStatus gameStatus = player.getPollingAgent().getGameStatus();
-        bevhaviour.updateBoard(gameStatus.getBoard(), this);
     }
 
+    public class GameBoardManager extends Task<Boolean> {
+        GUIController guiController;
+        GameStatus initGameStatus;
+
+        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
+            this.guiController = guiController;
+            this.initGameStatus = initGameStatus;
+        }
+
+        public Boolean call() {
+            String currentPlayer;
+            String myPlayerID = guiController.player.getPlayerId();
+
+            currentPlayer = initGameStatus.getActivePlayerID();
+            try {
+                while(!myPlayerID.equals(currentPlayer)) {
+                    Thread.sleep(2000);
+                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
+                }
+            } catch(InterruptedException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+            return true;
+        }
+    }
     void updateOnDemand() {
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
@@ -102,7 +122,13 @@ public class GUIController {
         System.out.println("Updating board!");
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
     }
-    
+
+    @FXML
+    public void exitGame(ActionEvent event) {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
+    }
+
     @FXML
     public void showInstruction(ActionEvent event) {
         String gameType =  player.getGameKind();
@@ -128,84 +154,62 @@ public class GUIController {
             instruction.setVisible ( true );
         }
     }
- 
-    private boolean firstClick = false;
+
+    public void getTurn(){
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Not your turn!");
+            detector.setText("Not your turn!");
+        } else {
+            detector.setText("Your turn");
+        }
+    }
+
     public ArrayList<Pane> fromTo = new ArrayList<Pane>();
     public List<Position> positions = new ArrayList<Position>();
 
+    public void lockBoard() {
+        board8x8.setDisable(true);
+    }
+
+    public void unlockBoard() {
+        board8x8.setDisable(false);
+    }
+
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
-            System.out.println("Not your turn!");
-            return;
-        }
+        getTurn();
 
         Pane actual = (Pane) event.getSource();
-        String errorMessage;
-        Position pos = new Position();
 
-        int row, col;
-        // handling when rowIndex/colIndex = 0
-        if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
-            row = 1;
-        } else {
-            row = GridPane.getRowIndex(actual) + 1;
-        }
-
-        if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
-            col = 1;
-        } else {
-            col = GridPane.getColumnIndex(actual) + 1;
-        }
-
-        
         if(event.getButton() == MouseButton.PRIMARY) {
             if(!this.firstClick) {
                 System.out.println("FIRST CLICK");
-                
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
-
-                this.fromTo.add(actual);
-
-                // TO DO: mark clicked field on board!
-
-                this.firstClick = true;
+                pieceAllWay.add(actual);
+                pieceFromTo.add(actual);
+                actual.setStyle("-fx-background-color: #666990");
+                firstClick = true;
             } else {
+
                 System.out.println("LAST CLICK");
+                pieceFromTo.add(actual);
+                pieceAllWay.add(actual);
+                actual.setStyle("-fx-background-color: #666990");
+                GUIbehaviour behaviour = new GUIbehaviour();
+                behaviour.copyFromTo(pieceFromTo);
+                List<Position> capturedFigures =  behaviour.serverCheck(player, pieceAllWay);
 
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
-
-                this.fromTo.add(actual);
-                
-                List<Position> capturedFigures = new ArrayList<Position>();
-
-                // send move info to server
-                GameStatus gameStatus = player.sendMoveCommand(this.positions);
-                errorMessage = gameStatus.getError();
-                capturedFigures = gameStatus.getCapturedFigures();  
-                String[][] gameBoard = gameStatus.getBoard();
-                int figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
-
-                if(errorMessage.equals("")) {
-                    System.out.println("GUIController - Correct move");
-                    GUIbehaviour bevhaviour = new GUIbehaviour();
-
-                    bevhaviour.swapList(this.fromTo);
-                    if(capturedFigures.size() != 0) {
-                        bevhaviour.react(figureIdx, capturedFigures, this.board8x8);
+                if (behaviour.getCorrectMove()) {
+                    if (capturedFigures.size() != 0) {
+                        behaviour.removePiecesAfterMove(behaviour.figureIdx, capturedFigures, board8x8);
+                        lockBoard();
                     } else {
-                        bevhaviour.react(figureIdx, null, this.board8x8);
+                        behaviour.removePiecesAfterMove(behaviour.figureIdx, null, board8x8);
                     }
-
                     //lock board
                     lockBoard();
 
                     //start thread -> thread unlocks board
-                    GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+                    GameBoardManager gameBoardManager = new GameBoardManager(this, behaviour.gameStatus);
                     gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                         @Override
                         public void handle (WorkerStateEvent e) {
@@ -219,70 +223,32 @@ public class GUIController {
 
                 } else {
                     System.out.println("GUIController - Wrong move");
-                    System.out.println(gameStatus.getError());
+                    System.out.println( behaviour.gameStatus.getError());
+                    detector.setText("Wrong move");
                     // print error message
                 }
 
+//                for (Pane place : pieceAllWay) {
+//                    if (place.getStyle().equals("-fx-background-color: #666990")) {
+//                        place.setStyle("-fx-background-color: #d67342");
+//                    }
+//                }
+
                 // clear
-                this.fromTo.clear();
-                this.positions.clear();
-
-                this.firstClick = false;
+                pieceFromTo.clear();
+                pieceAllWay.clear();
+                firstClick = false;
             }
-        } else if(event.getButton() == MouseButton.SECONDARY) {
-            if(this.firstClick) {
-                System.out.println("MIDDLE CLICK");
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
-            }
+        } else if(event.getButton() == MouseButton.SECONDARY && firstClick) {
+            System.out.println("MIDDLE CLICK");
+            actual.setStyle("-fx-background-color: #666990");
+            pieceAllWay.add(actual);
         }
     }
 
-    public void lockBoard() {
-        this.board8x8.setDisable(true);
-    }
 
-    public void unlockBoard() {
-        this.board8x8.setDisable(false);
-    }
 
-    @FXML
-    public void exitGame(ActionEvent event) {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
 
-    public GUIController(){
-        System.out.println ("GUIController created");
-    }
 
-    public class GameBoardManager extends Task<Boolean> {
-        GUIController guiController;
-        GameStatus initGameStatus;
-        
-        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
-            this.guiController = guiController;
-            this.initGameStatus = initGameStatus;
-        }
-
-        public Boolean call() {
-            String currentPlayer;
-            String myPlayerID = guiController.player.getPlayerId();
-
-            currentPlayer = initGameStatus.getActivePlayerID();
-            try {
-                while(!myPlayerID.equals(currentPlayer)) {
-                    Thread.sleep(2000);
-                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
-                }
-            } catch(InterruptedException e) {
-                System.out.println(e.getMessage());
-                System.exit(1);
-            }
-            
-            return true;
-        }
-    }
 }
 

@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.collections.ObservableList;
 
 import java.lang.Thread;
+import java.nio.file.Paths;
 
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
@@ -20,15 +21,11 @@ public class GUIStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //      Maria
-//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\GuiXml.fxml" ).toUri().toURL () );
-//        FXMLLoader fxmlLoader = new FXMLLoader ( getClass ().getResource ( "GuiXml.fxml" ));
-//        Test tees1 = new Test ();
-//        FXMLLoader fxmlLoader = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\guiversion\\warcaby\\src\\main\\java\\tp\\frontend\\gui_xml.fxml" ).toUri().toURL () );
-
+        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guifxml.fxml" ).toUri().toURL () );
+        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\types.fxml" ).toUri().toURL () );
 //      Ola
-        //FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("gui2.fxml"));
-        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+//        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
+//        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
 
         ClientNew player = new ClientNew();
         player.clientInit(); // register client
@@ -39,8 +36,8 @@ public class GUIStart extends Application {
             System.out.println("GUI sends gameKind");
 
             Scene scene = new Scene ( types.load(), 800, 600 );
-            TypesController typesController = types.getController();
-            typesController.setPlayer(player);
+            TypesController setBoard = types.getController();
+            setBoard.setPlayer(player);
 
             stage.setTitle("Welcome to checkers!");
             stage.setScene(scene);
@@ -48,10 +45,10 @@ public class GUIStart extends Application {
             stage.show();
 
         } else {
-            String tmp = player.getPollingAgent().getGameStatus().getGameKind();
-            while(tmp.equals("")) {
+            String gameType = player.getPollingAgent().getGameStatus().getGameKind();
+            while(gameType.equals("")) {
                 gameStatus = player.getPollingAgent().getGameStatus();
-                tmp = gameStatus.getGameKind();
+                gameType = gameStatus.getGameKind();
                 Thread.sleep(500);
             }
 

@@ -1,5 +1,7 @@
 package tp.frontend.gui.start;
 
+import tp.backend.ClientNew;
+import tp.backend.GameStatus;
 import tp.backend.Position;
 
 import javafx.collections.ObservableList;
@@ -13,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import javax.management.relation.Role;
 
@@ -21,29 +24,75 @@ import javax.management.relation.Role;
  */
 public class GUIbehaviour {
     ArrayList<Pane> fromTo;
-    public static ArrayList<Pane> positionChanges = new ArrayList<> ();
-    String[] imageType;
-    
+
     GUIbehaviour(){
         this.fromTo = new ArrayList<Pane>();
-        imageType = new String[5];
-        imageType[0] = "";
-        imageType[1] = "simpleWhitePiece.png";
-        imageType[2] = "kingWhitePiece.png"; 
-        imageType[3] = "simpleBlackPiece.png";
-        imageType[4] = "kingBlackPiece.png"; 
     }
 
     public void addElement(Pane element) {
-        this.fromTo.add(element);
+        fromTo.add(element);
     }
 
-    public void swapList(ArrayList<Pane> list) {
+    public void copyFromTo(ArrayList<Pane> list) {
         for(Pane p : list) {
             addElement(p);
         }
     }
 
+    public List<Position> getPositionFromPane(List<Pane> pieceAllWay){
+        List<Position> positions = new ArrayList<>();
+
+        for (Pane actual : pieceAllWay) {
+            Position position = transformIndexes(actual);
+            positions.add(position);
+        }
+        return positions;
+    }
+    public int figureIdx = 99;
+    private boolean correctMove;
+    public void setCorrectMove(boolean correctMove){
+        this.correctMove = correctMove;
+    }
+    public boolean getCorrectMove(){
+        return correctMove;
+    }
+    public GameStatus gameStatus = new GameStatus();
+    public List<Position> serverCheck(ClientNew player, List<Pane> pieceAllWay){
+        System.out.println("___________________________________________");
+        for (Pane p : pieceAllWay){
+            System.out.println("ROW: " + GridPane.getRowIndex(p) + "COL: " + GridPane.getColumnIndex(p) );
+        }
+        System.out.println("___________________________________________");
+
+        List<Position> positions = getPositionFromPane(pieceAllWay);
+        List<Position> capturedFigures = new ArrayList<Position>();
+        Position pos = new Position();
+
+        // send move info to server
+        for (Position poss : positions){
+            System.out.println("POSITION: X= " + poss.getX() + " Y= " + poss.getY());
+        }
+
+        GameStatus gameStatus = player.sendMoveCommand(positions);
+        String errorMessage = gameStatus.getError();
+        capturedFigures = gameStatus.getCapturedFigures();
+        String[][] gameBoard = gameStatus.getBoard();
+
+        pos = positions.get(positions.size()-1);
+        figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
+
+        System.out.println("Error Message: " + errorMessage);
+
+        if(errorMessage.equals("")) {
+            setCorrectMove(true);
+            System.out.println("GUIController - Correct move");
+        } else {
+            setCorrectMove(false);
+            System.out.println("GUIController - Wrong move");
+            System.out.println(gameStatus.getError());
+        }
+        return  capturedFigures;
+    }
     public String getImageName(String url) {
         int slashIdx = url.length()-1;
         while(url.charAt(slashIdx) != '/') {
@@ -59,9 +108,11 @@ public class GUIbehaviour {
     }
 
     public void add(Pane position, String fileName) throws FileNotFoundException, MalformedURLException {
-        if(fileName != "") {
+        if(!Objects.equals(fileName, "")) {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
             ImageView imageView = new ImageView(image);
+            imageView.setLayoutX(4);
+            imageView.setLayoutY(12);
             imageView.setFitHeight ( 40 );
             imageView.setFitWidth ( 50 );
             position.getChildren ().add ( imageView );
@@ -73,101 +124,88 @@ public class GUIbehaviour {
     public synchronized void updateBoard(String[][] boardString, GUIController controller){
         int row, col;
         String fileName = "";
-        Image image = null;
-        boolean emptyField = false;
+        Image image;
         for (Node node : controller.board8x8.getChildren()) {
             if (node instanceof Pane) {
-                if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
-                    row = 1;
-                } else {
-                    row = GridPane.getRowIndex(node) + 1;
-                }
-        
-                if(GridPane.getColumnIndex(node) == null) { // colIndex = 0
-                    col = 1;
-                } else {
-                    col = GridPane.getColumnIndex(node) + 1;
-                }
+                Position position = transformIndexes(node);
 
-                switch (boardString[row][col]) {
+                switch (boardString[position.getX()][position.getY()]) {
                     case "0":{
-                        emptyField = true;
+                        fileName = ImageType.EMPTY.toString();
                         break;
                     }
                     case "1":{
-                        fileName = "simpleWhitePiece.png";
-                        emptyField = false;
+                        fileName = ImageType.WHITE_SIMPLE.toString();
                         break;
                     }
                     case "2":{
-                        fileName = "kingWhitePiece.png";
-                        emptyField = false;
+                        fileName = ImageType.WHITE_KING.toString();
                         break;
                     }
                     case "3":{
-                        fileName = "simpleBlackPiece.png";
-                        emptyField = false;
+                        fileName = ImageType.BLACK_SIMPLE.toString();
                         break;
                     }
                     case "4":{
-                        fileName = "kingBlackPiece.png";
-                        emptyField = false;
+                        fileName = ImageType.BLACK_KING.toString();
                         break;
                     }
                 }
 
                 Pane pane = (Pane) node;
-                ObservableList<Node> children = pane.getChildren();
-                pane.getChildren().removeAll(children);                
+                pane.getChildren().removeAll(pane.getChildren());
 
-                if(!emptyField) {
+                if(!ImageType.EMPTY.equalsName(fileName)) {
                     image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
                     ImageView imageView = new ImageView(image);
+                    imageView.setLayoutX(4);
+                    imageView.setLayoutY(12);
                     imageView.setFitHeight( 40 );
                     imageView.setFitWidth( 50 );
+                    pane.getChildren().add(imageView);
+                }
 
-                    try {
-                        add(pane, fileName);
-                    } catch(FileNotFoundException e) {
-                        System.out.println(e.getMessage());
-                        System.exit(1);
-                    } catch(MalformedURLException e) {
-                        System.out.println(e.getMessage());
-                        System.exit(1);
-                    }
+                if (pane.getStyle().equals("-fx-background-color: #666990")) {
+                    pane.setStyle("-fx-background-color: #d67342");
                 }
             }
         }
     }
 
-    public void react(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
-        // get figure's image file name
-        String fileName = imageType[figureIdx];
+    public Position transformIndexes( Node node ){
+        Position position = new Position();
+        int row, col;
+        if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
+            row = 1;
+        } else {
+            row = GridPane.getRowIndex(node) + 1;
+        }
 
+        if(GridPane.getColumnIndex(node) == null) { // colIndex = 0
+            col = 1;
+        } else {
+            col = GridPane.getColumnIndex(node) + 1;
+        }
+        position.setX(row);
+        position.setY(col);
+        return position;
+    }
+
+    public void removePiecesAfterMove(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
+        // get figure's image file name
+        String fileName = ImageType.values()[figureIdx].toString();
         // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
 
         // Delete captured figures' images
         if(capturedFigures != null) {
             // Capture  move
-            int row, col;
             ObservableList<Node> children = gridPane.getChildren();
             for(Position p : capturedFigures) {
                 for(Node node : children) {
                     if(node instanceof Pane) {
-                        if(GridPane.getRowIndex(node) == null) { // rowIndex = 0
-                            row = 1;
-                        } else {
-                            row = GridPane.getRowIndex(node) + 1;
-                        }
-                
-                        if(GridPane.getColumnIndex(node) == null) { // colIndex = 0
-                            col = 1;
-                        } else {
-                            col = GridPane.getColumnIndex(node) + 1;
-                        }
-
-                        if(p.getX() == row && p.getY() == col) {
+                        Position position = transformIndexes(node);
+                        if(p.getX() == position.getX() && p.getY() == position.getY()) {
                             Pane pane = (Pane) node;
                             deletePiece(pane);
                         }
