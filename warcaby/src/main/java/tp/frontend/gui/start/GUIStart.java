@@ -25,8 +25,8 @@ public class GUIStart extends Application {
         FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\gametype\\types.fxml" ).toUri().toURL () );
 //      Ola
         //FXMLLoader board = new FXMLLoader ( getClass().getResource("GuiXml.fxml"));
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("gui2.fxml"));
-        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+//        FXMLLoader board = new FXMLLoader ( getClass().getResource("gui2.fxml"));
+//        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
 
         ClientNew player = new ClientNew();
         player.clientInit(); // register client
