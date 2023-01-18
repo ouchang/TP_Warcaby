@@ -1,5 +1,6 @@
 package tp.frontend.gui.start;
 
+import javafx.scene.text.TextFlow;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
@@ -38,10 +39,7 @@ public class GUIController {
     private CheckBox showInstructionButton;
 
     @FXML
-    private Button updateButton;
-
-    @FXML
-    private TextField instruction;
+    private TextArea instruction;
 
     @FXML
     public GridPane board8x8;
@@ -100,7 +98,33 @@ public class GUIController {
         }
     }
 
+    public class GameBoardManager extends Task<Boolean> {
+        GUIController guiController;
+        GameStatus initGameStatus;
 
+        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
+            this.guiController = guiController;
+            this.initGameStatus = initGameStatus;
+        }
+
+        public Boolean call() {
+            String currentPlayer;
+            String myPlayerID = guiController.player.getPlayerId();
+
+            currentPlayer = initGameStatus.getActivePlayerID();
+            try {
+                while(!myPlayerID.equals(currentPlayer)) {
+                    Thread.sleep(2000);
+                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
+                }
+            } catch(InterruptedException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+
+            return true;
+        }
+    }
     void updateOnDemand() {
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
@@ -123,6 +147,12 @@ public class GUIController {
             System.out.println ("prawy przycisk");
             detector.setText ( "prawy przycisk" );
         }
+    }
+
+    @FXML
+    public void exitGame(ActionEvent event) {
+        Stage stage = (Stage) exitButton.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
@@ -155,40 +185,23 @@ public class GUIController {
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
             detector.setText("Not your turn!");
-            return;
         } else {
             detector.setText("Your turn");
         }
     }
 
-    private boolean firstClick = false;
     public ArrayList<Pane> fromTo = new ArrayList<Pane>();
     public List<Position> positions = new ArrayList<Position>();
 
-    @FXML
-    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
-            System.out.println("Not your turn!");
-            return;
-        }
+    public void lockBoard() {
+        board8x8.setDisable(true);
+        //todo block panes if not your move
+//        board8x8.
+    }
 
-        Pane actual = (Pane) event.getSource();
-        String errorMessage;
-        Position pos = new Position();
-
-        int row, col;
-        // handling when rowIndex/colIndex = 0
-        if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
-            row = 1;
-        } else {
-            row = GridPane.getRowIndex(actual) + 1;
-        }
-
-        if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
-            col = 1;
-        } else {
-            col = GridPane.getColumnIndex(actual) + 1;
-        }
+    public void unlockBoard() {
+        board8x8.setDisable(false);
+    }
 
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
@@ -234,7 +247,7 @@ public class GUIController {
                     lockBoard();
 
                     //start thread -> thread unlocks board
-                    GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+                    GameBoardManager gameBoardManager = new GameBoardManager(this, behaviour.gameStatus);
                     gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
                         @Override
                         public void handle (WorkerStateEvent e) {
@@ -248,7 +261,7 @@ public class GUIController {
 
                 } else {
                     System.out.println("GUIController - Wrong move");
-                    System.out.println(gameStatus.getError());
+                    System.out.println( behaviour.gameStatus.getError());
                     // print error message
                 }
 
@@ -270,48 +283,9 @@ public class GUIController {
         }
     }
 
-    public void lockBoard() {
-        board8x8.setDisable(true);
-        //todo block panes if not your move
-//        board8x8.
-    }
 
-    public void unlockBoard() {
-        board8x8.setDisable(false);
-    }
 
-    @FXML
-    public void exitGame(ActionEvent event) {
-        Stage stage = (Stage) exitButton.getScene().getWindow();
-        stage.close();
-    }
 
-    public class GameBoardManager extends Task<Boolean> {
-        GUIController guiController;
-        GameStatus initGameStatus;
 
-        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
-            this.guiController = guiController;
-            this.initGameStatus = initGameStatus;
-        }
-
-        public Boolean call() {
-            String currentPlayer;
-            String myPlayerID = guiController.player.getPlayerId();
-
-            currentPlayer = initGameStatus.getActivePlayerID();
-            try {
-                while(!myPlayerID.equals(currentPlayer)) {
-                    Thread.sleep(2000);
-                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
-                }
-            } catch(InterruptedException e) {
-                System.out.println(e.getMessage());
-                System.exit(1);
-            }
-
-            return true;
-        }
-    }
 }
 

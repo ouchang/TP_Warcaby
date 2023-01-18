@@ -56,6 +56,7 @@ public class GUIbehaviour {
     public boolean getCorrectMove(){
         return correctMove;
     }
+    public GameStatus gameStatus = new GameStatus();
     public List<Position> serverCheck(ClientNew player, List<Pane> pieceAllWay){
         System.out.println("___________________________________________");
         for (Pane p : pieceAllWay){
