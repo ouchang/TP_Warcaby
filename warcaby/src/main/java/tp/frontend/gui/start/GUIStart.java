@@ -45,14 +45,13 @@ public class GUIStart extends Application {
             stage.show();
 
         } else {
-            String tmp = player.getPollingAgent().getGameStatus().getGameKind();
-            while(tmp.equals("")) {
+            String gameType = player.getPollingAgent().getGameStatus().getGameKind();
+            while(gameType.equals("")) {
                 gameStatus = player.getPollingAgent().getGameStatus();
-                tmp = gameStatus.getGameKind();
+                gameType = gameStatus.getGameKind();
                 Thread.sleep(500);
             }
 
-            // todo: rozważyć opcje dolączenia więcej jak dwóch graczy
             Scene scene = new Scene(board.load(), 800, 600 );
             stage.setTitle("BLACK");
             GUIController controller = board.getController();

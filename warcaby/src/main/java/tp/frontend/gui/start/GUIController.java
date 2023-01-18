@@ -1,6 +1,5 @@
 package tp.frontend.gui.start;
 
-import javafx.scene.Node;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
@@ -25,6 +24,9 @@ import java.util.ArrayList;
  */
 public class GUIController {
     ClientNew player;
+    private boolean firstClick = false;
+    public ArrayList<Pane> pieceFromTo = new ArrayList<>();
+    public List<Pane> pieceAllWay = new ArrayList<>();
 
     @FXML
     private CheckBox showInstructionButton;
@@ -53,21 +55,27 @@ public class GUIController {
     @FXML
     private GridPane game;
 
+    public GUIController(){
+        System.out.println ("GUI controller created");
+    }
+
     public void setPlayer(ClientNew player) {
         this.player = player;
     }
 
     @FXML
     void updateBoard(ActionEvent event) {
+        unlockBoard();
         detector.setText("");
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
-            return;
+            detector.setText("Opponents move");
+        } else {
+            GUIbehaviour bevhaviour = new GUIbehaviour();
+            GameStatus gameStatus = player.getPollingAgent().getGameStatus();
+            bevhaviour.updateBoard(gameStatus.getBoard(), this);
+            detector.setText("Your move");
         }
-
-        GUIbehaviour bevhaviour = new GUIbehaviour();
-        GameStatus gameStatus = player.getPollingAgent().getGameStatus();
-        bevhaviour.updateBoard(gameStatus.getBoard(), this);
     }
 
     @FXML
@@ -87,7 +95,6 @@ public class GUIController {
                 instruction.setText("GermanType");
                 break;
             }
-
         }
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
@@ -95,14 +102,8 @@ public class GUIController {
             instruction.setVisible ( true );
         }
     }
- 
-    private boolean firstClick = false;
-    public ArrayList<Pane> fromTo = new ArrayList<>();
-    public List<Position> positions = new ArrayList<>();
 
-    @FXML
-    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
-
+    public void getTurn(){
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
             detector.setText("Not your turn!");
@@ -110,108 +111,74 @@ public class GUIController {
         } else {
             detector.setText("Your turn");
         }
+    }
+
+    @FXML
+    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
+        getTurn();
 
         Pane actual = (Pane) event.getSource();
-        String errorMessage;
-        Position pos = new Position();
-
-        int row, col;
-        // handling when rowIndex/colIndex = 0
-        if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
-            row = 1;
-        } else {
-            row = GridPane.getRowIndex(actual) + 1;
-        }
-
-        if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
-            col = 1;
-        } else {
-            col = GridPane.getColumnIndex(actual) + 1;
-        }
         
         if(event.getButton() == MouseButton.PRIMARY) {
             if(!this.firstClick) {
                 System.out.println("FIRST CLICK");
-                
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
-
-                this.fromTo.add(actual);
-
-                // TO DO: mark clicked field on board!
-
-                this.firstClick = true;
+                pieceAllWay.add(actual);
+                pieceFromTo.add(actual);
+                actual.setStyle("-fx-background-color: #666990");
+                firstClick = true;
             } else {
 
                 System.out.println("LAST CLICK");
+                pieceFromTo.add(actual);
+                pieceAllWay.add(actual);
 
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
+                GUIbehaviour behaviour = new GUIbehaviour();
+                behaviour.copyFromTo(pieceFromTo);
+                List<Position> capturedFigures =  behaviour.serverCheck(player, pieceAllWay);
 
-                this.fromTo.add(actual);
-                
-                List<Position> capturedFigures = new ArrayList<Position>();
+                System.out.println("___________________________________________");
+                for (Position poss : capturedFigures){
+                    System.out.println("X: " + poss.getX() + " Y: " + poss.getY());
+                }
+                System.out.println("ID OF PICTURE : " + behaviour.figureIdx);
+                System.out.println("___________________________________________");
 
-                // send move info to server
-                System.out.println("POSITIONS: " + this.positions);
-                GameStatus gameStatus = player.sendMoveCommand(this.positions);
-                errorMessage = gameStatus.getError();
-                capturedFigures = gameStatus.getCapturedFigures();  
-                String[][] gameBoard = gameStatus.getBoard();
-                int figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
-
-                System.out.println("Error Message: " + errorMessage);
-
-                if(errorMessage.equals("")) {
-                    System.out.println("GUIController - Correct move");
-                    GUIbehaviour bevhaviour = new GUIbehaviour();
-
-                    bevhaviour.swapList(this.fromTo);
-                    if(capturedFigures.size() != 0) {
-                        bevhaviour.react(figureIdx, capturedFigures, this.board8x8);
-                    } else {
-                        bevhaviour.react(figureIdx, null, this.board8x8);
-                    }
+                if(capturedFigures.size() != 0) {
+                    //todo get from server if the move is valid - if not do not delete pieces
+                    //todo podświetlać pane jak nad nim przejeżdża się myszką
+                    behaviour.react(behaviour.figureIdx, capturedFigures, board8x8);
+                    lockBoard();
                 } else {
-                    System.out.println("GUIController - Wrong move");
-                    System.out.println(gameStatus.getError());
-                    // print error message
+                    behaviour.react(behaviour.figureIdx, null, board8x8);
                 }
 
+                for (Pane place : pieceAllWay){
+                    place.setStyle("-fx-background-color: #d67342");
+                }
                 // clear
-                this.fromTo.clear();
-                this.positions.clear();
-                this.firstClick = false;
+                pieceFromTo.clear();
+                pieceAllWay.clear();
+                firstClick = false;
             }
-        } else if(event.getButton() == MouseButton.SECONDARY) {
-            if(this.firstClick) {
-                System.out.println("MIDDLE CLICK");
-                pos.setX(row);
-                pos.setY(col);
-                this.positions.add(pos);
-                //((Pane) event.getSource()).setStyle("-fx-background-color: #E48A65;");
-            }
+        } else if(event.getButton() == MouseButton.SECONDARY && firstClick) {
+            System.out.println("MIDDLE CLICK");
+            actual.setStyle("-fx-background-color: #eb7990");       //todo change color
+            pieceAllWay.add(actual);
         }
     }
 
     public void lockBoard() {
-        this.game.setDisable(true);
+        board8x8.setDisable(true);
     }
 
     public void unlockBoard() {
-        this.game.setDisable(false);
+        board8x8.setDisable(false);
     }
 
     @FXML
     public void exitGame(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
-    }
-
-    public GUIController(){
-        System.out.println ("gui controller created");
     }
 }
 

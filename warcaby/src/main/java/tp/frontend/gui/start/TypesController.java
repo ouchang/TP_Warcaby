@@ -71,6 +71,5 @@ public class TypesController {
         stage.show();
     }
 }
-//todo zaznaczyc klikniete pole
 //todo info czyja tura + blokowanie planszy
 //todo dwa gracze jako  watki i za pomoca wait() jeden przechwytuje kontrole nad ?serverem? , jak się kończy ruch to uruchamia się wait i inny watek przechwytuje kontrole

@@ -1,5 +1,7 @@
 package tp.frontend.gui.start;
 
+import tp.backend.ClientNew;
+import tp.backend.GameStatus;
 import tp.backend.Position;
 
 import javafx.collections.ObservableList;
@@ -20,28 +22,80 @@ import java.util.List;
 public class GUIbehaviour {
     ArrayList<Pane> fromTo;
     public static ArrayList<Pane> positionChanges = new ArrayList<> ();
-    String[] imageType;
-    
+
     GUIbehaviour(){
         this.fromTo = new ArrayList<Pane>();
-        imageType = new String[5];
-        imageType[0] = "";
-        imageType[1] = "simpleWhitePiece.png";
-        imageType[2] = "kingWhitePiece.png"; 
-        imageType[3] = "simpleBlackPiece.png";
-        imageType[4] = "kingBlackPiece.png"; 
+
     }
 
     public void addElement(Pane element) {
-        this.fromTo.add(element);
+        fromTo.add(element);
     }
 
-    public void swapList(ArrayList<Pane> list) {
+    public void copyFromTo(ArrayList<Pane> list) {
         for(Pane p : list) {
             addElement(p);
         }
     }
 
+    public List<Position> getPositionFromPane(List<Pane> pieceAllWay){  //todo ocsobno getListOfPos oraz getPosFromPane
+        List<Position> positions = new ArrayList<Position>();
+
+        for (Pane actual : pieceAllWay) {
+            Position pos = new Position();
+            int row, col;
+            // handling when rowIndex/colIndex = 0
+            if (GridPane.getRowIndex(actual) == null) { // rowIndex = 0
+                row = 1;
+            } else {
+                row = GridPane.getRowIndex(actual) + 1;
+            }
+
+            if (GridPane.getColumnIndex(actual) == null) { // colIndex = 0
+                col = 1;
+            } else {
+                col = GridPane.getColumnIndex(actual) + 1;
+            }
+            pos.setX(row);
+            pos.setY(col);
+            positions.add(pos);
+        }
+        return positions;
+    }
+    public int figureIdx = 99;
+    public List<Position> serverCheck(ClientNew player, List<Pane> pieceAllWay){
+        System.out.println("___________________________________________");
+        for (Pane p : pieceAllWay){
+            System.out.println("ROW: " + GridPane.getRowIndex(p) + "COL: " + GridPane.getColumnIndex(p) );
+        }
+        System.out.println("___________________________________________");
+        List<Position> positions = getPositionFromPane(pieceAllWay);
+        List<Position> capturedFigures = new ArrayList<Position>();
+        Position pos = new Position();
+
+        // send move info to server
+        for (Position poss : positions){
+            System.out.println("POSITION: X= " + poss.getX() + " Y= " + poss.getY());
+        }
+
+        GameStatus gameStatus = player.sendMoveCommand(positions);
+        String errorMessage = gameStatus.getError();
+        capturedFigures = gameStatus.getCapturedFigures();
+        String[][] gameBoard = gameStatus.getBoard();
+
+        pos = positions.get(positions.size()-1);
+        figureIdx = Integer.parseInt(gameBoard[pos.getX()][pos.getY()]);
+
+        System.out.println("Error Message: " + errorMessage);
+
+        if(errorMessage.equals("")) {
+            System.out.println("GUIController - Correct move");
+        } else {
+            System.out.println("GUIController - Wrong move");
+            System.out.println(gameStatus.getError());
+        }
+        return  capturedFigures;
+    }
     public String getImageName(String url) {
         int slashIdx = url.length()-1;
         while(url.charAt(slashIdx) != '/') {
@@ -71,6 +125,7 @@ public class GUIbehaviour {
     }
 
     public void updateBoard(String[][] boardString, GUIController controller){
+        //todo: create class board and send not list of string but object board
         int row, col;
         String fileName = "";
         Image image = null;
@@ -138,8 +193,11 @@ public class GUIbehaviour {
 
     public void react(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
-        String fileName = imageType[figureIdx];
 
+        String fileName = ImageType.values()[figureIdx].toString();
+
+        System.out.println("FIGURE ID: " + figureIdx);
+        System.out.println("FILENAME: " + fileName);
 
         // Add figure's image to the ending position
         add(fromTo.get(1), fileName);
