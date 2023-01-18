@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1backend_1_1_game_status.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>backend</b></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -75,92 +91,562 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for tp.backend.GameStatus:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classtp_1_1backend_1_1_game_status.png" usemap="#tp.backend.GameStatus_map" alt=""/>
-  <map id="tp.backend.GameStatus_map" name="tp.backend.GameStatus_map">
-<area href="interfacetp_1_1backend_1_1_i_command.html" alt="tp.backend.ICommand" shape="rect" coords="0,0,144,24"/>
-  </map>
-</div></div>
+<div class="center"><img src="classtp_1_1backend_1_1_game_status__inherit__graph.png" border="0" usemap="#atp_8backend_8_game_status_inherit__map" alt="Inheritance graph"/></div>
+<map name="atp_8backend_8_game_status_inherit__map" id="atp_8backend_8_game_status_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,80,168,107"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="11,5,163,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for tp.backend.GameStatus:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status__coll__graph.png" border="0" usemap="#atp_8backend_8_game_status_coll__map" alt="Collaboration graph"/></div>
+<map name="atp_8backend_8_game_status_coll__map" id="atp_8backend_8_game_status_coll__map">
+<area shape="rect" title=" " alt="" coords="96,95,259,121"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="5,5,157,32"/>
+<area shape="rect" title=" " alt="" coords="182,5,365,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a8397c8d53d21b028667762e0687f10e9"><td class="memItemLeft" align="right" valign="top"><a id="a8397c8d53d21b028667762e0687f10e9" name="a8397c8d53d21b028667762e0687f10e9"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setId</b> (String id)</td></tr>
+<tr class="memitem:a7332b6543c0272cd32418c045c029f25"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a7332b6543c0272cd32418c045c029f25">GameStatus</a> ()</td></tr>
+<tr class="separator:a7332b6543c0272cd32418c045c029f25"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8397c8d53d21b028667762e0687f10e9"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8397c8d53d21b028667762e0687f10e9">setId</a> (String id)</td></tr>
 <tr class="separator:a8397c8d53d21b028667762e0687f10e9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a20979458a638104a010613d17ae26c36"><td class="memItemLeft" align="right" valign="top"><a id="a20979458a638104a010613d17ae26c36" name="a20979458a638104a010613d17ae26c36"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getId</b> ()</td></tr>
+<tr class="memitem:a20979458a638104a010613d17ae26c36"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a20979458a638104a010613d17ae26c36">getId</a> ()</td></tr>
 <tr class="separator:a20979458a638104a010613d17ae26c36"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a387242857080e3612b15d9e3904a9ad7"><td class="memItemLeft" align="right" valign="top"><a id="a387242857080e3612b15d9e3904a9ad7" name="a387242857080e3612b15d9e3904a9ad7"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayerId</b> (String playerId)</td></tr>
+<tr class="memitem:a387242857080e3612b15d9e3904a9ad7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a387242857080e3612b15d9e3904a9ad7">setPlayerId</a> (String playerId)</td></tr>
 <tr class="separator:a387242857080e3612b15d9e3904a9ad7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aaf99060687d1e6bc9791172908581fb7"><td class="memItemLeft" align="right" valign="top"><a id="aaf99060687d1e6bc9791172908581fb7" name="aaf99060687d1e6bc9791172908581fb7"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayerId</b> ()</td></tr>
+<tr class="memitem:aaf99060687d1e6bc9791172908581fb7"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#aaf99060687d1e6bc9791172908581fb7">getPlayerId</a> ()</td></tr>
 <tr class="separator:aaf99060687d1e6bc9791172908581fb7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:afe0a913d9a737772a3faefa941ea5b94"><td class="memItemLeft" align="right" valign="top"><a id="afe0a913d9a737772a3faefa941ea5b94" name="afe0a913d9a737772a3faefa941ea5b94"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setFriendly_name</b> (String friendly_name)</td></tr>
+<tr class="memitem:afe0a913d9a737772a3faefa941ea5b94"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#afe0a913d9a737772a3faefa941ea5b94">setFriendly_name</a> (String friendly_name)</td></tr>
 <tr class="separator:afe0a913d9a737772a3faefa941ea5b94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7593ec60fc3c2b3725751074f66cc8b1"><td class="memItemLeft" align="right" valign="top"><a id="a7593ec60fc3c2b3725751074f66cc8b1" name="a7593ec60fc3c2b3725751074f66cc8b1"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getFriendly_name</b> ()</td></tr>
+<tr class="memitem:a7593ec60fc3c2b3725751074f66cc8b1"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a7593ec60fc3c2b3725751074f66cc8b1">getFriendly_name</a> ()</td></tr>
 <tr class="separator:a7593ec60fc3c2b3725751074f66cc8b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6439ba48c941a393e2d524357b5923bb"><td class="memItemLeft" align="right" valign="top"><a id="a6439ba48c941a393e2d524357b5923bb" name="a6439ba48c941a393e2d524357b5923bb"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayer1</b> (String player1)</td></tr>
+<tr class="memitem:a6439ba48c941a393e2d524357b5923bb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a6439ba48c941a393e2d524357b5923bb">setPlayer1</a> (String player1)</td></tr>
 <tr class="separator:a6439ba48c941a393e2d524357b5923bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8a7f8ac8e347704bfafa2eaa82a0d86a"><td class="memItemLeft" align="right" valign="top"><a id="a8a7f8ac8e347704bfafa2eaa82a0d86a" name="a8a7f8ac8e347704bfafa2eaa82a0d86a"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayer1</b> ()</td></tr>
+<tr class="memitem:a8a7f8ac8e347704bfafa2eaa82a0d86a"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8a7f8ac8e347704bfafa2eaa82a0d86a">getPlayer1</a> ()</td></tr>
 <tr class="separator:a8a7f8ac8e347704bfafa2eaa82a0d86a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a73de09b6a49c56b995dc4976fd52a3f6"><td class="memItemLeft" align="right" valign="top"><a id="a73de09b6a49c56b995dc4976fd52a3f6" name="a73de09b6a49c56b995dc4976fd52a3f6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setPlayer2</b> (String player2)</td></tr>
+<tr class="memitem:a73de09b6a49c56b995dc4976fd52a3f6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a73de09b6a49c56b995dc4976fd52a3f6">setPlayer2</a> (String player2)</td></tr>
 <tr class="separator:a73de09b6a49c56b995dc4976fd52a3f6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8134726b12656a9104b3d21124887e5f"><td class="memItemLeft" align="right" valign="top"><a id="a8134726b12656a9104b3d21124887e5f" name="a8134726b12656a9104b3d21124887e5f"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getPlayer2</b> ()</td></tr>
+<tr class="memitem:a8134726b12656a9104b3d21124887e5f"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8134726b12656a9104b3d21124887e5f">getPlayer2</a> ()</td></tr>
 <tr class="separator:a8134726b12656a9104b3d21124887e5f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a517beaebae96d4cc467cc5b2d103a3ee"><td class="memItemLeft" align="right" valign="top"><a id="a517beaebae96d4cc467cc5b2d103a3ee" name="a517beaebae96d4cc467cc5b2d103a3ee"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setGameKind</b> (String gameKind)</td></tr>
+<tr class="memitem:a517beaebae96d4cc467cc5b2d103a3ee"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a517beaebae96d4cc467cc5b2d103a3ee">setGameKind</a> (String gameKind)</td></tr>
 <tr class="separator:a517beaebae96d4cc467cc5b2d103a3ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae3997b86aa0e80852369a9d239b0e614"><td class="memItemLeft" align="right" valign="top"><a id="ae3997b86aa0e80852369a9d239b0e614" name="ae3997b86aa0e80852369a9d239b0e614"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getGameKind</b> ()</td></tr>
+<tr class="memitem:ae3997b86aa0e80852369a9d239b0e614"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ae3997b86aa0e80852369a9d239b0e614">getGameKind</a> ()</td></tr>
 <tr class="separator:ae3997b86aa0e80852369a9d239b0e614"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab25981c331325406e631e7a6fe207a33"><td class="memItemLeft" align="right" valign="top"><a id="ab25981c331325406e631e7a6fe207a33" name="ab25981c331325406e631e7a6fe207a33"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setActivePlayerID</b> (String activePlayerID)</td></tr>
+<tr class="memitem:ab25981c331325406e631e7a6fe207a33"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ab25981c331325406e631e7a6fe207a33">setActivePlayerID</a> (String activePlayerID)</td></tr>
 <tr class="separator:ab25981c331325406e631e7a6fe207a33"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad6bb078348001ecab80e4c2f2e90ce24"><td class="memItemLeft" align="right" valign="top"><a id="ad6bb078348001ecab80e4c2f2e90ce24" name="ad6bb078348001ecab80e4c2f2e90ce24"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getActivePlayerID</b> ()</td></tr>
+<tr class="memitem:ad6bb078348001ecab80e4c2f2e90ce24"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ad6bb078348001ecab80e4c2f2e90ce24">getActivePlayerID</a> ()</td></tr>
 <tr class="separator:ad6bb078348001ecab80e4c2f2e90ce24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a34b5697b3e1bfefd2692690c67a13376"><td class="memItemLeft" align="right" valign="top"><a id="a34b5697b3e1bfefd2692690c67a13376" name="a34b5697b3e1bfefd2692690c67a13376"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setStatus</b> (String status)</td></tr>
+<tr class="memitem:a34b5697b3e1bfefd2692690c67a13376"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a34b5697b3e1bfefd2692690c67a13376">setStatus</a> (String status)</td></tr>
 <tr class="separator:a34b5697b3e1bfefd2692690c67a13376"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae303b39c806c8f5f8fa850814b737ecf"><td class="memItemLeft" align="right" valign="top"><a id="ae303b39c806c8f5f8fa850814b737ecf" name="ae303b39c806c8f5f8fa850814b737ecf"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getStatus</b> ()</td></tr>
+<tr class="memitem:ae303b39c806c8f5f8fa850814b737ecf"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ae303b39c806c8f5f8fa850814b737ecf">getStatus</a> ()</td></tr>
 <tr class="separator:ae303b39c806c8f5f8fa850814b737ecf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abc947d8f4e5ed1effd4c01bfda08cd68"><td class="memItemLeft" align="right" valign="top"><a id="abc947d8f4e5ed1effd4c01bfda08cd68" name="abc947d8f4e5ed1effd4c01bfda08cd68"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setError</b> (String error)</td></tr>
+<tr class="memitem:abc947d8f4e5ed1effd4c01bfda08cd68"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#abc947d8f4e5ed1effd4c01bfda08cd68">setError</a> (String error)</td></tr>
 <tr class="separator:abc947d8f4e5ed1effd4c01bfda08cd68"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac8c5d6600d517f9046b09b05f2bdab92"><td class="memItemLeft" align="right" valign="top"><a id="ac8c5d6600d517f9046b09b05f2bdab92" name="ac8c5d6600d517f9046b09b05f2bdab92"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getError</b> ()</td></tr>
+<tr class="memitem:ac8c5d6600d517f9046b09b05f2bdab92"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ac8c5d6600d517f9046b09b05f2bdab92">getError</a> ()</td></tr>
 <tr class="separator:ac8c5d6600d517f9046b09b05f2bdab92"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a71428efe9cd6703bd6adae1847bfbb6a"><td class="memItemLeft" align="right" valign="top"><a id="a71428efe9cd6703bd6adae1847bfbb6a" name="a71428efe9cd6703bd6adae1847bfbb6a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setBoard</b> (String[][] board)</td></tr>
+<tr class="memitem:a71428efe9cd6703bd6adae1847bfbb6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a71428efe9cd6703bd6adae1847bfbb6a">setBoard</a> (String[][] board)</td></tr>
 <tr class="separator:a71428efe9cd6703bd6adae1847bfbb6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a436c98c32ae18e519d4dd40f57c060f0"><td class="memItemLeft" align="right" valign="top"><a id="a436c98c32ae18e519d4dd40f57c060f0" name="a436c98c32ae18e519d4dd40f57c060f0"></a>
-String[][]&#160;</td><td class="memItemRight" valign="bottom"><b>getBoard</b> ()</td></tr>
+<tr class="memitem:a436c98c32ae18e519d4dd40f57c060f0"><td class="memItemLeft" align="right" valign="top">String[][]&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a436c98c32ae18e519d4dd40f57c060f0">getBoard</a> ()</td></tr>
 <tr class="separator:a436c98c32ae18e519d4dd40f57c060f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8dbb8539cd6dd482c2f9a5b560a5f8cf"><td class="memItemLeft" align="right" valign="top"><a id="a8dbb8539cd6dd482c2f9a5b560a5f8cf" name="a8dbb8539cd6dd482c2f9a5b560a5f8cf"></a>
-List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>getCapturedFigures</b> ()</td></tr>
+<tr class="memitem:a8dbb8539cd6dd482c2f9a5b560a5f8cf"><td class="memItemLeft" align="right" valign="top">List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8dbb8539cd6dd482c2f9a5b560a5f8cf">getCapturedFigures</a> ()</td></tr>
 <tr class="separator:a8dbb8539cd6dd482c2f9a5b560a5f8cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2426f2e8adfdb1ad91f51fa00f595149"><td class="memItemLeft" align="right" valign="top"><a id="a2426f2e8adfdb1ad91f51fa00f595149" name="a2426f2e8adfdb1ad91f51fa00f595149"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>setCapturedFigures</b> (List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; capturedFigures)</td></tr>
+<tr class="memitem:a2426f2e8adfdb1ad91f51fa00f595149"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a2426f2e8adfdb1ad91f51fa00f595149">setCapturedFigures</a> (List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; capturedFigures)</td></tr>
 <tr class="separator:a2426f2e8adfdb1ad91f51fa00f595149"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ac6bbae65cb36004e89c0cbb0b2d0c318"><td class="memItemLeft" align="right" valign="top"><a id="ac6bbae65cb36004e89c0cbb0b2d0c318" name="ac6bbae65cb36004e89c0cbb0b2d0c318"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addCapturedFigure</b> (<a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> cf)</td></tr>
+<tr class="memitem:ac6bbae65cb36004e89c0cbb0b2d0c318"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ac6bbae65cb36004e89c0cbb0b2d0c318">addCapturedFigure</a> (<a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> cf)</td></tr>
 <tr class="separator:ac6bbae65cb36004e89c0cbb0b2d0c318"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
+<h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
+<a id="a7332b6543c0272cd32418c045c029f25" name="a7332b6543c0272cd32418c045c029f25"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7332b6543c0272cd32418c045c029f25">&#9670;&nbsp;</a></span>GameStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">tp.backend.GameStatus.GameStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="ac6bbae65cb36004e89c0cbb0b2d0c318" name="ac6bbae65cb36004e89c0cbb0b2d0c318"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac6bbae65cb36004e89c0cbb0b2d0c318">&#9670;&nbsp;</a></span>addCapturedFigure()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.addCapturedFigure </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classtp_1_1backend_1_1_position.html">Position</a>&#160;</td>
+          <td class="paramname"><em>cf</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ad6bb078348001ecab80e4c2f2e90ce24" name="ad6bb078348001ecab80e4c2f2e90ce24"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad6bb078348001ecab80e4c2f2e90ce24">&#9670;&nbsp;</a></span>getActivePlayerID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getActivePlayerID </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_ad6bb078348001ecab80e4c2f2e90ce24_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_ad6bb078348001ecab80e4c2f2e90ce24_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_ad6bb078348001ecab80e4c2f2e90ce24_icgraph" id="aclasstp_1_1backend_1_1_game_status_ad6bb078348001ecab80e4c2f2e90ce24_icgraph">
+<area shape="rect" title=" " alt="" coords="303,5,488,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a436c98c32ae18e519d4dd40f57c060f0" name="a436c98c32ae18e519d4dd40f57c060f0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a436c98c32ae18e519d4dd40f57c060f0">&#9670;&nbsp;</a></span>getBoard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String[][] tp.backend.GameStatus.getBoard </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_a436c98c32ae18e519d4dd40f57c060f0_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_a436c98c32ae18e519d4dd40f57c060f0_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_a436c98c32ae18e519d4dd40f57c060f0_icgraph" id="aclasstp_1_1backend_1_1_game_status_a436c98c32ae18e519d4dd40f57c060f0_icgraph">
+<area shape="rect" title=" " alt="" coords="303,5,488,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a8dbb8539cd6dd482c2f9a5b560a5f8cf" name="a8dbb8539cd6dd482c2f9a5b560a5f8cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8dbb8539cd6dd482c2f9a5b560a5f8cf">&#9670;&nbsp;</a></span>getCapturedFigures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; tp.backend.GameStatus.getCapturedFigures </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_a8dbb8539cd6dd482c2f9a5b560a5f8cf_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_a8dbb8539cd6dd482c2f9a5b560a5f8cf_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_a8dbb8539cd6dd482c2f9a5b560a5f8cf_icgraph" id="aclasstp_1_1backend_1_1_game_status_a8dbb8539cd6dd482c2f9a5b560a5f8cf_icgraph">
+<area shape="rect" title=" " alt="" coords="303,5,488,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="ac8c5d6600d517f9046b09b05f2bdab92" name="ac8c5d6600d517f9046b09b05f2bdab92"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac8c5d6600d517f9046b09b05f2bdab92">&#9670;&nbsp;</a></span>getError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getError </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_ac8c5d6600d517f9046b09b05f2bdab92_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_ac8c5d6600d517f9046b09b05f2bdab92_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_ac8c5d6600d517f9046b09b05f2bdab92_icgraph" id="aclasstp_1_1backend_1_1_game_status_ac8c5d6600d517f9046b09b05f2bdab92_icgraph">
+<area shape="rect" title=" " alt="" coords="303,5,488,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a7593ec60fc3c2b3725751074f66cc8b1" name="a7593ec60fc3c2b3725751074f66cc8b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7593ec60fc3c2b3725751074f66cc8b1">&#9670;&nbsp;</a></span>getFriendly_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getFriendly_name </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae3997b86aa0e80852369a9d239b0e614" name="ae3997b86aa0e80852369a9d239b0e614"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae3997b86aa0e80852369a9d239b0e614">&#9670;&nbsp;</a></span>getGameKind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getGameKind </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_ae3997b86aa0e80852369a9d239b0e614_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_ae3997b86aa0e80852369a9d239b0e614_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_ae3997b86aa0e80852369a9d239b0e614_icgraph" id="aclasstp_1_1backend_1_1_game_status_ae3997b86aa0e80852369a9d239b0e614_icgraph">
+<area shape="rect" title=" " alt="" coords="272,5,457,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html#ad70cc1f8c9b74b0c3a7a24e5da6bd3a3" title=" " alt="" coords="5,13,224,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a20979458a638104a010613d17ae26c36" name="a20979458a638104a010613d17ae26c36"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a20979458a638104a010613d17ae26c36">&#9670;&nbsp;</a></span>getId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8a7f8ac8e347704bfafa2eaa82a0d86a" name="a8a7f8ac8e347704bfafa2eaa82a0d86a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a7f8ac8e347704bfafa2eaa82a0d86a">&#9670;&nbsp;</a></span>getPlayer1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getPlayer1 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8134726b12656a9104b3d21124887e5f" name="a8134726b12656a9104b3d21124887e5f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8134726b12656a9104b3d21124887e5f">&#9670;&nbsp;</a></span>getPlayer2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getPlayer2 </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aaf99060687d1e6bc9791172908581fb7" name="aaf99060687d1e6bc9791172908581fb7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aaf99060687d1e6bc9791172908581fb7">&#9670;&nbsp;</a></span>getPlayerId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getPlayerId </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ae303b39c806c8f5f8fa850814b737ecf" name="ae303b39c806c8f5f8fa850814b737ecf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae303b39c806c8f5f8fa850814b737ecf">&#9670;&nbsp;</a></span>getStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.backend.GameStatus.getStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ab25981c331325406e631e7a6fe207a33" name="ab25981c331325406e631e7a6fe207a33"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab25981c331325406e631e7a6fe207a33">&#9670;&nbsp;</a></span>setActivePlayerID()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setActivePlayerID </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>activePlayerID</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a71428efe9cd6703bd6adae1847bfbb6a" name="a71428efe9cd6703bd6adae1847bfbb6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a71428efe9cd6703bd6adae1847bfbb6a">&#9670;&nbsp;</a></span>setBoard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setBoard </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>board</em>[][]</td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a2426f2e8adfdb1ad91f51fa00f595149" name="a2426f2e8adfdb1ad91f51fa00f595149"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2426f2e8adfdb1ad91f51fa00f595149">&#9670;&nbsp;</a></span>setCapturedFigures()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setCapturedFigures </td>
+          <td>(</td>
+          <td class="paramtype">List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt;&#160;</td>
+          <td class="paramname"><em>capturedFigures</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="abc947d8f4e5ed1effd4c01bfda08cd68" name="abc947d8f4e5ed1effd4c01bfda08cd68"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abc947d8f4e5ed1effd4c01bfda08cd68">&#9670;&nbsp;</a></span>setError()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setError </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>error</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="afe0a913d9a737772a3faefa941ea5b94" name="afe0a913d9a737772a3faefa941ea5b94"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afe0a913d9a737772a3faefa941ea5b94">&#9670;&nbsp;</a></span>setFriendly_name()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setFriendly_name </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>friendly_name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a517beaebae96d4cc467cc5b2d103a3ee" name="a517beaebae96d4cc467cc5b2d103a3ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a517beaebae96d4cc467cc5b2d103a3ee">&#9670;&nbsp;</a></span>setGameKind()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setGameKind </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>gameKind</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a8397c8d53d21b028667762e0687f10e9" name="a8397c8d53d21b028667762e0687f10e9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8397c8d53d21b028667762e0687f10e9">&#9670;&nbsp;</a></span>setId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setId </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>id</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a6439ba48c941a393e2d524357b5923bb" name="a6439ba48c941a393e2d524357b5923bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6439ba48c941a393e2d524357b5923bb">&#9670;&nbsp;</a></span>setPlayer1()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setPlayer1 </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>player1</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a73de09b6a49c56b995dc4976fd52a3f6" name="a73de09b6a49c56b995dc4976fd52a3f6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a73de09b6a49c56b995dc4976fd52a3f6">&#9670;&nbsp;</a></span>setPlayer2()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setPlayer2 </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>player2</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a387242857080e3612b15d9e3904a9ad7" name="a387242857080e3612b15d9e3904a9ad7"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a387242857080e3612b15d9e3904a9ad7">&#9670;&nbsp;</a></span>setPlayerId()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setPlayerId </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>playerId</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_game_status_a387242857080e3612b15d9e3904a9ad7_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_game_status_a387242857080e3612b15d9e3904a9ad7_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_game_status_a387242857080e3612b15d9e3904a9ad7_icgraph" id="aclasstp_1_1backend_1_1_game_status_a387242857080e3612b15d9e3904a9ad7_icgraph">
+<area shape="rect" title=" " alt="" coords="463,5,648,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a8e77fb8ccf0387b5ce173d66f5a86e2d" title=" " alt="" coords="244,5,415,47"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#aeec502f9d997e5eb7557e9dbc9b8be5d" title=" " alt="" coords="5,5,196,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a34b5697b3e1bfefd2692690c67a13376" name="a34b5697b3e1bfefd2692690c67a13376"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a34b5697b3e1bfefd2692690c67a13376">&#9670;&nbsp;</a></span>setStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.GameStatus.setStatus </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>status</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>backend/GameStatus.java</li>
+<li>backend/<a class="el" href="_game_status_8java.html">GameStatus.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>tp</b></li><li class="navelem"><a class="el" href="namespacetp_1_1backend.html">backend</a></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

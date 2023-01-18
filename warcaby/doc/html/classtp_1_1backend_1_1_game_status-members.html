@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1backend_1_1_game_status.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>backend</b></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="headertitle"><div class="title">tp.backend.GameStatus Member List</div></div>
 </div><!--header-->
@@ -72,34 +88,37 @@ $(function() {
 
 <p>This is the complete list of members for <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>, including all inherited members.</p>
 <table class="directory">
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>addCapturedFigure</b>(Position cf) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>GameStatus</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getActivePlayerID</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getBoard</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getCapturedFigures</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getError</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getFriendly_name</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getGameKind</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getId</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getPlayer1</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getPlayer2</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>getPlayerId</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>getStatus</b>() (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setActivePlayerID</b>(String activePlayerID) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setBoard</b>(String[][] board) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setCapturedFigures</b>(List&lt; Position &gt; capturedFigures) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setError</b>(String error) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setFriendly_name</b>(String friendly_name) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setGameKind</b>(String gameKind) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setId</b>(String id) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setPlayer1</b>(String player1) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setPlayer2</b>(String player2) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="even"><td class="entry"><b>setPlayerId</b>(String playerId) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
-  <tr bgcolor="#f0f0f0" class="odd"><td class="entry"><b>setStatus</b>(String status) (defined in <a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a>)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ac6bbae65cb36004e89c0cbb0b2d0c318">addCapturedFigure</a>(Position cf)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a7332b6543c0272cd32418c045c029f25">GameStatus</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ad6bb078348001ecab80e4c2f2e90ce24">getActivePlayerID</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a436c98c32ae18e519d4dd40f57c060f0">getBoard</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8dbb8539cd6dd482c2f9a5b560a5f8cf">getCapturedFigures</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ac8c5d6600d517f9046b09b05f2bdab92">getError</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a7593ec60fc3c2b3725751074f66cc8b1">getFriendly_name</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ae3997b86aa0e80852369a9d239b0e614">getGameKind</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a20979458a638104a010613d17ae26c36">getId</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8a7f8ac8e347704bfafa2eaa82a0d86a">getPlayer1</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8134726b12656a9104b3d21124887e5f">getPlayer2</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#aaf99060687d1e6bc9791172908581fb7">getPlayerId</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ae303b39c806c8f5f8fa850814b737ecf">getStatus</a>()</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#ab25981c331325406e631e7a6fe207a33">setActivePlayerID</a>(String activePlayerID)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a71428efe9cd6703bd6adae1847bfbb6a">setBoard</a>(String[][] board)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a2426f2e8adfdb1ad91f51fa00f595149">setCapturedFigures</a>(List&lt; Position &gt; capturedFigures)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#abc947d8f4e5ed1effd4c01bfda08cd68">setError</a>(String error)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#afe0a913d9a737772a3faefa941ea5b94">setFriendly_name</a>(String friendly_name)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a517beaebae96d4cc467cc5b2d103a3ee">setGameKind</a>(String gameKind)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a8397c8d53d21b028667762e0687f10e9">setId</a>(String id)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a6439ba48c941a393e2d524357b5923bb">setPlayer1</a>(String player1)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a73de09b6a49c56b995dc4976fd52a3f6">setPlayer2</a>(String player2)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a387242857080e3612b15d9e3904a9ad7">setPlayerId</a>(String playerId)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html#a34b5697b3e1bfefd2692690c67a13376">setStatus</a>(String status)</td><td class="entry"><a class="el" href="classtp_1_1backend_1_1_game_status.html">tp.backend.GameStatus</a></td><td class="entry"></td></tr>
 </table></div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

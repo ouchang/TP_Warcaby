@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1backend_1_1_client_new_1_1_polling_agent.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>backend</b></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_client_new.html">ClientNew</a></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html">PollingAgent</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -75,24 +91,66 @@ $(function() {
 <div class="dynheader">
 Inheritance diagram for tp.backend.ClientNew.PollingAgent:</div>
 <div class="dyncontent">
- <div class="center">
-  <img src="classtp_1_1backend_1_1_client_new_1_1_polling_agent.png" alt=""/>
- </div></div>
+<div class="center"><img src="classtp_1_1backend_1_1_client_new_1_1_polling_agent__inherit__graph.png" border="0" usemap="#atp_8backend_8_client_new_8_polling_agent_inherit__map" alt="Inheritance graph"/></div>
+<map name="atp_8backend_8_client_new_8_polling_agent_inherit__map" id="atp_8backend_8_client_new_8_polling_agent_inherit__map">
+<area shape="rect" title=" " alt="" coords="5,80,196,121"/>
+<area shape="rect" title=" " alt="" coords="63,5,139,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
+<div class="dynheader">
+Collaboration diagram for tp.backend.ClientNew.PollingAgent:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_client_new_1_1_polling_agent__coll__graph.png" border="0" usemap="#atp_8backend_8_client_new_8_polling_agent_coll__map" alt="Collaboration graph"/></div>
+<map name="atp_8backend_8_client_new_8_polling_agent_coll__map" id="atp_8backend_8_client_new_8_polling_agent_coll__map">
+<area shape="rect" title=" " alt="" coords="51,377,241,419"/>
+<area shape="rect" title=" " alt="" coords="5,95,81,121"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html" title=" " alt="" coords="51,184,241,225"/>
+<area shape="rect" href="classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="167,95,330,121"/>
+<area shape="rect" href="interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="77,5,229,32"/>
+<area shape="rect" title=" " alt="" coords="253,5,436,32"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html" title=" " alt="" coords="72,288,220,315"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a9dabbb611148ed8e035c9ef9e686a476"><td class="memItemLeft" align="right" valign="top"><a id="a9dabbb611148ed8e035c9ef9e686a476" name="a9dabbb611148ed8e035c9ef9e686a476"></a>
-synchronized <a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><b>getGameStatus</b> ()</td></tr>
+<tr class="memitem:a9dabbb611148ed8e035c9ef9e686a476"><td class="memItemLeft" align="right" valign="top">synchronized <a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#a9dabbb611148ed8e035c9ef9e686a476">getGameStatus</a> ()</td></tr>
 <tr class="separator:a9dabbb611148ed8e035c9ef9e686a476"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aeec502f9d997e5eb7557e9dbc9b8be5d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#aeec502f9d997e5eb7557e9dbc9b8be5d">run</a> ()</td></tr>
 <tr class="separator:aeec502f9d997e5eb7557e9dbc9b8be5d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a621c1b543ec4e71db6487afec7f495e3"><td class="memItemLeft" align="right" valign="top"><a id="a621c1b543ec4e71db6487afec7f495e3" name="a621c1b543ec4e71db6487afec7f495e3"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
+<tr class="memitem:a621c1b543ec4e71db6487afec7f495e3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html#a621c1b543ec4e71db6487afec7f495e3">stop</a> ()</td></tr>
 <tr class="separator:a621c1b543ec4e71db6487afec7f495e3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Agent class to handle polling requests of game's status Implemented as Threads </p>
 </div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a9dabbb611148ed8e035c9ef9e686a476" name="a9dabbb611148ed8e035c9ef9e686a476"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dabbb611148ed8e035c9ef9e686a476">&#9670;&nbsp;</a></span>getGameStatus()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">synchronized <a class="el" href="classtp_1_1backend_1_1_game_status.html">GameStatus</a> tp.backend.ClientNew.PollingAgent.getGameStatus </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_client_new_1_1_polling_agent_a9dabbb611148ed8e035c9ef9e686a476_icgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_a9dabbb611148ed8e035c9ef9e686a476_icgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_a9dabbb611148ed8e035c9ef9e686a476_icgraph" id="aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_a9dabbb611148ed8e035c9ef9e686a476_icgraph">
+<area shape="rect" title=" " alt="" coords="303,35,493,76"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html#ad70cc1f8c9b74b0c3a7a24e5da6bd3a3" title=" " alt="" coords="21,71,239,98"/>
+</map>
+</div>
+
+</div>
+</div>
 <a id="aeec502f9d997e5eb7557e9dbc9b8be5d" name="aeec502f9d997e5eb7557e9dbc9b8be5d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aeec502f9d997e5eb7557e9dbc9b8be5d">&#9670;&nbsp;</a></span>run()</h2>
 
@@ -108,16 +166,50 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>stop</b> ()</td></tr>
       </table>
 </div><div class="memdoc">
 <p >Thread runner </p>
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1backend_1_1_client_new_1_1_polling_agent_aeec502f9d997e5eb7557e9dbc9b8be5d_cgraph.png" border="0" usemap="#aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_aeec502f9d997e5eb7557e9dbc9b8be5d_cgraph" alt=""/></div>
+<map name="aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_aeec502f9d997e5eb7557e9dbc9b8be5d_cgraph" id="aclasstp_1_1backend_1_1_client_new_1_1_polling_agent_aeec502f9d997e5eb7557e9dbc9b8be5d_cgraph">
+<area shape="rect" title=" " alt="" coords="5,81,196,122"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a8e77fb8ccf0387b5ce173d66f5a86e2d" title=" " alt="" coords="244,81,415,122"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#a5c0738a68d36b5b5881232114d85437d" title=" " alt="" coords="464,22,647,63"/>
+<area shape="rect" href="classtp_1_1backend_1_1_command_factory.html#aa9f1f4f9593280bd33399a99b8045c34" title=" " alt="" coords="944,51,1159,93"/>
+<area shape="rect" href="classtp_1_1backend_1_1_game_status.html#a387242857080e3612b15d9e3904a9ad7" title=" " alt="" coords="463,139,648,181"/>
+<area shape="rect" href="classtp_1_1backend_1_1_client_new.html#abc336e8ee2c7f831eaf2df63fdea1911" title=" " alt="" coords="696,29,896,56"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a621c1b543ec4e71db6487afec7f495e3" name="a621c1b543ec4e71db6487afec7f495e3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a621c1b543ec4e71db6487afec7f495e3">&#9670;&nbsp;</a></span>stop()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.backend.ClientNew.PollingAgent.stop </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following file:<ul>
-<li>backend/ClientNew.java</li>
+<li>backend/<a class="el" href="_client_new_8java.html">ClientNew.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>tp</b></li><li class="navelem"><a class="el" href="namespacetp_1_1backend.html">backend</a></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_client_new.html">ClientNew</a></li><li class="navelem"><a class="el" href="classtp_1_1backend_1_1_client_new_1_1_polling_agent.html">PollingAgent</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

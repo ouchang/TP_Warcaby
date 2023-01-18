@@ -9,6 +9,10 @@
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
@@ -46,6 +50,23 @@ $(function() {
 /* @license-end */
 </script>
 <div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
+$(document).ready(function(){initNavTree('classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,11 +81,6 @@ $(function() {
 </iframe>
 </div>
 
-<div id="nav-path" class="navpath">
-  <ul>
-<li class="navelem"><b>tp</b></li><li class="navelem"><b>frontend</b></li><li class="navelem"><b>gui</b></li><li class="navelem"><b>start</b></li><li class="navelem"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html">GUIbehaviour</a></li>  </ul>
-</div>
-</div><!-- top -->
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
@@ -73,46 +89,314 @@ $(function() {
   <div class="headertitle"><div class="title">tp.frontend.gui.start.GUIbehaviour Class Reference</div></div>
 </div><!--header-->
 <div class="contents">
+<div class="dynheader">
+Collaboration diagram for tp.frontend.gui.start.GUIbehaviour:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour__coll__graph.png" border="0" usemap="#atp_8frontend_8gui_8start_8_g_u_ibehaviour_coll__map" alt="Collaboration graph"/></div>
+<map name="atp_8frontend_8gui_8start_8_g_u_ibehaviour_coll__map" id="atp_8frontend_8gui_8start_8_g_u_ibehaviour_coll__map">
+<area shape="rect" title=" " alt="" coords="5,109,220,136"/>
+<area shape="rect" title=" " alt="" coords="49,5,177,32"/>
+</map>
+<center><span class="legend">[<a target="top" href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:aa8009e4ea086fac84ffd06455c6b24e6"><td class="memItemLeft" align="right" valign="top"><a id="aa8009e4ea086fac84ffd06455c6b24e6" name="aa8009e4ea086fac84ffd06455c6b24e6"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>addElement</b> (Pane element)</td></tr>
+<tr class="memitem:aa8009e4ea086fac84ffd06455c6b24e6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa8009e4ea086fac84ffd06455c6b24e6">addElement</a> (Pane element)</td></tr>
 <tr class="separator:aa8009e4ea086fac84ffd06455c6b24e6"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abbc40e511816ef45d99187f942be6cc2"><td class="memItemLeft" align="right" valign="top"><a id="abbc40e511816ef45d99187f942be6cc2" name="abbc40e511816ef45d99187f942be6cc2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>swapList</b> (ArrayList&lt; Pane &gt; list)</td></tr>
+<tr class="memitem:abbc40e511816ef45d99187f942be6cc2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#abbc40e511816ef45d99187f942be6cc2">swapList</a> (ArrayList&lt; Pane &gt; list)</td></tr>
 <tr class="separator:abbc40e511816ef45d99187f942be6cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af38d9c67a7d7fb3065f256d39cde35ff"><td class="memItemLeft" align="right" valign="top"><a id="af38d9c67a7d7fb3065f256d39cde35ff" name="af38d9c67a7d7fb3065f256d39cde35ff"></a>
-String&#160;</td><td class="memItemRight" valign="bottom"><b>getImageName</b> (String url)</td></tr>
+<tr class="memitem:af38d9c67a7d7fb3065f256d39cde35ff"><td class="memItemLeft" align="right" valign="top">String&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#af38d9c67a7d7fb3065f256d39cde35ff">getImageName</a> (String url)</td></tr>
 <tr class="separator:af38d9c67a7d7fb3065f256d39cde35ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a2ff3c88da201003c08611ab7ddb10bd2"><td class="memItemLeft" align="right" valign="top"><a id="a2ff3c88da201003c08611ab7ddb10bd2" name="a2ff3c88da201003c08611ab7ddb10bd2"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>deletePiece</b> (Pane position)</td></tr>
+<tr class="memitem:a2ff3c88da201003c08611ab7ddb10bd2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a2ff3c88da201003c08611ab7ddb10bd2">deletePiece</a> (Pane position)</td></tr>
 <tr class="separator:a2ff3c88da201003c08611ab7ddb10bd2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a559c864f775e9a6312f8a6e679e535c8"><td class="memItemLeft" align="right" valign="top"><a id="a559c864f775e9a6312f8a6e679e535c8" name="a559c864f775e9a6312f8a6e679e535c8"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>add</b> (Pane position, String fileName)  throws FileNotFoundException, MalformedURLException </td></tr>
+<tr class="memitem:a559c864f775e9a6312f8a6e679e535c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a559c864f775e9a6312f8a6e679e535c8">add</a> (Pane position, String fileName)  throws FileNotFoundException, MalformedURLException </td></tr>
 <tr class="separator:a559c864f775e9a6312f8a6e679e535c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a144c5dac05065d57d9f96ab0a577300a"><td class="memItemLeft" align="right" valign="top"><a id="a144c5dac05065d57d9f96ab0a577300a" name="a144c5dac05065d57d9f96ab0a577300a"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>updateBoard</b> (String[][] boardString, <a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html">GUIController</a> controller)</td></tr>
+<tr class="memitem:a144c5dac05065d57d9f96ab0a577300a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a144c5dac05065d57d9f96ab0a577300a">updateBoard</a> (String[][] boardString, <a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html">GUIController</a> controller)</td></tr>
 <tr class="separator:a144c5dac05065d57d9f96ab0a577300a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa0c490005212b0b7aa218cb1edc5089f"><td class="memItemLeft" align="right" valign="top"><a id="aa0c490005212b0b7aa218cb1edc5089f" name="aa0c490005212b0b7aa218cb1edc5089f"></a>
-void&#160;</td><td class="memItemRight" valign="bottom"><b>react</b> (int figureIdx, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; capturedFigures, GridPane gridPane)  throws FileNotFoundException, MalformedURLException </td></tr>
+<tr class="memitem:aa0c490005212b0b7aa218cb1edc5089f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa0c490005212b0b7aa218cb1edc5089f">react</a> (int figureIdx, List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt; capturedFigures, GridPane gridPane)  throws FileNotFoundException, MalformedURLException </td></tr>
 <tr class="separator:aa0c490005212b0b7aa218cb1edc5089f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
-<tr class="memitem:abae0b477d567b6e88aceeddd0cb721b2"><td class="memItemLeft" align="right" valign="top"><a id="abae0b477d567b6e88aceeddd0cb721b2" name="abae0b477d567b6e88aceeddd0cb721b2"></a>
-static ArrayList&lt; Pane &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>positionChanges</b> = new ArrayList&lt;&gt; ()</td></tr>
+<tr class="memitem:abae0b477d567b6e88aceeddd0cb721b2"><td class="memItemLeft" align="right" valign="top">static ArrayList&lt; Pane &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#abae0b477d567b6e88aceeddd0cb721b2">positionChanges</a> = new ArrayList&lt;&gt; ()</td></tr>
 <tr class="separator:abae0b477d567b6e88aceeddd0cb721b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >MVC - View </p>
-</div><hr/>The documentation for this class was generated from the following file:<ul>
-<li>frontend/gui/start/GUIbehaviour.java</li>
+</div><h2 class="groupheader">Member Function Documentation</h2>
+<a id="a559c864f775e9a6312f8a6e679e535c8" name="a559c864f775e9a6312f8a6e679e535c8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a559c864f775e9a6312f8a6e679e535c8">&#9670;&nbsp;</a></span>add()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.add </td>
+          <td>(</td>
+          <td class="paramtype">Pane&#160;</td>
+          <td class="paramname"><em>position</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>fileName</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> throws FileNotFoundException, MalformedURLException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8_icgraph">
+<area shape="rect" title=" " alt="" coords="608,42,847,69"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa0c490005212b0b7aa218cb1edc5089f" title=" " alt="" coords="308,13,555,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a144c5dac05065d57d9f96ab0a577300a" title=" " alt="" coords="303,64,560,105"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="aa8009e4ea086fac84ffd06455c6b24e6" name="aa8009e4ea086fac84ffd06455c6b24e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8009e4ea086fac84ffd06455c6b24e6">&#9670;&nbsp;</a></span>addElement()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.addElement </td>
+          <td>(</td>
+          <td class="paramtype">Pane&#160;</td>
+          <td class="paramname"><em>element</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6_icgraph">
+<area shape="rect" title=" " alt="" coords="620,5,859,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#abbc40e511816ef45d99187f942be6cc2" title=" " alt="" coords="303,13,572,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2ff3c88da201003c08611ab7ddb10bd2" name="a2ff3c88da201003c08611ab7ddb10bd2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2ff3c88da201003c08611ab7ddb10bd2">&#9670;&nbsp;</a></span>deletePiece()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.deletePiece </td>
+          <td>(</td>
+          <td class="paramtype">Pane&#160;</td>
+          <td class="paramname"><em>position</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2_icgraph">
+<area shape="rect" title=" " alt="" coords="597,5,851,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa0c490005212b0b7aa218cb1edc5089f" title=" " alt="" coords="303,13,549,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af38d9c67a7d7fb3065f256d39cde35ff" name="af38d9c67a7d7fb3065f256d39cde35ff"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af38d9c67a7d7fb3065f256d39cde35ff">&#9670;&nbsp;</a></span>getImageName()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">String tp.frontend.gui.start.GUIbehaviour.getImageName </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>url</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa0c490005212b0b7aa218cb1edc5089f" name="aa0c490005212b0b7aa218cb1edc5089f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa0c490005212b0b7aa218cb1edc5089f">&#9670;&nbsp;</a></span>react()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.react </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>figureIdx</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">List&lt; <a class="el" href="classtp_1_1backend_1_1_position.html">Position</a> &gt;&#160;</td>
+          <td class="paramname"><em>capturedFigures</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">GridPane&#160;</td>
+          <td class="paramname"><em>gridPane</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td> throws FileNotFoundException, MalformedURLException</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_cgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_cgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_cgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_cgraph">
+<area shape="rect" title=" " alt="" coords="5,35,252,61"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a559c864f775e9a6312f8a6e679e535c8" title=" " alt="" coords="307,5,546,32"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a2ff3c88da201003c08611ab7ddb10bd2" title=" " alt="" coords="300,57,553,98"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_icgraph">
+<area shape="rect" title=" " alt="" coords="303,13,549,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="abbc40e511816ef45d99187f942be6cc2" name="abbc40e511816ef45d99187f942be6cc2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abbc40e511816ef45d99187f942be6cc2">&#9670;&nbsp;</a></span>swapList()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.swapList </td>
+          <td>(</td>
+          <td class="paramtype">ArrayList&lt; Pane &gt;&#160;</td>
+          <td class="paramname"><em>list</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_cgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_cgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_cgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_cgraph">
+<area shape="rect" title=" " alt="" coords="5,13,275,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#aa8009e4ea086fac84ffd06455c6b24e6" title=" " alt="" coords="323,5,561,47"/>
+</map>
+</div>
+<div class="dynheader">
+Here is the caller graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_icgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_icgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_icgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_icgraph">
+<area shape="rect" title=" " alt="" coords="303,13,572,39"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#ada6a67f7e4eb8819b46aa0c383491ae8" title=" " alt="" coords="5,5,255,47"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a144c5dac05065d57d9f96ab0a577300a" name="a144c5dac05065d57d9f96ab0a577300a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a144c5dac05065d57d9f96ab0a577300a">&#9670;&nbsp;</a></span>updateBoard()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void tp.frontend.gui.start.GUIbehaviour.updateBoard </td>
+          <td>(</td>
+          <td class="paramtype">String&#160;</td>
+          <td class="paramname"><em>boardString</em>[][], </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html">GUIController</a>&#160;</td>
+          <td class="paramname"><em>controller</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<div class="dynheader">
+Here is the call graph for this function:</div>
+<div class="dyncontent">
+<div class="center"><img src="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a_cgraph.png" border="0" usemap="#aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a_cgraph" alt=""/></div>
+<map name="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a_cgraph" id="aclasstp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a_cgraph">
+<area shape="rect" title=" " alt="" coords="5,5,263,47"/>
+<area shape="rect" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html#a559c864f775e9a6312f8a6e679e535c8" title=" " alt="" coords="311,13,549,39"/>
+</map>
+</div>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="abae0b477d567b6e88aceeddd0cb721b2" name="abae0b477d567b6e88aceeddd0cb721b2"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abae0b477d567b6e88aceeddd0cb721b2">&#9670;&nbsp;</a></span>positionChanges</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">ArrayList&lt;Pane&gt; tp.frontend.gui.start.GUIbehaviour.positionChanges = new ArrayList&lt;&gt; ()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>The documentation for this class was generated from the following file:<ul>
+<li>frontend/gui/start/<a class="el" href="_g_u_ibehaviour_8java.html">GUIbehaviour.java</a></li>
 </ul>
 </div><!-- contents -->
+</div><!-- doc-content -->
 <!-- start footer part -->
-<hr class="footer"/><address class="footer"><small>
-Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3
-</small></address>
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><b>tp</b></li><li class="navelem"><b>frontend</b></li><li class="navelem"><b>gui</b></li><li class="navelem"><a class="el" href="namespacetp_1_1frontend_1_1gui_1_1start.html">start</a></li><li class="navelem"><a class="el" href="classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html">GUIbehaviour</a></li>
+    <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.3 </li>
+  </ul>
+</div>
 </body>
 </html>

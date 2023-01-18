@@ -1,7 +1,5 @@
 var searchData=
 [
-  ['sendgamekind_0',['sendGameKind',['../classtp_1_1backend_1_1_client_new.html#a6eb1d86c6001335c74e2ec4c400af321',1,'tp::backend::ClientNew']]],
-  ['sendmovecommand_1',['sendMoveCommand',['../classtp_1_1backend_1_1_client_new.html#a149ccb6627caddd090a62cf742c64a02',1,'tp::backend::ClientNew']]],
-  ['server_2',['Server',['../classtp_1_1backend_1_1_server.html',1,'tp::backend']]],
-  ['swedishkind_3',['SwedishKind',['../classtp_1_1backend_1_1_swedish_kind.html',1,'tp::backend']]]
+  ['loadinitboard_0',['loadInitBoard',['../classtp_1_1backend_1_1_game_new.html#a7b48b0d47e0d68d63275232b5af90419',1,'tp::backend::GameNew']]],
+  ['lockboard_1',['lockBoard',['../classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html#a87d93ee2e18d85595c618a183f14b67e',1,'tp::frontend::gui::start::GUIController']]]
 ];

@@ -1,0 +1,11 @@
+<map id="tp.backend.CzechKind.checkMoveKing" name="tp.backend.CzechKind.checkMoveKing">
+<area shape="rect" id="node1" title=" " alt="" coords="5,195,197,236"/>
+<area shape="rect" id="node2" href="$classtp_1_1backend_1_1_movement.html#a1fc31ee7e1c337f9d1fdc31629abd868" title=" " alt="" coords="253,5,480,47"/>
+<area shape="rect" id="node3" href="$classtp_1_1backend_1_1_position.html#a8ad3a3a64a49d9b3c9af55c5eddad8bc" title=" " alt="" coords="283,71,450,98"/>
+<area shape="rect" id="node4" href="$classtp_1_1backend_1_1_position.html#ace8d4ba8f1c77394ca6b16e4dbf9b8c0" title=" " alt="" coords="283,122,451,149"/>
+<area shape="rect" id="node5" href="$classtp_1_1backend_1_1_movement.html#a2e09d543b72ed62945fb9c0af1a6127d" title=" " alt="" coords="245,173,488,199"/>
+<area shape="rect" id="node6" href="$classtp_1_1backend_1_1_movement.html#aaab51f161ec75e431eedf3455fd5e5c2" title=" " alt="" coords="267,224,466,265"/>
+<area shape="rect" id="node7" href="$classtp_1_1backend_1_1_movement.html#a94a49986c4a29e48f5286357225213ae" title=" " alt="" coords="268,290,465,317"/>
+<area shape="rect" id="node8" href="$classtp_1_1backend_1_1_position.html#a260ff3c7cae9a048aa8eea348b2dbb62" title=" " alt="" coords="283,341,450,367"/>
+<area shape="rect" id="node9" href="$classtp_1_1backend_1_1_position.html#aab0ca6dfa9bff3b75e6d1849e9b58aba" title=" " alt="" coords="283,391,451,418"/>
+</map>
