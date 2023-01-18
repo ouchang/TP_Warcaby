@@ -13,11 +13,17 @@ import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 
 import java.io.FileNotFoundException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 
 /**
  * MVC - Controller
@@ -58,9 +64,25 @@ public class GUIController {
     public GUIController(){
         System.out.println ("GUI controller created");
     }
+    boolean isBoardLocked = false;
 
     public void setPlayer(ClientNew player) {
         this.player = player;
+
+        GameStatus gameStatus = player.getGameStatus();
+
+        //start thread -> thread unlocks board
+        GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+        gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+            @Override
+            public void handle (WorkerStateEvent e) {
+                unlockBoard();
+                updateOnDemand();
+            }
+        });
+
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(gameBoardManager);
     }
 
     @FXML
@@ -78,23 +100,49 @@ public class GUIController {
         }
     }
 
+
+    void updateOnDemand() {
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Wait until opponent makes move!");
+            return;
+        }
+
+        GUIbehaviour bevhaviour = new GUIbehaviour();
+        GameStatus gameStatus = player.getPollingAgent().getGameStatus();
+        System.out.println("Updating board!");
+        bevhaviour.updateBoard(gameStatus.getBoard(), this);
+    }
+
+    @FXML
+    public void tedectorAction(MouseEvent event) {
+        if (event.getButton () == MouseButton.PRIMARY){
+            System.out.println ("lewy przycisk");
+            detector.setText ( "lewy przycisk" );
+        }
+        if (event.getButton () == MouseButton.SECONDARY){
+            System.out.println ("prawy przycisk");
+            detector.setText ( "prawy przycisk" );
+        }
+    }
+
     @FXML
     public void showInstruction(ActionEvent event) {
         String gameType =  player.getGameKind();
 
         switch (gameType){
             case "czech":{
-                instruction.setText("CzechType");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n2) Jeżeli istnieje możliwość bicia, to gracz musi wykonać dowolne bicie\n");
                 break;
             }
             case "swedish":{
-                instruction.setText("SwedishType");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu szwedzkiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n");
                 break;
             }
             case "german":{
-                instruction.setText("GermanType");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się wyłącznie do przodu\n2) Pionek może wykonać bicie do tyłu\n");
                 break;
             }
+
         }
         if (instruction.isVisible () == true){
             instruction.setVisible ( false );
@@ -113,12 +161,41 @@ public class GUIController {
         }
     }
 
+    private boolean firstClick = false;
+    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
+    public List<Position> positions = new ArrayList<Position>();
+
+    @FXML
+    public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
+        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Not your turn!");
+            return;
+        }
+
+        Pane actual = (Pane) event.getSource();
+        String errorMessage;
+        Position pos = new Position();
+
+        int row, col;
+        // handling when rowIndex/colIndex = 0
+        if(GridPane.getRowIndex(actual) == null) { // rowIndex = 0
+            row = 1;
+        } else {
+            row = GridPane.getRowIndex(actual) + 1;
+        }
+
+        if(GridPane.getColumnIndex(actual) == null) { // colIndex = 0
+            col = 1;
+        } else {
+            col = GridPane.getColumnIndex(actual) + 1;
+        }
+
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         getTurn();
 
         Pane actual = (Pane) event.getSource();
-        
+
         if(event.getButton() == MouseButton.PRIMARY) {
             if(!this.firstClick) {
                 System.out.println("FIRST CLICK");
@@ -152,6 +229,27 @@ public class GUIController {
                     } else {
                         behaviour.removePiecesAfterMove(behaviour.figureIdx, null, board8x8);
                     }
+
+                    //lock board
+                    lockBoard();
+
+                    //start thread -> thread unlocks board
+                    GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+                    gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle (WorkerStateEvent e) {
+                            unlockBoard();
+                            updateOnDemand();
+                        }
+                    });
+
+                    ExecutorService executor = Executors.newSingleThreadExecutor();
+                    executor.submit(gameBoardManager);
+
+                } else {
+                    System.out.println("GUIController - Wrong move");
+                    System.out.println(gameStatus.getError());
+                    // print error message
                 }
 
                 for (Pane place : pieceAllWay) {
@@ -186,6 +284,34 @@ public class GUIController {
     public void exitGame(ActionEvent event) {
         Stage stage = (Stage) exitButton.getScene().getWindow();
         stage.close();
+    }
+
+    public class GameBoardManager extends Task<Boolean> {
+        GUIController guiController;
+        GameStatus initGameStatus;
+
+        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
+            this.guiController = guiController;
+            this.initGameStatus = initGameStatus;
+        }
+
+        public Boolean call() {
+            String currentPlayer;
+            String myPlayerID = guiController.player.getPlayerId();
+
+            currentPlayer = initGameStatus.getActivePlayerID();
+            try {
+                while(!myPlayerID.equals(currentPlayer)) {
+                    Thread.sleep(2000);
+                    currentPlayer = guiController.player.getPollingAgent().getGameStatus().getActivePlayerID();
+                }
+            } catch(InterruptedException e) {
+                System.out.println(e.getMessage());
+                System.exit(1);
+            }
+
+            return true;
+        }
     }
 }
 

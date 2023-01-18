@@ -17,6 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import javax.management.relation.Role;
+
 /**
  * MVC - View
  */
@@ -118,12 +120,11 @@ public class GUIbehaviour {
         }
     }
 
-    public void updateBoard(String[][] boardString, GUIController controller){
-        //todo: create class board and send not list of string but object board
+    public synchronized void updateBoard(String[][] boardString, GUIController controller){
+        int row, col;
         String fileName = "";
         Image image;
         for (Node node : controller.board8x8.getChildren()) {
-
             if (node instanceof Pane) {
                 Position position = transformIndexes(node);
 

@@ -180,7 +180,6 @@ public class ClientNew {
     GameStatus gameStatus = (GameStatus) commandFactory.getCommand("GameStatus");
     gameStatus.setPlayerId(this.playerId);
     gameStatus = (GameStatus) clientCallSync(gameStatus);
-    //System.out.println("Client [" + gameStatus.getPlayerId() + "]  receives gameStatus!");
     return gameStatus;
   }
   /**

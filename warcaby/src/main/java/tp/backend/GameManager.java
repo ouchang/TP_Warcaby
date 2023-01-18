@@ -61,6 +61,7 @@ public class GameManager implements Runnable {
   private void gameKindHandler(GameKind gameKind) {
     synchronized(game) {
       if(gameKind.getPlayerId().equals(game.getPlayer1ID())) {
+        // Design Pattern - factory
         IGameKind kind = gameKindFactory.getGameKind(gameKind.getKind());
         game.setGameKind(kind);
         game.loadInitBoard();
