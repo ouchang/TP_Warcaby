@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.collections.ObservableList;
 
 import java.lang.Thread;
-import java.nio.file.Paths;
 
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
@@ -21,11 +20,11 @@ public class GUIStart extends Application {
     @Override
     public void start(Stage stage) throws Exception {
 //      Maria
-        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guifxml.fxml" ).toUri().toURL () );
-        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\types.fxml" ).toUri().toURL () );
+//        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guifxml.fxml" ).toUri().toURL () );
+//        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\types.fxml" ).toUri().toURL () );
 //      Ola
-//        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
-//        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
+        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
 
         ClientNew player = new ClientNew();
         player.clientInit(); // register client

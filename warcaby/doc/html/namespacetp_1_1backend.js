@@ -4,6 +4,7 @@ var namespacetp_1_1backend =
     [ "ClientInit", "classtp_1_1backend_1_1_client_init.html", "classtp_1_1backend_1_1_client_init" ],
     [ "ClientManager", "classtp_1_1backend_1_1_client_manager.html", "classtp_1_1backend_1_1_client_manager" ],
     [ "ClientNew", "classtp_1_1backend_1_1_client_new.html", "classtp_1_1backend_1_1_client_new" ],
+    [ "CoderDecoder", "classtp_1_1backend_1_1_coder_decoder.html", null ],
     [ "CommandClass", "classtp_1_1backend_1_1_command_class.html", "classtp_1_1backend_1_1_command_class" ],
     [ "CommandFactory", "classtp_1_1backend_1_1_command_factory.html", null ],
     [ "CzechKind", "classtp_1_1backend_1_1_czech_kind.html", "classtp_1_1backend_1_1_czech_kind" ],

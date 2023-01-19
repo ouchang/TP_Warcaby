@@ -6,6 +6,7 @@ var classtp_1_1backend_1_1_client_new =
     [ "clientCallSync", "classtp_1_1backend_1_1_client_new.html#a5c0738a68d36b5b5881232114d85437d", null ],
     [ "clientInit", "classtp_1_1backend_1_1_client_new.html#abc336e8ee2c7f831eaf2df63fdea1911", null ],
     [ "getFirstPlayer", "classtp_1_1backend_1_1_client_new.html#a53e962662a502cdc92689ea9feb7c26d", null ],
+    [ "getGameKind", "classtp_1_1backend_1_1_client_new.html#acf34b88458e11886e803535c1c240a78", null ],
     [ "getGameStatus", "classtp_1_1backend_1_1_client_new.html#a8e77fb8ccf0387b5ce173d66f5a86e2d", null ],
     [ "getPlayerId", "classtp_1_1backend_1_1_client_new.html#a2c2ccb81e11ca0fddafd4a21d316bb2e", null ],
     [ "getPollingAgent", "classtp_1_1backend_1_1_client_new.html#afbec6ac6c056fed39502ef50ed870f9a", null ],

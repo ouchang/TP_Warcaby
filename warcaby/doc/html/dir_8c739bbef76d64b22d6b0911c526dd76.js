@@ -13,7 +13,9 @@ var dir_8c739bbef76d64b22d6b0911c526dd76 =
       [ "tp.backend.ClientNew", "classtp_1_1backend_1_1_client_new.html", "classtp_1_1backend_1_1_client_new" ],
       [ "tp.backend.ClientNew.PollingAgent", "classtp_1_1backend_1_1_client_new_1_1_polling_agent.html", "classtp_1_1backend_1_1_client_new_1_1_polling_agent" ]
     ] ],
-    [ "coderDecoder.java", "coder_decoder_8java.html", null ],
+    [ "CoderDecoder.java", "_coder_decoder_8java.html", [
+      [ "tp.backend.CoderDecoder", "classtp_1_1backend_1_1_coder_decoder.html", null ]
+    ] ],
     [ "CommandClass.java", "_command_class_8java.html", [
       [ "tp.backend.CommandClass", "classtp_1_1backend_1_1_command_class.html", "classtp_1_1backend_1_1_command_class" ]
     ] ],

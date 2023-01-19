@@ -1,0 +1,14 @@
+<map id="tp.frontend.gui.start.GUIController.GameBoardManager" name="tp.frontend.gui.start.GUIController.GameBoardManager">
+<area shape="rect" id="node1" title=" " alt="" coords="691,189,909,230"/>
+<area shape="rect" id="node2" title=" " alt="" coords="380,196,501,223"/>
+<area shape="rect" id="node3" href="$classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html" title=" " alt="" coords="333,247,548,273"/>
+<area shape="rect" id="node4" href="$classtp_1_1backend_1_1_client_new.html" title=" " alt="" coords="23,28,171,55"/>
+<area shape="rect" id="node5" href="$classtp_1_1backend_1_1_client_new_1_1_polling_agent.html" title=" " alt="" coords="705,43,895,85"/>
+<area shape="rect" id="node6" title=" " alt="" coords="403,89,479,116"/>
+<area shape="rect" id="node7" href="$classtp_1_1backend_1_1_game_status.html" title=" " alt="" coords="359,141,522,168"/>
+<area shape="rect" id="node8" href="$interfacetp_1_1backend_1_1_i_command.html" title=" " alt="" coords="21,107,173,133"/>
+<area shape="rect" id="node9" title=" " alt="" coords="5,172,188,199"/>
+<area shape="rect" id="node10" title=" " alt="" coords="33,244,161,271"/>
+<area shape="rect" id="node11" title=" " alt="" coords="48,295,145,321"/>
+<area shape="rect" id="node12" title=" " alt="" coords="59,345,135,372"/>
+</map>

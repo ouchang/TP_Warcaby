@@ -1,6 +1,5 @@
 package tp.frontend.gui.start;
 
-import javafx.scene.text.TextFlow;
 import tp.backend.ClientNew;
 import tp.backend.GameStatus;
 import tp.backend.Position;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -63,26 +61,12 @@ public class GUIController {
             public void handle (WorkerStateEvent e) {
                 unlockBoard();
                 updateOnDemand();
+                getTurn();
             }
         });
 
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.submit(gameBoardManager);
-    }
-
-    @FXML
-    void updateBoard(ActionEvent event) {
-        unlockBoard();
-        detector.setText("");
-        if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
-            System.out.println("Wait until opponent makes move!");
-            detector.setText("Opponents move");
-        } else {
-            GUIbehaviour bevhaviour = new GUIbehaviour();
-            GameStatus gameStatus = player.getPollingAgent().getGameStatus();
-            bevhaviour.updateBoard(gameStatus.getBoard(), this);
-            detector.setText("Your move");
-        }
     }
 
     public class GameBoardManager extends Task<Boolean> {
@@ -135,15 +119,15 @@ public class GUIController {
 
         switch (gameType){
             case "czech":{
-                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n2) Jeżeli istnieje możliwość bicia, to gracz musi wykonać dowolne bicie\n");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n\n Reguły typu czeskiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n2) Jeżeli istnieje możliwość bicia, to gracz musi wykonać dowolne bicie\n");
                 break;
             }
             case "swedish":{
-                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu szwedzkiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n\n Reguły typu szwedzkiego: 1) Pionki poruszają się i zbijają wyłącznie do przodu\n");
                 break;
             }
             case "german":{
-                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n Reguły typu czeskiego: 1) Pionki poruszają się wyłącznie do przodu\n2) Pionek może wykonać bicie do tyłu\n");
+                instruction.setText("- By wykonać zwykły ruch/pojedyncze zbicie, zaznacz wybrane pola za pomocą lewego klawisza myszki.\n - By wykonać wielokrotne zbicie: pierwsze pole zaznacz lewym klawiszem myszki, pośrednie pola - prawym klawiszem myszki, końcowe pole - lewym klawiszem myszki.\n\n Reguły typu niemieckiego: 1) Pionki poruszają się wyłącznie do przodu\n2) Pionek może wykonać bicie do tyłu\n");
                 break;
             }
 
@@ -157,6 +141,15 @@ public class GUIController {
 
     public void getTurn(){
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
+            System.out.println("Not your turn!");
+            detector.setText("Not your turn!");
+        } else {
+            detector.setText("Your turn");
+        }
+    }
+
+    public void getTurnBasedOnGameStatus(GameStatus gameStatus) {
+        if(!gameStatus.getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
             detector.setText("Not your turn!");
         } else {
@@ -205,6 +198,9 @@ public class GUIController {
                     } else {
                         behaviour.removePiecesAfterMove(behaviour.figureIdx, null, board8x8);
                     }
+
+                    getTurnBasedOnGameStatus(behaviour.gameStatus);
+
                     //lock board
                     lockBoard();
 
@@ -215,6 +211,7 @@ public class GUIController {
                         public void handle (WorkerStateEvent e) {
                             unlockBoard();
                             updateOnDemand();
+                            getTurn();
                         }
                     });
 
@@ -245,10 +242,5 @@ public class GUIController {
             pieceAllWay.add(actual);
         }
     }
-
-
-
-
-
 }
 
