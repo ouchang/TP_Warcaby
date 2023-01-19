@@ -10,42 +10,42 @@ class App {
 }
 class ClientInit {
   + ClientInit(): 
-  - color: String
   - playerId: String
+  - color: String
   - firstPlayer: boolean
-   firstPlayer: boolean
    playerId: String
+   firstPlayer: boolean
    colour: String
    color: String
 }
 class ClientManager {
   ~ ClientManager(String): 
-  + start(): ICommand
   + makeMove(int, List<Position>): MoveCommand
+  + start(): ICommand
 }
 class ClientNew {
   + ClientNew(): 
-  - playerId: String
-  + pollingAgent: PollingAgent
   - firstPlayer: boolean
   - gameKind: String
+  + pollingAgent: PollingAgent
+  - playerId: String
   + sendMoveCommand(List<Position>): GameStatus
   + clientCallSync(ICommand): ICommand
-  + clientCallAsync(ICommand): void
   + sendGameKind(): void
+  + clientCallAsync(ICommand): void
   + clientInit(): void
-   firstPlayer: boolean
    playerId: String
+   firstPlayer: boolean
    gameStatus: GameStatus
    pollingAgent: PollingAgent
    gameKind: String
 }
 class CoderDecoder {
   + CoderDecoder(): 
-  - decode(String, String): ICommand?
   ~ decodeCommand(String): ICommand
-  ~ decodeCall(String): String
   ~ codeCommand(ICommand): String
+  ~ decodeCall(String): String
+  - decode(String, String): ICommand?
 }
 class CommandClass {
   + CommandClass(): 
@@ -56,26 +56,62 @@ class CommandClass {
 }
 class CommandFactory {
   + CommandFactory(): 
-  + getCommand(String): ICommand?
   + getClass(String): Class?
+  + getCommand(String): ICommand?
 }
 class CzechKind {
   ~ CzechKind(): 
   - name: String
   - gameBoard: String[][]
-  - boardSize: int
   - capturedRequired: boolean
-  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
-  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  - boardSize: int
   + isCapturePossible(int, String[][]): boolean
   + hasPieceUpgrade(int, Position): boolean
-  + checkMovePiece(int, List<Position>, String[][]): Movement
   + checkMoveKing(int, List<Position>, String[][]): Movement
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + checkMovePiece(int, List<Position>, String[][]): Movement
   + whoStarts(): int
    name: String
-   gameBoard: String[][]
    boardSize: int
+   gameBoard: String[][]
    capturedRequired: boolean
+}
+class GUIController {
+  + GUIController(): 
+  ~ player: ClientNew
+  + lockBoard(): void
+  ~ updateOnDemand(): void
+  + getTurn(): void
+  + movePiece(MouseEvent): void
+  + showInstruction(ActionEvent): void
+  + exitGame(ActionEvent): void
+  + getTurnBasedOnGameStatus(GameStatus): void
+  + unlockBoard(): void
+   player: ClientNew
+}
+class GUIStart {
+  + GUIStart(): 
+  + start(Stage): void
+}
+class GUIbehaviour {
+  ~ GUIbehaviour(): 
+  - correctMove: boolean
+  + addElement(Pane): void
+  + removePiecesAfterMove(int, List<Position>, GridPane): void
+  + transformIndexes(Node): Position
+  + getImageName(String): String
+  + updateBoard(String[][], GUIController): void
+  + serverCheck(ClientNew, List<Pane>): List<Position>
+  + deletePiece(Pane): void
+  + getPositionFromPane(List<Pane>): List<Position>
+  + copyFromTo(ArrayList<Pane>): void
+  + add(Pane, String): void
+   correctMove: boolean
+}
+class GameBoardManager {
+  ~ GameBoardManager(GUIController, GameStatus): 
+  + call(): Boolean
 }
 class GameKind {
   + GameKind(): 
@@ -90,22 +126,22 @@ class GameKindFactory {
 }
 class GameManager {
   ~ GameManager(GameNew, Socket): 
-  - gameStatusHandler(GameStatus, PrintWriter, Movement): void
+  + run(): void
+  - clientInitHandler(ClientInit, PrintWriter): void
   - moveCommandHandler(MoveCommand, PrintWriter): void
   - gameKindHandler(GameKind): void
-  - clientInitHandler(ClientInit, PrintWriter): void
-  + run(): void
+  - gameStatusHandler(GameStatus, PrintWriter, Movement): void
 }
 class GameNew {
   ~ GameNew(): 
-  - gameKind: IGameKind
+  - activePlayerID: String
   - player1ID: String
   - player2ID: String
-  - board: String[][]
   - numOfPlayers: int
-  - activePlayerID: String
-  + loadInitBoard(): void
+  - board: String[][]
+  - gameKind: IGameKind
   + addPlayer(): String
+  + loadInitBoard(): void
   + move(List<Position>, String): Movement
    activePlayerID: String
    board: String[][]
@@ -118,16 +154,16 @@ class GameNew {
 class GameStatus {
   + GameStatus(): 
   ~ player2: String
-  ~ status: String
-  ~ board: String[][]
-  ~ capturedFigures: List<Position>
   ~ gameKind: String
+  ~ activePlayerID: String
+  ~ capturedFigures: List<Position>
   ~ player1: String
+  ~ board: String[][]
+  ~ id: String
   ~ error: String
   ~ friendly_name: String
+  ~ status: String
   ~ playerId: String
-  ~ id: String
-  ~ activePlayerID: String
   + addCapturedFigure(Position): void
    activePlayerID: String
    playerId: String
@@ -144,59 +180,66 @@ class GameStatus {
 class GermanKind {
   ~ GermanKind(): 
   - capturedRequired: boolean
-  - name: String
   - boardSize: int
+  - name: String
   - gameBoard: String[][]
-  + checkMovePiece(int, List<Position>, String[][]): Movement
-  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
   + whoStarts(): int
-  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
-  + checkMoveKing(int, List<Position>, String[][]): Movement
   + hasPieceUpgrade(int, Position): boolean
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
   + isCapturePossible(int, String[][]): boolean
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
    name: String
-   gameBoard: String[][]
    boardSize: int
+   gameBoard: String[][]
    capturedRequired: boolean
 }
 class GetCurrentGameStateClass {
   + GetCurrentGameStateClass(): 
-  ~ playerId: String
   ~ id: String
+  ~ playerId: String
    id: String
    playerId: String
 }
 interface ICommand << interface >>
 interface IGameKind << interface >> {
-  + checkMovePiece(int, List<Position>, String[][]): Movement
-  + checkMoveKing(int, List<Position>, String[][]): Movement
-  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + whoStarts(): int
   + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
   + isCapturePossible(int, String[][]): boolean
   + hasPieceUpgrade(int, Position): boolean
-  + whoStarts(): int
    name: String
-   gameBoard: String[][]
    boardSize: int
+   gameBoard: String[][]
    capturedRequired: boolean
+}
+enum ImageType << enumeration >> {
+  - ImageType(String): 
+  + toString(): String
+  + values(): ImageType[]
+  + valueOf(String): ImageType
+  + equalsName(String): boolean
 }
 class MoveCommand {
   ~ MoveCommand(): 
-  ~ positions: List<Position>
   ~ playerId: String
-  + addPosition(Position): void
+  ~ positions: List<Position>
   + clearPositions(): void
+  + addPosition(Position): void
    positions: List<Position>
    playerId: String
 }
 class Movement {
   + Movement(): 
-  - capturedFigures: List<Position>
+  - correctMove: boolean
   - errorMessage: String
   - kind: String
-  - correctMove: boolean
-  + isEqual(String, boolean, List<Position>, String): boolean
+  - capturedFigures: List<Position>
   + addCapturedFigure(Position): void
+  + isEqual(String, boolean, List<Position>, String): boolean
    kind: String
    capturedFigures: List<Position>
    correctMove: boolean
@@ -222,21 +265,27 @@ class Server {
 }
 class SwedishKind {
   ~ SwedishKind(): 
-  - gameBoard: String[][]
   - boardSize: int
   - name: String
+  - gameBoard: String[][]
   - capturedRequired: boolean
-  + checkMovePiece(int, List<Position>, String[][]): Movement
-  + checkMoveKing(int, List<Position>, String[][]): Movement
-  + whoStarts(): int
-  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
-  + hasPieceUpgrade(int, Position): boolean
-  + isCapturePossible(int, String[][]): boolean
   + checkMultiCapturePiece(int, List<Position>, String[][]): Movement
+  + whoStarts(): int
+  + hasPieceUpgrade(int, Position): boolean
+  + checkMoveKing(int, List<Position>, String[][]): Movement
+  + isCapturePossible(int, String[][]): boolean
+  + checkMovePiece(int, List<Position>, String[][]): Movement
+  + checkMultiCaptureKing(int, List<Position>, String[][]): Movement
    name: String
-   gameBoard: String[][]
    boardSize: int
+   gameBoard: String[][]
    capturedRequired: boolean
+}
+class TypesController {
+  + TypesController(): 
+  ~ player: ClientNew
+  + choseType(ActionEvent): void
+   player: ClientNew
 }
 
 ClientInit                -[#008200,dashed]-^  ICommand                 
@@ -247,8 +296,8 @@ ClientManager             -[#595959,dashed]->  Position                 : "«cre
 ClientNew                "1" *-[#595959,plain]-> "CD\n1" CoderDecoder             
 ClientNew                 -[#595959,dashed]->  CoderDecoder             : "«create»"
 ClientNew                "1" *-[#595959,plain]-> "commandFactory\n1" CommandFactory           
-ClientNew                 -[#595959,dashed]->  PollingAgent             : "«create»"
 ClientNew                "1" *-[#595959,plain]-> "pollingAgent\n1" PollingAgent             
+ClientNew                 -[#595959,dashed]->  PollingAgent             : "«create»"
 CoderDecoder              -[#595959,dashed]->  CommandClass             : "«create»"
 CommandFactory            -[#595959,dashed]->  ClientInit               : "«create»"
 CommandFactory            -[#595959,dashed]->  GameKind                 : "«create»"
@@ -258,14 +307,25 @@ CommandFactory            -[#595959,dashed]->  MoveCommand              : "«cre
 CzechKind                 -[#008200,dashed]-^  IGameKind                
 CzechKind                 -[#595959,dashed]->  Movement                 : "«create»"
 CzechKind                 -[#595959,dashed]->  Position                 : "«create»"
+GUIController            "1" *-[#595959,plain]-> "player\n1" ClientNew                
+GUIController             -[#595959,dashed]->  GUIbehaviour             : "«create»"
+GUIController             -[#595959,dashed]->  GameBoardManager         : "«create»"
+GUIStart                  -[#595959,dashed]->  ClientNew                : "«create»"
+GUIStart                  -[#595959,dashed]->  GameStatus               : "«create»"
+GUIbehaviour              -[#595959,dashed]->  GameStatus               : "«create»"
+GUIbehaviour             "1" *-[#595959,plain]-> "gameStatus\n1" GameStatus               
+GUIbehaviour              -[#595959,dashed]->  Position                 : "«create»"
+GameBoardManager          +-[#820000,plain]-  GUIController            
+GameBoardManager         "1" *-[#595959,plain]-> "guiController\n1" GUIController            
+GameBoardManager         "1" *-[#595959,plain]-> "initGameStatus\n1" GameStatus               
 GameKind                  -[#008200,dashed]-^  ICommand                 
 GameKindFactory           -[#595959,dashed]->  CzechKind                : "«create»"
 GameKindFactory           -[#595959,dashed]->  GermanKind               : "«create»"
 GameKindFactory           -[#595959,dashed]->  SwedishKind              : "«create»"
 GameManager              "1" *-[#595959,plain]-> "CD\n1" CoderDecoder             
 GameManager               -[#595959,dashed]->  CoderDecoder             : "«create»"
-GameManager              "1" *-[#595959,plain]-> "gameKindFactory\n1" GameKindFactory          
 GameManager               -[#595959,dashed]->  GameKindFactory          : "«create»"
+GameManager              "1" *-[#595959,plain]-> "gameKindFactory\n1" GameKindFactory          
 GameManager              "1" *-[#595959,plain]-> "game\n1" GameNew                  
 GameManager               -[#595959,dashed]->  GameStatus               : "«create»"
 GameManager               -[#595959,dashed]->  Movement                 : "«create»"
@@ -286,4 +346,5 @@ Server                    -[#595959,dashed]->  GameNew                  : "«cre
 SwedishKind               -[#008200,dashed]-^  IGameKind                
 SwedishKind               -[#595959,dashed]->  Movement                 : "«create»"
 SwedishKind               -[#595959,dashed]->  Position                 : "«create»"
+TypesController          "1" *-[#595959,plain]-> "player\n1" ClientNew                
 @enduml

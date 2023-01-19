@@ -3,6 +3,7 @@ var hierarchy =
     [ "tp.backend.App", "classtp_1_1backend_1_1_app.html", null ],
     [ "tp.backend.ClientManager", "classtp_1_1backend_1_1_client_manager.html", null ],
     [ "tp.backend.ClientNew", "classtp_1_1backend_1_1_client_new.html", null ],
+    [ "tp.backend.CoderDecoder", "classtp_1_1backend_1_1_coder_decoder.html", null ],
     [ "tp.backend.CommandClass", "classtp_1_1backend_1_1_command_class.html", null ],
     [ "tp.backend.CommandFactory", "classtp_1_1backend_1_1_command_factory.html", null ],
     [ "tp.backend.GameKindFactory", "classtp_1_1backend_1_1_game_kind_factory.html", null ],
@@ -20,6 +21,7 @@ var hierarchy =
       [ "tp.backend.GermanKind", "classtp_1_1backend_1_1_german_kind.html", null ],
       [ "tp.backend.SwedishKind", "classtp_1_1backend_1_1_swedish_kind.html", null ]
     ] ],
+    [ "tp.frontend.gui.start.ImageType", "enumtp_1_1frontend_1_1gui_1_1start_1_1_image_type.html", null ],
     [ "tp.backend.Movement", "classtp_1_1backend_1_1_movement.html", null ],
     [ "tp.backend.Position", "classtp_1_1backend_1_1_position.html", null ],
     [ "Runnable", null, [
@@ -30,5 +32,8 @@ var hierarchy =
     [ "tp.frontend.gui.start.TypesController", "classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html", null ],
     [ "Application", null, [
       [ "tp.frontend.gui.start.GUIStart", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html", null ]
+    ] ],
+    [ "Task", null, [
+      [ "tp.frontend.gui.start.GUIController.GameBoardManager", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller_1_1_game_board_manager.html", null ]
     ] ]
 ];

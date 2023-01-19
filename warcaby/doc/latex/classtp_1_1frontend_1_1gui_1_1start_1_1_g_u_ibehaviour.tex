@@ -7,7 +7,7 @@ Collaboration diagram for tp.\+frontend.\+gui.\+start.\+GUIbehaviour\+:
 \begin{figure}[H]
 \begin{center}
 \leavevmode
-\includegraphics[width=241pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour__coll__graph}
+\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour__coll__graph}
 \end{center}
 \end{figure}
 \doxysubsection*{Public Member Functions}
@@ -15,7 +15,15 @@ Collaboration diagram for tp.\+frontend.\+gui.\+start.\+GUIbehaviour\+:
 \item 
 void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6}{add\+Element}} (Pane element)
 \item 
-void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2}{swap\+List}} (Array\+List$<$ Pane $>$ list)
+void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ac0c7383f0935e004f4cf0c662f4d63}{copy\+From\+To}} (Array\+List$<$ Pane $>$ list)
+\item 
+List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a3b41ef9fc020b8b60b66fe02961718bd}{get\+Position\+From\+Pane}} (List$<$ Pane $>$ piece\+All\+Way)
+\item 
+void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ad92b9f1512f7d3570deb6184a4feaf12}{set\+Correct\+Move}} (boolean correct\+Move)
+\item 
+boolean \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a09dd5bad6ca5d435b5c6f57554a83604}{get\+Correct\+Move}} ()
+\item 
+List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_adf29cb6698ceee10079df32e11d5d0b4}{server\+Check}} (\mbox{\hyperlink{classtp_1_1backend_1_1_client_new}{Client\+New}} player, List$<$ Pane $>$ piece\+All\+Way)
 \item 
 String \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_af38d9c67a7d7fb3065f256d39cde35ff}{get\+Image\+Name}} (String url)
 \item 
@@ -23,14 +31,18 @@ void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2f
 \item 
 void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8}{add}} (Pane position, String file\+Name)  throws File\+Not\+Found\+Exception, Malformed\+URLException 
 \item 
-void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a}{update\+Board}} (String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board\+String, \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller}{GUIController}} controller)
+synchronized void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a5201208dbb8aba457c8411513f4f6ed0}{update\+Board}} (String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]} board\+String, \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller}{GUIController}} controller)
 \item 
-void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f}{react}} (int figure\+Idx, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ captured\+Figures, Grid\+Pane grid\+Pane)  throws File\+Not\+Found\+Exception, Malformed\+URLException 
+\mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2e21e90697410369458e78990658c482}{transform\+Indexes}} (Node node)
+\item 
+void \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ac831f9c45c63675093d35e78794acaa7}{remove\+Pieces\+After\+Move}} (int \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a054d01e75d01cb2f0327145adc9638bf}{figure\+Idx}}, List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ captured\+Figures, Grid\+Pane grid\+Pane)  throws File\+Not\+Found\+Exception, Malformed\+URLException 
 \end{DoxyCompactItemize}
-\doxysubsection*{Static Public Attributes}
+\doxysubsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
-static Array\+List$<$ Pane $>$ \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abae0b477d567b6e88aceeddd0cb721b2}{position\+Changes}} = new Array\+List$<$$>$ ()
+int \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a054d01e75d01cb2f0327145adc9638bf}{figure\+Idx}} = 99
+\item 
+\mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} \mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ab304e7540b6d443030af78976dea07cf}{game\+Status}} = new \mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}}()
 \end{DoxyCompactItemize}
 
 
@@ -44,114 +56,86 @@ MVC -\/ View
 \doxysubsubsection{\texorpdfstring{add()}{add()}}
 {\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+add (\begin{DoxyParamCaption}\item[{Pane}]{position,  }\item[{String}]{file\+Name }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception, Malformed\+URLException}
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a559c864f775e9a6312f8a6e679e535c8_icgraph}
-\end{center}
-\end{figure}
 \mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6}} 
 \index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!addElement@{addElement}}
 \index{addElement@{addElement}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
 \doxysubsubsection{\texorpdfstring{addElement()}{addElement()}}
 {\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+add\+Element (\begin{DoxyParamCaption}\item[{Pane}]{element }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa8009e4ea086fac84ffd06455c6b24e6_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ac0c7383f0935e004f4cf0c662f4d63}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ac0c7383f0935e004f4cf0c662f4d63}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!copyFromTo@{copyFromTo}}
+\index{copyFromTo@{copyFromTo}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{copyFromTo()}{copyFromTo()}}
+{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+copy\+From\+To (\begin{DoxyParamCaption}\item[{Array\+List$<$ Pane $>$}]{list }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2}} 
 \index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!deletePiece@{deletePiece}}
 \index{deletePiece@{deletePiece}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
 \doxysubsubsection{\texorpdfstring{deletePiece()}{deletePiece()}}
 {\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+delete\+Piece (\begin{DoxyParamCaption}\item[{Pane}]{position }\end{DoxyParamCaption})}
 
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2ff3c88da201003c08611ab7ddb10bd2_icgraph}
-\end{center}
-\end{figure}
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a09dd5bad6ca5d435b5c6f57554a83604}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a09dd5bad6ca5d435b5c6f57554a83604}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!getCorrectMove@{getCorrectMove}}
+\index{getCorrectMove@{getCorrectMove}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{getCorrectMove()}{getCorrectMove()}}
+{\footnotesize\ttfamily boolean tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+get\+Correct\+Move (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
 \mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_af38d9c67a7d7fb3065f256d39cde35ff}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_af38d9c67a7d7fb3065f256d39cde35ff}} 
 \index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!getImageName@{getImageName}}
 \index{getImageName@{getImageName}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
 \doxysubsubsection{\texorpdfstring{getImageName()}{getImageName()}}
 {\footnotesize\ttfamily String tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+get\+Image\+Name (\begin{DoxyParamCaption}\item[{String}]{url }\end{DoxyParamCaption})}
 
-\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f}} 
-\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!react@{react}}
-\index{react@{react}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
-\doxysubsubsection{\texorpdfstring{react()}{react()}}
-{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+react (\begin{DoxyParamCaption}\item[{int}]{figure\+Idx,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{captured\+Figures,  }\item[{Grid\+Pane}]{grid\+Pane }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception, Malformed\+URLException}
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a3b41ef9fc020b8b60b66fe02961718bd}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a3b41ef9fc020b8b60b66fe02961718bd}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!getPositionFromPane@{getPositionFromPane}}
+\index{getPositionFromPane@{getPositionFromPane}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{getPositionFromPane()}{getPositionFromPane()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+get\+Position\+From\+Pane (\begin{DoxyParamCaption}\item[{List$<$ Pane $>$}]{piece\+All\+Way }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_aa0c490005212b0b7aa218cb1edc5089f_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2}} 
-\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!swapList@{swapList}}
-\index{swapList@{swapList}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
-\doxysubsubsection{\texorpdfstring{swapList()}{swapList()}}
-{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+swap\+List (\begin{DoxyParamCaption}\item[{Array\+List$<$ Pane $>$}]{list }\end{DoxyParamCaption})}
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ac831f9c45c63675093d35e78794acaa7}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ac831f9c45c63675093d35e78794acaa7}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!removePiecesAfterMove@{removePiecesAfterMove}}
+\index{removePiecesAfterMove@{removePiecesAfterMove}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{removePiecesAfterMove()}{removePiecesAfterMove()}}
+{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+remove\+Pieces\+After\+Move (\begin{DoxyParamCaption}\item[{int}]{figure\+Idx,  }\item[{List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$}]{captured\+Figures,  }\item[{Grid\+Pane}]{grid\+Pane }\end{DoxyParamCaption}) throws File\+Not\+Found\+Exception, Malformed\+URLException}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_cgraph}
-\end{center}
-\end{figure}
-Here is the caller graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abbc40e511816ef45d99187f942be6cc2_icgraph}
-\end{center}
-\end{figure}
-\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a}} 
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_adf29cb6698ceee10079df32e11d5d0b4}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_adf29cb6698ceee10079df32e11d5d0b4}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!serverCheck@{serverCheck}}
+\index{serverCheck@{serverCheck}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{serverCheck()}{serverCheck()}}
+{\footnotesize\ttfamily List$<$ \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} $>$ tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+server\+Check (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classtp_1_1backend_1_1_client_new}{Client\+New}}}]{player,  }\item[{List$<$ Pane $>$}]{piece\+All\+Way }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ad92b9f1512f7d3570deb6184a4feaf12}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ad92b9f1512f7d3570deb6184a4feaf12}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!setCorrectMove@{setCorrectMove}}
+\index{setCorrectMove@{setCorrectMove}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{setCorrectMove()}{setCorrectMove()}}
+{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+set\+Correct\+Move (\begin{DoxyParamCaption}\item[{boolean}]{correct\+Move }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2e21e90697410369458e78990658c482}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a2e21e90697410369458e78990658c482}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!transformIndexes@{transformIndexes}}
+\index{transformIndexes@{transformIndexes}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{transformIndexes()}{transformIndexes()}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_position}{Position}} tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+transform\+Indexes (\begin{DoxyParamCaption}\item[{Node}]{node }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a5201208dbb8aba457c8411513f4f6ed0}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a5201208dbb8aba457c8411513f4f6ed0}} 
 \index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!updateBoard@{updateBoard}}
 \index{updateBoard@{updateBoard}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
 \doxysubsubsection{\texorpdfstring{updateBoard()}{updateBoard()}}
-{\footnotesize\ttfamily void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+update\+Board (\begin{DoxyParamCaption}\item[{String}]{board\+String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller}{GUIController}}}]{controller }\end{DoxyParamCaption})}
+{\footnotesize\ttfamily synchronized void tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+update\+Board (\begin{DoxyParamCaption}\item[{String}]{board\+String\mbox{[}$\,$\mbox{]}\mbox{[}$\,$\mbox{]},  }\item[{\mbox{\hyperlink{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller}{GUIController}}}]{controller }\end{DoxyParamCaption})}
 
-Here is the call graph for this function\+:
-\nopagebreak
-\begin{figure}[H]
-\begin{center}
-\leavevmode
-\includegraphics[width=350pt]{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a144c5dac05065d57d9f96ab0a577300a_cgraph}
-\end{center}
-\end{figure}
 
 
 \doxysubsection{Member Data Documentation}
-\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abae0b477d567b6e88aceeddd0cb721b2}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_abae0b477d567b6e88aceeddd0cb721b2}} 
-\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!positionChanges@{positionChanges}}
-\index{positionChanges@{positionChanges}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
-\doxysubsubsection{\texorpdfstring{positionChanges}{positionChanges}}
-{\footnotesize\ttfamily Array\+List$<$Pane$>$ tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+position\+Changes = new Array\+List$<$$>$ ()\hspace{0.3cm}{\ttfamily [static]}}
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a054d01e75d01cb2f0327145adc9638bf}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_a054d01e75d01cb2f0327145adc9638bf}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!figureIdx@{figureIdx}}
+\index{figureIdx@{figureIdx}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{figureIdx}{figureIdx}}
+{\footnotesize\ttfamily int tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+figure\+Idx = 99}
+
+\mbox{\Hypertarget{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ab304e7540b6d443030af78976dea07cf}\label{classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour_ab304e7540b6d443030af78976dea07cf}} 
+\index{tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}!gameStatus@{gameStatus}}
+\index{gameStatus@{gameStatus}!tp.frontend.gui.start.GUIbehaviour@{tp.frontend.gui.start.GUIbehaviour}}
+\doxysubsubsection{\texorpdfstring{gameStatus}{gameStatus}}
+{\footnotesize\ttfamily \mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}} tp.\+frontend.\+gui.\+start.\+GUIbehaviour.\+game\+Status = new \mbox{\hyperlink{classtp_1_1backend_1_1_game_status}{Game\+Status}}()}
 
 
 

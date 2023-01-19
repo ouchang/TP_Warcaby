@@ -6,6 +6,7 @@ var annotated_dup =
         [ "ClientInit", "classtp_1_1backend_1_1_client_init.html", "classtp_1_1backend_1_1_client_init" ],
         [ "ClientManager", "classtp_1_1backend_1_1_client_manager.html", "classtp_1_1backend_1_1_client_manager" ],
         [ "ClientNew", "classtp_1_1backend_1_1_client_new.html", "classtp_1_1backend_1_1_client_new" ],
+        [ "CoderDecoder", "classtp_1_1backend_1_1_coder_decoder.html", null ],
         [ "CommandClass", "classtp_1_1backend_1_1_command_class.html", "classtp_1_1backend_1_1_command_class" ],
         [ "CommandFactory", "classtp_1_1backend_1_1_command_factory.html", null ],
         [ "CzechKind", "classtp_1_1backend_1_1_czech_kind.html", "classtp_1_1backend_1_1_czech_kind" ],
@@ -29,6 +30,7 @@ var annotated_dup =
             [ "GUIbehaviour", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour.html", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_ibehaviour" ],
             [ "GUIController", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller.html", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_controller" ],
             [ "GUIStart", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start.html", "classtp_1_1frontend_1_1gui_1_1start_1_1_g_u_i_start" ],
+            [ "ImageType", "enumtp_1_1frontend_1_1gui_1_1start_1_1_image_type.html", "enumtp_1_1frontend_1_1gui_1_1start_1_1_image_type" ],
             [ "TypesController", "classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller.html", "classtp_1_1frontend_1_1gui_1_1start_1_1_types_controller" ]
           ] ]
         ] ]

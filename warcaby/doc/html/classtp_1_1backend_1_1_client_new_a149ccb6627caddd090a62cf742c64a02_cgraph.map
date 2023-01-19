@@ -1,7 +1,0 @@
-<map id="tp.backend.ClientNew.sendMoveCommand" name="tp.backend.ClientNew.sendMoveCommand">
-<area shape="rect" id="node1" title=" " alt="" coords="5,81,185,122"/>
-<area shape="rect" id="node2" href="$classtp_1_1backend_1_1_client_new.html#a5c0738a68d36b5b5881232114d85437d" title=" " alt="" coords="243,22,425,63"/>
-<area shape="rect" id="node4" href="$classtp_1_1backend_1_1_command_factory.html#aa9f1f4f9593280bd33399a99b8045c34" title=" " alt="" coords="731,51,945,93"/>
-<area shape="rect" id="node5" href="$classtp_1_1backend_1_1_move_command.html#a58f5b76ed22348764eb74247099f9615" title=" " alt="" coords="233,139,435,181"/>
-<area shape="rect" id="node3" href="$classtp_1_1backend_1_1_client_new.html#abc336e8ee2c7f831eaf2df63fdea1911" title=" " alt="" coords="483,29,683,56"/>
-</map>
