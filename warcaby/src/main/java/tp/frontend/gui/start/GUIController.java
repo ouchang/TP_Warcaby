@@ -26,6 +26,8 @@ import java.util.concurrent.Executors;
 
 /**
  * MVC - Controller
+ *
+ * Class representing controller of the board
  */
 public class GUIController {
     ClientNew player;
@@ -47,8 +49,12 @@ public class GUIController {
     public GUIController(){
         System.out.println ("GUI controller created");
     }
-    boolean isBoardLocked = false;
 
+    /**
+     * Method setPlayer sets who can make a move in that time.
+     * This method unlocks a board for an opponent and updates his board.
+     * @param player player who has to make move.
+     */
     public void setPlayer(ClientNew player) {
         this.player = player;
 
@@ -69,15 +75,23 @@ public class GUIController {
         executor.submit(gameBoardManager);
     }
 
+    /**
+     * Class representing changes of players that are making a move.
+     */
     public class GameBoardManager extends Task<Boolean> {
-        GUIController guiController;
-        GameStatus initGameStatus;
+        private GUIController guiController;
+        private GameStatus initGameStatus;
 
-        GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
+        public List<Position> positions = new ArrayList<Position>();
+
+        public GameBoardManager(GUIController guiController, GameStatus initGameStatus) {
             this.guiController = guiController;
             this.initGameStatus = initGameStatus;
         }
 
+        /**
+         * Method call checks if the turn has changed // if the opponent made a move.
+         */
         public Boolean call() {
             String currentPlayer;
             String myPlayerID = guiController.player.getPlayerId();
@@ -95,7 +109,11 @@ public class GUIController {
             return true;
         }
     }
-    void updateOnDemand() {
+
+    /**
+     * Method updateOnDemand says a player to get an information about the position and to update a board
+     */
+    public void updateOnDemand() {
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Wait until opponent makes move!");
             return;
@@ -139,6 +157,9 @@ public class GUIController {
         }
     }
 
+    /**
+     * Method getTurn checks whose turn is it and prints it on a board
+     */
     public void getTurn(){
         if(!player.getPollingAgent().getGameStatus().getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
@@ -148,6 +169,10 @@ public class GUIController {
         }
     }
 
+    /**
+     * Method getTurn checks whose turn is it and prints it on a board.
+     * This method depends on current status of the game.
+     */
     public void getTurnBasedOnGameStatus(GameStatus gameStatus) {
         if(!gameStatus.getActivePlayerID().equals(player.getPlayerId())) {
             System.out.println("Not your turn!");
@@ -157,9 +182,6 @@ public class GUIController {
         }
     }
 
-    public ArrayList<Pane> fromTo = new ArrayList<Pane>();
-    public List<Position> positions = new ArrayList<Position>();
-
     public void lockBoard() {
         board8x8.setDisable(true);
     }
@@ -168,6 +190,11 @@ public class GUIController {
         board8x8.setDisable(false);
     }
 
+    /**
+     * Method movePiece takes a position of the used pieces from the board.
+     * This method checks when the move starts or ends (when pressing a left mouse button)
+     * and if there are captures (right mouse button)
+     */
     @FXML
     public void movePiece(MouseEvent event) throws FileNotFoundException, MalformedURLException {
         getTurn();
@@ -222,14 +249,7 @@ public class GUIController {
                     System.out.println("GUIController - Wrong move");
                     System.out.println( behaviour.gameStatus.getError());
                     detector.setText("Wrong move");
-                    // print error message
                 }
-
-//                for (Pane place : pieceAllWay) {
-//                    if (place.getStyle().equals("-fx-background-color: #666990")) {
-//                        place.setStyle("-fx-background-color: #d67342");
-//                    }
-//                }
 
                 // clear
                 pieceFromTo.clear();

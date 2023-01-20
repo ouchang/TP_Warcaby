@@ -21,11 +21,17 @@ import javax.management.relation.Role;
 
 /**
  * MVC - View
+ *
+ * Class representing direct communication with a server.
  */
 public class GUIbehaviour {
-    ArrayList<Pane> fromTo;
+    private ArrayList<Pane> fromTo;
 
-    GUIbehaviour(){
+    public int figureIdx = -1;
+
+    private boolean correctMove;
+
+    public GUIbehaviour(){
         this.fromTo = new ArrayList<Pane>();
     }
 
@@ -33,6 +39,9 @@ public class GUIbehaviour {
         fromTo.add(element);
     }
 
+    /**
+     * Method copies received list of starting / ending position to the private ArrayList.
+     */
     public void copyFromTo(ArrayList<Pane> list) {
         for(Pane p : list) {
             addElement(p);
@@ -48,8 +57,6 @@ public class GUIbehaviour {
         }
         return positions;
     }
-    public int figureIdx = 99;
-    private boolean correctMove;
     public void setCorrectMove(boolean correctMove){
         this.correctMove = correctMove;
     }
@@ -57,6 +64,14 @@ public class GUIbehaviour {
         return correctMove;
     }
     public GameStatus gameStatus = new GameStatus();
+
+    /**
+     * Method serverCheck checks the correctness of the move.
+     * This method sends an information about the move to the server and recieves the curent game status.
+     * @param player ID of the player who made move
+     * @param pieceAllWay describes a move (as a Pane) including starting / ending position and all captures.
+     * @return list of captured figures while making this move.
+     */
     public List<Position> serverCheck(ClientNew player, List<Pane> pieceAllWay){
         System.out.println("___________________________________________");
         for (Pane p : pieceAllWay){
@@ -107,20 +122,33 @@ public class GUIbehaviour {
         position.getChildren ().removeAll (children );
     }
 
+    /**
+     * Method that adds the specified file to a proper position on the board.
+     */
     public void add(Pane position, String fileName) throws FileNotFoundException, MalformedURLException {
         if(!Objects.equals(fileName, "")) {
             Image image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-            ImageView imageView = new ImageView(image);
-            imageView.setLayoutX(4);
-            imageView.setLayoutY(12);
-            imageView.setFitHeight ( 40 );
-            imageView.setFitWidth ( 50 );
+            ImageView imageView = newImageview(image);
             position.getChildren ().add ( imageView );
         } else {
             System.out.println("Empty fileName!");
         }
     }
+    public ImageView newImageview(Image image){
+        ImageView imageView = new ImageView(image);
+        imageView.setLayoutX(4);
+        imageView.setLayoutY(12);
+        imageView.setFitHeight ( 40 );
+        imageView.setFitWidth ( 50 );
+        return imageView;
+    }
 
+    /**
+     * Method updates a board due to boardString received from the server.
+     * This methods also unmarkes the last move from the board.
+     * @param boardString the information about the position on the board received from server.
+     * @param controller controller of the gui.
+     */
     public synchronized void updateBoard(String[][] boardString, GUIController controller){
         int row, col;
         String fileName = "";
@@ -157,11 +185,7 @@ public class GUIbehaviour {
 
                 if(!ImageType.EMPTY.equalsName(fileName)) {
                     image = new Image(getClass().getClassLoader().getResourceAsStream(fileName));
-                    ImageView imageView = new ImageView(image);
-                    imageView.setLayoutX(4);
-                    imageView.setLayoutY(12);
-                    imageView.setFitHeight( 40 );
-                    imageView.setFitWidth( 50 );
+                    ImageView imageView = newImageview(image);
                     pane.getChildren().add(imageView);
                 }
 
@@ -172,6 +196,10 @@ public class GUIbehaviour {
         }
     }
 
+    /**
+     * Method that takes the position of the node
+     * and transforms it to the position that server can operate on.
+     */
     public Position transformIndexes( Node node ){
         Position position = new Position();
         int row, col;
@@ -191,6 +219,13 @@ public class GUIbehaviour {
         return position;
     }
 
+    /**
+     * Method removePiecesAfterMove removes unnecessary pieces from the board.
+     * This method also adds a piece at the last position of the move.
+     * @param figureIdx ID of the piece that ends a move and have to be added to a new position.
+     * @param capturedFigures Pieces of the opponent that have to be deleted from thw board.
+     * @param gridPane game's board
+     */
     public void removePiecesAfterMove(int figureIdx, List<Position> capturedFigures, GridPane gridPane) throws FileNotFoundException, MalformedURLException {
         // get figure's image file name
         String fileName = ImageType.values()[figureIdx].toString();

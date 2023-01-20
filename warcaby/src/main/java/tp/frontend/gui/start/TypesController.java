@@ -15,6 +15,8 @@ import java.io.IOException;
 
 /**
  * MVC - Controller
+ *
+ *  Class managing the process of choosing a game type
  */
 public class TypesController {
     @FXML
@@ -41,7 +43,7 @@ public class TypesController {
     @FXML
     public void choseType(ActionEvent event) throws IOException {
         Stage stage = (Stage) czech.getScene().getWindow();
-        System.out.println("choose type");
+        System.out.println("choosing type");
         System.out.println(event.getSource());
 
         
