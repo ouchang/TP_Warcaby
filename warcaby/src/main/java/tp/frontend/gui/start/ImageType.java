@@ -1,5 +1,9 @@
 package tp.frontend.gui.start;
 
+/**
+ * Enum representing names of used files depending on the piece type.
+ * It's used while the process of board updating.
+ */
 public enum ImageType {
     EMPTY(""),
     WHITE_SIMPLE("simpleWhitePiece.png"),

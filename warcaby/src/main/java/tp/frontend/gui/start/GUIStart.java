@@ -14,6 +14,8 @@ import tp.backend.GameStatus;
 
 /**
  * MVC - View
+ *
+ * Class representing choosing fxml files for players.
  */
 public class GUIStart extends Application {
 
@@ -51,7 +53,6 @@ public class GUIStart extends Application {
                 Thread.sleep(500);
             }
 
-            // todo: rozważyć opcje dolączenia więcej jak dwóch graczy
             Scene scene = new Scene(board.load(), 800, 600 );
             stage.setTitle("BLACK");
             GUIController controller = board.getController();
