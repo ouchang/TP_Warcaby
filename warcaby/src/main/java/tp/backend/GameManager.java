@@ -2,6 +2,7 @@ package tp.backend;
 
 import java.net.*;
 import java.io.*;
+import java.util.List;
 
 /**
  * MVC - Controller
@@ -114,6 +115,35 @@ public class GameManager implements Runnable {
     gameStatusHandler(new GameStatus(), clientOut, moveOutput);
   }
 
+
+  private void gameRecordedHandler(GameRecorded gameRecorded, PrintWriter clientOut) {
+    List<String> serializedGameStatus = game.loadRecordedGame(gameRecorded.getGameID());
+    gameRecorded.setSerializedGameStatus(serializedGameStatus);
+
+    System.out.println("Receiving Recorded Game");
+    for(String s : serializedGameStatus) {
+      System.out.println("S: " + s);
+    }
+
+    String serializedGameRecorded = CD.codeCommand(gameRecorded);
+    System.out.println("Serialized Recorded Game: " + serializedGameRecorded);
+    clientOut.println(serializedGameRecorded);
+  }
+
+  private void gameIDsRecordedHandler(GameIDsRecorded gameIDsRecorded, PrintWriter clientOut) {
+    List<String> serializedGameIDsRecorded = game.loadRecordedGameIDs();
+    gameIDsRecorded.setSerializedRecordedGameIDs(serializedGameIDsRecorded);
+
+    System.out.println("Receiving Recorded GameIDs");
+    for(String s : serializedGameIDsRecorded) {
+      System.out.println("S: " + s);
+    }
+
+    String objectSerialized = CD.codeCommand(gameIDsRecorded);
+    System.out.println("Serialized Recorded Game: " + objectSerialized);
+    clientOut.println(objectSerialized);
+  }
+
   /**
    * Starting method for threads
    */
@@ -148,6 +178,14 @@ public class GameManager implements Runnable {
         case "MoveCommand":
           MoveCommand moveCommand = (MoveCommand) CD.decodeCommand(clientCallSerialized);
           moveCommandHandler(moveCommand, clientOut);
+          break;
+        case "GameRecorded":
+          GameRecorded gameRecorded = (GameRecorded) CD.decodeCommand(clientCallSerialized);
+          gameRecordedHandler(gameRecorded, clientOut);
+          break;
+        case "GameIDsRecorded": 
+          GameIDsRecorded gameIDsRecorded = (GameIDsRecorded) CD.decodeCommand(clientCallSerialized);
+          gameIDsRecordedHandler(gameIDsRecorded, clientOut);
           break;
       }
 

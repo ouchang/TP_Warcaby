@@ -16,6 +16,10 @@ public class CommandFactory {
         return new ClientInit();
       case "GameKind":
         return new GameKind();
+      case "GameRecorded":
+        return new GameRecorded();
+      case "GameIDsRecorded":
+        return new GameIDsRecorded();
     }
     return null;
   }
@@ -32,6 +36,10 @@ public class CommandFactory {
         return (new ClientInit()).getClass();
       case "GameKind":
         return (new GameKind()).getClass();
+      case "GameRecorded":
+        return (new GameRecorded()).getClass();
+      case "GameIDsRecorded":
+        return (new GameIDsRecorded()).getClass();
       default:
         return null;
     }

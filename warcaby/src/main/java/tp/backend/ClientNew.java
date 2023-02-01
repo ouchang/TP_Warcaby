@@ -134,6 +134,12 @@ public class ClientNew {
       case "GameStatus":
         GameStatus gameStatus = (GameStatus) CD.decodeCommand(objectSerialized);
         return gameStatus;
+      case "GameRecorded":
+        GameRecorded gameRecorded = (GameRecorded) CD.decodeCommand(objectSerialized);
+        return gameRecorded;
+      case "GameIDsRecorded":
+        GameIDsRecorded gameIDsRecorded = (GameIDsRecorded) CD.decodeCommand(objectSerialized);
+        return gameIDsRecorded;
     }
 
     return null;
@@ -201,6 +207,22 @@ public class ClientNew {
 
     GameStatus gameStatus = (GameStatus) clientCallSync(moveCommand);
     return gameStatus;
+  }
+
+  public GameRecorded getGameRecorded(String gameID) {
+    GameRecorded gameRecorded = (GameRecorded) commandFactory.getCommand("GameRecorded");
+    gameRecorded.setGameID(gameID);
+    
+    gameRecorded = (GameRecorded) clientCallSync(gameRecorded);
+
+    return gameRecorded;
+  }
+
+  public GameIDsRecorded getGameIDsRecorded() {
+    GameIDsRecorded gameIDsRecorded = (GameIDsRecorded) commandFactory.getCommand("GameIDsRecorded");
+
+    gameIDsRecorded = (GameIDsRecorded) clientCallSync(gameIDsRecorded);
+    return gameIDsRecorded;
   }
 
   /**

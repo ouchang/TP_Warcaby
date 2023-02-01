@@ -2,6 +2,12 @@ package tp.backend;
 
 import java.util.UUID;
 import java.util.List;
+import java.util.ArrayList;
+
+import tp.hibernate.entity.GameStatusEntity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
 
 /**
  * MVC - Model
@@ -9,6 +15,9 @@ import java.util.List;
  * Class representing the game's process
  */
 public class GameNew {
+  // Game ID
+  private UUID gameID;
+
   private int numOfPlayers;
 
   private IGameKind gameKind;
@@ -39,6 +48,16 @@ public class GameNew {
   private static final String REGULAR = "REGULAR";
   private static final String CAPTURE = "CAPTURE";
 
+  // CoderDecoder
+  CoderDecoder CD;
+
+  // Enable database
+  boolean enable_database_persistent = true;
+
+  // Hibernate
+  EntityManagerFactory entityManagerFactory;
+  EntityManager entityManager;
+
   /**
    * Constructor
    */
@@ -49,6 +68,19 @@ public class GameNew {
     this.gameKind = null;
     this.player1ID = "";
     this.player2ID = "";
+
+    this.CD = new CoderDecoder();
+
+    this.gameID = UUID.randomUUID();
+
+    if(enable_database_persistent) {
+      this.entityManagerFactory = Persistence.createEntityManagerFactory("default");
+      this.entityManager = this.entityManagerFactory.createEntityManager();
+    }
+  }
+
+  public UUID getGameID() {
+    return this.gameID;
   }
 
   // Setters & Getters
@@ -70,6 +102,11 @@ public class GameNew {
   public void loadInitBoard() {
     this.board = gameKind.getGameBoard();
     this.boardSize = gameKind.getBoardSize();
+
+    // save movement in database
+    if(enable_database_persistent) {
+      saveGameStatus();
+    }
   }
 
   public String getGameKindName() {
@@ -182,6 +219,11 @@ public class GameNew {
           this.activePlayerID = this.player1ID;
         }
 
+        // save movement in database
+        if(enable_database_persistent) {
+          saveGameStatus();
+        }
+
         return movement;
       } else {
         // update error info
@@ -249,6 +291,11 @@ public class GameNew {
           this.activePlayerID = this.player1ID;
         }
         
+        // save movement in database
+        if(enable_database_persistent) {
+          saveGameStatus();
+        }
+
         return movement;
       }  else {
         return movement;
@@ -256,5 +303,50 @@ public class GameNew {
     }
 
     return null;
+  }
+
+  public void saveGameStatus() {
+    GameStatus gStatus = new GameStatus();
+    gStatus.setPlayer1(player1ID);
+    gStatus.setPlayer2(player2ID);
+    gStatus.setGameKind(getGameKindName());
+    gStatus.setActivePlayerID(activePlayerID);
+    gStatus.setBoard(board);
+
+    GameStatusEntity gameEntity = new GameStatusEntity();
+    gameEntity.setGameID(gameID.toString());
+    gameEntity.setGameStatusSerialized(CD.codeCommand(gStatus));
+
+    entityManager.getTransaction().begin();
+    entityManager.persist(gameEntity);
+    entityManager.getTransaction().commit();
+
+    //entityManager.close();
+    //entityManagerFactory.close();
+  }
+
+  public List<String> loadRecordedGame(String gameID) {
+    List<GameStatusEntity> result = entityManager.createQuery( "FROM GameStatusEntity WHERE gameID = :gameid", GameStatusEntity.class ).setParameter("gameid", gameID).getResultList();
+    List<String> serializedResult = new ArrayList<String>();
+
+    System.out.println("Loading Recorded Game");
+
+    for(GameStatusEntity gse : result) {
+      serializedResult.add(gse.getGameStatusSerialized());
+      System.out.println("GSE: " + gse.getGameStatusSerialized());
+    }
+
+    return serializedResult;
+  }
+
+  public List<String> loadRecordedGameIDs() {
+    List<GameStatusEntity> result = entityManager.createQuery( "FROM GameStatusEntity", GameStatusEntity.class ).getResultList();
+    List<String> serializedResult = new ArrayList<String>();
+
+    for(GameStatusEntity gse : result) {
+      serializedResult.add(gse.getGameID());
+    }
+
+    return serializedResult;
   }
 }
