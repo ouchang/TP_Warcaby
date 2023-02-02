@@ -17,6 +17,8 @@ public class ClientNew {
   private String color;
   private boolean firstPlayer;
   private String gameKind;
+  public boolean isRecordedGameLoaded = false;
+  public List<String> serializedGameStatus;
   public PollingAgent pollingAgent;
 
   /**
@@ -28,6 +30,22 @@ public class ClientNew {
   }
 
   // Getters & Setter for class's attributes
+
+  public void setIsRecordedGameLoaded(boolean is) {
+    this.isRecordedGameLoaded = is;
+  }
+
+  public boolean getIsRecordedGameLoaded() {
+    return this.isRecordedGameLoaded;
+  }
+
+  public void setSerializedGameStatus(List<String> list) {
+    this.serializedGameStatus = list;
+  }
+
+  public List<String> getSerializedGameStatus() {
+    return this.serializedGameStatus;
+  }
 
   public String getPlayerId() {
     return this.playerId;
@@ -256,7 +274,7 @@ public class ClientNew {
           synchronized(this) {
             this.gameStatus = client.getGameStatus();
           }
-          Thread.sleep(1000);
+          Thread.sleep(500); //1000
         }
 
       } catch(InterruptedException e) {

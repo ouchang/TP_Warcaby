@@ -24,18 +24,22 @@ public class GUIStart extends Application {
 //      Maria
 //        FXMLLoader board = new FXMLLoader( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\guifxml.fxml" ).toUri().toURL () );
 //        FXMLLoader types = new FXMLLoader ( Paths.get ( "C:\\Users\\hnatiuk\\Desktop\\pwr\\TP\\latestWarcaby\\warcaby\\src\\main\\java\\tp\\frontend\\gui\\start\\types.fxml" ).toUri().toURL () );
-//      Ola
-        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
-        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+
 
         ClientNew player = new ClientNew();
         player.clientInit(); // register client
 
         GameStatus gameStatus = new GameStatus();
 
+        //      Ola
+        //FXMLLoader types = new FXMLLoader ( getClass().getResource("types2.fxml"));
+        FXMLLoader board = new FXMLLoader ( getClass().getResource("guifxml.fxml"));
+        FXMLLoader types = new FXMLLoader ( getClass().getResource("types.fxml"));
+
         if (player.getFirstPlayer() == true) {
             System.out.println("GUI sends gameKind");
 
+            
             Scene scene = new Scene ( types.load(), 800, 600 );
             TypesController setBoard = types.getController();
             setBoard.setPlayer(player);

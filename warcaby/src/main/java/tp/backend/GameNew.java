@@ -344,7 +344,9 @@ public class GameNew {
     List<String> serializedResult = new ArrayList<String>();
 
     for(GameStatusEntity gse : result) {
-      serializedResult.add(gse.getGameID());
+      if(!serializedResult.contains(gse.getGameID())) {
+        serializedResult.add(gse.getGameID());
+      }
     }
 
     return serializedResult;

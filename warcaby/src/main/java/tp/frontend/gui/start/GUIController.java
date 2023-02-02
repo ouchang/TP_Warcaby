@@ -1,6 +1,7 @@
 package tp.frontend.gui.start;
 
 import tp.backend.ClientNew;
+import tp.backend.CoderDecoder;
 import tp.backend.GameStatus;
 import tp.backend.Position;
 
@@ -46,9 +47,13 @@ public class GUIController {
     @FXML
     private Button exitButton;
 
+    CoderDecoder CD = new CoderDecoder();
+
     public GUIController(){
         System.out.println ("GUI controller created");
     }
+
+    List<String> LGS = new ArrayList<String>();
 
     /**
      * Method setPlayer sets who can make a move in that time.
@@ -59,20 +64,67 @@ public class GUIController {
         this.player = player;
 
         GameStatus gameStatus = player.getGameStatus();
+        LGS = player.getSerializedGameStatus();
+        LGS.remove(0); // delete starting point (default positions)
+        //GameStatus gameStatus = player.getPollingAgent().getGameStatus();
 
-        //start thread -> thread unlocks board
-        GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
-        gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-            @Override
-            public void handle (WorkerStateEvent e) {
-                unlockBoard();
-                updateOnDemand();
-                getTurn();
+        //if(!player.isRecordedGameLoaded) {
+            //start thread -> thread unlocks board
+            GameBoardManager gameBoardManager = new GameBoardManager(this, gameStatus);
+            gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                @Override
+                public void handle (WorkerStateEvent e) {
+                    unlockBoard();
+                    updateOnDemand();
+                    getTurn();
+                }
+            });
+
+            ExecutorService executor = Executors.newSingleThreadExecutor();
+            executor.submit(gameBoardManager);
+        //}
+    }
+
+
+
+    public void replayUpdateBoard() {
+        GameStatus GS;
+        //this.replayGameStatus = new ArrayList<GameStatus>();
+
+        //for(String s : player.getSerializedGameStatus()) {
+            if(!LGS.isEmpty()) {
+                String s = LGS.get(0);
+                LGS.remove(0);
+                GS = (GameStatus) CD.decodeCommand(s);
+                System.out.println("ACTIVE_PLAYER: " + GS.getActivePlayerID());
+                //this.player.setP
+                //GB.updateBoard(GS.getBoard(), this); 
+                
+                GameBoardManager gameBoardManager = new GameBoardManager(this, GS);
+                gameBoardManager.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                    @Override
+                    public void handle (WorkerStateEvent e) {
+                        System.out.println("Board should be refreshed!");
+                        unlockBoard();
+                        //updateOnDemand();
+                        updateOnReplay(GS);
+                        detector.setText(LGS.size() + " moves left");
+                    }
+                });
+
+                ExecutorService executor = Executors.newSingleThreadExecutor();
+                executor.submit(gameBoardManager);
+
+                /*
+                try {
+                    Thread.sleep(5000);
+                } catch(InterruptedException e) {
+                    System.out.println(e.getMessage());
+                    System.exit(1);
+                }
+                */
             }
-        });
-
-        ExecutorService executor = Executors.newSingleThreadExecutor();
-        executor.submit(gameBoardManager);
+        //}
     }
 
     /**
@@ -96,7 +148,13 @@ public class GUIController {
             String currentPlayer;
             String myPlayerID = guiController.player.getPlayerId();
 
-            currentPlayer = initGameStatus.getActivePlayerID();
+            if(guiController.player.getIsRecordedGameLoaded()) {
+                myPlayerID = initGameStatus.getActivePlayerID();
+                currentPlayer = initGameStatus.getActivePlayerID();
+            } else {
+                currentPlayer = initGameStatus.getActivePlayerID();
+            }
+            System.out.println("MY_ID: " + myPlayerID + " CURR_ID: " + currentPlayer);
             try {
                 while(!myPlayerID.equals(currentPlayer)) {
                     Thread.sleep(2000);
@@ -123,6 +181,12 @@ public class GUIController {
         GameStatus gameStatus = player.getPollingAgent().getGameStatus();
         System.out.println("Updating board!");
         bevhaviour.updateBoard(gameStatus.getBoard(), this);
+    }
+
+    public void updateOnReplay(GameStatus GS) {
+        GUIbehaviour bevhaviour = new GUIbehaviour();
+        System.out.println("Updating Replay board!");
+        bevhaviour.updateBoard(GS.getBoard(), this);
     }
 
     @FXML
@@ -174,11 +238,16 @@ public class GUIController {
      * This method depends on current status of the game.
      */
     public void getTurnBasedOnGameStatus(GameStatus gameStatus) {
-        if(!gameStatus.getActivePlayerID().equals(player.getPlayerId())) {
-            System.out.println("Not your turn!");
-            detector.setText("Not your turn!");
+
+        if(player.getIsRecordedGameLoaded()) {
+            detector.setText(LGS.size() + " moves left");
         } else {
-            detector.setText("Your turn");
+            if(!gameStatus.getActivePlayerID().equals(player.getPlayerId())) {
+                System.out.println("Not your turn!");
+                detector.setText("Not your turn!");
+            } else {
+                detector.setText("Your turn");
+            }
         }
     }
 

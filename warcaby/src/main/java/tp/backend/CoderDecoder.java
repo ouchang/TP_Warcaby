@@ -36,7 +36,7 @@ public class CoderDecoder {
    * @param json serialized command as JSON
    * @return command as object
    */
-  ICommand decodeCommand(String json) {
+  public ICommand decodeCommand(String json) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       CommandClass cmd = new CommandClass();
@@ -72,7 +72,7 @@ public class CoderDecoder {
    * @param object command object
    * @return serialized command as JSON
    */
-  String codeCommand(ICommand object) {
+  public String codeCommand(ICommand object) {
     try {
       ObjectMapper mapper = new ObjectMapper(); 
       mapper.setVisibility(PropertyAccessor.FIELD, Visibility.ANY);

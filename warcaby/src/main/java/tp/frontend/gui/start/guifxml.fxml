@@ -315,7 +315,12 @@
       </GridPane>
       <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="5" GridPane.rowIndex="3">
          <children>
-            <Button fx:id="exitButton" alignment="CENTER" contentDisplay="TOP" layoutY="121.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="133.0" text="Exit">
+            <Button fx:id="exitButton" alignment="CENTER" contentDisplay="TOP" layoutY="100.0" mnemonicParsing="false" onAction="#exitGame" prefHeight="31.0" prefWidth="133.0" text="Exit">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="replayButton" alignment="CENTER" contentDisplay="TOP" layoutY="155.0" mnemonicParsing="false" onAction="#replayUpdateBoard" prefHeight="31.0" prefWidth="133.0" text="Replay">
                <font>
                   <Font size="18.0" />
                </font>
